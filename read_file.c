@@ -9,14 +9,14 @@
 
 void initialize ( char *filename, Metadata *system_description, Data *system ) {
 
-	int lines, columns, line_is_empty;
-	char tmpchar;
+	int lines, columns, line_is_empty, i, j;
+	char tmpchar, str[256];
 	char **composition;
 	double **x_values;
 	double *y_values;
 	FILE *file;
 
-	file = fopen ( *filename, "r" );
+	file = fopen ( filename, "r" );
 	lines = -1;
 	columns = 0;
 	line_is_empty = TRUE;
@@ -37,22 +37,77 @@ void initialize ( char *filename, Metadata *system_description, Data *system ) {
 		* data points in the file (lines and columns)
 		*/
 
-	system_description->dataset_size = lines;
-	system_description->n_of_comps = columns;
-
 	composition = malloc ( columns * sizeof(char *) );
-	system_description->components = composition;
 
 	x_values = malloc ( lines * sizeof(double *) );
 	y_values = malloc ( lines * sizeof(double) );
 	for ( i = 0; i < lines; i++ ) {
 		x_values[i] = malloc ( columns * sizeof (double) );
 	}
+		/*
+		* And now our structures are initialized
+		*/
+
+	file = fopen ( filename, "r" );
+
+	fscanf(file, "%127[^,\n]", str);
+	fscanf(file, "%*c");
+
+	for ( i = 0; i < columns; i ++ ) {
+		fscanf(file, "%127[^,\n]", str);
+		fscanf(file, "%*c");
+		composition[i] = malloc ( (strlen(str) + 1) * sizeof (char) );
+		strcpy ( composition[i], str );
+	}
+
+	for ( i = 0; i < lines; i++ ) {
+		fscanf(file, "%127[^,\n]", str);
+		fscanf(file, "%*c");
+		y_values[i] = strtod ( str, NULL );
+		for ( j = 0; j < columns; j++ ) {
+			fscanf(file, "%127[^,\n]", str);
+			fscanf(file, "%*c");
+			x_values[i][j] = strtod ( str, NULL );
+		}
+	}
+
+	fclose ( file );
+		/*
+		* And now we have read the data from the file
+		*/
+
+	system_description->dataset_size = lines;
+	system_description->n_of_comps = columns;
+	system_description->components = composition;
+
 	system->x = x_values;
 	system->aw = y_values;
 		/*
-		* And now our structures are allocated
+		* And now our data and metadata are stored in our structs
 		*/
 
 }
 
+/*
+* This function cleans up the memory utilized,
+* freeing pointers to data and metadata.
+*/
+
+void finalize ( Metadata *system_description, Data *system) {
+
+	int i, lines = system_description->dataset_size;
+	int components = system_description->n_of_comps;
+
+	for ( i = 0; i < lines; i++ ) {
+		free (system->x[i]);
+	}
+
+	free (system->x);
+	free (system->aw);
+
+	for ( i = 0; i < components; i++ ) {
+		free (system_description->components[i]);
+	}
+	free (system_description->components);
+
+}

@@ -22,4 +22,8 @@ typedef struct {
 	double **x;
 } Data;
 
+extern void initialize ( char *filename,
+		Metadata *system_description, Data *system );
+extern void finalize ( Metadata *system_description, Data *system);
+
 

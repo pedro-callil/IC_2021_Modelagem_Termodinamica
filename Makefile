@@ -4,6 +4,7 @@ LDFLAGS		= -Ofast
 LDLIBS		= -lm -lmvec -lgsl -lcblas
 
 SRC		= read_file.c \
+		  fit.c \
 		  main.c
 
 DEPS		= definitions_and_headers.h

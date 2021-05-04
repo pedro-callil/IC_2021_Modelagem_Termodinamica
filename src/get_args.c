@@ -2,22 +2,28 @@
 
 void print_usage (void) {
 
-	printf ( "Usage: FitWaterActivity [OPTIONS]\n" );
-	printf ( "    Options:\n" );
-	printf ( "        -h\n" );
-	printf ( "          Show this help\n" );
-	printf ( "        -q\n" );
-	printf ( "          Quiet; hide verbose output\n" );
-	printf ( "        -f <filename>\n" );
-	printf ( "          File in which the activity data are stored\n" );
-	printf ( "        -m <model>\n" );
-	printf ( "          Model: can be one of norrish,\n" );
+	fprintf ( stderr, "Usage: FitWaterActivity [OPTIONS]\n" );
+	fprintf ( stderr, "    Options:\n" );
+	fprintf ( stderr, "        -h\n" );
+	fprintf ( stderr, "          Show this help\n" );
+	fprintf ( stderr, "        -q\n" );
+	fprintf ( stderr, "          Quiet; hide verbose output\n" );
+	fprintf ( stderr, "        -f <filename>\n" );
+	fprintf ( stderr, "          File in which the activity data are stored\n" );
+	fprintf ( stderr, "        -m <model>\n" );
+	fprintf ( stderr, "          Model: can be one of norrish,\n" );
 
 }
 
 void getargs ( int argc, char **argv, info *user_data ) {
 
 	int opt;
+
+	if ( argc < 2 ) {
+		fprintf ( stderr, "No arguments provided; for help, use -h\n" );
+		fprintf ( stderr, "Aborting...\n" );
+		exit (24);
+	}
 
 	user_data->model = malloc ( 8 * sizeof (char) );
 	strcpy ( user_data->model, "norrish" );

@@ -17,7 +17,9 @@ void print_usage (void) {
 
 void getargs ( int argc, char **argv, info *user_data ) {
 
-	int opt;
+	int opt, gave_file;
+
+	gave_file = FALSE;
 
 	if ( argc < 2 ) {
 		fprintf ( stderr, "No arguments provided; for help, use -h\n" );
@@ -40,10 +42,20 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				user_data->quiet = TRUE;
 				break;
 			case 'f':
-				user_data->filename = malloc (
-					( strlen (optarg) + 1 ) * sizeof (char)
-				);
-				strcpy ( user_data->filename, optarg );
+				gave_file = TRUE;
+				if ( access( optarg, F_OK|R_OK ) == TRUE ) {
+					user_data->filename = malloc (
+						( strlen (optarg) + 1 ) *
+						sizeof (char)
+					);
+					strcpy ( user_data->filename, optarg );
+				} else {
+					fprintf ( stderr,
+					"File not found or wrong permissions. " );
+					fprintf ( stderr, "Aborting...\n" );
+					free(user_data->model);
+					exit (34);
+				}
 				break;
 			case 'm':
 				free(user_data->model);
@@ -54,6 +66,12 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				break;
 		}
 
+	}
+
+	if ( gave_file == FALSE ) {
+		fprintf ( stderr, "No filename given, aborting...\n" );
+		free (user_data->model);
+		exit (24);
 	}
 }
 

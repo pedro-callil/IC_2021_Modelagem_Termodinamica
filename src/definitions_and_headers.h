@@ -3,7 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include <getopt.h>
-#include <gsl/gsl_rng.h>
+#include <unistd.h>
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_vector.h>

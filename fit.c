@@ -8,6 +8,9 @@
  * the GNU Scientific Library Reference Manual.
  */
 
+/* This function is an implementation of Norrish's model for predicting water
+ * activity in solutions, to be used for fitting.
+ */
 
 int phi_norrish ( const gsl_vector *K, void *params, gsl_vector * f ) {
 
@@ -58,7 +61,7 @@ void callback_norrish ( const size_t iter, void *params,
 
 }
 
-int fit_to_model ( System *data ) {
+int fit_to_model ( System *data, info user_data ) {
 
 	size_t n, p, i;
 	const gsl_multifit_nlinear_type *T = gsl_multifit_nlinear_trust;
@@ -69,8 +72,9 @@ int fit_to_model ( System *data ) {
 	gsl_vector *f;
 	gsl_matrix *J, *covar;
 	gsl_vector_view x;
-	const double xtol = 1e-5;
-	const double gtol = 1e-5;
+	callback_function callback;
+	const double xtol = 1e-9;
+	const double gtol = 1e-9;
 	const double ftol = 0.0;
 	double *x_init;
 	double chisq, chisq0, correction;
@@ -99,8 +103,13 @@ int fit_to_model ( System *data ) {
 	f = gsl_multifit_nlinear_residual (w);
 	gsl_blas_ddot ( f, f, &chisq0 );
 
+	if ( user_data.quiet == TRUE ) {
+		callback = NULL;
+	} else {
+		callback = &callback_norrish;
+	}
 	status = gsl_multifit_nlinear_driver ( 100, xtol, gtol, ftol,
-			callback_norrish, NULL, &info, w);
+			callback, NULL, &info, w);
 
 	J = gsl_multifit_nlinear_jac (w);
 	gsl_multifit_nlinear_covar ( J, 0.0, covar );
@@ -108,15 +117,16 @@ int fit_to_model ( System *data ) {
 	gsl_blas_ddot ( f, f, &chisq );
 	correction = GSL_MAX_DBL ( 1, sqrt ( chisq / (n - p) ) );
 
-	fprintf ( stderr, "Results Obtained:\n" );
+	fprintf ( stdout, "Results Obtained:\n" );
 	for ( i = 0; i < p; i++ ) {
-		fprintf ( stderr, "\tK_%ld = %.5f +/- %.5f\n", i,
-				gsl_vector_get ( w->x, i),
-				correction * sqrt ( gsl_matrix_get ( covar, i, i ) ) );
+		fprintf ( stdout, "\tK_%ld = %.5e +/- %.5e\t", i,
+			gsl_vector_get ( w->x, i),
+			correction * sqrt ( gsl_matrix_get ( covar, i, i ) ) );
+		fprintf ( stdout, "(%s)\n", data->description.components[i] );
 	}
-	fprintf ( stderr, "initial cost: |f(x)| = %f\n", sqrt (chisq0) );
-	fprintf ( stderr, "final cost:   |f(x)| = %f\n", sqrt (chisq) );
-	fprintf ( stderr, "Exit status is \"%s\".\n\n", gsl_strerror (status) );
+	fprintf ( stdout, "initial cost: |f(x)| = %f\n", sqrt (chisq0) );
+	fprintf ( stdout, "final cost:   |f(x)| = %f\n", sqrt (chisq) );
+	fprintf ( stdout, "Exit status is \"%s\".\n\n", gsl_strerror (status) );
 
 	gsl_multifit_nlinear_free (w) ;
 	gsl_matrix_free (covar);

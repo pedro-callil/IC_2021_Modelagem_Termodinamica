@@ -93,7 +93,8 @@ void initialize ( char *filename, Metadata *system_description, Data *system ) {
 * freeing pointers to data and metadata.
 */
 
-void finalize ( Metadata *system_description, Data *system) {
+void finalize ( Metadata *system_description, Data *system,
+		info *user_data ) {
 
 	int i, lines = system_description->dataset_size;
 	int components = system_description->n_of_comps;
@@ -109,5 +110,7 @@ void finalize ( Metadata *system_description, Data *system) {
 		free (system_description->components[i]);
 	}
 	free (system_description->components);
+	free ( user_data->model );
+	free ( user_data->filename );
 
 }

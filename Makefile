@@ -1,9 +1,10 @@
 CC		= gcc
 CFLAGS		= -Wall -std=c99 -pedantic -Werror
-LDFLAGS		= -Ofast
+LDFLAGS		= -Ofast -ggdb3
 LDLIBS		= -lm -lmvec -lgsl -lcblas
 
-SRC		= read_file.c \
+SRC		= get_args.c \
+		  read_file.c \
 		  fit.c \
 		  main.c
 

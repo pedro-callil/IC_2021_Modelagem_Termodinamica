@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <getopt.h>
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_matrix.h>
@@ -28,9 +29,21 @@ typedef struct {
 	Data x_and_aw;
 } System;
 
+typedef struct {
+	char *model;
+	char *filename;
+	int quiet;
+} info;
+
+typedef void (*callback_function)
+	(const size_t iter, void *params,
+	const gsl_multifit_nlinear_workspace *w);
+
+extern void getargs ( int argc, char **argv, info *user_data );
 extern void initialize ( char *filename,
 		Metadata *system_description, Data *system );
-extern void finalize ( Metadata *system_description, Data *system );
+extern void finalize ( Metadata *system_description, Data *system,
+		info *user_data );
 extern int phi_norrish ( const gsl_vector *K, void *params, gsl_vector *f );
-extern int fit_to_model ( System *data );
+extern int fit_to_model ( System *data, info user_data );
 

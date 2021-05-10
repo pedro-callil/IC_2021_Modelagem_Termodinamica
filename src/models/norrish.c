@@ -1,4 +1,4 @@
-#include "definitions_and_headers.h"
+#include "../definitions_and_headers.h"
 
 /* This function is an implementation of Norrish's model for predicting water
  * activity in solutions, to be used for fitting.
@@ -67,7 +67,7 @@ void print_norrish ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 
 	fprintf ( stdout, "Results Obtained:\n" );
 	for ( i = 0; i < p; i++ ) {
-		fprintf ( stdout, "\tK_%ld = %.5e +/- %.5e\t", i,
+		fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t", i,
 			gsl_vector_get ( w->x, i),
 			correction * sqrt ( gsl_matrix_get ( covar, i, i ) ) );
 		fprintf ( stdout, "(%s)\n", data->description.components[i] );

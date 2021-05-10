@@ -61,3 +61,10 @@ extern void print_norrish ( gsl_matrix *covar,
 		gsl_multifit_nlinear_workspace *w, int status,
 		double chisq0, double chisq, System *data );
 
+extern int phi_virial ( const gsl_vector *K, void *params, gsl_vector *f );
+extern void callback_virial ( const size_t iter, void *params,
+		const gsl_multifit_nlinear_workspace *w );
+extern void print_virial ( gsl_matrix *covar,
+		gsl_multifit_nlinear_workspace *w, int status,
+		double chisq0, double chisq, System *data );
+

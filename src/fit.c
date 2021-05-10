@@ -33,6 +33,10 @@ int fit_to_model ( System *data, info user_data ) {
 
 	if ( strcmp ( user_data.model, "norrish" ) == TRUE ) {
 		fdf.f = phi_norrish;
+		fdf.p = p;
+	} else if ( strcmp ( user_data.model, "virial" ) == TRUE ) {
+		fdf.f = phi_virial;
+		fdf.p = p + ( p * ( p - 1 ) ) / 2;
 	} else {
 		fprintf (stderr, "Model unknown. Aborting...\n" );
 		exit (45);
@@ -40,8 +44,9 @@ int fit_to_model ( System *data, info user_data ) {
 	fdf.df = NULL;
 	fdf.fvv = NULL;
 	fdf.n = n;
-	fdf.p = p;
 	fdf.params = data;
+
+	p = fdf.p;
 
 	covar = gsl_matrix_alloc ( p, p );
 	x_init = malloc ( p * sizeof (double) );
@@ -61,6 +66,8 @@ int fit_to_model ( System *data, info user_data ) {
 	} else {
 		if ( strcmp ( user_data.model, "norrish" ) == TRUE ) {
 			callback = &callback_norrish;
+		} else if ( strcmp ( user_data.model, "virial" ) == TRUE ) {
+			callback = &callback_virial;
 		} else {
 			callback = NULL;
 		}
@@ -75,6 +82,8 @@ int fit_to_model ( System *data, info user_data ) {
 
 	if ( strcmp ( user_data.model, "norrish" ) == TRUE ) {
 		print = &print_norrish;
+	} else if ( strcmp ( user_data.model, "virial" ) == TRUE ) {
+		print = &print_virial;
 	} else {
 		print = NULL;
 	}

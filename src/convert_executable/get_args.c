@@ -14,6 +14,9 @@ void print_usage (void) {
 	fprintf ( stderr, "      File in which the new data shall be stored.\n" );
 	fprintf ( stderr, "    -x <property>\n" );
 	fprintf ( stderr, "      Property to convert to molar fraction.\n" );
+	fprintf ( stderr, "      Can be one of \"molality\", \"mass_fraction\",\n" );
+	fprintf ( stderr, "      \"mass_concentration\"" );
+	fprintf ( stderr,      " or \"molar_concentration\".\n" );
 	fprintf ( stderr, "      If set, the following options are valid:\n" );
 	fprintf ( stderr, "        -m <molar mass 1> ... <molar mass n>\n" );
 	fprintf ( stderr, "          If the property replacing molar fraction\n" );
@@ -22,6 +25,8 @@ void print_usage (void) {
 	fprintf ( stderr, "          this option, in g/mol.\n" );
 	fprintf ( stderr, "    -y <property>\n" );
 	fprintf ( stderr, "      Property to convert to water activity.\n" );
+	fprintf ( stderr, "      Can be one of \"vapour pressure\", \"BPE\",\n" );
+	fprintf ( stderr, "      \"FPD\" or \"osmotic coefficient\".\n" );
 	fprintf ( stderr, "      If set, the following options are valid:\n" );
 	fprintf ( stderr, "        -t <temperature>\n" );
 	fprintf ( stderr, "          If the property replacing water activity\n" );
@@ -37,7 +42,7 @@ void print_usage (void) {
 	fprintf ( stderr, "          freezing point depression or boiling point\n" );
 	fprintf ( stderr, "          elevation, the pressure shall be informed\n" );
 	fprintf ( stderr, "          through this option. Otherwise assumed to be\n" );
-	fprintf ( stderr, "          P = 101 325 Pa.\n" );
+	fprintf ( stderr, "          P = 101.325 kPa.\n" );
 
 }
 
@@ -54,8 +59,12 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->filename = NULL;
 	user_data->new_filename = NULL;
 	user_data->y_property = NULL;
+	user_data->temperature = 298.15;
+	user_data->temperature_to_add = 0;
+	user_data->pressure = 101.325;
 	user_data->x_property = NULL;
 	user_data->molar_masses = NULL;
+	user_data->quiet = FALSE;
 
 	if ( argc < 2 ) {
 		fprintf ( stderr, "No arguments provided; for help, use -h\n" );
@@ -155,7 +164,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 		exit (24);
 	}
 	if ( gave_C_yet == TRUE ) {
-		user_data->temperature += KELVIN_TO_CELSIUS;
+		user_data->temperature_to_add = KELVIN_TO_CELSIUS;
 	}
 }
 

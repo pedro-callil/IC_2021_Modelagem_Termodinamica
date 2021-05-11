@@ -22,6 +22,14 @@
 #define FALSE 1
 
 #define KELVIN_TO_CELSIUS 273.15
+#define MOLALITY_TO_FRACTION 55.51
+#define MASS_TO_FRACTION 18.015
+
+/* constants for arden_buck function */
+#define A_A 6.1121
+#define B_A 18.678
+#define C_A 234.5
+#define D_A 257.14
 
 /*
  * Data structures
@@ -48,6 +56,7 @@ typedef struct {
 	char *new_filename;
 	char *y_property;
 	double temperature;
+	double temperature_to_add;
 	double pressure;
 	char *x_property;
 	double *molar_masses;

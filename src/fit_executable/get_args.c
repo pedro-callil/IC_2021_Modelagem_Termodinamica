@@ -11,7 +11,7 @@ void print_usage (void) {
 	fprintf ( stderr, "        -f <filename>\n" );
 	fprintf ( stderr, "          File in which the activity data are stored\n" );
 	fprintf ( stderr, "        -m <model>\n" );
-	fprintf ( stderr, "          Model: can be one of norrish,\n" );
+	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
 
 }
 

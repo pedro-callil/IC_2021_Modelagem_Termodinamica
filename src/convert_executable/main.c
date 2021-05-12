@@ -8,7 +8,8 @@ int main ( int argc, char **argv ) {
 
 	getargs ( argc, argv, &user_data );
 
-	initialize ( user_data.filename, &system_description, &system );
+	initialize ( user_data.filename, &system_description,
+			&system, &user_data );
 
 	new_system = convert ( &system_description, &system, &user_data );
 

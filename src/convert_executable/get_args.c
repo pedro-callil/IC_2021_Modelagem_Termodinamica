@@ -34,9 +34,9 @@ void print_usage (void) {
 	fprintf ( stderr, "          the solution, then its temperature shall\n" );
 	fprintf ( stderr, "          be informed (see also: -T). Otherwise the\n" );
 	fprintf ( stderr, "          program assumes T = 298.15 K.\n" );
-	fprintf ( stderr, "          -C <temperature>\n" );
-	fprintf ( stderr, "            If passed, the program will assume\n" );
-	fprintf ( stderr, "            temperatures in oC; otherwise, in K.\n" );
+	fprintf ( stderr, "        -C\n" );
+	fprintf ( stderr, "          If passed, the program will assume\n" );
+	fprintf ( stderr, "          temperatures in oC; otherwise, in K.\n" );
 	fprintf ( stderr, "        -p <pressure>\n" );
 	fprintf ( stderr, "          If the property replacing water activity is\n" );
 	fprintf ( stderr, "          freezing point depression or boiling point\n" );
@@ -61,7 +61,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->y_property = NULL;
 	user_data->temperature = 298.15;
 	user_data->temperature_to_add = 0;
-	user_data->pressure = 101.325;
+	user_data->pressure = 101325;
 	user_data->x_property = NULL;
 	user_data->molar_masses = NULL;
 	user_data->quiet = FALSE;

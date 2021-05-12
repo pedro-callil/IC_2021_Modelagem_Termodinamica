@@ -7,7 +7,8 @@
  * .csv file in which the data are stored, and pointers to the structs.
  */
 
-void initialize ( char *filename, Metadata *system_description, Data *system ) {
+void initialize ( char *filename, Metadata *system_description,
+		Data *system, info *user_data ) {
 
 	int lines, columns, line_is_empty, i, j;
 	char tmpchar, str[256];
@@ -63,7 +64,7 @@ void initialize ( char *filename, Metadata *system_description, Data *system ) {
 	for ( i = 0; i < lines; i++ ) {
 		fscanf(file, "%127[^,\n]", str);
 		fscanf(file, "%*c");
-		y_values[i] = strtod ( str, NULL );
+		y_values[i] = strtod ( str, NULL ) + user_data->temperature_to_add;
 		for ( j = 0; j < columns; j++ ) {
 			fscanf(file, "%127[^,\n]", str);
 			fscanf(file, "%*c");

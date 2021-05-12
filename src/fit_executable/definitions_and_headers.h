@@ -69,6 +69,7 @@ extern void initialize ( char *filename,
 extern void finalize ( Metadata *system_description, Data *system,
 		info *user_data );
 extern int fit_to_model ( System *data, info user_data );
+extern int check_to_model ( System *data, info user_data );
 
 /*
  * * * Functions specific to each model.

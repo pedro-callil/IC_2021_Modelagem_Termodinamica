@@ -29,7 +29,7 @@ CONVERT_DEPS		= $(CONVERT_SRC_DIR)/definitions_and_headers.h
 CONVERT_EXECUTABLE	= $(BINDIR)/ConvertWaterActivity
 CONVERT_SYS_FILE	= /usr/bin/ConvertWaterActivity
 
-.PHONY: all clean install
+.PHONY: all clean install uninstall
 all: $(MAIN_EXECUTABLE) $(CONVERT_EXECUTABLE)
 
 clean:

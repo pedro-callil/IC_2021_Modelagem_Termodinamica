@@ -8,7 +8,7 @@
  * the GNU Scientific Library Reference Manual.
  */
 
-int fit_to_model ( System *data, info user_data ) {
+int fit_to_model ( System *data, info *user_data ) {
 
 	size_t n, p, i;
 	const gsl_multifit_nlinear_type *T = gsl_multifit_nlinear_trust;
@@ -31,10 +31,10 @@ int fit_to_model ( System *data, info user_data ) {
 	n = data->description.dataset_size;
 	p = data->description.n_of_comps;
 
-	if ( strcmp ( user_data.model, "norrish" ) == TRUE ) {
+	if ( strcmp ( user_data->model, "norrish" ) == TRUE ) {
 		fdf.f = phi_norrish;
 		fdf.p = p;
-	} else if ( strcmp ( user_data.model, "virial" ) == TRUE ) {
+	} else if ( strcmp ( user_data->model, "virial" ) == TRUE ) {
 		fdf.f = phi_virial;
 		fdf.p = p + ( p * ( p - 1 ) ) / 2;
 	} else {
@@ -61,12 +61,12 @@ int fit_to_model ( System *data, info user_data ) {
 	f = gsl_multifit_nlinear_residual (w);
 	gsl_blas_ddot ( f, f, &chisq0 );
 
-	if ( user_data.quiet == TRUE ) {
+	if ( user_data->quiet == TRUE ) {
 		callback = NULL;
 	} else {
-		if ( strcmp ( user_data.model, "norrish" ) == TRUE ) {
+		if ( strcmp ( user_data->model, "norrish" ) == TRUE ) {
 			callback = &callback_norrish;
-		} else if ( strcmp ( user_data.model, "virial" ) == TRUE ) {
+		} else if ( strcmp ( user_data->model, "virial" ) == TRUE ) {
 			callback = &callback_virial;
 		} else {
 			callback = NULL;
@@ -80,9 +80,9 @@ int fit_to_model ( System *data, info user_data ) {
 
 	gsl_blas_ddot ( f, f, &chisq );
 
-	if ( strcmp ( user_data.model, "norrish" ) == TRUE ) {
+	if ( strcmp ( user_data->model, "norrish" ) == TRUE ) {
 		print = &print_norrish;
-	} else if ( strcmp ( user_data.model, "virial" ) == TRUE ) {
+	} else if ( strcmp ( user_data->model, "virial" ) == TRUE ) {
 		print = &print_virial;
 	} else {
 		print = NULL;

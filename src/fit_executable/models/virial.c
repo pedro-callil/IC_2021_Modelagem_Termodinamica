@@ -1,6 +1,6 @@
 #include "../definitions_and_headers.h"
 
-/* This function is an implementation of Norrish's model for predicting water
+/* This function is an implementation of a virial model for predicting water
  * activity in solutions, to be used for fitting.
  */
 

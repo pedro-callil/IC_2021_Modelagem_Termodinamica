@@ -5,6 +5,14 @@ Nesse repositório está o código-fonte dos programas utilizados para
 conversão e ajuste dos valores de atividade da água de acordo com a
 lista de modelos adotados.
 
+Instalação:
+
+```
+git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
+cd IC_2021_Modelagem_Termodinamica
+make
+```
+
 Autor
 -----
 

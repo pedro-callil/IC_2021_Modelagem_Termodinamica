@@ -59,6 +59,12 @@ typedef void (*print_function)
 	(gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 	int status, double chisq0, double chisq, System *data);
 
+typedef void (*check_function)
+	( System *data, info *user_data, double *errors );
+
+typedef void (*print_function_for_check)
+	( System *data, info *user_data, double *errors );
+
 /*
  * Functions and subroutines
  */
@@ -68,8 +74,8 @@ extern void initialize ( char *filename,
 		Metadata *system_description, Data *system );
 extern void finalize ( Metadata *system_description, Data *system,
 		info *user_data );
-extern int fit_to_model ( System *data, info user_data );
-extern int check_to_model ( System *data, info user_data );
+extern int fit_to_model ( System *data, info *user_data );
+extern int check_model ( System *data, info *user_data );
 
 /*
  * * * Functions specific to each model.
@@ -89,3 +95,5 @@ extern void print_virial ( gsl_matrix *covar,
 		gsl_multifit_nlinear_workspace *w, int status,
 		double chisq0, double chisq, System *data );
 
+extern void check_raoult ( System *data, info *user_data, double *errors );
+extern void print_raoult ( System *data, info *user_data, double *errors );

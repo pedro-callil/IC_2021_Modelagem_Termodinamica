@@ -18,6 +18,13 @@ int check_model ( System *data, info *user_data ) {
 	if ( strcmp ( user_data->model, "raoult" ) == TRUE ) {
 		check = &check_raoult;
 		print = &print_raoult;
+	} else if ( strcmp ( user_data->model, "caurie" ) ==TRUE ) {
+		check = &check_caurie;
+		print = &print_caurie;
+	} else {
+		fprintf ( stderr, "Model unknown. Assuming Raoult's Law.\n" );
+		check = &check_raoult;
+		print = &print_raoult;
 	}
 
 	check ( data, user_data, errors );

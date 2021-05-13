@@ -15,6 +15,7 @@ MAIN_SRC	= $(MAIN_SRC_DIR)/get_args.c \
 		  $(MAIN_SRC_DIR)/main.c \
 		  $(MAIN_MODELS_DIR)/norrish.c \
 		  $(MAIN_MODELS_DIR)/virial.c \
+		  $(MAIN_MODELS_DIR)/caurie.c \
 		  $(MAIN_MODELS_DIR)/raoult.c
 
 CONVERT_SRC	= $(CONVERT_SRC_DIR)/get_args.c \

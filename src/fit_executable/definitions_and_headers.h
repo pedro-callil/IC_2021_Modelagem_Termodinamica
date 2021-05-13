@@ -21,6 +21,10 @@
 #define TRUE 0
 #define FALSE 1
 
+#define KGS_IN_MOL_WATER 0.018015
+#define FAC_B_CAURIE 3081.3601
+#define FAC_C_CAURIE 171046.2991
+
 /*
  * Data structures
  */
@@ -97,3 +101,6 @@ extern void print_virial ( gsl_matrix *covar,
 
 extern void check_raoult ( System *data, info *user_data, double *errors );
 extern void print_raoult ( System *data, info *user_data, double *errors );
+
+extern void check_caurie ( System *data, info *user_data, double *errors );
+extern void print_caurie ( System *data, info *user_data, double *errors );

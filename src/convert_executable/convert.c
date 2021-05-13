@@ -1,5 +1,9 @@
 #include "definitions_and_headers.h"
 
+
+/*
+ * Function declarations:
+ */
 double arden_buck ( double T );
 double ge_and_wang_bpe ( double T, info *user_data );
 double ge_and_wang_fpd ( double T, info *user_data );
@@ -10,6 +14,10 @@ double freezing_point ( double P );
 double delta_H_fus ( double T );
 double delta_C_fus ( double T );
 
+
+/*
+ * Central function for conversion.
+ */
 Data convert ( Metadata *system_description, Data *system,
 		info *user_data ) {
 
@@ -204,10 +212,12 @@ Data convert ( Metadata *system_description, Data *system,
  * *
  */
 
+/* For vapour pressure calculation, more precise than Antoine. */
 double arden_buck ( double T ) {
 	return ( A_A * exp ( ( B_A - T / C_A ) * ( T / ( D_A + T ) ) ) );
 }
 
+/* Ge and Wang's relation between boiling point elevation and water activity. */
 double ge_and_wang_bpe ( double T, info *user_data ) {
 
 	double aw, aw_log;
@@ -224,6 +234,7 @@ double ge_and_wang_bpe ( double T, info *user_data ) {
 	return aw;
 }
 
+/* Ge and Wang's relation between freezing point depression and water activity. */
 double ge_and_wang_fpd ( double T, info *user_data ) {
 
 	double aw, aw_log;
@@ -252,6 +263,16 @@ double boiling_point ( double P ) {
 	return T_B;
 }
 
+double freezing_point ( double P ) {
+
+	return FREEZING_POINT_WATER;
+}
+
+/*
+ * The next four functions are polynomial regressions to deal with the relation
+ * of some property (such as C_p or Delta_H) with the temperature.
+ */
+
 double delta_H_vap ( double T ) {
 
 	double delta_H;
@@ -271,11 +292,6 @@ double delta_C_vap ( double T ) {
 	delta_C = C_vap - C_liq;
 
 	return delta_C;
-}
-
-double freezing_point ( double P ) {
-
-	return FREEZING_POINT_WATER;
 }
 
 double delta_H_fus ( double T ) {

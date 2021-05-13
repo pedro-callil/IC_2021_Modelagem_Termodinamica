@@ -42,7 +42,7 @@ int phi_virial ( const gsl_vector *K, void *params, gsl_vector * f ) {
 	return GSL_SUCCESS;
 }
 
-
+/* function to call every iteration */
 void callback_virial ( const size_t iter, void *params,
 		const gsl_multifit_nlinear_workspace *w ) {
 
@@ -83,6 +83,7 @@ void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 			correction * sqrt ( gsl_matrix_get
 				( covar, counter, counter ) ) );
 		fprintf ( stdout, "(%s)\n", data->description.components[i] );
+		/* add solute name */
 		counter++;
 		for ( j = 0; j < i; j++ ) {
 			fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t",
@@ -92,6 +93,7 @@ void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 			fprintf ( stdout, "(%s/%s)\n",
 				data->description.components[i],
 				data->description.components[j] );
+			/* add solute pair name */
 			counter++;
 		}
 	}

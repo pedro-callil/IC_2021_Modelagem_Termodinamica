@@ -35,6 +35,7 @@ int phi_norrish ( const gsl_vector *K, void *params, gsl_vector * f ) {
 }
 
 
+/* function to call every iteration */
 void callback_norrish ( const size_t iter, void *params,
 		const gsl_multifit_nlinear_workspace *w ) {
 
@@ -71,6 +72,7 @@ void print_norrish ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 			gsl_vector_get ( w->x, i),
 			correction * sqrt ( gsl_matrix_get ( covar, i, i ) ) );
 		fprintf ( stdout, "(%s)\n", data->description.components[i] );
+		/* add name of the solute */
 	}
 	fprintf ( stdout, "initial cost: |f(x)| = %f\n", sqrt (chisq0) );
 	fprintf ( stdout, "final cost:   |f(x)| = %f\n", sqrt (chisq) );

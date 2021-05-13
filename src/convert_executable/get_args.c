@@ -84,6 +84,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				user_data->quiet = TRUE;
 				break;
 			case 'f':
+				/* read filename from user (original data) */
 				gave_file = TRUE;
 				if ( access( optarg, F_OK|R_OK ) == TRUE ) {
 					user_data->filename = malloc (
@@ -100,6 +101,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				}
 				break;
 			case 'n':
+				/* read new filename from user (new data) */
 				gave_new_file = TRUE;
 				user_data->new_filename = malloc (
 					( strlen (optarg) + 1 ) *
@@ -107,12 +109,14 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				strcpy ( user_data->new_filename, optarg );
 				break;
 			case 'x':
+				/* read property to convert to molar fraction */
 				user_data->x_property = malloc (
 					( strlen (optarg) + 1 ) *
 					sizeof (char) );
 				strcpy ( user_data->x_property, optarg );
 				break;
 			case 'm':
+				/* read molar mass of each component */
 				index = optind - 1;
 				comps = 0;
 				while ( index < argc ) {
@@ -136,6 +140,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				}
 				break;
 			case 'y':
+				/* read property to convert to water activity */
 				user_data->y_property = malloc (
 					( strlen (optarg) + 1 ) *
 					sizeof (char) );
@@ -145,6 +150,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				user_data->temperature = strtod ( optarg, NULL );
 				break;
 			case 'C':
+				/* read if temperature in C or K */
 				gave_C_yet = TRUE;
 				break;
 			case 'p':
@@ -164,6 +170,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 		exit (24);
 	}
 	if ( gave_C_yet == TRUE ) {
+		/* convert Kelvin (default) to Celsius */
 		user_data->temperature_to_add = KELVIN_TO_CELSIUS;
 	}
 }

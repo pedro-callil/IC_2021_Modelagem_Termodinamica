@@ -21,6 +21,8 @@
 #define TRUE 0
 #define FALSE 1
 
+/* For molality calculations for Caurie's model */
+
 #define KGS_IN_MOL_WATER 0.018015
 #define FAC_B_CAURIE 3081.3601
 #define FAC_C_CAURIE 171046.2991

@@ -19,6 +19,7 @@ void write_to_file ( Metadata *system_description, Data *new_system,
 	for ( i = 0; i < comps - 1; i++ ) {
 		fprintf ( new_file, "%s,", system_description->components[i] );
 	}
+	/* write component names to the first line */
 
 	fprintf ( new_file, "%s\n", system_description->components[comps-1] );
 
@@ -28,6 +29,7 @@ void write_to_file ( Metadata *system_description, Data *new_system,
 			fprintf ( new_file, "%.9f,", new_system->x[i][j] );
 		}
 		fprintf ( new_file, "%.9f\n", new_system->x[i][j] );
+		/* write obtained water activities and molar fractions */
 	}
 
 	fclose (new_file);

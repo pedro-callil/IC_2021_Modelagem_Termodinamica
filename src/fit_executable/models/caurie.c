@@ -26,6 +26,10 @@ void check_caurie ( System *data, info *user_data, double *errors ) {
 		for ( j = 0; j < p; j++ ) {
 			prod_aw *= xw / ( xw + data->x_and_aw.x[i][j] );
 		}
+		/*
+		* obtaining the water activity of a binary solution
+		* in which the solute maintains constant its molality
+		*/
 		if ( p > 1 ) {
 			for ( j = 0; j < p; j++ ) {
 				m[j] = data->x_and_aw.x[i][j] /
@@ -37,6 +41,9 @@ void check_caurie ( System *data, info *user_data, double *errors ) {
 						m[k] * m[l];
 				}
 			}
+			/*
+			* Caurie's correction for ternary solutions
+			*/
 			if ( p > 2 ) {
 				for ( k = 0; k < p; k++ ) {
 					for ( l = 0; l < k; l++ ) {
@@ -48,6 +55,9 @@ void check_caurie ( System *data, info *user_data, double *errors ) {
 						}
 					}
 				}
+				/*
+				* Caurie's correction for n-ary solutions
+				*/
 			}
 		}
 		phi_calc = log (prod_aw) / log (xw);

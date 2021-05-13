@@ -1,5 +1,6 @@
 #include "definitions_and_headers.h"
 
+/* print accepted arguments and options */
 void print_usage (void) {
 
 	fprintf ( stderr, "Usage: FitWaterActivity [OPTIONS]\n" );
@@ -12,9 +13,11 @@ void print_usage (void) {
 	fprintf ( stderr, "          File in which the activity data are stored\n" );
 	fprintf ( stderr, "        -m <model>\n" );
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
+	fprintf ( stderr, "          caurie, raoult or zdanovskii. \n" );
 
 }
 
+/* read arguments and options from user */
 void getargs ( int argc, char **argv, info *user_data ) {
 
 	int opt, gave_file;
@@ -28,7 +31,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	}
 
 	user_data->model = malloc ( 8 * sizeof (char) );
-	strcpy ( user_data->model, "norrish" );
+	strcpy ( user_data->model, "raoult" );
 	user_data->quiet = FALSE;
 
 	while ( ( opt = getopt ( argc, argv, "hqf:m:" ) ) != -1 ) {

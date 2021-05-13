@@ -34,15 +34,25 @@ int fit_to_model ( System *data, info *user_data ) {
 	if ( strcmp ( user_data->model, "norrish" ) == TRUE ) {
 		fdf.f = phi_norrish;
 		fdf.p = p;
+		callback = &callback_norrish;
+		print = &print_norrish;
 	} else if ( strcmp ( user_data->model, "virial" ) == TRUE ) {
 		fdf.f = phi_virial;
 		fdf.p = p + ( p * ( p - 1 ) ) / 2;
+		callback = &callback_virial;
+		print = &print_virial;
 	} else {
 		fprintf (stderr, "Model unknown. Aborting...\n" );
 		exit (45);
 	}
+
 	fdf.df = NULL;
 	fdf.fvv = NULL;
+		/*
+		* We won't specify the values of the jacobians and hessians,
+		* because the data are small enough to make the performance
+		* difference negligible
+		*/
 	fdf.n = n;
 	fdf.params = data;
 
@@ -63,15 +73,9 @@ int fit_to_model ( System *data, info *user_data ) {
 
 	if ( user_data->quiet == TRUE ) {
 		callback = NULL;
-	} else {
-		if ( strcmp ( user_data->model, "norrish" ) == TRUE ) {
-			callback = &callback_norrish;
-		} else if ( strcmp ( user_data->model, "virial" ) == TRUE ) {
-			callback = &callback_virial;
-		} else {
-			callback = NULL;
-		}
+		/* limit ouput if required */
 	}
+
 	status = gsl_multifit_nlinear_driver ( 100, xtol, gtol, ftol,
 			callback, NULL, &info, w);
 
@@ -79,14 +83,6 @@ int fit_to_model ( System *data, info *user_data ) {
 	gsl_multifit_nlinear_covar ( J, 0.0, covar );
 
 	gsl_blas_ddot ( f, f, &chisq );
-
-	if ( strcmp ( user_data->model, "norrish" ) == TRUE ) {
-		print = &print_norrish;
-	} else if ( strcmp ( user_data->model, "virial" ) == TRUE ) {
-		print = &print_virial;
-	} else {
-		print = NULL;
-	}
 
 	print ( covar, w, status, chisq0, chisq, data );
 

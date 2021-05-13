@@ -14,6 +14,9 @@ int check_model ( System *data, info *user_data ) {
 
 	n = data->description.dataset_size;
 	errors = malloc ( n * sizeof (double) );
+	/* array in which the absolute values
+	* of the errors shall be stored
+	*/
 
 	if ( strcmp ( user_data->model, "raoult" ) == TRUE ) {
 		check = &check_raoult;

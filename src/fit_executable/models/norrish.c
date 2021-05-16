@@ -67,20 +67,24 @@ void print_norrish ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 
 	correction = GSL_MAX_DBL ( 1, sqrt ( chisq / (n - p) ) );
 
-	fprintf ( stdout, "Results Obtained:\n" );
-	for ( i = 0; i < p; i++ ) {
-		fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t", i,
-			gsl_vector_get ( w->x, i),
-			correction * sqrt ( gsl_matrix_get ( covar, i, i ) ) );
-		fprintf ( stdout, "(%s)\n", data->description.components[i] );
-		/* add name of the solute */
+	if ( user_data->is_all == FALSE ) {
+		fprintf ( stdout, "Results Obtained:\n" );
+		for ( i = 0; i < p; i++ ) {
+			fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t", i,
+				gsl_vector_get ( w->x, i), correction *
+				sqrt ( gsl_matrix_get ( covar, i, i ) ) );
+			fprintf ( stdout, "(%s)\n",
+					data->description.components[i] );
+			/* add name of the solute */
+		}
+
+		fprintf ( stdout, "initial cost: |f(x)| = %f\n", sqrt (chisq0) );
+		fprintf ( stdout, "final cost:   |f(x)| = %f\n", sqrt (chisq) );
+		fprintf ( stdout, "Exit status is \"%s\".\n\n",
+				gsl_strerror (status) );
 	}
 
 	user_data->cost = sqrt (chisq);
-
-	fprintf ( stdout, "initial cost: |f(x)| = %f\n", sqrt (chisq0) );
-	fprintf ( stdout, "final cost:   |f(x)| = %f\n", sqrt (chisq) );
-	fprintf ( stdout, "Exit status is \"%s\".\n\n", gsl_strerror (status) );
 
 }
 

@@ -36,6 +36,8 @@ void print_raoult ( System *data, info *user_data, double *errors ) {
 
 	user_data->cost = sqrt (user_data->cost);
 
-	fprintf ( stderr, "final cost:   |f(x)| = %f\n", user_data->cost );
+	if ( user_data->is_all == FALSE ) {
+		fprintf ( stderr, "final cost:   |f(x)| = %f\n", user_data->cost );
+	}
 
 }

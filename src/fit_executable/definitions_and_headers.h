@@ -52,6 +52,7 @@ typedef struct {
 	char *filename;
 	int quiet;
 	double cost;
+	int is_all;
 } info;
 
 /*

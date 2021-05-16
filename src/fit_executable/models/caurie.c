@@ -82,6 +82,8 @@ void print_caurie ( System *data, info *user_data, double *errors ) {
 
 	user_data->cost = sqrt (cost);
 
-	fprintf ( stderr, "final cost:   |f(x)| = %f\n", sqrt (cost) );
+	if ( user_data->is_all == FALSE ) {
+		fprintf ( stderr, "final cost:   |f(x)| = %f\n", sqrt (cost) );
+	}
 
 }

@@ -35,6 +35,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	strcpy ( user_data->model, "raoult" );
 	user_data->quiet = FALSE;
 	user_data->cost = 0;
+	user_data->is_all = FALSE;
 
 	while ( ( opt = getopt ( argc, argv, "hqf:m:" ) ) != -1 ) {
 		switch (opt) {
@@ -68,6 +69,10 @@ void getargs ( int argc, char **argv, info *user_data ) {
 					( strlen (optarg) + 1 ) * sizeof (char)
 				);
 				strcpy ( user_data->model, optarg );
+				if ( strcmp ( user_data->model, "all" ) == TRUE ) {
+					user_data->is_all = TRUE;
+					user_data->quiet = TRUE;
+				}
 				break;
 		}
 

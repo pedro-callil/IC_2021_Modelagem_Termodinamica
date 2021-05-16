@@ -74,36 +74,39 @@ void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 
 	correction = GSL_MAX_DBL ( 1, sqrt ( chisq / (n - p) ) );
 
-	fprintf ( stdout, "Results Obtained:\n" );
+	if ( user_data->is_all == FALSE ) {
+		fprintf ( stdout, "Results Obtained:\n" );
 
-	counter = 0;
+		counter = 0;
 
-	for ( i = 0; i < p; i++ ) {
-		fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t", counter,
-			gsl_vector_get ( w->x, counter),
-			correction * sqrt ( gsl_matrix_get
-				( covar, counter, counter ) ) );
-		fprintf ( stdout, "(%s)\n", data->description.components[i] );
-		/* add solute name */
-		counter++;
-		for ( j = 0; j < i; j++ ) {
-			fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t",
-				counter, gsl_vector_get ( w->x, counter),
+		for ( i = 0; i < p; i++ ) {
+			fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t", counter,
+				gsl_vector_get ( w->x, counter),
 				correction * sqrt ( gsl_matrix_get
 					( covar, counter, counter ) ) );
-			fprintf ( stdout, "(%s/%s)\n",
-				data->description.components[i],
-				data->description.components[j] );
-			/* add solute pair name */
+			fprintf ( stdout, "(%s)\n", data->description.components[i] );
+			/* add solute name */
 			counter++;
+			for ( j = 0; j < i; j++ ) {
+				fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t",
+					counter, gsl_vector_get ( w->x, counter),
+					correction * sqrt ( gsl_matrix_get
+						( covar, counter, counter ) ) );
+				fprintf ( stdout, "(%s/%s)\n",
+					data->description.components[i],
+					data->description.components[j] );
+				/* add solute pair name */
+				counter++;
+			}
 		}
+
+		fprintf ( stdout, "initial cost: |f(x)| = %f\n", sqrt (chisq0) );
+		fprintf ( stdout, "final cost:   |f(x)| = %f\n", sqrt (chisq) );
+		fprintf ( stdout, "Exit status is \"%s\".\n\n",
+				gsl_strerror (status) );
 	}
 
 	user_data->cost = sqrt (chisq);
-
-	fprintf ( stdout, "initial cost: |f(x)| = %f\n", sqrt (chisq0) );
-	fprintf ( stdout, "final cost:   |f(x)| = %f\n", sqrt (chisq) );
-	fprintf ( stdout, "Exit status is \"%s\".\n\n", gsl_strerror (status) );
 
 }
 

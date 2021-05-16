@@ -13,7 +13,8 @@ void print_usage (void) {
 	fprintf ( stderr, "          File in which the activity data are stored\n" );
 	fprintf ( stderr, "        -m <model>\n" );
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
-	fprintf ( stderr, "          caurie, raoult or zdanovskii. \n" );
+	fprintf ( stderr, "          caurie, raoult or all, option which \n" );
+	fprintf ( stderr, "          compares all other models. \n" );
 
 }
 
@@ -33,6 +34,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->model = malloc ( 8 * sizeof (char) );
 	strcpy ( user_data->model, "raoult" );
 	user_data->quiet = FALSE;
+	user_data->cost = 0;
 
 	while ( ( opt = getopt ( argc, argv, "hqf:m:" ) ) != -1 ) {
 		switch (opt) {

@@ -26,15 +26,16 @@ void check_raoult ( System *data, info *user_data, double *errors ) {
 void print_raoult ( System *data, info *user_data, double *errors ) {
 
 	int i, n;
-	double cost;
 
 	n = data->description.dataset_size;
 
-	cost = 0;
+	user_data->cost = 0;
 	for ( i = 0; i < n; i++ ) {
-		cost += pow ( errors[i], 2 );
+		user_data->cost += pow ( errors[i], 2 );
 	}
 
-	fprintf ( stderr, "final cost:   |f(x)| = %f\n", sqrt (cost) );
+	user_data->cost = sqrt (user_data->cost);
+
+	fprintf ( stderr, "final cost:   |f(x)| = %f\n", user_data->cost );
 
 }

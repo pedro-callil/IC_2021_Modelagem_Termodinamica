@@ -51,6 +51,7 @@ typedef struct {
 	char *model;
 	char *filename;
 	int quiet;
+	double cost;
 } info;
 
 /*
@@ -63,7 +64,8 @@ typedef void (*callback_function)
 
 typedef void (*print_function)
 	(gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
-	int status, double chisq0, double chisq, System *data);
+	int status, double chisq0, double chisq,
+	System *data, info *user_data);
 
 typedef void (*check_function)
 	( System *data, info *user_data, double *errors );
@@ -82,6 +84,7 @@ extern void finalize ( Metadata *system_description, Data *system,
 		info *user_data );
 extern int fit_to_model ( System *data, info *user_data );
 extern int check_model ( System *data, info *user_data );
+extern void analyze_all_models ( System *data, info *user_data );
 
 /*
  * * * Functions specific to each model.
@@ -92,14 +95,16 @@ extern void callback_norrish ( const size_t iter, void *params,
 		const gsl_multifit_nlinear_workspace *w );
 extern void print_norrish ( gsl_matrix *covar,
 		gsl_multifit_nlinear_workspace *w, int status,
-		double chisq0, double chisq, System *data );
+		double chisq0, double chisq,
+		System *data, info *user_data );
 
 extern int phi_virial ( const gsl_vector *K, void *params, gsl_vector *f );
 extern void callback_virial ( const size_t iter, void *params,
 		const gsl_multifit_nlinear_workspace *w );
 extern void print_virial ( gsl_matrix *covar,
 		gsl_multifit_nlinear_workspace *w, int status,
-		double chisq0, double chisq, System *data );
+		double chisq0, double chisq,
+		System *data, info *user_data );
 
 extern void check_raoult ( System *data, info *user_data, double *errors );
 extern void print_raoult ( System *data, info *user_data, double *errors );

@@ -84,7 +84,7 @@ int fit_to_model ( System *data, info *user_data ) {
 
 	gsl_blas_ddot ( f, f, &chisq );
 
-	print ( covar, w, status, chisq0, chisq, data );
+	print ( covar, w, status, chisq0, chisq, data, user_data );
 
 	gsl_multifit_nlinear_free (w) ;
 	gsl_matrix_free (covar);

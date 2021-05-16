@@ -80,6 +80,8 @@ void print_caurie ( System *data, info *user_data, double *errors ) {
 		cost += pow ( errors[i], 2 );
 	}
 
+	user_data->cost = sqrt (cost);
+
 	fprintf ( stderr, "final cost:   |f(x)| = %f\n", sqrt (cost) );
 
 }

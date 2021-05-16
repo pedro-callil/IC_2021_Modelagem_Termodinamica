@@ -62,7 +62,8 @@ void callback_virial ( const size_t iter, void *params,
 }
 
 void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
-		int status, double chisq0, double chisq, System *data ) {
+		int status, double chisq0, double chisq,
+		System *data, info *user_data ) {
 
 	int p, n;
 	size_t i, j, counter;
@@ -97,6 +98,9 @@ void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 			counter++;
 		}
 	}
+
+	user_data->cost = sqrt (chisq);
+
 	fprintf ( stdout, "initial cost: |f(x)| = %f\n", sqrt (chisq0) );
 	fprintf ( stdout, "final cost:   |f(x)| = %f\n", sqrt (chisq) );
 	fprintf ( stdout, "Exit status is \"%s\".\n\n", gsl_strerror (status) );

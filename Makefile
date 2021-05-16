@@ -12,6 +12,7 @@ MAIN_SRC	= $(MAIN_SRC_DIR)/get_args.c \
 		  $(MAIN_SRC_DIR)/read_file.c \
 		  $(MAIN_SRC_DIR)/fit.c \
 		  $(MAIN_SRC_DIR)/check.c \
+		  $(MAIN_SRC_DIR)/analyze.c \
 		  $(MAIN_SRC_DIR)/main.c \
 		  $(MAIN_MODELS_DIR)/norrish.c \
 		  $(MAIN_MODELS_DIR)/virial.c \

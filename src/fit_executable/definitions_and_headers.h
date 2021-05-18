@@ -27,6 +27,10 @@
 #define FAC_B_CAURIE 3081.3601
 #define FAC_C_CAURIE 171046.2991
 
+/* polynomial fitting - Zdanovskii relation */
+
+#define DEG_POLY_ZDAN 4
+
 /*
  * Data structures
  */
@@ -57,6 +61,13 @@ typedef struct {
 	double cost;
 	int is_all;
 } info;
+
+typedef struct {
+	double *x;
+	double *y;
+	int size;
+} struct_for_zdan;
+
 
 /*
  * Function pointers
@@ -115,3 +126,9 @@ extern void print_raoult ( System *data, info *user_data, double *errors );
 
 extern void check_caurie ( System *data, info *user_data, double *errors );
 extern void print_caurie ( System *data, info *user_data, double *errors );
+
+
+extern void check_zdanovskii ( System *data, info *user_data, double *errors );
+extern void print_zdanovskii ( System *data, info *user_data, double *errors );
+
+

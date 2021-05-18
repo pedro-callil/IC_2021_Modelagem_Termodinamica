@@ -1,6 +1,6 @@
 CC		= gcc
-CFLAGS		= -Wall -std=c18 -pedantic -Werror
-LDFLAGS		= -Ofast -ggdb3
+CFLAGS		= -Wall -std=c18 -pedantic -Werror -Ofast
+LDFLAGS		= -gdwarf-4 -ggdb3
 LDLIBS		= -lm -lmvec -lgsl -lcblas
 
 MAIN_SRC_DIR	= src/fit_executable
@@ -14,6 +14,7 @@ MAIN_SRC	= $(MAIN_SRC_DIR)/get_args.c \
 		  $(MAIN_SRC_DIR)/check.c \
 		  $(MAIN_SRC_DIR)/analyze.c \
 		  $(MAIN_SRC_DIR)/main.c \
+		  $(MAIN_MODELS_DIR)/zdanovskii.c \
 		  $(MAIN_MODELS_DIR)/norrish.c \
 		  $(MAIN_MODELS_DIR)/virial.c \
 		  $(MAIN_MODELS_DIR)/caurie.c \

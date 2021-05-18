@@ -25,8 +25,8 @@ int check_model ( System *data, info *user_data ) {
 		check = &check_caurie;
 		print = &print_caurie;
 	} else if ( strcmp ( user_data->model, "zdanovskii" ) == TRUE ) {
-		check = &check_raoult;
-		print = &print_raoult;
+		check = &check_zdanovskii;
+		print = &print_zdanovskii;
 	} else {
 		fprintf ( stderr, "Model unknown. Assuming Raoult's Law.\n" );
 		check = &check_raoult;

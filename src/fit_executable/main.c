@@ -10,7 +10,8 @@ int main ( int argc, char **argv ) {
 	getargs ( argc, argv, &user_data );
 	/* read command line arguments from user */
 
-	initialize ( user_data.filename, &system_description, &system );
+	initialize ( user_data.filename, &system_description,
+			&system, &user_data );
 	/* read file to data structure and malloc required blocks */
 
 	data_for_fit.description = system_description;

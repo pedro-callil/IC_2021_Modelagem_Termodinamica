@@ -7,7 +7,8 @@
  * .csv file in which the data are stored, and pointers to the structs.
  */
 
-void initialize ( char *filename, Metadata *system_description, Data *system ) {
+void initialize ( char *filename, Metadata *system_description,
+		Data *system, info *user_data ) {
 
 	int lines, columns, line_is_empty, i, j;
 	char tmpchar, str[256];
@@ -44,6 +45,17 @@ void initialize ( char *filename, Metadata *system_description, Data *system ) {
 	for ( i = 0; i < lines; i++ ) {
 		x_values[i] = malloc ( columns * sizeof (double) );
 	}
+
+	if ( strcmp ( user_data->model, "zdanovskii" ) == TRUE ) {
+
+		file = fopen ( user_data->files_zdan[0], "r" );
+		fclose (file);
+
+		file = fopen ( user_data->files_zdan[1], "r" );
+		fclose (file);
+
+	}
+
 		/*
 		* And now our structures are initialized
 		*/
@@ -103,6 +115,14 @@ void finalize ( Metadata *system_description, Data *system,
 		free (system->x[i]);
 	}
 
+	if ( strcmp ( user_data->model, "zdanovskii" ) == TRUE ) {
+		free (system->x_zdan[0]);
+		free (system->x_zdan[1]);
+		free (system->x_zdan);
+		free (system->aw_zdan[0]);
+		free (system->aw_zdan[1]);
+		free (system->aw_zdan);
+	}
 	free (system->x);
 	free (system->aw);
 

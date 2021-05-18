@@ -40,6 +40,8 @@ typedef struct {
 typedef struct {
 	double *aw;
 	double **x;
+	double **x_zdan;
+	double **aw_zdan;
 } Data;
 
 typedef struct {
@@ -50,6 +52,7 @@ typedef struct {
 typedef struct {
 	char *model;
 	char *filename;
+	char **files_zdan;
 	int quiet;
 	double cost;
 	int is_all;
@@ -79,8 +82,8 @@ typedef void (*print_function_for_check)
  */
 
 extern void getargs ( int argc, char **argv, info *user_data );
-extern void initialize ( char *filename,
-		Metadata *system_description, Data *system );
+extern void initialize ( char *filename, Metadata *system_description,
+		Data *system, info *user_data );
 extern void finalize ( Metadata *system_description, Data *system,
 		info *user_data );
 extern int fit_to_model ( System *data, info *user_data );

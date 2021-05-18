@@ -11,19 +11,25 @@ void print_usage (void) {
 	fprintf ( stderr, "          Quiet; hide verbose output\n" );
 	fprintf ( stderr, "        -f <filename>\n" );
 	fprintf ( stderr, "          File in which the activity data are stored\n" );
+	fprintf ( stderr, "        -Z <1st filename> <2nd filename>\n" );
+	fprintf ( stderr, "          If the model chosen is \"zdanovskii\",\n" );
+	fprintf ( stderr, "          these two files must store the isotherms\n" );
+	fprintf ( stderr, "          of the two components of the ternary mixture\n" );
+	fprintf ( stderr, "          in a binary solution.\n" );
 	fprintf ( stderr, "        -m <model>\n" );
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
-	fprintf ( stderr, "          caurie, raoult or all, option which \n" );
-	fprintf ( stderr, "          compares all other models. \n" );
+	fprintf ( stderr, "          caurie, raoult, zdanovskii or all, \n" );
+	fprintf ( stderr, "          which compares all other models. \n" );
 
 }
 
 /* read arguments and options from user */
 void getargs ( int argc, char **argv, info *user_data ) {
 
-	int opt, gave_file;
+	int opt, gave_file, gave_filenames, index, counter;
 
 	gave_file = FALSE;
+	gave_filenames = FALSE;
 
 	if ( argc < 2 ) {
 		fprintf ( stderr, "No arguments provided; for help, use -h\n" );
@@ -47,6 +53,25 @@ void getargs ( int argc, char **argv, info *user_data ) {
 			case 'q':
 				user_data->quiet = TRUE;
 				break;
+			case 'Z':
+				user_data->files_zdan =
+					malloc ( 2 * sizeof (char *) );
+				index = optind - 1;
+				counter = 0;
+				while ( index < argc ) {
+					if ( argv[index][0] != '-' ) {
+						user_data->files_zdan[counter] =
+							malloc ( strlen (argv[index])
+									+ 1 );
+						strcpy ( user_data->files_zdan[counter],
+								argv[index] );
+						counter++;
+					} else break;
+					index ++;
+				}
+				if ( counter >= 2 ) {
+					gave_filenames = TRUE;
+				}
 			case 'f':
 				gave_file = TRUE;
 				if ( access( optarg, F_OK|R_OK ) == TRUE ) {
@@ -80,6 +105,14 @@ void getargs ( int argc, char **argv, info *user_data ) {
 
 	if ( gave_file == FALSE ) {
 		fprintf ( stderr, "No filename given, aborting...\n" );
+		free (user_data->model);
+		exit (24);
+	}
+
+	if ( gave_filenames == FALSE &&
+			strcmp ( user_data->model, "zdanovskii" ) == TRUE ) {
+		fprintf ( stderr, "No isotherms given for Zdanovskii Relation." );
+		fprintf ( stderr, " Aborting.\n" );
 		free (user_data->model);
 		exit (24);
 	}

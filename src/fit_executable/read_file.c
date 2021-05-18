@@ -11,6 +11,7 @@ void initialize ( char *filename, Metadata *system_description,
 		Data *system, info *user_data ) {
 
 	int lines, columns, line_is_empty, i, j;
+	int lines_zdan[2];
 	char tmpchar, str[256];
 	char **composition;
 	double **x_values;
@@ -47,12 +48,46 @@ void initialize ( char *filename, Metadata *system_description,
 	}
 
 	if ( strcmp ( user_data->model, "zdanovskii" ) == TRUE ) {
+		system->x_zdan = malloc ( 2 * sizeof (double *) );
+		system->aw_zdan = malloc ( 2 * sizeof (double *) );
+		for ( i = 0; i < 2; i++ ) {
 
-		file = fopen ( user_data->files_zdan[0], "r" );
-		fclose (file);
+			/* read number of lines in file to allocate memory */
+			file = fopen ( user_data->files_zdan[i], "r" );
+			lines_zdan[i] = -1;
+			line_is_empty = TRUE;
+			do {
+				tmpchar = fgetc (file);
+				if ( tmpchar == '\n' && line_is_empty == FALSE ) {
+					lines_zdan[i]++;
+					line_is_empty = TRUE;
+				} else if ( tmpchar == ',' ) {
+					line_is_empty = FALSE;
+				}
+			} while ( tmpchar != EOF );
+			fclose (file);
+			system->x_zdan[i] = malloc ( lines_zdan[i] *
+					sizeof (double) );
+			system->aw_zdan[i] = malloc ( lines_zdan[i] *
+					sizeof (double) );
 
-		file = fopen ( user_data->files_zdan[1], "r" );
-		fclose (file);
+
+			/* read file data to data structures */
+			file = fopen ( user_data->files_zdan[i], "r" );
+			fscanf ( file, "%127[^,\n]", str );
+			fscanf ( file, "%*c" );
+			fscanf(file, "%127[^,\n]", str);
+			fscanf(file, "%*c"); /* get rid of names */
+			for ( j = 0; j < lines_zdan[i]; j++ ) {
+				fscanf ( file, "%127[^,\n]", str );
+				fscanf ( file, "%*c" );
+				system->aw_zdan[i][j] = strtod ( str, NULL );
+				fscanf ( file, "%127[^,\n]", str );
+				fscanf ( file, "%*c" );
+				system->x_zdan[i][j] = strtod ( str, NULL );
+			}
+			fclose (file);
+		}
 
 	}
 
@@ -122,6 +157,9 @@ void finalize ( Metadata *system_description, Data *system,
 		free (system->aw_zdan[0]);
 		free (system->aw_zdan[1]);
 		free (system->aw_zdan);
+		free (user_data->files_zdan[0]);
+		free (user_data->files_zdan[1]);
+		free (user_data->files_zdan);
 	}
 	free (system->x);
 	free (system->aw);
@@ -130,7 +168,7 @@ void finalize ( Metadata *system_description, Data *system,
 		free (system_description->components[i]);
 	}
 	free (system_description->components);
-	free ( user_data->model );
-	free ( user_data->filename );
+	free (user_data->model);
+	free (user_data->filename);
 
 }

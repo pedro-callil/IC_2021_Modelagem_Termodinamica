@@ -43,7 +43,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->cost = 0;
 	user_data->is_all = FALSE;
 
-	while ( ( opt = getopt ( argc, argv, "hqf:m:" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqf:m:Z:" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				free (user_data->model);
@@ -72,6 +72,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				if ( counter >= 2 ) {
 					gave_filenames = TRUE;
 				}
+				break;
 			case 'f':
 				gave_file = TRUE;
 				if ( access( optarg, F_OK|R_OK ) == TRUE ) {
@@ -114,6 +115,15 @@ void getargs ( int argc, char **argv, info *user_data ) {
 		fprintf ( stderr, "No isotherms given for Zdanovskii Relation." );
 		fprintf ( stderr, " Aborting.\n" );
 		free (user_data->model);
+		if ( user_data->filename != NULL ) {
+			free (user_data->filename);
+		}
+		if ( user_data->files_zdan != NULL ) {
+			if ( user_data->files_zdan[0] != NULL ) {
+				free (user_data->files_zdan[0]);
+			}
+			free (user_data->files_zdan);
+		}
 		exit (24);
 	}
 }

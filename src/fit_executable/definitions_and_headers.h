@@ -30,6 +30,7 @@
 /* polynomial fitting - Zdanovskii relation */
 
 #define DEG_POLY_ZDAN 4
+#define MAX_ITER_ZDAN 1000
 #define TOL_ZDAN 1e-6
 
 /*

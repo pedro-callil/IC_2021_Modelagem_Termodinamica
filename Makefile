@@ -1,6 +1,6 @@
 CC		= gcc
 CFLAGS		= -Wall -std=c18 -pedantic -Werror -Ofast
-LDFLAGS		= -gdwarf-4 -ggdb3
+LDFLAGS		= -ggdb3
 LDLIBS		= -lm -lmvec -lgsl -lcblas
 
 MAIN_SRC_DIR	= src/fit_executable

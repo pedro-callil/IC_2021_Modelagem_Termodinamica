@@ -14,7 +14,7 @@ void fit_polynomial ( double *x_data, double *y_data,
  */
 void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 
-	int i, j, n, p;
+	int i, j, n, p, iter;
 	double xw, aw, m_1, m_2, m_01, m_02, phi_calc, phi_real, S;
 	double *m_1st_vec, *m_2nd_vec, *aw_vec;
 	double K_aw_to_m_1st[DEG_POLY_ZDAN];
@@ -59,11 +59,21 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		m_2 = x_to_m ( data->x_and_aw.x[i][1], xw );
 		S = ( m_1 / m_01 ) + ( m_2 / m_02 );
 
+		iter = 0;
 		while ( fabs ( S - 1 ) < TOL_ZDAN ) {
 			m_01 = S * m_01;
 			aw = m_1st_to_aw ( m_01, K_m_1st_to_aw );
 			m_02 = aw_to_m_2nd ( aw, K_aw_to_m_2nd );
 			S = ( m_1 / m_01 ) + ( m_2 / m_02 );
+			iter ++;
+			if ( iter >= MAX_ITER_ZDAN ) {
+				fprintf ( stderr,
+					"Maximum number of iterations (%d) ",
+				    	MAX_ITER_ZDAN );
+				fprintf ( stderr,
+					"now surpassed. Aborting...\n" );
+				exit (39);
+			}
 		}
 
 		aw = m_1st_to_aw ( m_01, K_m_1st_to_aw );

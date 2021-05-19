@@ -29,6 +29,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 	m_2nd_vec = malloc ( n * sizeof (double) );
 	aw_vec = malloc ( n * sizeof (double) );
 
+	/* converting data from mol fraction to molality */
 	for ( i = 0; i < n; i++ ) {
 		xw = 1;
 		for ( j = 0; j < p; j++ ) {
@@ -39,10 +40,12 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		aw_vec[i] = data->x_and_aw.aw[i];
 	}
 
+	/* get relations between molality and water activity */
 	fit_polynomial ( m_1st_vec, aw_vec, K_m_1st_to_aw, n );
 	fit_polynomial ( aw_vec, m_1st_vec, K_aw_to_m_1st, n );
 	fit_polynomial ( aw_vec, m_2nd_vec, K_aw_to_m_2nd, n );
 
+	/* apply zdanovskii model */
 	for ( i = 0; i < n; i++ ) {
 		xw = 1;
 		for ( j = 0; j < p; j++ ) {
@@ -56,7 +59,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		m_2 = x_to_m ( data->x_and_aw.x[i][1], xw );
 		S = ( m_1 / m_01 ) + ( m_2 / m_02 );
 
-		while ( fabs ( S - 1 ) < 1e-6 ) {
+		while ( fabs ( S - 1 ) < TOL_ZDAN ) {
 			m_01 = S * m_01;
 			aw = m_1st_to_aw ( m_01, K_m_1st_to_aw );
 			m_02 = aw_to_m_2nd ( aw, K_aw_to_m_2nd );
@@ -93,6 +96,7 @@ void print_zdanovskii ( System *data, info *user_data, double *errors ) {
 
 }
 
+/* this is the polynomial as needed for GSL non-linear fitting */
 int polynomial_as_gsl ( const gsl_vector *K, void *params, gsl_vector *f ) {
 
 	int size, i, j;
@@ -115,6 +119,7 @@ int polynomial_as_gsl ( const gsl_vector *K, void *params, gsl_vector *f ) {
 	return GSL_SUCCESS;
 }
 
+/* get polynomial coeficients from data  */
 void fit_polynomial ( double *x_data, double *y_data,
 		double *coefs, int size ) {
 
@@ -164,6 +169,8 @@ void fit_polynomial ( double *x_data, double *y_data,
 
 }
 
+
+/* auxiliary functions for property conversion */
 double x_to_m ( double x, double xw ) {
 
 	return x / ( xw * KGS_IN_MOL_WATER );

@@ -17,6 +17,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 	int i, j, n, p, iter;
 	double xw, aw, m_1, m_2, m_01, m_02, phi_calc, phi_real, S;
 	double *m_1st_vec, *m_2nd_vec, *aw_vec;
+	double *m_01_std, *m_02_std, *aw_01_std, *aw_02_std;
 	double K_aw_to_m_1st[DEG_POLY_ZDAN];
 	double K_aw_to_m_2nd[DEG_POLY_ZDAN];
 	double K_m_1st_to_aw[DEG_POLY_ZDAN];
@@ -28,6 +29,24 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 	m_1st_vec = malloc ( n * sizeof (double) );
 	m_2nd_vec = malloc ( n * sizeof (double) );
 	aw_vec = malloc ( n * sizeof (double) );
+
+	m_01_std = malloc ( data->x_and_aw.n_zdan[0] * sizeof (double) );
+	aw_01_std = malloc ( data->x_and_aw.n_zdan[0] * sizeof (double) );
+
+	for ( i = 0; i < data->x_and_aw.n_zdan[0]; i++ ) {
+		m_01_std[i] = x_to_m ( data->x_and_aw.x_zdan[0][i],
+				1 - data->x_and_aw.x_zdan[0][i] );
+		aw_01_std[i] = data->x_and_aw.aw_zdan[0][i];
+	}
+
+	m_02_std = malloc ( data->x_and_aw.n_zdan[1] * sizeof (double) );
+	aw_02_std = malloc ( data->x_and_aw.n_zdan[1] * sizeof (double) );
+
+	for ( i = 0; i < data->x_and_aw.n_zdan[1]; i++ ) {
+		m_02_std[i] = x_to_m ( data->x_and_aw.x_zdan[1][i],
+				1 - data->x_and_aw.x_zdan[1][i] );
+		aw_02_std[i] = data->x_and_aw.aw_zdan[1][i];
+	}
 
 	/* converting data from mol fraction to molality */
 	for ( i = 0; i < n; i++ ) {
@@ -41,9 +60,12 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 	}
 
 	/* get relations between molality and water activity */
-	fit_polynomial ( m_1st_vec, aw_vec, K_m_1st_to_aw, n );
-	fit_polynomial ( aw_vec, m_1st_vec, K_aw_to_m_1st, n );
-	fit_polynomial ( aw_vec, m_2nd_vec, K_aw_to_m_2nd, n );
+	fit_polynomial ( m_01_std, aw_01_std,
+			K_m_1st_to_aw, data->x_and_aw.n_zdan[0] );
+	fit_polynomial ( aw_01_std, m_01_std,
+			K_aw_to_m_1st, data->x_and_aw.n_zdan[0] );
+	fit_polynomial ( aw_02_std, m_02_std,
+			K_aw_to_m_2nd, data->x_and_aw.n_zdan[1] );
 
 	/* apply zdanovskii model */
 	for ( i = 0; i < n; i++ ) {
@@ -69,7 +91,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 			if ( iter >= MAX_ITER_ZDAN ) {
 				fprintf ( stderr,
 					"Maximum number of iterations (%d) ",
-				    	MAX_ITER_ZDAN );
+					MAX_ITER_ZDAN );
 				fprintf ( stderr,
 					"now surpassed. Aborting...\n" );
 				exit (39);
@@ -85,6 +107,11 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 	free (m_1st_vec);
 	free (m_2nd_vec);
 	free (aw_vec);
+
+	free (m_01_std);
+	free (aw_01_std);
+	free (m_02_std);
+	free (aw_02_std);
 }
 
 void print_zdanovskii ( System *data, info *user_data, double *errors ) {

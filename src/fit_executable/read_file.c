@@ -47,9 +47,12 @@ void initialize ( char *filename, Metadata *system_description,
 		x_values[i] = malloc ( columns * sizeof (double) );
 	}
 
-	if ( strcmp ( user_data->model, "zdanovskii" ) == TRUE ) {
+	if ( strcmp ( user_data->model, "zdanovskii" ) == TRUE ||
+			( strcmp ( user_data->model, "all" ) == TRUE &&
+			user_data->gave_filenames == TRUE ) ) {
 		system->x_zdan = malloc ( 2 * sizeof (double *) );
 		system->aw_zdan = malloc ( 2 * sizeof (double *) );
+		system->n_zdan = malloc ( 2 * sizeof (int) );
 		for ( i = 0; i < 2; i++ ) {
 
 			/* read number of lines in file to allocate memory */
@@ -70,14 +73,15 @@ void initialize ( char *filename, Metadata *system_description,
 					sizeof (double) );
 			system->aw_zdan[i] = malloc ( lines_zdan[i] *
 					sizeof (double) );
+			system->n_zdan[i] = lines_zdan[i];
 
 
 			/* read file data to data structures */
 			file = fopen ( user_data->files_zdan[i], "r" );
 			fscanf ( file, "%127[^,\n]", str );
 			fscanf ( file, "%*c" );
-			fscanf(file, "%127[^,\n]", str);
-			fscanf(file, "%*c"); /* get rid of names */
+			fscanf ( file, "%127[^,\n]", str);
+			fscanf ( file, "%*c"); /* get rid of names */
 			for ( j = 0; j < lines_zdan[i]; j++ ) {
 				fscanf ( file, "%127[^,\n]", str );
 				fscanf ( file, "%*c" );
@@ -157,10 +161,18 @@ void finalize ( Metadata *system_description, Data *system,
 		free (system->aw_zdan[0]);
 		free (system->aw_zdan[1]);
 		free (system->aw_zdan);
-		free (user_data->files_zdan[0]);
-		free (user_data->files_zdan[1]);
+		free (system->n_zdan);
+	}
+
+	if ( user_data->files_zdan != NULL ) {
+		for ( i = 0; i < 2; i++ ) {
+			if ( user_data->files_zdan[i] != NULL ) {
+				free (user_data->files_zdan[i]);
+			}
+		}
 		free (user_data->files_zdan);
 	}
+
 	free (system->x);
 	free (system->aw);
 

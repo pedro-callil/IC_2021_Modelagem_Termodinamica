@@ -48,6 +48,7 @@ typedef struct {
 	double **x;
 	double **x_zdan;
 	double **aw_zdan;
+	int *n_zdan;
 } Data;
 
 typedef struct {
@@ -62,6 +63,7 @@ typedef struct {
 	int quiet;
 	double cost;
 	int is_all;
+	int gave_filenames;
 } info;
 
 typedef struct {

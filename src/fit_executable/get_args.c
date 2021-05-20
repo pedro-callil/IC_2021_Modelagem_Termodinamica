@@ -26,10 +26,10 @@ void print_usage (void) {
 /* read arguments and options from user */
 void getargs ( int argc, char **argv, info *user_data ) {
 
-	int opt, gave_file, gave_filenames, index, counter;
+	int opt, gave_file, index, counter;
 
 	gave_file = FALSE;
-	gave_filenames = FALSE;
+	user_data->gave_filenames = FALSE;
 
 	if ( argc < 2 ) {
 		fprintf ( stderr, "No arguments provided; for help, use -h\n" );
@@ -70,7 +70,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 					index ++;
 				}
 				if ( counter >= 2 ) {
-					gave_filenames = TRUE;
+					user_data->gave_filenames = TRUE;
 				}
 				break;
 			case 'f':
@@ -110,7 +110,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 		exit (24);
 	}
 
-	if ( gave_filenames == FALSE &&
+	if ( user_data->gave_filenames == FALSE &&
 			strcmp ( user_data->model, "zdanovskii" ) == TRUE ) {
 		fprintf ( stderr, "No isotherms given for Zdanovskii Relation." );
 		fprintf ( stderr, " Aborting.\n" );

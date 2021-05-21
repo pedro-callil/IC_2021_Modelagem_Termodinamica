@@ -70,6 +70,7 @@ typedef struct {
 	double *x;
 	double *y;
 	int size;
+	int degree;
 } struct_for_zdan;
 
 

@@ -8,6 +8,8 @@ double polynomial ( double x, double *coefs, int degree );
 void fit_polynomial ( double *x_data, double *y_data,
 		double *coefs, int size, int degree );
 int aw_is_sane ( double aw, System *data);
+void free_ptrs ( double *p0, double *p1, double *p2, double *p3, double *p4,
+		double *p5, double *p6, double *p7, double *p8, double *p9);
 
 /*
  * This function compares the water activities with the values
@@ -100,18 +102,10 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		if ( aw_is_sane ( aw, data ) != TRUE ) {
 			fprintf ( stderr, "Water activity in mixture not in " );
 			fprintf ( stderr, "acceptable range. Aborting...\n" );
-			free (m_1st_vec);
-			free (m_2nd_vec);
-			free (aw_vec);
-
-			free (m_01_std);
-			free (aw_01_std);
-			free (m_02_std);
-			free (aw_02_std);
-
-			free (K_m_1st_to_aw);
-			free (K_aw_to_m_1st);
-			free (K_aw_to_m_2nd);
+			free_ptrs ( m_1st_vec, m_2nd_vec, aw_vec,
+					m_01_std, aw_01_std, m_02_std,
+					aw_02_std, K_m_1st_to_aw, K_aw_to_m_1st,
+					K_aw_to_m_2nd );
 			free (errors);
 			finalize ( &data->description, &data->x_and_aw, user_data );
 			exit (35);
@@ -136,18 +130,10 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 					MAX_ITER_ZDAN );
 				fprintf ( stderr,
 					"now surpassed. Aborting...\n" );
-				free (m_1st_vec);
-				free (m_2nd_vec);
-				free (aw_vec);
-
-				free (m_01_std);
-				free (aw_01_std);
-				free (m_02_std);
-				free (aw_02_std);
-
-				free (K_m_1st_to_aw);
-				free (K_aw_to_m_1st);
-				free (K_aw_to_m_2nd);
+				free_ptrs ( m_1st_vec, m_2nd_vec, aw_vec,
+					m_01_std, aw_01_std, m_02_std,
+					aw_02_std, K_m_1st_to_aw, K_aw_to_m_1st,
+					K_aw_to_m_2nd );
 				free (errors);
 				finalize ( &data->description,
 						&data->x_and_aw, user_data );
@@ -161,18 +147,8 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		errors[i] = fabs ( phi_real - phi_calc );
 	}
 
-	free (m_1st_vec);
-	free (m_2nd_vec);
-	free (aw_vec);
-
-	free (m_01_std);
-	free (aw_01_std);
-	free (m_02_std);
-	free (aw_02_std);
-
-	free (K_m_1st_to_aw);
-	free (K_aw_to_m_1st);
-	free (K_aw_to_m_2nd);
+	free_ptrs ( m_1st_vec, m_2nd_vec, aw_vec, m_01_std, aw_01_std, m_02_std,
+			aw_02_std, K_m_1st_to_aw, K_aw_to_m_1st, K_aw_to_m_2nd );
 }
 
 void print_zdanovskii ( System *data, info *user_data, double *errors ) {
@@ -353,4 +329,24 @@ int aw_is_sane ( double aw, System *data ) {
 	}
 
 	return is_sane;
+}
+
+/*
+ * This function frees all pointers used in the zdanovskii's model.
+ */
+
+void free_ptrs ( double *p0, double *p1, double *p2, double *p3, double *p4,
+		double *p5, double *p6, double *p7, double *p8, double *p9) {
+
+	free (p0);
+	free (p1);
+	free (p2);
+	free (p3);
+	free (p4);
+	free (p5);
+	free (p6);
+	free (p7);
+	free (p8);
+	free (p9);
+
 }

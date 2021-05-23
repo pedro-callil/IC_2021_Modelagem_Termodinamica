@@ -7,6 +7,7 @@ double m_1st_to_aw ( double m_1st, double *coefs, int degree );
 double polynomial ( double x, double *coefs, int degree );
 void fit_polynomial ( double *x_data, double *y_data,
 		double *coefs, int size, int degree );
+int aw_is_sane ( double aw, System *data);
 
 /*
  * This function compares the water activities with the values
@@ -25,11 +26,14 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 	n = data->description.dataset_size;
 	p = data->description.n_of_comps;
 
-	/* allocating memory for molalities and water activities */
+	/* allocating memory for molalities and water activities... */
+		/* ...of data to be analyzed */
 	m_1st_vec = malloc ( n * sizeof (double) );
 	m_2nd_vec = malloc ( n * sizeof (double) );
 	aw_vec = malloc ( n * sizeof (double) );
 
+		/* ...of reference data... */
+			/* ...of the first component */
 	m_01_std = malloc ( data->x_and_aw.n_zdan[0] * sizeof (double) );
 	aw_01_std = malloc ( data->x_and_aw.n_zdan[0] * sizeof (double) );
 
@@ -39,6 +43,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		aw_01_std[i] = data->x_and_aw.aw_zdan[0][i];
 	}
 
+			/* ...of the second component */
 	m_02_std = malloc ( data->x_and_aw.n_zdan[1] * sizeof (double) );
 	aw_02_std = malloc ( data->x_and_aw.n_zdan[1] * sizeof (double) );
 
@@ -92,6 +97,24 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		}
 		aw = xw; /* Using Raoult as initial guess */
 
+		if ( aw_is_sane ( aw, data ) != TRUE ) {
+			fprintf ( stderr, "Water activity in mixture not in " );
+			fprintf ( stderr, "acceptable range. Aborting..." );
+			free (m_1st_vec);
+			free (m_2nd_vec);
+			free (aw_vec);
+
+			free (m_01_std);
+			free (aw_01_std);
+			free (m_02_std);
+			free (aw_02_std);
+
+			free (K_m_1st_to_aw);
+			free (K_aw_to_m_1st);
+			free (K_aw_to_m_2nd);
+			exit (35);
+		}
+
 		m_01 = aw_to_m_1st ( aw, K_aw_to_m_1st, degree_01 );
 		m_02 = aw_to_m_2nd ( aw, K_aw_to_m_2nd, degree_02 );
 		m_1 = x_to_m ( data->x_and_aw.x[i][0], xw );
@@ -111,6 +134,18 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 					MAX_ITER_ZDAN );
 				fprintf ( stderr,
 					"now surpassed. Aborting...\n" );
+				free (m_1st_vec);
+				free (m_2nd_vec);
+				free (aw_vec);
+
+				free (m_01_std);
+				free (aw_01_std);
+				free (m_02_std);
+				free (aw_02_std);
+
+				free (K_m_1st_to_aw);
+				free (K_aw_to_m_1st);
+				free (K_aw_to_m_2nd);
 				exit (39);
 			}
 		}
@@ -252,12 +287,16 @@ double polynomial ( double x, double *coefs, int degree ) {
 	return y;
 }
 
+/*
+ * These functions are equal to the function "polynomial", above.
+ * They are only distinct in name, and were written to make the
+ * main portion of the code, in the first functions of this file,
+ * more readable.
+ */
 double aw_to_m_1st ( double aw, double *coefs, int degree ) {
 
 	double m_1st;
-
 	m_1st = polynomial ( aw, coefs, degree );
-
 	return m_1st;
 
 }
@@ -265,9 +304,7 @@ double aw_to_m_1st ( double aw, double *coefs, int degree ) {
 double aw_to_m_2nd ( double aw, double *coefs, int degree ) {
 
 	double m_2nd;
-
 	m_2nd = polynomial ( aw, coefs, degree );
-
 	return m_2nd;
 
 }
@@ -275,9 +312,40 @@ double aw_to_m_2nd ( double aw, double *coefs, int degree ) {
 double m_1st_to_aw ( double m_1st, double *coefs, int degree ) {
 
 	double aw;
-
 	aw = polynomial ( m_1st, coefs, degree );
-
 	return aw;
 
+}
+
+/*
+ * This funtion checks if the binary mixture data are sufficient to
+ * calculate the water activity of the ternary mixture.
+ */
+int aw_is_sane ( double aw, System *data ) {
+
+	double aw_min;
+	int n_1st, n_2nd, i, is_sane;
+
+	n_1st = data->x_and_aw.n_zdan[0];
+	n_2nd = data->x_and_aw.n_zdan[1];
+
+	aw_min = 1.0;
+	for ( i = 0; i < n_1st; i++ ) {
+		if ( aw_min < data->x_and_aw.aw_zdan[0][i] ) {
+			aw_min = data->x_and_aw.aw_zdan[0][i];
+		}
+	}
+	for ( i = 0; i < n_2nd; i++ ) {
+		if ( aw_min < data->x_and_aw.aw_zdan[1][i] ) {
+			aw_min = data->x_and_aw.aw_zdan[1][i];
+		}
+	}
+
+	if ( aw < aw_min ) {
+		is_sane = FALSE;
+	} else {
+		is_sane = TRUE;
+	}
+
+	return is_sane;
 }

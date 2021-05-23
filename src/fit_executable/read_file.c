@@ -93,7 +93,13 @@ void initialize ( char *filename, Metadata *system_description,
 			fclose (file);
 		}
 
+	} else {
+		system->n_zdan = NULL;
+		system->x_zdan = NULL;
+		system->aw_zdan = NULL;
+		user_data->files_zdan = NULL;
 	}
+
 
 		/*
 		* And now our structures are initialized

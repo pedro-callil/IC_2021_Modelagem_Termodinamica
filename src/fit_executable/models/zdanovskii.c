@@ -99,7 +99,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 
 		if ( aw_is_sane ( aw, data ) != TRUE ) {
 			fprintf ( stderr, "Water activity in mixture not in " );
-			fprintf ( stderr, "acceptable range. Aborting..." );
+			fprintf ( stderr, "acceptable range. Aborting...\n" );
 			free (m_1st_vec);
 			free (m_2nd_vec);
 			free (aw_vec);
@@ -112,6 +112,8 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 			free (K_m_1st_to_aw);
 			free (K_aw_to_m_1st);
 			free (K_aw_to_m_2nd);
+			free (errors);
+			finalize ( &data->description, &data->x_and_aw, user_data );
 			exit (35);
 		}
 
@@ -146,6 +148,9 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 				free (K_m_1st_to_aw);
 				free (K_aw_to_m_1st);
 				free (K_aw_to_m_2nd);
+				free (errors);
+				finalize ( &data->description,
+						&data->x_and_aw, user_data );
 				exit (39);
 			}
 		}

@@ -20,6 +20,10 @@ void print_usage (void) {
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
 	fprintf ( stderr, "          caurie, raoult, zdanovskii or all, \n" );
 	fprintf ( stderr, "          which compares all other models. \n" );
+	fprintf ( stderr, "        -O\n" );
+	fprintf ( stderr, "          Fit models that need only one one file,\n" );
+	fprintf ( stderr, "          currently all but \"zdanovskii\". Useful\n" );
+	fprintf ( stderr, "          for combination with option \"-m all\".\n" );
 
 }
 
@@ -42,8 +46,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->quiet = FALSE;
 	user_data->cost = 0;
 	user_data->is_all = FALSE;
+	user_data->not_zdan = FALSE;
 
-	while ( ( opt = getopt ( argc, argv, "hqf:m:Z:" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqf:m:Z:O" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				free (user_data->model);
@@ -52,6 +57,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				break;
 			case 'q':
 				user_data->quiet = TRUE;
+				break;
+			case 'O':
+				user_data->not_zdan = TRUE;
 				break;
 			case 'Z':
 				user_data->files_zdan =

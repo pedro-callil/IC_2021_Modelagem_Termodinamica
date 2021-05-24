@@ -64,6 +64,7 @@ typedef struct {
 	double cost;
 	int is_all;
 	int gave_filenames;
+	int not_zdan;
 } info;
 
 typedef struct {

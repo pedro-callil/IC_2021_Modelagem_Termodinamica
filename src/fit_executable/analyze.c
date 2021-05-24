@@ -30,14 +30,15 @@ void analyze_all_models ( System *data, info *user_data ) {
 	fprintf ( stdout, "Final cost for caurie's model:    \t\t%f\n",
 			user_data->cost );
 
-	if ( user_data->gave_filenames == TRUE ) {
+	if ( user_data->gave_filenames == TRUE &&
+			user_data->not_zdan != TRUE ) {
 		free (user_data->model);
 		user_data->model = malloc ( strlen ("zdanovskii") + 1 );
 		strcpy ( user_data->model, "zdanovskii" );
 		check_model ( data, user_data );
 		fprintf ( stdout, "Final cost for zdanovskii's model:\t\t%f\n",
 				user_data->cost );
-	} else {
+	} else if ( user_data->not_zdan != TRUE ) {
 		fprintf ( stderr, "\tWARNING: Not possible to compute" );
 		fprintf ( stderr, " zdanovskii's results \n" );
 	}

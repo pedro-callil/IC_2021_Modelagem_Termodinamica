@@ -1,15 +1,14 @@
 #include "../definitions_and_headers.h"
 
 double x_to_m ( double x, double xw );
-double aw_to_m_1st ( double aw, double *coefs, int degree );
-double aw_to_m_2nd ( double aw, double *coefs, int degree );
-double m_1st_to_aw ( double m_1st, double *coefs, int degree );
 double polynomial ( double x, double *coefs, int degree );
 void fit_polynomial ( double *x_data, double *y_data,
 		double *coefs, int size, int degree );
 int aw_is_sane ( double aw, System *data);
 void free_ptrs ( double *p0, double *p1, double *p2, double *p3, double *p4,
 		double *p5, double *p6, double *p7, double *p8, double *p9);
+
+
 
 /*
  * This function compares the water activities with the values
@@ -24,6 +23,11 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 	double *K_aw_to_m_1st;
 	double *K_aw_to_m_2nd;
 	double *K_m_1st_to_aw;
+	polynomial_function aw_to_m_1st, aw_to_m_2nd, m_1st_to_aw;
+
+	aw_to_m_1st = &polynomial;
+	aw_to_m_2nd = &polynomial;
+	m_1st_to_aw = &polynomial;
 
 	n = data->description.dataset_size;
 	p = data->description.n_of_comps;
@@ -266,36 +270,6 @@ double polynomial ( double x, double *coefs, int degree ) {
 	}
 
 	return y;
-}
-
-/*
- * These functions are equal to the function "polynomial", above.
- * They are only distinct in name, and were written to make the
- * main portion of the code, in the first functions of this file,
- * more readable.
- */
-double aw_to_m_1st ( double aw, double *coefs, int degree ) {
-
-	double m_1st;
-	m_1st = polynomial ( aw, coefs, degree );
-	return m_1st;
-
-}
-
-double aw_to_m_2nd ( double aw, double *coefs, int degree ) {
-
-	double m_2nd;
-	m_2nd = polynomial ( aw, coefs, degree );
-	return m_2nd;
-
-}
-
-double m_1st_to_aw ( double m_1st, double *coefs, int degree ) {
-
-	double aw;
-	aw = polynomial ( m_1st, coefs, degree );
-	return aw;
-
 }
 
 /*

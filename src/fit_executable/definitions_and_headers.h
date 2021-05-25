@@ -94,6 +94,9 @@ typedef void (*check_function)
 typedef void (*print_function_for_check)
 	( System *data, info *user_data, double *errors );
 
+typedef double (*polynomial_function)
+	( double x, double *coefs, int degree );
+
 /*
  * Functions and subroutines
  */

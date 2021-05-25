@@ -39,6 +39,7 @@ all: $(MAIN_EXECUTABLE) $(CONVERT_EXECUTABLE)
 
 clean:
 	rm -f $(MAIN_EXECUTABLE) $(CONVERT_EXECUTABLE)
+	rmdir bin
 
 install: $(MAIN_EXECUTABLE) $(CONVERT_EXECUTABLE)
 	cp $(MAIN_EXECUTABLE) $(MAIN_SYS_FILE)
@@ -48,9 +49,11 @@ uninstall: $(MAIN_SYS_FILE) $(CONVERT_SYS_FILE)
 	rm -f $(MAIN_SYS_FILE) $(CONVERT_SYS_FILE)
 
 $(MAIN_EXECUTABLE): $(MAIN_SRC) $(MAIN_DEPS)
+	if [ ! -d "./bin" ]; then mkdir bin; fi
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(MAIN_SRC) -o $@
 
 $(CONVERT_EXECUTABLE): $(CONVERT_SRC) $(CONVERT_DEPS)
+	if [ ! -d "./bin" ]; then mkdir bin; fi
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(CONVERT_SRC) -o $@
 
 

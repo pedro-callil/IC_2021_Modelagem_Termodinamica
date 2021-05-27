@@ -41,6 +41,11 @@ int fit_to_model ( System *data, info *user_data ) {
 		fdf.p = p + ( p * ( p - 1 ) ) / 2;
 		callback = &callback_virial;
 		print = &print_virial;
+	} else if ( strcmp ( user_data->model, "uniquac" ) == TRUE ) {
+		fdf.f = phi_uniquac;
+		fdf.p = 2 * ( p + 1 );
+		callback = &callback_uniquac;
+		print = &print_uniquac;
 	} else {
 		fprintf (stderr, "Model unknown. Aborting...\n" );
 		exit (45);

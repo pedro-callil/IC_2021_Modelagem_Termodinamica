@@ -15,6 +15,7 @@ MAIN_SRC	= $(MAIN_SRC_DIR)/get_args.c \
 		  $(MAIN_SRC_DIR)/analyze.c \
 		  $(MAIN_SRC_DIR)/main.c \
 		  $(MAIN_MODELS_DIR)/zdanovskii.c \
+		  $(MAIN_MODELS_DIR)/uniquac.c \
 		  $(MAIN_MODELS_DIR)/norrish.c \
 		  $(MAIN_MODELS_DIR)/virial.c \
 		  $(MAIN_MODELS_DIR)/caurie.c \

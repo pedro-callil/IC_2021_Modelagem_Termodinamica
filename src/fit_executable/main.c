@@ -19,7 +19,9 @@ int main ( int argc, char **argv ) {
 
 	if ( strcmp ( user_data.model, "all" ) != TRUE ) {
 		if ( strcmp ( user_data.model, "norrish" ) == TRUE ||
-			strcmp ( user_data.model, "virial" ) == TRUE ) {
+			strcmp ( user_data.model, "virial" ) == TRUE ||
+			strcmp ( user_data.model, "uniquac" ) == TRUE ) {
+			fprintf ( stderr, "Oh No No No No!\n" );
 			fit_to_model ( &data_for_fit, &user_data );
 			/* if the model choosen requires non-linear fitting */
 		} else if ( strcmp ( user_data.model, "raoult" ) == TRUE ||

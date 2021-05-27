@@ -17,6 +17,13 @@ void analyze_all_models ( System *data, info *user_data ) {
 			user_data->cost );
 
 	free (user_data->model);
+	user_data->model = malloc ( strlen ("uniquac") + 1 );
+	strcpy ( user_data->model, "uniquac" );
+	fit_to_model ( data, user_data );
+	fprintf ( stdout, "Final cost for uniquac model:      \t\t%f\n",
+			user_data->cost );
+
+	free (user_data->model);
 	user_data->model = malloc ( strlen ("raoult") + 1 );
 	strcpy ( user_data->model, "raoult" );
 	check_model ( data, user_data );

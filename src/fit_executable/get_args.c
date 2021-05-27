@@ -30,7 +30,7 @@ void print_usage (void) {
 /* read arguments and options from user */
 void getargs ( int argc, char **argv, info *user_data ) {
 
-	int opt, gave_file, index, counter;
+	int opt, gave_file, index, count;
 
 	gave_file = FALSE;
 	user_data->gave_filenames = FALSE;
@@ -65,19 +65,19 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				user_data->files_zdan =
 					malloc ( 2 * sizeof (char *) );
 				index = optind - 1;
-				counter = 0;
+				count = 0;
 				while ( index < argc ) {
 					if ( argv[index][0] != '-' ) {
-						user_data->files_zdan[counter] =
+						user_data->files_zdan[count] =
 							malloc ( strlen (argv[index])
 									+ 1 );
-						strcpy ( user_data->files_zdan[counter],
+						strcpy ( user_data->files_zdan[count],
 								argv[index] );
-						counter++;
+						count++;
 					} else break;
 					index ++;
 				}
-				if ( counter >= 2 ) {
+				if ( count >= 2 ) {
 					user_data->gave_filenames = TRUE;
 				}
 				break;

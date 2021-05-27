@@ -27,11 +27,16 @@
 #define FAC_B_CAURIE 3081.3601
 #define FAC_C_CAURIE 171046.2991
 
-/* polynomial fitting - Zdanovskii relation */
+/* Polynomial fitting - Zdanovskii relation */
 
 #define DEG_POLY_ZDAN 4
 #define MAX_ITER_ZDAN 1000
 #define TOL_ZDAN 1e-6
+
+/* Physical constants, used in UNIQUAC */
+
+#define R 8.314462618
+#define TEMP 298.15
 
 /*
  * Data structures
@@ -126,6 +131,14 @@ extern int phi_virial ( const gsl_vector *K, void *params, gsl_vector *f );
 extern void callback_virial ( const size_t iter, void *params,
 		const gsl_multifit_nlinear_workspace *w );
 extern void print_virial ( gsl_matrix *covar,
+		gsl_multifit_nlinear_workspace *w, int status,
+		double chisq0, double chisq,
+		System *data, info *user_data );
+
+extern int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector *f );
+extern void callback_uniquac ( const size_t iter, void *params,
+		const gsl_multifit_nlinear_workspace *w );
+extern void print_uniquac ( gsl_matrix *covar,
 		gsl_multifit_nlinear_workspace *w, int status,
 		double chisq0, double chisq,
 		System *data, info *user_data );

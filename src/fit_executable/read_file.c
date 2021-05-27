@@ -146,9 +146,31 @@ void initialize ( char *filename, Metadata *system_description,
 }
 
 /*
-* This function cleans up the memory utilized,
-* freeing pointers to data and metadata.
-*/
+ * Initialize solver for different models.
+ */
+void init_data ( char *model, double *x_init, int p ) {
+
+	int i, n;
+
+	if ( strcmp ( model, "uniquac" ) == TRUE ) {
+		n = ( p / 2 );
+		x_init[0] = 1;
+		x_init[n] = 0;
+		for ( i = 1; i < n; i++ ) {
+			x_init[i] = 10;
+			x_init[n+i] = 0;
+		}
+	} else {
+		for ( i = 0; i < p; i++ ) {
+			x_init[i] = 1.0;
+		}
+	}
+}
+
+/*
+ * This function cleans up the memory utilized,
+ * freeing pointers to data and metadata.
+ */
 
 void finalize ( Metadata *system_description, Data *system,
 		info *user_data ) {

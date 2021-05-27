@@ -28,13 +28,13 @@
 int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 
 	System *data;
-	double phi_i_calc, phi_i_real;
-	double ln_gamma_w;
-	double a_w, x_w, x_j, x_k;
-	double sumxjlj, sumqjxj, sumthetajtaujw, sumthetaktaukj, sumsum;
-	double l_w, l_j, r_w, r_j, q_w, q_j, q_k;
-	double theta_w, theta_j, theta_k, Phi_w;
-	double u_jj, u_jw, u_wj, u_kj, u_kk, u_ww, tau_jw, tau_kj, tau_wj;
+	long double phi_i_calc, phi_i_real;
+	long double ln_gamma_w;
+	long double a_w, x_w, x_j, x_k;
+	long double sumxjlj, sumqjxj, sumthetajtaujw, sumthetaktaukj, sumsum;
+	long double l_w, l_j, r_w, r_j, q_w, q_j, q_k;
+	long double theta_w, theta_j, theta_k, Phi_w;
+	long double u_jj, u_jw, u_wj, u_kj, u_kk, u_ww, tau_jw, tau_kj, tau_wj;
 	int n, p;
 	int i, j, k;
 
@@ -81,8 +81,9 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 			theta_j = ( q_j * x_j ) / sumqjxj;
 			u_ww = gsl_vector_get ( K, p + 1 );
 			u_jj = gsl_vector_get ( K, p + j + 1 );
-			u_jw = sqrt ( u_jj * u_ww );
+			u_jw = 0.5 * ( u_jj + u_ww );
 			tau_jw = exp ( - ( u_jw - u_ww ) / ( R * TEMP ) );
+			/*fprintf ( stderr, "tau_jw = %Lf\n", tau_jw );*/
 			sumthetajtaujw += theta_j * tau_jw;
 		}
 
@@ -100,8 +101,11 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 				theta_k = ( q_k * x_k ) / sumqjxj;
 				u_kk = gsl_vector_get ( K, p + k + 1 );
 				u_jj = gsl_vector_get ( K, p + j + 1 );
-				u_kj = sqrt ( u_jj * u_kk );
+				u_kj = 0.5 * ( u_jj + u_kk );
 				tau_kj = exp ( - ( u_kj - u_jj ) / ( R * TEMP ) );
+				/*fprintf ( stderr,
+					"tau_kj = %Lf, with abs = %Lf\n",
+					tau_kj, - ( u_kj - u_jj ) / ( R * TEMP ) );*/
 				sumthetaktaukj += theta_k * tau_kj;
 			}
 
@@ -114,8 +118,9 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 			theta_j = ( q_j * x_j ) / sumqjxj;
 			u_ww = gsl_vector_get ( K, p );
 			u_jj = gsl_vector_get ( K, p + j + 1 );
-			u_wj = sqrt ( u_ww * u_jj );
+			u_wj = 0.5 * ( u_ww + u_jj );
 			tau_wj = exp ( - ( u_wj - u_jj ) / ( R * TEMP ) );
+			/*fprintf ( stderr, "tau_wj = %Lf\n", tau_wj );*/
 
 			sumsum += ( theta_j * tau_wj ) / sumthetaktaukj;
 

@@ -109,6 +109,7 @@ typedef double (*polynomial_function)
 extern void getargs ( int argc, char **argv, info *user_data );
 extern void initialize ( char *filename, Metadata *system_description,
 		Data *system, info *user_data );
+extern void init_data ( char *model, double *x_init, int p );
 extern void finalize ( Metadata *system_description, Data *system,
 		info *user_data );
 extern int fit_to_model ( System *data, info *user_data );

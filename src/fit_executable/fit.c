@@ -10,7 +10,7 @@
 
 int fit_to_model ( System *data, info *user_data ) {
 
-	size_t n, p, i;
+	size_t n, p;
 	const gsl_multifit_nlinear_type *T = gsl_multifit_nlinear_trust;
 	gsl_multifit_nlinear_workspace *w;
 	gsl_multifit_nlinear_fdf fdf;
@@ -27,6 +27,8 @@ int fit_to_model ( System *data, info *user_data ) {
 	double *x_init;
 	double chisq, chisq0;
 	int status, info;
+
+	fdf_params.trs = gsl_multifit_nlinear_trs_lmaccel;
 
 	n = data->description.dataset_size;
 	p = data->description.n_of_comps;
@@ -65,9 +67,8 @@ int fit_to_model ( System *data, info *user_data ) {
 
 	covar = gsl_matrix_alloc ( p, p );
 	x_init = malloc ( p * sizeof (double) );
-	for ( i = 0; i < p; i++ ) {
-		x_init[i] = 1;
-	}
+	init_data ( user_data->model, x_init, p );
+
 	x = gsl_vector_view_array ( x_init, p );
 
 	w = gsl_multifit_nlinear_alloc ( T, &fdf_params, n, p );

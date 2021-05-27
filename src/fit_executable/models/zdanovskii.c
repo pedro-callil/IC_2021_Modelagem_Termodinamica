@@ -286,12 +286,12 @@ int aw_is_sane ( double aw, System *data ) {
 
 	aw_min = 1.0;
 	for ( i = 0; i < n_1st; i++ ) {
-		if ( aw_min < data->x_and_aw.aw_zdan[0][i] ) {
+		if ( aw_min > data->x_and_aw.aw_zdan[0][i] ) {
 			aw_min = data->x_and_aw.aw_zdan[0][i];
 		}
 	}
 	for ( i = 0; i < n_2nd; i++ ) {
-		if ( aw_min < data->x_and_aw.aw_zdan[1][i] ) {
+		if ( aw_min > data->x_and_aw.aw_zdan[1][i] ) {
 			aw_min = data->x_and_aw.aw_zdan[1][i];
 		}
 	}

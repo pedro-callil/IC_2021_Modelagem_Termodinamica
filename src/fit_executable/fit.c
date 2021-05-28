@@ -82,7 +82,7 @@ int fit_to_model ( System *data, info *user_data ) {
 		/* limit ouput if required */
 	}
 
-	status = gsl_multifit_nlinear_driver ( 100, xtol, gtol, ftol,
+	status = gsl_multifit_nlinear_driver ( MAX_ITER, xtol, gtol, ftol,
 			callback, NULL, &info, w);
 
 	J = gsl_multifit_nlinear_jac (w);

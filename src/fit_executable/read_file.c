@@ -155,10 +155,10 @@ void init_data ( char *model, double *x_init, int p ) {
 	if ( strcmp ( model, "uniquac" ) == TRUE ) {
 		n = ( p / 2 );
 		x_init[0] = 1;
-		x_init[n] = 0;
+		x_init[n] = 1000;
 		for ( i = 1; i < n; i++ ) {
 			x_init[i] = 10;
-			x_init[n+i] = 0;
+			x_init[n+i] = 1000;
 		}
 	} else {
 		for ( i = 0; i < p; i++ ) {

@@ -53,6 +53,10 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 
 		r_w = fabs ( gsl_vector_get ( K, 0 ) );
 		l_w = 1 - r_w;
+			/*
+			*
+			*
+			*/
 		sumxjlj = x_w * l_w;
 
 		q_w = r_w;
@@ -103,9 +107,6 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 				u_jj = fabs ( gsl_vector_get ( K, p + j + 1 ) );
 				u_kj = sqrt ( u_jj * u_kk );
 				tau_kj = exp ( - ( u_kj - u_jj ) / ( R * TEMP ) );
-				/*fprintf ( stderr,
-					"tau_kj = %Lf, with abs = %Lf\n",
-					tau_kj, - ( u_kj - u_jj ) / ( R * TEMP ) );*/
 				sumthetaktaukj += theta_k * tau_kj;
 			}
 
@@ -120,7 +121,6 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 			u_jj = fabs ( gsl_vector_get ( K, p + j + 1 ) );
 			u_wj = sqrt ( u_ww * u_jj );
 			tau_wj = exp ( - ( u_wj - u_jj ) / ( R * TEMP ) );
-			/*fprintf ( stderr, "tau_wj = %Lf\n", tau_wj );*/
 
 			sumsum += ( theta_j * tau_wj ) / sumthetaktaukj;
 
@@ -161,7 +161,7 @@ void callback_uniquac ( const size_t iter, void *params,
 	size = x->size;
 	for ( i = 0; i < size; i++ ) {
 		fprintf ( stderr, "\tK_%ld = %.7e\n", i,
-				gsl_vector_get ( x, i ) );
+				fabs ( gsl_vector_get ( x, i ) ) );
 	}
 	fprintf ( stderr, "\n" );
 

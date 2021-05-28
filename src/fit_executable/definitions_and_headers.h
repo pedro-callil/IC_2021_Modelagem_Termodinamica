@@ -21,6 +21,10 @@
 #define TRUE 0
 #define FALSE 1
 
+/* For nonlinear fitting */
+
+#define MAX_ITER 100
+
 /* For molality calculations for Caurie's model */
 
 #define KGS_IN_MOL_WATER 0.018015

@@ -14,7 +14,7 @@
  * r_i = q_i appears, according to the original Abrams & Prausnitz 1975
  * paper, to be one of the most commonly used simplifications. In fact,
  * r_i and q_i are strongly correlated (both are a measure of molecular
- * "size"), therefore this simplication is sane. u_ij = ( u_ii + u_jj )/2
+ * "size"), therefore this simplication is sane. u_ij = sqrt( u_ii * u_jj )
  * is another simplification mentioned in the article, specially atractive
  * because it reduces the quadratic dependence of the number of parameters
  * to fit with the number of components to a linear one, better suited for
@@ -23,13 +23,6 @@
  * One could also question our choice of simplification for u_ij, pointing
  * that, in the original paper, is also mentioned u_ij = u_ii. We opted not
  * to assert this, to maintain the dependence of u_ij in the two components.
- *
- * Due to the hardships found trying to fit all parameters at once, there are
- * also two functions to fit different parameter sets one at a time: one to fit
- * the u_ii given sane fixed values of r_i and q_i, and other to fit r_i and
- * q_i using the prevously obtained u_ii and the third one (that's the one
- * directly under this comment, by the way) to use the values of r_i/q_i and
- * u_ii as starting points to a nonlinear fitting process.
  */
 
 int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
@@ -58,7 +51,7 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 			* therefore, we also need its molar fraction.
 			*/
 
-		r_w = gsl_vector_get ( K, 0 );
+		r_w = fabs ( gsl_vector_get ( K, 0 ) );
 		l_w = 1 - r_w;
 		sumxjlj = x_w * l_w;
 
@@ -68,7 +61,7 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		for ( j = 0; j < p; j++ ) {
 
 			x_j = data->x_and_aw.x[i][j];
-			r_j = gsl_vector_get ( K, j + 1 );
+			r_j = fabs ( gsl_vector_get ( K, j + 1 ) );
 			l_j = 1 - r_j;
 			sumxjlj += x_j * l_j;
 			/* here we dealt with the l's and their sum */
@@ -79,16 +72,16 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		}
 
 		theta_w = ( q_w * x_w ) / sumqjxj;
-		Phi_w = theta_w; /* because */
+		Phi_w = theta_w; /* because q_i = r_i */
 
 		sumthetajtaujw = theta_w; /* = theta_w * tau_ww = theta_w * 1 */
 		for ( j = 0; j < p; j++ ) {
-			q_j = gsl_vector_get ( K, j + 1 );
+			q_j = fabs ( gsl_vector_get ( K, j + 1 ) );
 			x_j = data->x_and_aw.x[i][j];
 			theta_j = ( q_j * x_j ) / sumqjxj;
-			u_ww = gsl_vector_get ( K, p + 1 );
-			u_jj = gsl_vector_get ( K, p + j + 1 );
-			u_jw = 0.5 * ( u_jj + u_ww );
+			u_ww = fabs ( gsl_vector_get ( K, p + 1 ) );
+			u_jj = fabs ( gsl_vector_get ( K, p + j + 1 ) );
+			u_jw = sqrt ( u_jj * u_ww );
 			tau_jw = exp ( - ( u_jw - u_ww ) / ( R * TEMP ) );
 			/*fprintf ( stderr, "tau_jw = %Lf\n", tau_jw );*/
 			sumthetajtaujw += theta_j * tau_jw;
@@ -104,11 +97,11 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 				} else {
 					x_k = data->x_and_aw.x[i][k];
 				}
-				q_k = gsl_vector_get ( K, k + 1 );
+				q_k = fabs ( gsl_vector_get ( K, k + 1 ) );
 				theta_k = ( q_k * x_k ) / sumqjxj;
-				u_kk = gsl_vector_get ( K, p + k + 1 );
-				u_jj = gsl_vector_get ( K, p + j + 1 );
-				u_kj = 0.5 * ( u_jj + u_kk );
+				u_kk = fabs ( gsl_vector_get ( K, p + k + 1 ) );
+				u_jj = fabs ( gsl_vector_get ( K, p + j + 1 ) );
+				u_kj = sqrt ( u_jj * u_kk );
 				tau_kj = exp ( - ( u_kj - u_jj ) / ( R * TEMP ) );
 				/*fprintf ( stderr,
 					"tau_kj = %Lf, with abs = %Lf\n",
@@ -116,16 +109,16 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 				sumthetaktaukj += theta_k * tau_kj;
 			}
 
-			q_j = gsl_vector_get ( K, j + 1 );
+			q_j = fabs ( gsl_vector_get ( K, j + 1 ) );
 			if ( j == -1 ) {
 				x_j = x_w;
 			} else {
 				x_j = data->x_and_aw.x[i][j];
 			}
 			theta_j = ( q_j * x_j ) / sumqjxj;
-			u_ww = gsl_vector_get ( K, p );
-			u_jj = gsl_vector_get ( K, p + j + 1 );
-			u_wj = 0.5 * ( u_ww + u_jj );
+			u_ww = fabs ( gsl_vector_get ( K, p ) );
+			u_jj = fabs ( gsl_vector_get ( K, p + j + 1 ) );
+			u_wj = sqrt ( u_ww * u_jj );
 			tau_wj = exp ( - ( u_wj - u_jj ) / ( R * TEMP ) );
 			/*fprintf ( stderr, "tau_wj = %Lf\n", tau_wj );*/
 
@@ -167,7 +160,7 @@ void callback_uniquac ( const size_t iter, void *params,
 	fprintf ( stderr, "\t|f(x)| = %.4f\n", gsl_blas_dnrm2 (f) );
 	size = x->size;
 	for ( i = 0; i < size; i++ ) {
-		fprintf ( stderr, "\tK_%ld = %.4f\n", i,
+		fprintf ( stderr, "\tK_%ld = %.7e\n", i,
 				gsl_vector_get ( x, i ) );
 	}
 	fprintf ( stderr, "\n" );
@@ -192,7 +185,7 @@ void print_uniquac ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 
 		for ( i = -1; i < p; i++ ) {
 			fprintf ( stdout, "\tq_%d  = %.5e\t+/-\t%.5e\t",
-				i + 1, gsl_vector_get ( w->x, i + 1),
+				i + 1, fabs ( gsl_vector_get ( w->x, i + 1) ),
 				correction * sqrt ( gsl_matrix_get
 					( covar, i + 1, i + 1 ) ) );
 			if ( i != -1 ) {
@@ -203,9 +196,10 @@ void print_uniquac ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 			}
 			/* add solute name */
 			fprintf ( stdout, "\tu_%d%d = %.5e\t+/-\t%.5e\t",
-				i + 1, i + 1, gsl_vector_get ( w->x, p + i + 1),
+				i + 1, i + 1,
+				fabs ( gsl_vector_get ( w->x, p + i + 2 ) ),
 				correction * sqrt ( gsl_matrix_get
-					( covar, p + i + 1, p + i + 1 ) ) );
+					( covar, p + i + 2, p + i + 2 ) ) );
 			if ( i != -1 ) {
 				fprintf ( stdout, "(%s)\n",
 					data->description.components[i] );

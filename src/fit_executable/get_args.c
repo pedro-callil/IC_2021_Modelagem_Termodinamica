@@ -18,8 +18,8 @@ void print_usage (void) {
 	fprintf ( stderr, "          in a binary solution.\n" );
 	fprintf ( stderr, "        -m <model>\n" );
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
-	fprintf ( stderr, "          caurie, raoult, zdanovskii or all, \n" );
-	fprintf ( stderr, "          which compares all other models. \n" );
+	fprintf ( stderr, "          UNIQUAC, caurie, raoult, zdanovskii \n" );
+	fprintf ( stderr, "          or all, which compares all other models. \n" );
 	fprintf ( stderr, "        -O\n" );
 	fprintf ( stderr, "          Fit models that need only one one file,\n" );
 	fprintf ( stderr, "          currently all but \"zdanovskii\". Useful\n" );

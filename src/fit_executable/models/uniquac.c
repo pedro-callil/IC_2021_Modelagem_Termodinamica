@@ -14,7 +14,7 @@
  * r_i = q_i appears, according to the original Abrams & Prausnitz 1975
  * paper, to be one of the most commonly used simplifications. In fact,
  * r_i and q_i are strongly correlated (both are a measure of molecular
- * "size"), therefore this simplication is sane. u_ij = sqrt ( u_ii * u_jj )
+ * "size"), therefore this simplication is sane. u_ij = ( u_ii + u_jj )/2
  * is another simplification mentioned in the article, specially atractive
  * because it reduces the quadratic dependence of the number of parameters
  * to fit with the number of components to a linear one, better suited for

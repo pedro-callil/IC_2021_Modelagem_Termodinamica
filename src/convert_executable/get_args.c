@@ -28,6 +28,8 @@ void print_usage (void) {
 	fprintf ( stderr, "      Can be one of \"vapour pressure\", \"BPE\",\n" );
 	fprintf ( stderr, "      \"FPD\" or \"osmotic coefficient\".\n" );
 	fprintf ( stderr, "      If set, the following options are valid:\n" );
+	fprintf ( stderr, "        -k\n" );
+	fprintf ( stderr, "          Indicates pressure in kPa, not Pa.\n" );
 	fprintf ( stderr, "        -t <temperature>\n" );
 	fprintf ( stderr, "          If the property replacing water activity\n" );
 	fprintf ( stderr, "          is the vapour pressure (-y pressure) of\n" );
@@ -62,6 +64,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->temperature = 298.15;
 	user_data->temperature_to_add = 0;
 	user_data->pressure = 101325;
+	user_data->pressure_factor = 1;
 	user_data->x_property = NULL;
 	user_data->molar_masses = NULL;
 	user_data->quiet = FALSE;
@@ -74,7 +77,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 
 	user_data->quiet = FALSE;
 
-	while ( ( opt = getopt ( argc, argv, "hqf:n:x:m:y:t:Cp:" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqCkf:n:x:m:y:t:p:" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				print_usage ();
@@ -99,6 +102,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 					free(user_data->filename);
 					exit (34);
 				}
+				break;
+			case 'k':
+				user_data->pressure_factor = 1000;
 				break;
 			case 'n':
 				/* read new filename from user (new data) */

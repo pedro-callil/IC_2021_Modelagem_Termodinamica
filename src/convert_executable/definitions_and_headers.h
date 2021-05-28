@@ -31,7 +31,7 @@
 #define DELTA_H_FUS 6010.0
 
 /* constants for arden_buck function */
-#define A_A 6.1121
+#define A_A 611.21
 #define B_A 18.678
 #define C_A 234.5
 #define D_A 257.14
@@ -97,6 +97,7 @@ typedef struct {
 	double temperature;
 	double temperature_to_add;
 	double pressure;
+	int pressure_factor;
 	char *x_property;
 	double *molar_masses;
 	int quiet;

@@ -54,8 +54,8 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		r_w = fabs ( gsl_vector_get ( K, 0 ) );
 		l_w = 1 - r_w;
 			/*
-			*
-			*
+			* l = (z/2) * (r-q) - (r-1)
+			* :. l = -(r-1) = 1 - r
 			*/
 		sumxjlj = x_w * l_w;
 

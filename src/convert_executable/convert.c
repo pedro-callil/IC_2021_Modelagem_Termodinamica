@@ -166,7 +166,8 @@ Data convert ( Metadata *system_description, Data *system,
 				"vapor_pressure" ) == TRUE ) {
 			pure_pressure = arden_buck ( user_data->temperature );
 			for ( i = 0; i < lines; i++ ) {
-				aw[i] = y_var[i] / pure_pressure;
+				aw[i] =  user_data->pressure_factor * y_var[i];
+				aw[i] /= pure_pressure;
 			}
 		}      /*
 		* Here we convert vapour pressure data in water activity (via
@@ -200,6 +201,27 @@ Data convert ( Metadata *system_description, Data *system,
 		}
 	}
 
+	/*
+	* One last sanity check: we need this because sometimes floating
+	* point and empirical relations precision makes a result a little
+	* bit wrong, and this should be corrected.
+	*/
+
+	for ( i = 0; i < lines; i++ ) {
+		if ( aw[i] > 1.0 ) {
+			aw[i] = 1.0;
+		} else if ( aw[i] < 0.0 ) {
+			aw[i] = 0.0;
+		}
+		for ( j = 0; j < comps; j++ ) {
+			if ( x[i][j] > 1.0 ) {
+				x[i][j] = 1.0;
+			} else if ( x[i][j] < 0.0 ) {
+				x[i][j] = 0.0;
+			}
+		}
+	}
+
 	new_system.x = x;
 	new_system.aw = aw;
 
@@ -214,6 +236,9 @@ Data convert ( Metadata *system_description, Data *system,
 
 /* For vapour pressure calculation, more precise than Antoine. */
 double arden_buck ( double T ) {
+	if ( T > 150.0 ) {
+		T = T - 273.15;
+	}
 	return ( A_A * exp ( ( B_A - T / C_A ) * ( T / ( D_A + T ) ) ) );
 }
 

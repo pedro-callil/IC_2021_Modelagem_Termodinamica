@@ -47,6 +47,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->cost = 0;
 	user_data->is_all = FALSE;
 	user_data->not_zdan = FALSE;
+	user_data->files_zdan = NULL;
 
 	while ( ( opt = getopt ( argc, argv, "hqf:m:Z:O" ) ) != -1 ) {
 		switch (opt) {

@@ -97,7 +97,7 @@ typedef struct {
 	double temperature;
 	double temperature_to_add;
 	double pressure;
-	int pressure_factor;
+	double pressure_factor;
 	char *x_property;
 	double *molar_masses;
 	int quiet;

@@ -30,6 +30,8 @@ void print_usage (void) {
 	fprintf ( stderr, "      If set, the following options are valid:\n" );
 	fprintf ( stderr, "        -k\n" );
 	fprintf ( stderr, "          Indicates pressure in kPa, not Pa.\n" );
+	fprintf ( stderr, "        -M\n" );
+	fprintf ( stderr, "          Indicates pressure in mmHg, not Pa.\n" );
 	fprintf ( stderr, "        -t <temperature>\n" );
 	fprintf ( stderr, "          If the property replacing water activity\n" );
 	fprintf ( stderr, "          is the vapour pressure (-y pressure) of\n" );
@@ -77,7 +79,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 
 	user_data->quiet = FALSE;
 
-	while ( ( opt = getopt ( argc, argv, "hqCkf:n:x:m:y:t:p:" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqCkMf:n:x:m:y:t:p:" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				print_usage ();
@@ -105,6 +107,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				break;
 			case 'k':
 				user_data->pressure_factor = 1000;
+				break;
+			case 'M':
+				user_data->pressure_factor = 133.322387415;
 				break;
 			case 'n':
 				/* read new filename from user (new data) */

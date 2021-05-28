@@ -23,6 +23,13 @@
  * One could also question our choice of simplification for u_ij, pointing
  * that, in the original paper, is also mentioned u_ij = u_ii. We opted not
  * to assert this, to maintain the dependence of u_ij in the two components.
+ *
+ * Due to the hardships found trying to fit all parameters at once, there are
+ * also two functions to fit different parameter sets one at a time: one to fit
+ * the u_ii given sane fixed values of r_i and q_i, and other to fit r_i and
+ * q_i using the prevously obtained u_ii and the third one (that's the one
+ * directly under this comment, by the way) to use the values of r_i/q_i and
+ * u_ii as starting points to a nonlinear fitting process.
  */
 
 int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {

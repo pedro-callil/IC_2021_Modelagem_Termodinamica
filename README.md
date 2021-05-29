@@ -30,6 +30,40 @@ $ cd IC_2021_Modelagem_Termodinamica
 $ make
 ```
 
+Uso
+---
+
+Para fazer uso dos executáveis, é necessário levar alguns detalhes em conta.
+Primeiramente, dentre os dados experimentais dos arquivos fornecidos, não deve
+figurar a situação obtida ao se analisar água pura ou qualquer outra situação
+na qual o valor do coeficiente osmótico da solução (a razão entre os logaritmos
+naturais da atividade da água e de sua concentração) não esteja bem definido.
+
+Além disso, o programa assume que os arquivos sejam planilhas em formato .csv,
+nas quais a primeira linha apresenta os nomes dos componentes, a primeira coluna
+os valores da propriedade associada à atividade da água, e as próximas colunas
+os valores da propriedade associada à composição de cada componente:
+
+```
+aw,componente,substancia
+0.99,0.006,0.004
+0.97,0.015,0.022
+0.88,0.123,0.045
+...
+```
+
+Para ajustar os dados de coeficiente osmótico, usando o programa `FitWaterActivity`
+é necessário que os dados estejam expressos como relações entre atividade da água
+e fração molar, como acima. Caso contrário, é preciso convertê-los usando o programa
+`ConvertWaterActivity`. Os dois programas estarão no subdiretório `bin` do diretório
+no qual o código foi compilado. Para informações sobre como utilizar o programa,
+deve ser invocada a opção `-h`:
+
+```
+$ ./bin/ConvertWaterActivity -h
+$ ./bin/FitWaterActivity -h
+```
+
 Autor
 -----
 

@@ -103,7 +103,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		}
 		aw = xw; /* Using Raoult as initial guess */
 
-		if ( aw_is_sane ( aw, data ) != TRUE ) {
+		if ( aw_is_sane ( data->x_and_aw.aw[i], data ) != TRUE ) {
 			fprintf ( stderr, "Water activity in mixture not in " );
 			fprintf ( stderr, "acceptable range. Aborting...\n" );
 			free_ptrs ( m_1st_vec, m_2nd_vec, aw_vec,

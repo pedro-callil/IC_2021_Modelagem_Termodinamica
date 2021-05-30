@@ -197,17 +197,13 @@ Data convert ( Metadata *system_description, Data *system,
 		*/
 
 		else if ( strcmp ( user_data->y_property,
-					"isopiestic_sodium_chloride" ) == TRUE ||
-				strcmp ( user_data->y_property,
 					"isopiestic_nacl" ) == TRUE ||
-				strcmp ( user_data->y_property,
-					"sodium_chloride" ) == TRUE ||
 				strcmp ( user_data->y_property,
 					"nacl" ) == TRUE ) {
 			aw[i] = chirife_and_resnik_isopiestic ( y_var[i] );
 		}
 		/*
-		* We use data from Chirife and Resnik (1984) to obtain water
+		* We use data from Scatchard et. al (1938) to obtain water
 		* activity values from isopiestic measurements, i.e. from the
 		* NaCl solution in osmotic equilibrium with the solution to be
 		* analysed.

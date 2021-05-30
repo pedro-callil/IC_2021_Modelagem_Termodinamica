@@ -26,7 +26,8 @@ void print_usage (void) {
 	fprintf ( stderr, "    -y <property>\n" );
 	fprintf ( stderr, "      Property to convert to water activity.\n" );
 	fprintf ( stderr, "      Can be one of \"vapour_pressure\", \"BPE\",\n" );
-	fprintf ( stderr, "      \"FPD\", \"phi\" or \"osmotic_coefficient\".\n" );
+	fprintf ( stderr, "      \"FPD\", \"phi\", \"osmotic_coefficient\",\n" );
+	fprintf ( stderr, "      \"isopiestic_nacl\" or \"nacl\".\n" );
 	fprintf ( stderr, "      If set, the following options are valid:\n" );
 	fprintf ( stderr, "        -k\n" );
 	fprintf ( stderr, "          Indicates pressure in kPa, not Pa.\n" );

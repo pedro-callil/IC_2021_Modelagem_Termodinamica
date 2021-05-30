@@ -70,6 +70,14 @@
 #define C_H 0.313106
 #define D_H -0.0003325
 
+/* constants for isopiestic fitting */
+
+#define A_I 174.294534593
+#define B_I -50.8780588331
+#define C_I -0.323089993507
+#define D_I -0.913445257884
+#define E_I 0.999967849643
+
 /*
  * Data structures
  */

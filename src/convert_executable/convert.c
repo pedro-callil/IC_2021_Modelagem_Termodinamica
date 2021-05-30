@@ -13,6 +13,7 @@ double delta_C_vap ( double T );
 double freezing_point ( double P );
 double delta_H_fus ( double T );
 double delta_C_fus ( double T );
+double chirife_and_resnik_isopiestic ( double x_nacl );
 
 
 /*
@@ -195,6 +196,23 @@ Data convert ( Metadata *system_description, Data *system,
 		* using the equation of Ge and Wang.
 		*/
 
+		else if ( strcmp ( user_data->y_property,
+					"isopiestic_sodium_chloride" ) == TRUE ||
+				strcmp ( user_data->y_property,
+					"isopiestic_nacl" ) == TRUE ||
+				strcmp ( user_data->y_property,
+					"sodium_chloride" ) == TRUE ||
+				strcmp ( user_data->y_property,
+					"nacl" ) == TRUE ) {
+			aw[i] = chirife_and_resnik_isopiestic ( y_var[i] );
+		}
+		/*
+		* We use data from Chirife and Resnik (1984) to obtain water
+		* activity values from isopiestic measurements, i.e. from the
+		* NaCl solution in osmotic equilibrium with the solution to be
+		* analysed.
+		*/
+
 	} else {
 		for ( i = 0; i < lines; i++ ) {
 			aw[i] = y_var[i];
@@ -208,16 +226,20 @@ Data convert ( Metadata *system_description, Data *system,
 	*/
 
 	for ( i = 0; i < lines; i++ ) {
-		if ( aw[i] > 1.0 ) {
-			aw[i] = 1.0;
-		} else if ( aw[i] < 0.0 ) {
-			aw[i] = 0.0;
+		if ( user_data->y_property != NULL ) {
+			if ( aw[i] > 1.0 ) {
+				aw[i] = 1.0;
+			} else if ( aw[i] < 0.0 ) {
+				aw[i] = 0.0;
+			}
 		}
-		for ( j = 0; j < comps; j++ ) {
-			if ( x[i][j] > 1.0 ) {
-				x[i][j] = 1.0;
-			} else if ( x[i][j] < 0.0 ) {
-				x[i][j] = 0.0;
+		if ( user_data->x_property != NULL ) {
+			for ( j = 0; j < comps; j++ ) {
+				if ( x[i][j] > 1.0 ) {
+					x[i][j] = 1.0;
+				} else if ( x[i][j] < 0.0 ) {
+					x[i][j] = 0.0;
+				}
 			}
 		}
 	}
@@ -336,4 +358,22 @@ double delta_C_fus ( double T ) {
 	return delta_C;
 }
 
+/*
+ * This function converts data of molar fraction of NaCl in binary solution
+ * to water activity data.
+ */
 
+double chirife_and_resnik_isopiestic ( double x_nacl ) {
+
+	double aw_equiv;
+
+	aw_equiv = 0;
+	aw_equiv += A_I * pow ( x_nacl, 4 );
+	aw_equiv += B_I * pow ( x_nacl, 3 );
+	aw_equiv += C_I * pow ( x_nacl, 2 );
+	aw_equiv += D_I * x_nacl;
+	aw_equiv += E_I;
+
+	return aw_equiv;
+
+}

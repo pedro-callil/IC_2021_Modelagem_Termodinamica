@@ -13,7 +13,7 @@ double delta_C_vap ( double T );
 double freezing_point ( double P );
 double delta_H_fus ( double T );
 double delta_C_fus ( double T );
-double chirife_and_resnik_isopiestic ( double x_nacl );
+double scatchard_isopiestic ( double x_nacl );
 
 
 /*
@@ -200,7 +200,31 @@ Data convert ( Metadata *system_description, Data *system,
 					"isopiestic_nacl" ) == TRUE ||
 				strcmp ( user_data->y_property,
 					"nacl" ) == TRUE ) {
-			aw[i] = chirife_and_resnik_isopiestic ( y_var[i] );
+			if ( strcmp ( user_data->isopiestic_property,
+					"molality" ) == TRUE ) {
+				for ( i = 0; i < lines; i++ ) {
+					y_var[i] = y_var[i] /
+						( y_var[i] + MOLALITY_TO_FRACTION );
+				}
+			} else if ( strcmp ( user_data->isopiestic_property,
+					"mass_fraction" ) == TRUE ) {
+				for ( i = 0; i < lines; i++ ) {
+					y_var[i] = ( y_var[i] / NACL_MASS ) /
+						( ( ( 1 - y_var[i] ) /
+						MASS_TO_FRACTION ) +
+						( y_var[i] / NACL_MASS ) );
+				}
+			} else if ( strcmp ( user_data->isopiestic_property,
+					"mass_concentration" ) == TRUE ) {
+				for ( i = 0; i < lines; i++ ) {
+					y_var[i] = ( y_var[i] / NACL_MASS ) /
+						( ( y_var[i] / NACL_MASS ) +
+						( 1 / MASS_TO_FRACTION ) );
+				}
+			}
+			for ( i = 0; i < lines; i++ ) {
+				aw[i] = scatchard_isopiestic ( y_var[i] );
+			}
 		}
 		/*
 		* We use data from Scatchard et. al (1938) to obtain water
@@ -359,7 +383,7 @@ double delta_C_fus ( double T ) {
  * to water activity data.
  */
 
-double chirife_and_resnik_isopiestic ( double x_nacl ) {
+double scatchard_isopiestic ( double x_nacl ) {
 
 	double aw_equiv;
 

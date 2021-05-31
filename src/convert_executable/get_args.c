@@ -48,6 +48,11 @@ void print_usage (void) {
 	fprintf ( stderr, "          elevation, the pressure shall be informed\n" );
 	fprintf ( stderr, "          through this option. Otherwise assumed to be\n" );
 	fprintf ( stderr, "          P = 101.325 kPa.\n" );
+	fprintf ( stderr, "        -I <property>\n" );
+	fprintf ( stderr, "          Property in which isopiestic NaCl data\n" );
+	fprintf ( stderr, "          are stored. The options are the same for\n" );
+	fprintf ( stderr, "          \"-x\", above. If not informed, will assume\n" );
+	fprintf ( stderr, "          molar fraction.\n" );
 
 }
 
@@ -71,6 +76,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->x_property = NULL;
 	user_data->molar_masses = NULL;
 	user_data->quiet = FALSE;
+	user_data->isopiestic_property = NULL;
 
 	if ( argc < 2 ) {
 		fprintf ( stderr, "No arguments provided; for help, use -h\n" );
@@ -80,7 +86,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 
 	user_data->quiet = FALSE;
 
-	while ( ( opt = getopt ( argc, argv, "hqCkMf:n:x:m:y:t:p:" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqCkMf:n:x:I:m:y:t:p:" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				print_usage ();
@@ -126,6 +132,13 @@ void getargs ( int argc, char **argv, info *user_data ) {
 					( strlen (optarg) + 1 ) *
 					sizeof (char) );
 				strcpy ( user_data->x_property, optarg );
+				break;
+			case 'I':
+				/* read property to convert to molar fraction */
+				user_data->isopiestic_property = malloc (
+					( strlen (optarg) + 1 ) *
+					sizeof (char) );
+				strcpy ( user_data->isopiestic_property, optarg );
 				break;
 			case 'm':
 				/* read molar mass of each component */

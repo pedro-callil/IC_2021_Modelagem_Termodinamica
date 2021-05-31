@@ -24,6 +24,7 @@
 #define KELVIN_TO_CELSIUS 273.15
 #define MOLALITY_TO_FRACTION 55.51
 #define MASS_TO_FRACTION 18.015
+#define NACL_MASS 58.443
 
 #define R_CONST 8.31446261815324
 
@@ -107,6 +108,7 @@ typedef struct {
 	double pressure;
 	double pressure_factor;
 	char *x_property;
+	char *isopiestic_property;
 	double *molar_masses;
 	int quiet;
 } info;

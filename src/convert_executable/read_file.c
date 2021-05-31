@@ -116,23 +116,27 @@ void finalize ( Metadata *system_description, Data *new_system,
 	free (system_description->components);
 
 	if ( user_data->filename != NULL ) {
-		free ( user_data->filename );
+		free (user_data->filename);
 	}
 
 	if ( user_data->new_filename != NULL ) {
-		free ( user_data->new_filename );
+		free (user_data->new_filename);
 	}
 
 	if ( user_data->y_property != NULL ) {
-		free ( user_data->y_property );
+		free (user_data->y_property);
 	}
 
 	if ( user_data->x_property != NULL ) {
-		free ( user_data->x_property );
+		free (user_data->x_property);
 	}
 
 	if ( user_data->molar_masses != NULL ) {
-		free ( user_data->molar_masses );
+		free (user_data->molar_masses);
+	}
+
+	if ( user_data->isopiestic_property != NULL ) {
+		free (user_data->isopiestic_property);
 	}
 
 

@@ -6,7 +6,8 @@ void analyze_all_models ( System *data, info *user_data ) {
 	user_data->model = malloc ( strlen ("norrish") + 1 );
 	strcpy ( user_data->model, "norrish" );
 	fit_to_model ( data, user_data );
-	if ( isnormal ( user_data->cost ) != 0 ) {
+	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
+			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for Norrish's model:   \t\t%f\n",
 			user_data->cost );
 	} else {
@@ -18,7 +19,8 @@ void analyze_all_models ( System *data, info *user_data ) {
 	user_data->model = malloc ( strlen ("virial") + 1 );
 	strcpy ( user_data->model, "virial" );
 	fit_to_model ( data, user_data );
-	if ( isnormal ( user_data->cost ) != 0 ) {
+	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
+			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for Virial model:      \t\t%f\n",
 			user_data->cost );
 	} else {
@@ -30,7 +32,8 @@ void analyze_all_models ( System *data, info *user_data ) {
 	user_data->model = malloc ( strlen ("uniquac") + 1 );
 	strcpy ( user_data->model, "uniquac" );
 	fit_to_model ( data, user_data );
-	if ( isnormal ( user_data->cost ) != 0 ) {
+	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
+			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for UNIQUAC model:      \t\t%f\n",
 			user_data->cost );
 	} else {
@@ -42,7 +45,8 @@ void analyze_all_models ( System *data, info *user_data ) {
 	user_data->model = malloc ( strlen ("raoult") + 1 );
 	strcpy ( user_data->model, "raoult" );
 	check_model ( data, user_data );
-	if ( isnormal ( user_data->cost ) != 0 ) {
+	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
+			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for Raoult's model:    \t\t%f\n",
 			user_data->cost );
 	} else {
@@ -54,7 +58,8 @@ void analyze_all_models ( System *data, info *user_data ) {
 	user_data->model = malloc ( strlen ("caurie") + 1 );
 	strcpy ( user_data->model, "caurie" );
 	check_model ( data, user_data );
-	if ( isnormal ( user_data->cost ) != 0 ) {
+	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
+			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for Caurie's model:    \t\t%f\n",
 			user_data->cost );
 	} else {
@@ -68,7 +73,8 @@ void analyze_all_models ( System *data, info *user_data ) {
 		user_data->model = malloc ( strlen ("zdanovskii") + 1 );
 		strcpy ( user_data->model, "zdanovskii" );
 		check_model ( data, user_data );
-		if ( isnormal ( user_data->cost ) != 0 ) {
+		if ( fpclassify ( user_data->cost ) == FP_ZERO ||
+				fpclassify ( user_data->cost ) == FP_NORMAL ) {
 			fprintf ( stdout, "Final cost for Zdanovskii's model:\t\t%f\n",
 				user_data->cost );
 		} else {

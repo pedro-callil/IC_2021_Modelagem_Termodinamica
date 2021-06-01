@@ -100,6 +100,8 @@ void initialize ( char *filename, Metadata *system_description,
 		user_data->files_zdan = NULL;
 	}
 
+	system->aw_calc = NULL;
+
 
 		/*
 		* And now our structures are initialized
@@ -192,6 +194,10 @@ void finalize ( Metadata *system_description, Data *system,
 		free (system->n_zdan);
 	}
 
+	if ( system->aw_calc != NULL ) {
+		free (system->aw_calc);
+	}
+
 	if ( user_data->files_zdan != NULL ) {
 		for ( i = 0; i < 2; i++ ) {
 			if ( user_data->files_zdan[i] != NULL ) {
@@ -199,6 +205,10 @@ void finalize ( Metadata *system_description, Data *system,
 			}
 		}
 		free (user_data->files_zdan);
+	}
+
+	if ( user_data->save_new_results == TRUE ) {
+		free (user_data->filename_new_results);
 	}
 
 	free (system->x);

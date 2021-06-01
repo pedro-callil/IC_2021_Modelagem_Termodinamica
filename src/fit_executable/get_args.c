@@ -11,6 +11,8 @@ void print_usage (void) {
 	fprintf ( stderr, "          Quiet; hide verbose output\n" );
 	fprintf ( stderr, "        -f <filename>\n" );
 	fprintf ( stderr, "          File in which the activity data are stored\n" );
+	fprintf ( stderr, "        -F <filename to store predicted values>\n" );
+	fprintf ( stderr, "          File to store the calculated values.\n" );
 	fprintf ( stderr, "        -Z <1st filename> <2nd filename>\n" );
 	fprintf ( stderr, "          If the model chosen is \"zdanovskii\",\n" );
 	fprintf ( stderr, "          these two files must store the isotherms\n" );
@@ -48,8 +50,10 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->is_all = FALSE;
 	user_data->not_zdan = FALSE;
 	user_data->files_zdan = NULL;
+	user_data->save_new_results = FALSE;
+	user_data->filename_new_results = NULL;
 
-	while ( ( opt = getopt ( argc, argv, "hqf:m:Z:O" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqf:F:m:Z:O" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				free (user_data->model);
@@ -97,6 +101,14 @@ void getargs ( int argc, char **argv, info *user_data ) {
 					free(user_data->model);
 					exit (34);
 				}
+				break;
+			case 'F':
+				user_data->save_new_results = TRUE;
+				user_data->filename_new_results =
+					malloc ( ( strlen (optarg) + 1 ) *
+					sizeof (char) );
+				strcpy ( user_data->filename_new_results,
+						optarg );
 				break;
 			case 'm':
 				free(user_data->model);

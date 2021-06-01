@@ -21,6 +21,7 @@ int fit_to_model ( System *data, info *user_data ) {
 	gsl_vector_view x;
 	callback_function callback;
 	print_function print;
+	save_function save;
 	const double xtol = 1e-9;
 	const double gtol = 1e-9;
 	const double ftol = 0.0;
@@ -33,21 +34,25 @@ int fit_to_model ( System *data, info *user_data ) {
 	n = data->description.dataset_size;
 	p = data->description.n_of_comps;
 
+	save = NULL;
 	if ( strcmp ( user_data->model, "norrish" ) == TRUE ) {
 		fdf.f = phi_norrish;
 		fdf.p = p;
 		callback = &callback_norrish;
 		print = &print_norrish;
+		save = &save_norrish;
 	} else if ( strcmp ( user_data->model, "virial" ) == TRUE ) {
 		fdf.f = phi_virial;
 		fdf.p = p + ( p * ( p - 1 ) ) / 2;
 		callback = &callback_virial;
 		print = &print_virial;
+		save = &save_virial;
 	} else if ( strcmp ( user_data->model, "uniquac" ) == TRUE ) {
 		fdf.f = phi_uniquac;
 		fdf.p = 2 * ( p + 1 );
 		callback = &callback_uniquac;
 		print = &print_uniquac;
+		save = &save_uniquac;
 	} else {
 		fprintf (stderr, "Model unknown. Aborting...\n" );
 		exit (45);
@@ -91,6 +96,10 @@ int fit_to_model ( System *data, info *user_data ) {
 	gsl_blas_ddot ( f, f, &chisq );
 
 	print ( covar, w, status, chisq0, chisq, data, user_data );
+
+	if ( user_data->save_new_results == TRUE && save != NULL ) {
+		save ( data, user_data, w );
+	}
 
 	gsl_multifit_nlinear_free (w) ;
 	gsl_matrix_free (covar);

@@ -219,3 +219,142 @@ void print_uniquac ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 
 }
 
+void save_uniquac ( System *data, info *user_data,
+		gsl_multifit_nlinear_workspace *w ) {
+
+	int i, j, k, lines, comps;
+	long double phi_calc, phi_real;
+	long double ln_gamma_w;
+	long double a_w, x_w, x_j, x_k;
+	long double sumxjlj, sumqjxj, sumthetajtaujw, sumthetaktaukj, sumsum;
+	long double l_w, l_j, r_w, r_j, q_w, q_j, q_k;
+	long double theta_w, theta_j, theta_k, Phi_w;
+	long double u_jj, u_jw, u_wj, u_kj, u_kk, u_ww, tau_jw, tau_kj, tau_wj;
+	char *filename;
+	FILE *results_file;
+	gsl_vector *x = gsl_multifit_nlinear_position (w);
+
+	filename = user_data->filename_new_results;
+	results_file = fopen ( filename, "w" );
+
+	lines = data->description.dataset_size;
+	comps = data->description.n_of_comps;
+
+	fprintf ( results_file, "phi_calc,phi_exp," );
+
+	for ( i = 0; i < comps - 1; i++ ) {
+		fprintf ( results_file, "%s,", data->description.components[i] );
+	}
+	fprintf ( results_file, "%s\n", data->description.components[i] );
+
+	/*
+	* Shamelessly copied from the function at the top of this file.
+	* I'm sorry.
+	*/
+	for ( i = 0; i < lines ; i++ ) {
+		x_w = 1;
+		for ( j = 0; j < comps; j++ ) {
+			x_w -= data->x_and_aw.x[i][j];
+		}      /* In this model the water is seen as another component;
+			* therefore, we also need its molar fraction.
+			*/
+
+		r_w = fabs ( gsl_vector_get ( x, 0 ) );
+		l_w = 1 - r_w;
+			/*
+			* l = (z/2) * (r-q) - (r-1)
+			* :. l = -(r-1) = 1 - r
+			*/
+		sumxjlj = x_w * l_w;
+
+		q_w = r_w;
+		sumqjxj = q_w * x_w;
+
+		for ( j = 0; j < comps; j++ ) {
+
+			x_j = data->x_and_aw.x[i][j];
+			r_j = fabs ( gsl_vector_get ( x, j + 1 ) );
+			l_j = 1 - r_j;
+			sumxjlj += x_j * l_j;
+			/* here we dealt with the l's and their sum */
+
+			q_j = r_j;
+			sumqjxj += q_j * x_j;
+			/* needed for theta_j */
+		}
+
+		theta_w = ( q_w * x_w ) / sumqjxj;
+		Phi_w = theta_w; /* because q_i = r_i */
+
+		sumthetajtaujw = theta_w; /* = theta_w * tau_ww = theta_w * 1 */
+		for ( j = 0; j < comps; j++ ) {
+			q_j = fabs ( gsl_vector_get ( x, j + 1 ) );
+			x_j = data->x_and_aw.x[i][j];
+			theta_j = ( q_j * x_j ) / sumqjxj;
+			u_ww = fabs ( gsl_vector_get ( x, comps + 1 ) );
+			u_jj = fabs ( gsl_vector_get ( x, comps + j + 1 ) );
+			u_jw = sqrt ( u_jj * u_ww );
+			tau_jw = exp ( - ( u_jw - u_ww ) / ( R * TEMP ) );
+			/*fprintf ( stderr, "tau_jw = %Lf\n", tau_jw );*/
+			sumthetajtaujw += theta_j * tau_jw;
+		}
+
+		sumsum = 0;
+		for ( j = -1; j < comps; j++ ) {
+
+			sumthetaktaukj = theta_w;
+			for ( k = -1; k < comps; k++ ) {
+				if ( k == -1 ) {
+					x_k = x_w;
+				} else {
+					x_k = data->x_and_aw.x[i][k];
+				}
+				q_k = fabs ( gsl_vector_get ( x, k + 1 ) );
+				theta_k = ( q_k * x_k ) / sumqjxj;
+				u_kk = fabs ( gsl_vector_get ( x, comps + k + 1 ) );
+				u_jj = fabs ( gsl_vector_get ( x, comps + j + 1 ) );
+				u_kj = sqrt ( u_jj * u_kk );
+				tau_kj = exp ( - ( u_kj - u_jj ) / ( R * TEMP ) );
+				sumthetaktaukj += theta_k * tau_kj;
+			}
+
+			q_j = fabs ( gsl_vector_get ( x, j + 1 ) );
+			if ( j == -1 ) {
+				x_j = x_w;
+			} else {
+				x_j = data->x_and_aw.x[i][j];
+			}
+			theta_j = ( q_j * x_j ) / sumqjxj;
+			u_ww = fabs ( gsl_vector_get ( x, comps ) );
+			u_jj = fabs ( gsl_vector_get ( x, comps + j + 1 ) );
+			u_wj = sqrt ( u_ww * u_jj );
+			tau_wj = exp ( - ( u_wj - u_jj ) / ( R * TEMP ) );
+
+			sumsum += ( theta_j * tau_wj ) / sumthetaktaukj;
+
+		}
+
+		ln_gamma_w = log ( Phi_w / x_w );
+			/* "ln_gamma_w +=
+			* ( Z_COORD / 2 ) * q_w * log ( theta_w / Phi_w );"
+			* is a expression that would be here if we did not
+			* assume r_j = q_j; however, because we assumed this,
+			* the expression between parenthesis inside the log
+			* equals  one, and this forces the whole right-hand
+			* side to 0.
+			*/
+		ln_gamma_w += l_w;
+		ln_gamma_w -= ( Phi_w / x_w ) * sumxjlj;
+		ln_gamma_w -= q_w * ( 1 - log ( sumthetajtaujw ) - sumsum );
+
+		a_w = exp (ln_gamma_w) * x_w;
+		phi_calc = log (a_w) / log (x_w);
+		phi_real = log (data->x_and_aw.aw[i]) / log (x_w);
+		fprintf ( results_file, "%Lf,%Lf,", phi_calc, phi_real );
+		for ( j = 0; j < comps - 1; j++ ) {
+			fprintf ( results_file, "%f,", data->x_and_aw.x[i][j] );
+		}
+		fprintf ( results_file, "%f\n", data->x_and_aw.x[i][comps-1] );
+	}
+	fclose (results_file);
+}

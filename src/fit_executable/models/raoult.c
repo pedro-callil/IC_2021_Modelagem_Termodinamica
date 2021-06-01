@@ -41,3 +41,41 @@ void print_raoult ( System *data, info *user_data, double *errors ) {
 	}
 
 }
+
+void save_raoult ( System *data, info *user_data ) {
+
+	int i, j, lines, comps;
+	double xw, phi_calc, phi_exp;
+	char *filename;
+	FILE *results_file;
+
+	filename = user_data->filename_new_results;
+	results_file = fopen ( filename, "w" );
+
+	lines = data->description.dataset_size;
+	comps = data->description.n_of_comps;
+
+	fprintf ( results_file, "phi_calc,phi_exp," );
+
+	for ( i = 0; i < comps - 1; i++ ) {
+		fprintf ( results_file, "%s,", data->description.components[i] );
+	}
+	fprintf ( results_file, "%s\n", data->description.components[comps-1] );
+
+	for ( i = 0; i < lines; i++ ) {
+		xw = 1;
+		for ( j = 0; j < comps; j++ ) {
+			xw -= data->x_and_aw.x[i][j];
+		}
+		phi_exp = log (data->x_and_aw.aw[i]) / log (xw);
+		phi_calc = 1.0;
+		fprintf ( results_file, "%f,%f,", phi_calc, phi_exp );
+		for ( j = 0; j < comps - 1; j++ ) {
+			fprintf ( results_file, "%f,", data->x_and_aw.x[i][j] );
+		}
+		fprintf ( results_file, "%f\n", data->x_and_aw.x[i][comps-1] );
+	}
+
+	fclose (results_file);
+
+}

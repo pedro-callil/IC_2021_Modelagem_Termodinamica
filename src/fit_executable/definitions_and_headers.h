@@ -57,6 +57,7 @@ typedef struct {
 	double **x;
 	double **x_zdan;
 	double **aw_zdan;
+	double *aw_calc;
 	int *n_zdan;
 } Data;
 
@@ -68,12 +69,14 @@ typedef struct {
 typedef struct {
 	char *model;
 	char *filename;
+	char *filename_new_results;
 	char **files_zdan;
-	int quiet;
 	double cost;
+	int quiet;
 	int is_all;
 	int gave_filenames;
 	int not_zdan;
+	int save_new_results;
 } info;
 
 typedef struct {
@@ -89,19 +92,25 @@ typedef struct {
  */
 
 typedef void (*callback_function)
-	(const size_t iter, void *params,
-	const gsl_multifit_nlinear_workspace *w);
+	( const size_t iter, void *params,
+	const gsl_multifit_nlinear_workspace *w );
 
 typedef void (*print_function)
-	(gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
+	( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 	int status, double chisq0, double chisq,
-	System *data, info *user_data);
+	System *data, info *user_data );
 
 typedef void (*check_function)
 	( System *data, info *user_data, double *errors );
 
 typedef void (*print_function_for_check)
 	( System *data, info *user_data, double *errors );
+
+typedef void (*save_function)
+	( System *data, info *user_data, gsl_multifit_nlinear_workspace *w  );
+
+typedef void (*save_function_for_check)
+	( System *data, info *user_data );
 
 typedef double (*polynomial_function)
 	( double x, double *coefs, int degree );
@@ -131,6 +140,8 @@ extern void print_norrish ( gsl_matrix *covar,
 		gsl_multifit_nlinear_workspace *w, int status,
 		double chisq0, double chisq,
 		System *data, info *user_data );
+extern void save_norrish ( System *data, info *user_data,
+		gsl_multifit_nlinear_workspace *w );
 
 extern int phi_virial ( const gsl_vector *K, void *params, gsl_vector *f );
 extern void callback_virial ( const size_t iter, void *params,
@@ -139,6 +150,8 @@ extern void print_virial ( gsl_matrix *covar,
 		gsl_multifit_nlinear_workspace *w, int status,
 		double chisq0, double chisq,
 		System *data, info *user_data );
+extern void save_virial ( System *data, info *user_data,
+		gsl_multifit_nlinear_workspace *w );
 
 extern int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector *f );
 extern void callback_uniquac ( const size_t iter, void *params,
@@ -147,15 +160,20 @@ extern void print_uniquac ( gsl_matrix *covar,
 		gsl_multifit_nlinear_workspace *w, int status,
 		double chisq0, double chisq,
 		System *data, info *user_data );
+extern void save_uniquac ( System *data, info *user_data,
+		gsl_multifit_nlinear_workspace *w );
 
 extern void check_raoult ( System *data, info *user_data, double *errors );
 extern void print_raoult ( System *data, info *user_data, double *errors );
+extern void save_raoult ( System *data, info *user_data );
 
 extern void check_caurie ( System *data, info *user_data, double *errors );
 extern void print_caurie ( System *data, info *user_data, double *errors );
+extern void save_caurie ( System *data, info *user_data );
 
 
 extern void check_zdanovskii ( System *data, info *user_data, double *errors );
 extern void print_zdanovskii ( System *data, info *user_data, double *errors );
+extern void save_zdanovskii ( System *data, info *user_data );
 
 

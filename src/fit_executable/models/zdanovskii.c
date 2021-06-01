@@ -37,6 +37,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 	m_1st_vec = malloc ( n * sizeof (double) );
 	m_2nd_vec = malloc ( n * sizeof (double) );
 	aw_vec = malloc ( n * sizeof (double) );
+	data->x_and_aw.aw_calc = malloc ( n * sizeof (double) );
 
 		/* ...of reference data... */
 			/* ...of the first component */
@@ -148,6 +149,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		aw = m_1st_to_aw ( m_01, K_m_1st_to_aw, degree_01 );
 		phi_real = log (data->x_and_aw.aw[i]) / log (xw);
 		phi_calc = log (aw) / log (xw);
+		data->x_and_aw.aw_calc[i] = aw;
 		errors[i] = fabs ( phi_real - phi_calc );
 	}
 
@@ -172,6 +174,42 @@ void print_zdanovskii ( System *data, info *user_data, double *errors ) {
 		fprintf ( stderr, "final cost:   |f(x)| = %f\n", user_data->cost );
 	}
 
+}
+
+void save_zdanovskii ( System *data, info *user_data ) {
+
+	int i, j, lines, comps;
+	double xw, phi_calc, phi_exp;
+	char *filename;
+	FILE *results_file;
+
+	filename = user_data->filename_new_results;
+	results_file = fopen ( filename, "w" );
+
+	lines = data->description.dataset_size;
+	comps = data->description.n_of_comps;
+
+	fprintf ( results_file, "phi_calc,phi_exp," );
+
+	for ( i = 0; i < comps - 1; i++ ) {
+		fprintf ( results_file, "%s,", data->description.components[i] );
+	}
+	fprintf ( results_file, "%s\n", data->description.components[comps-1] );
+
+	for ( i = 0; i < lines; i++ ) {
+		xw = 1;
+		for ( j = 0; j < comps; j++ ) {
+			xw -= data->x_and_aw.x[i][j];
+		}
+		phi_exp = log (data->x_and_aw.aw[i]) / log (xw);
+		phi_calc = log (data->x_and_aw.aw_calc[i]) / log(xw);
+		fprintf ( results_file, "%f,%f,", phi_calc, phi_exp );
+		for ( j = 0; j < comps - 1; j++ ) {
+			fprintf ( results_file, "%f,", data->x_and_aw.x[i][j] );
+		}
+		fprintf ( results_file, "%f\n", data->x_and_aw.x[i][comps-1] );
+	}
+	fclose (results_file);
 }
 
 /* this is the polynomial as needed for GSL non-linear fitting */

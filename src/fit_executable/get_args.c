@@ -18,6 +18,12 @@ void print_usage (void) {
 	fprintf ( stderr, "          these two files must store the isotherms\n" );
 	fprintf ( stderr, "          of the two components of the ternary mixture\n" );
 	fprintf ( stderr, "          in a binary solution.\n" );
+	fprintf ( stderr, "        -E\n" );
+	fprintf ( stderr, "          If passed, we assume that the data marked\n" );
+	fprintf ( stderr, "          \"aw\" are actually molar fraction data of\n" );
+	fprintf ( stderr, "          binary solutions in osmotic equilibrium.\n" );
+	fprintf ( stderr, "          This, obviously, makes sense only for n-ary\n" );
+	fprintf ( stderr, "          solutions.\n" );
 	fprintf ( stderr, "        -m <model>\n" );
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
 	fprintf ( stderr, "          UNIQUAC, caurie, raoult, zdanovskii \n" );
@@ -52,8 +58,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->files_zdan = NULL;
 	user_data->save_new_results = FALSE;
 	user_data->filename_new_results = NULL;
+	user_data->has_aw_data = TRUE;
 
-	while ( ( opt = getopt ( argc, argv, "hqf:F:m:Z:O" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqf:F:m:Z:OE" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				free (user_data->model);
@@ -65,6 +72,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				break;
 			case 'O':
 				user_data->not_zdan = TRUE;
+				break;
+			case 'E':
+				user_data->has_aw_data = FALSE;
 				break;
 			case 'Z':
 				user_data->files_zdan =

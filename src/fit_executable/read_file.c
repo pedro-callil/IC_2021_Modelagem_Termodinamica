@@ -137,6 +137,7 @@ void initialize ( char *filename, Metadata *system_description,
 
 	system_description->dataset_size = lines;
 	system_description->n_of_comps = columns;
+	system_description->has_aw_data = user_data->has_aw_data;
 	system_description->components = composition;
 
 	system->x = x_values;

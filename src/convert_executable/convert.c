@@ -238,6 +238,20 @@ Data convert ( Metadata *system_description, Data *system,
 		* analysed.
 		*/
 
+		else if ( strcmp ( user_data->y_property,
+					"molality" ) == TRUE ) {
+			for ( i = 0; i < lines; i++ ) {
+				tmp_xtot_for_molality = MOLALITY_TO_FRACTION;
+				tmp_xtot_for_molality += y_var[i];
+				aw[i] = y_var[i] / tmp_xtot_for_molality;
+			}
+
+		}
+		/*
+		* The reason for this seemingly absurd is defined in the file
+		* ../fit_executable/models/virial.c, at the function "phi_virial".
+		*/
+
 	} else {
 		for ( i = 0; i < lines; i++ ) {
 			aw[i] = y_var[i];

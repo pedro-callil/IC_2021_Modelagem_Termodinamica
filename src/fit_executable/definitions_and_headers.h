@@ -49,6 +49,7 @@
 typedef struct {
 	int dataset_size;
 	int n_of_comps;
+	int has_aw_data;
 	char **components;
 } Metadata;
 
@@ -77,6 +78,7 @@ typedef struct {
 	int gave_filenames;
 	int not_zdan;
 	int save_new_results;
+	int has_aw_data;
 } info;
 
 typedef struct {

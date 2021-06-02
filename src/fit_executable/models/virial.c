@@ -8,7 +8,7 @@ int phi_virial ( const gsl_vector *K, void *params, gsl_vector * f ) {
 
 	System *data;
 	double phi_i_calc, phi_i_real;
-	double xw, sumxiki;
+	double xw, sumxiki, ln_aw_mono;
 	int n, c_mono;
 	int i, j, k, counter;
 
@@ -35,7 +35,26 @@ int phi_virial ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		}
 		xw = log(xw);
 		phi_i_calc = sumxiki / xw;
-		phi_i_real = log ( data->x_and_aw.aw[i] ) / xw;
+		if ( data->description.has_aw_data == TRUE ) {
+			phi_i_real = log ( data->x_and_aw.aw[i] ) / xw;
+		} else {
+			ln_aw_mono = data->x_and_aw.aw[i] * ( 1 + 2 *
+					gsl_vector_get ( K, 0 ) );
+			phi_i_calc = sumxiki;
+			phi_i_real = ln_aw_mono;
+		}      /*
+			* This is weird, but instead of graciously
+			* informing the water activity of a n-ary
+			* solution, or some equivalent property as
+			* BPE or phi or Pvap, as one would expect,
+			* a few studies inform the molality of a
+			* binary solution with equal activity. Thus
+			* we can't actually obtain a phi_real, but
+			* being the composition of the binary mixture
+			* used as reference a subset of the n-ary
+			* mixture of interest, the model can be, very
+			* easily, adapted. Crisis, therefore, averted.
+			*/
 		gsl_vector_set ( f, i, phi_i_calc - phi_i_real );
 	}
 

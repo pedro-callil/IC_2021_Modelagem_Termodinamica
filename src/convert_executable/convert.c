@@ -165,7 +165,12 @@ Data convert ( Metadata *system_description, Data *system,
 				"vapour_pressure" ) == TRUE ||
 				strcmp ( user_data->y_property,
 				"vapor_pressure" ) == TRUE ) {
-			pure_pressure = arden_buck ( user_data->temperature );
+			if ( user_data->gave_std_pressure == TRUE ) {
+				pure_pressure = user_data->std_pressure;
+			} else {
+				pure_pressure =
+					arden_buck ( user_data->temperature );
+			}
 			for ( i = 0; i < lines; i++ ) {
 				aw[i] =  user_data->pressure_factor * y_var[i];
 				aw[i] /= pure_pressure;

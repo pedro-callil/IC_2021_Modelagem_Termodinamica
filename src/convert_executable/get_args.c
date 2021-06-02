@@ -39,6 +39,10 @@ void print_usage (void) {
 	fprintf ( stderr, "          the solution, then its temperature shall\n" );
 	fprintf ( stderr, "          be informed (see also: -T). Otherwise the\n" );
 	fprintf ( stderr, "          program assumes T = 298.15 K.\n" );
+	fprintf ( stderr, "        -P <standard pressure in Pa>\n" );
+	fprintf ( stderr, "          If informed the vapour pressure won't\n" );
+	fprintf ( stderr, "          be obtained through Arden-Buck, it will,\n" );
+	fprintf ( stderr, "          instead, be defined by the user.\n" );
 	fprintf ( stderr, "        -C\n" );
 	fprintf ( stderr, "          If passed, the program will assume\n" );
 	fprintf ( stderr, "          temperatures in oC; otherwise, in K.\n" );
@@ -77,6 +81,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->molar_masses = NULL;
 	user_data->quiet = FALSE;
 	user_data->isopiestic_property = NULL;
+	user_data->gave_std_pressure = FALSE;
 
 	if ( argc < 2 ) {
 		fprintf ( stderr, "No arguments provided; for help, use -h\n" );
@@ -86,7 +91,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 
 	user_data->quiet = FALSE;
 
-	while ( ( opt = getopt ( argc, argv, "hqCkMf:n:x:I:m:y:t:p:" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqCkMf:n:x:I:m:y:t:p:P:" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				print_usage ();
@@ -180,6 +185,10 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				break;
 			case 'p':
 				user_data->pressure = strtod ( optarg, NULL );
+				break;
+			case 'P':
+				user_data->std_pressure = strtod ( optarg, NULL );
+				user_data->gave_std_pressure = FALSE;
 				break;
 		}
 

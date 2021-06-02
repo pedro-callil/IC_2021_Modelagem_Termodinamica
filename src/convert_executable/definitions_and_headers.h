@@ -103,14 +103,16 @@ typedef struct {
 	char *filename;
 	char *new_filename;
 	char *y_property;
+	char *x_property;
+	char *isopiestic_property;
 	double temperature;
 	double temperature_to_add;
 	double pressure;
 	double pressure_factor;
-	char *x_property;
-	char *isopiestic_property;
+	double std_pressure;
 	double *molar_masses;
 	int quiet;
+	int gave_std_pressure;
 } info;
 
 /*

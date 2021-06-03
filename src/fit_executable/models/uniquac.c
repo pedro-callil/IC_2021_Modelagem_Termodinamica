@@ -30,7 +30,7 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 	System *data;
 	long double phi_i_calc, phi_i_real;
 	long double ln_gamma_w;
-	long double a_w, x_w, x_j, x_k;
+	long double x_w, x_j, x_k;
 	long double sumxjlj, sumqjxj, sumthetajtaujw, sumthetaktaukj, sumsum;
 	long double l_w, l_j, r_w, r_j, q_w, q_j, q_k;
 	long double theta_w, theta_j, theta_k, Phi_w;
@@ -139,9 +139,88 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		ln_gamma_w -= ( Phi_w / x_w ) * sumxjlj;
 		ln_gamma_w -= q_w * ( 1 - log ( sumthetajtaujw ) - sumsum );
 
-		a_w = exp (ln_gamma_w) * x_w;
-		phi_i_calc = log (a_w) / log (x_w);
-		phi_i_real = log (data->x_and_aw.aw[i]) / log (x_w);
+		if ( data->description.has_aw_data == TRUE ) {
+			phi_i_calc = ( ln_gamma_w + log (x_w) ) / log (x_w);
+			phi_i_real = log (data->x_and_aw.aw[i]) / log (x_w);
+		} else {
+			/*
+			* This is exactly the algorithm programmed above,
+			* for a binary mixture. For the reasons why we need
+			* implement this ugly thing, see the file ../virial.c,
+			* specifically the function "phi_virial".
+			*/
+			phi_i_calc = ln_gamma_w;
+
+			x_j = data->x_and_aw.aw[i];
+			x_w = 1 - x_j;
+
+			r_w = fabs ( gsl_vector_get ( K, 0 ) );
+			q_w = r_w;
+			l_w = 1 - r_w;
+
+			r_j = fabs ( gsl_vector_get ( K, 1 ) );
+			q_j = r_j;
+			l_j = 1 - r_j;
+
+			sumxjlj = ( x_w * l_w ) + ( x_j * l_j );
+			sumqjxj = ( q_w * x_w ) + ( q_j * x_j );
+			theta_w = ( q_w * x_w ) / sumqjxj;
+			Phi_w = theta_w;
+
+			sumthetajtaujw = theta_w;
+			theta_j = ( q_j * x_j ) / sumqjxj;
+			u_ww = fabs ( gsl_vector_get ( K, p + 1 ) );
+			u_jj = fabs ( gsl_vector_get ( K, p + 2 ) );
+			u_jw = sqrt ( u_jj * u_ww );
+			tau_jw = exp ( - ( u_jw - u_ww ) / ( R * TEMP ) );
+			sumthetajtaujw += theta_j * tau_jw;
+
+			sumsum = 0;
+			for ( j = -1; j < 1; j++ ) {
+
+				sumthetaktaukj = theta_w;
+				for ( k = -1; k < 1; k++ ) {
+					if ( k == -1 ) {
+						x_k = x_w;
+					} else {
+						x_k = data->x_and_aw.aw[i];
+					}
+					q_k = fabs ( gsl_vector_get ( K, k + 1 ) );
+					theta_k = ( q_k * x_k ) / sumqjxj;
+					u_kk = fabs
+						( gsl_vector_get ( K, p + k + 1 ) );
+					u_jj = fabs
+						( gsl_vector_get ( K, p + j + 1 ) );
+					u_kj = sqrt ( u_jj * u_kk );
+					tau_kj = exp
+						( - ( u_kj - u_jj ) / ( R * TEMP ) );
+					sumthetaktaukj += theta_k * tau_kj;
+				}
+
+				q_j = fabs ( gsl_vector_get ( K, j + 1 ) );
+				if ( j == -1 ) {
+					x_j = x_w;
+				} else {
+					x_j = data->x_and_aw.x[i][j];
+				}
+				theta_j = ( q_j * x_j ) / sumqjxj;
+				u_ww = fabs ( gsl_vector_get ( K, p ) );
+				u_jj = fabs ( gsl_vector_get ( K, p + j + 1 ) );
+				u_wj = sqrt ( u_ww * u_jj );
+				tau_wj = exp ( - ( u_wj - u_jj ) / ( R * TEMP ) );
+
+				sumsum += ( theta_j * tau_wj ) / sumthetaktaukj;
+
+			}
+
+
+			ln_gamma_w = log ( Phi_w / x_w );
+			ln_gamma_w += l_w;
+			ln_gamma_w -= ( Phi_w / x_w ) * sumxjlj;
+			ln_gamma_w -= q_w * ( 1 - log ( sumthetajtaujw ) - sumsum );
+
+			phi_i_real = ln_gamma_w;
+		}
 		gsl_vector_set ( f, i, phi_i_calc - phi_i_real );
 	}
 
@@ -225,7 +304,7 @@ void save_uniquac ( System *data, info *user_data,
 	int i, j, k, lines, comps;
 	long double phi_calc, phi_real;
 	long double ln_gamma_w;
-	long double a_w, x_w, x_j, x_k;
+	long double x_w, x_j, x_k;
 	long double sumxjlj, sumqjxj, sumthetajtaujw, sumthetaktaukj, sumsum;
 	long double l_w, l_j, r_w, r_j, q_w, q_j, q_k;
 	long double theta_w, theta_j, theta_k, Phi_w;
@@ -347,8 +426,7 @@ void save_uniquac ( System *data, info *user_data,
 		ln_gamma_w -= ( Phi_w / x_w ) * sumxjlj;
 		ln_gamma_w -= q_w * ( 1 - log ( sumthetajtaujw ) - sumsum );
 
-		a_w = exp (ln_gamma_w) * x_w;
-		phi_calc = log (a_w) / log (x_w);
+		phi_calc = ( ln_gamma_w + log (x_w) ) / log (x_w);
 		phi_real = log (data->x_and_aw.aw[i]) / log (x_w);
 		fprintf ( results_file, "%Lf,%Lf,", phi_calc, phi_real );
 		for ( j = 0; j < comps - 1; j++ ) {

@@ -22,18 +22,20 @@ int phi_norrish ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		sumxiki = 0;
 		for ( j = 0; j < c; j++ ) {
 			xw -= data->x_and_aw.x[i][j];
-			sumxiki += gsl_vector_get ( K, j ) * data->x_and_aw.x[i][j];
+			sumxiki += sqrt ( fabs ( gsl_vector_get ( K, j ) ) )
+				* data->x_and_aw.x[i][j];
 		}
 		sumxiki = sumxiki * sumxiki;
-		xw = log(xw);
+		xw = log (xw);
 		phi_i_calc = ( xw + sumxiki ) / xw;
 		if ( data->description.has_aw_data == TRUE ) {
 			phi_i_real = log ( data->x_and_aw.aw[i] ) / xw;
 		} else {
-			phi_i_calc = ( sumxiki + xw );
+			phi_i_calc = exp ( sumxiki + xw );
 			phi_i_real = gsl_vector_get ( K, 0 ) * data->x_and_aw.aw[i];
 			phi_i_real = phi_i_real * phi_i_real;
-			phi_i_real += xw;
+			phi_i_real += 1 - data->x_and_aw.aw[i];
+			phi_i_real = exp (phi_i_real);
 		}
 		gsl_vector_set ( f, i, phi_i_calc - phi_i_real );
 	}
@@ -121,7 +123,8 @@ void save_norrish ( System *data, info *user_data,
 		sumxiki = 0;
 		for ( j = 0; j < comps; j++ ) {
 			xw -= data->x_and_aw.x[i][j];
-			sumxiki += data->x_and_aw.x[i][j] * gsl_vector_get ( x, j );
+			sumxiki += data->x_and_aw.x[i][j] *
+				sqrt ( fabs ( gsl_vector_get ( x, j ) ) );
 		}
 		sumxiki = sumxiki * sumxiki;
 		xw = log(xw);

@@ -19,7 +19,13 @@ void check_raoult ( System *data, info *user_data, double *errors ) {
 		for ( j = 0; j < p; j++ ) {
 			xw -= data->x_and_aw.x[i][j];
 		}
-		errors[i] = fabs ( 1 - ( log(data->x_and_aw.aw[i]) / log(xw) ) );
+		if ( data->description.has_aw_data == TRUE ) {
+			errors[i] = fabs
+				( 1 - ( log(data->x_and_aw.aw[i]) / log(xw) ) );
+		} else {
+			errors[i] = fabs
+				( ( 1 - data->x_and_aw.aw[i] ) - xw );
+		}
 	}
 }
 

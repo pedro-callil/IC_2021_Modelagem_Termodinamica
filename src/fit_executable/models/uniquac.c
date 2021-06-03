@@ -140,8 +140,8 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		ln_gamma_w -= q_w * ( 1 - log ( sumthetajtaujw ) - sumsum );
 
 		if ( data->description.has_aw_data == TRUE ) {
-			phi_i_calc = ( ln_gamma_w + log (x_w) ) / log (x_w);
 			phi_i_real = log (data->x_and_aw.aw[i]) / log (x_w);
+			phi_i_calc = ( ln_gamma_w + log (x_w) ) / log (x_w);
 		} else {
 			/*
 			* This is exactly the algorithm programmed above,
@@ -149,7 +149,7 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 			* implement this ugly thing, see the file ../virial.c,
 			* specifically the function "phi_virial".
 			*/
-			phi_i_calc = ln_gamma_w;
+			phi_i_calc = ln_gamma_w + log ( 1 - data->x_and_aw.aw[i] );
 
 			x_j = data->x_and_aw.aw[i];
 			x_w = 1 - x_j;
@@ -219,7 +219,7 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 			ln_gamma_w -= ( Phi_w / x_w ) * sumxjlj;
 			ln_gamma_w -= q_w * ( 1 - log ( sumthetajtaujw ) - sumsum );
 
-			phi_i_real = ln_gamma_w;
+			phi_i_real = ln_gamma_w + log ( 1 - data->x_and_aw.aw[i] );
 		}
 		gsl_vector_set ( f, i, phi_i_calc - phi_i_real );
 	}

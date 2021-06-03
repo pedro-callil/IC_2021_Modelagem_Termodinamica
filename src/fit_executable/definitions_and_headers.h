@@ -79,6 +79,7 @@ typedef struct {
 	int not_zdan;
 	int save_new_results;
 	int has_aw_data;
+	int max_iter;
 } info;
 
 typedef struct {

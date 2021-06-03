@@ -28,6 +28,9 @@ void print_usage (void) {
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
 	fprintf ( stderr, "          UNIQUAC, caurie, raoult, zdanovskii \n" );
 	fprintf ( stderr, "          or all, which compares all other models. \n" );
+	fprintf ( stderr, "        -M <maximum number of iterations>\n" );
+	fprintf ( stderr, "          Maximum number of iterations; defaults to \n" );
+	fprintf ( stderr, "          MAX_ITER, defined as 100, if not informed. \n" );
 	fprintf ( stderr, "        -O\n" );
 	fprintf ( stderr, "          Fit models that need only one one file,\n" );
 	fprintf ( stderr, "          currently all but \"zdanovskii\". Useful\n" );
@@ -59,8 +62,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->save_new_results = FALSE;
 	user_data->filename_new_results = NULL;
 	user_data->has_aw_data = TRUE;
+	user_data->max_iter = MAX_ITER;
 
-	while ( ( opt = getopt ( argc, argv, "hqf:F:m:Z:OE" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqf:F:m:Z:M:OE" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				free (user_data->model);
@@ -130,6 +134,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 					user_data->is_all = TRUE;
 					user_data->quiet = TRUE;
 				}
+				break;
+			case 'M':
+				user_data->max_iter = atoi (optarg);
 				break;
 		}
 

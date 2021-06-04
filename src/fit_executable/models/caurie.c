@@ -67,6 +67,9 @@ void check_caurie ( System *data, info *user_data, double *errors ) {
 		if ( data->description.has_aw_data == TRUE ) {
 			phi_real = log (data->x_and_aw.aw[i]) / log (xw);
 		} else {
+			/* This is for non-aw (isopiestic) data.
+			* Check ./virial.c for detailed explanations.
+			*/
 			phi_real = 1;
 		}
 		errors[i] = fabs ( phi_real - phi_calc );

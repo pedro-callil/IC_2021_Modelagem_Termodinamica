@@ -23,7 +23,8 @@ void print_usage (void) {
 	fprintf ( stderr, "          \"aw\" are actually molar fraction data of\n" );
 	fprintf ( stderr, "          binary solutions in osmotic equilibrium.\n" );
 	fprintf ( stderr, "          This, obviously, makes sense only for n-ary\n" );
-	fprintf ( stderr, "          solutions.\n" );
+	fprintf ( stderr, "          solutions. Using with option \"-F\" will\n" );
+	fprintf ( stderr, "          lead to unpredictable gibberish, for now.\n" );
 	fprintf ( stderr, "        -m <model>\n" );
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
 	fprintf ( stderr, "          UNIQUAC, caurie, raoult, zdanovskii \n" );
@@ -31,6 +32,8 @@ void print_usage (void) {
 	fprintf ( stderr, "        -M <maximum number of iterations>\n" );
 	fprintf ( stderr, "          Maximum number of iterations; defaults to \n" );
 	fprintf ( stderr, "          MAX_ITER, defined as 100, if not informed. \n" );
+	fprintf ( stderr, "          Useful mainly for the UNIQUAC model, which\n" );
+	fprintf ( stderr, "          demands more iterations for convergence.\n" );
 	fprintf ( stderr, "        -O\n" );
 	fprintf ( stderr, "          Fit models that need only one one file,\n" );
 	fprintf ( stderr, "          currently all but \"zdanovskii\". Useful\n" );

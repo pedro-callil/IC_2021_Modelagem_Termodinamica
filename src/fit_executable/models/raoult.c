@@ -23,6 +23,9 @@ void check_raoult ( System *data, info *user_data, double *errors ) {
 			errors[i] = fabs
 				( 1 - ( log(data->x_and_aw.aw[i]) / log(xw) ) );
 		} else {
+			/* For when isopiestic data (not aw, directly)
+			* is informed (check ./virial.c)
+			*/
 			errors[i] = fabs
 				( ( 1 - data->x_and_aw.aw[i] ) - xw );
 		}

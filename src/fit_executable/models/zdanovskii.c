@@ -17,7 +17,7 @@ void free_ptrs ( double *p0, double *p1, double *p2, double *p3, double *p4,
 void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 
 	int i, j, n, p, iter, degree_01, degree_02;
-	double xw, aw, m_1, m_2, m_01, m_02, phi_calc, phi_real, S;
+	double xw, aw, m_1, m_2, m_01, m_02, phi_calc, phi_real, S, m_std;
 	double *m_1st_vec, *m_2nd_vec, *aw_vec;
 	double *m_01_std, *m_02_std, *aw_01_std, *aw_02_std;
 	double *K_aw_to_m_1st;
@@ -147,9 +147,16 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 		}
 
 		aw = m_1st_to_aw ( m_01, K_m_1st_to_aw, degree_01 );
-		phi_real = log (data->x_and_aw.aw[i]) / log (xw);
-		phi_calc = log (aw) / log (xw);
 		data->x_and_aw.aw_calc[i] = aw;
+		if ( data->description.has_aw_data == TRUE ) {
+			phi_real = log (data->x_and_aw.aw[i]) / log (xw);
+			phi_calc = log (aw) / log (xw);
+		} else {
+			phi_calc = aw;
+			m_std = ( data->x_and_aw.aw[i] ) /
+				( ( 1 - data->x_and_aw.aw[i] ) * KGS_IN_MOL_WATER );
+			phi_real = m_1st_to_aw ( m_std, K_m_1st_to_aw, degree_01 );
+		}
 		errors[i] = fabs ( phi_real - phi_calc );
 	}
 

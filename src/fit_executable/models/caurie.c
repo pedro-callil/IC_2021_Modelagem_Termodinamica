@@ -64,7 +64,11 @@ void check_caurie ( System *data, info *user_data, double *errors ) {
 		}
 		data->x_and_aw.aw_calc[i] = prod_aw;
 		phi_calc = log (prod_aw) / log (xw);
-		phi_real = log (data->x_and_aw.aw[i]) / log (xw);
+		if ( data->description.has_aw_data == TRUE ) {
+			phi_real = log (data->x_and_aw.aw[i]) / log (xw);
+		} else {
+			phi_real = 1;
+		}
 		errors[i] = fabs ( phi_real - phi_calc );
 	}
 

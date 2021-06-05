@@ -69,7 +69,7 @@ void print_norrish ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 
 	int p, n;
 	size_t i;
-	double correction;
+	double correction, R_squared;
 
 	p = data->description.n_of_comps;
 	n = data->description.dataset_size;
@@ -87,8 +87,14 @@ void print_norrish ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 			/* add name of the solute */
 		}
 
-		fprintf ( stdout, "initial cost: |f(x)| = %f\n", sqrt (chisq0) );
-		fprintf ( stdout, "final cost:   |f(x)| = %f\n", sqrt (chisq) );
+		R_squared = get_R_squared ( w, data );
+
+		fprintf ( stdout, "initial cost: |f(x)|         = %f\n",
+				sqrt (chisq0) );
+		fprintf ( stdout, "final cost:   |f(x)|         = %f\n",
+				sqrt (chisq) );
+		fprintf ( stdout, "adj. coeff. of determination = %f\n",
+				1 - ( 1 - R_squared ) * ( n - 1 ) / ( n - p - 1 ) );
 		fprintf ( stdout, "Exit status is \"%s\".\n\n",
 				gsl_strerror (status) );
 	}

@@ -9,6 +9,7 @@ MAIN_MODELS_DIR	= src/fit_executable/models
 BINDIR		= bin
 
 MAIN_SRC	= $(MAIN_SRC_DIR)/get_args.c \
+		  $(MAIN_SRC_DIR)/get_r_squared.c \
 		  $(MAIN_SRC_DIR)/read_file.c \
 		  $(MAIN_SRC_DIR)/fit.c \
 		  $(MAIN_SRC_DIR)/check.c \

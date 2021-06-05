@@ -130,6 +130,7 @@ extern void finalize ( Metadata *system_description, Data *system,
 		info *user_data );
 extern int fit_to_model ( System *data, info *user_data );
 extern int check_model ( System *data, info *user_data );
+extern double get_R_squared ( gsl_multifit_nlinear_workspace *w, System *data );
 extern void analyze_all_models ( System *data, info *user_data );
 
 /*

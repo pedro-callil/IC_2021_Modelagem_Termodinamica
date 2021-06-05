@@ -81,7 +81,7 @@ void check_caurie ( System *data, info *user_data, double *errors ) {
 void print_caurie ( System *data, info *user_data, double *errors ) {
 
 	int i, n;
-	double cost;
+	double cost, R_squared;
 
 	n = data->description.dataset_size;
 
@@ -92,8 +92,11 @@ void print_caurie ( System *data, info *user_data, double *errors ) {
 
 	user_data->cost = sqrt (cost);
 
+	R_squared = get_R_squared_check ( errors, data );
+
 	if ( user_data->is_all == FALSE ) {
-		fprintf ( stderr, "final cost:   |f(x)| = %f\n", sqrt (cost) );
+		fprintf ( stdout, "coeff. of determination = %f\n", R_squared );
+		fprintf ( stdout, "final cost:      |f(x)| = %f\n", sqrt (cost) );
 	}
 
 }

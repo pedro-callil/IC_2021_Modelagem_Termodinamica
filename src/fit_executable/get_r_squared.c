@@ -24,7 +24,6 @@ double get_R_squared ( gsl_multifit_nlinear_workspace *w, System *data ) {
 		avg_phi_real += log (aw) / log (xw);
 	}
 	avg_phi_real = avg_phi_real / n;
-	fprintf ( stderr, "%f\t%d\n", avg_phi_real, n );
 	SStot = 0;
 	SSres = 0;
 	for ( i = 0; i < n; i++ ) {

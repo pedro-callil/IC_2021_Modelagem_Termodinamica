@@ -23,12 +23,14 @@ int phi_virial ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		counter = 0;
 		for ( j = 0; j < c_mono; j++ ) {
 			xw -= data->x_and_aw.x[i][j];
-			sumxiki += data->x_and_aw.x[i][j] * ( 1 + 2 *
-					gsl_vector_get ( K, counter ) );
+			sumxiki += ( data->x_and_aw.x[i][j]
+					/ ( xw * KGS_IN_MOL_WATER ) ) *
+				( 1 + 2 * gsl_vector_get ( K, counter ) );
 			counter++;
 			for ( k = 0; k < j; k++ ) {
-				sumxiki += 3 * data->x_and_aw.x[i][j] *
-					data->x_and_aw.x[i][k] *
+				sumxiki += 3 * ( data->x_and_aw.x[i][j] *
+					data->x_and_aw.x[i][k] /
+					pow ( xw * KGS_IN_MOL_WATER, 2 ) ) *
 					gsl_vector_get ( K, counter );
 				counter++;
 			}
@@ -162,12 +164,14 @@ void save_virial ( System *data, info *user_data,
 		counter = 0;
 		for ( j = 0; j < comps; j++ ) {
 			xw -= data->x_and_aw.x[i][j];
-			sumxiki += data->x_and_aw.x[i][j] * ( 1 + 2 *
-					gsl_vector_get ( x, counter ) );
+			sumxiki += ( data->x_and_aw.x[i][j]
+					/ ( xw * KGS_IN_MOL_WATER ) ) *
+				( 1 + 2 * gsl_vector_get ( x, counter ) );
 			counter++;
 			for ( k = 0; k < j; k++ ) {
-				sumxiki += 3 * data->x_and_aw.x[i][j] *
-					data->x_and_aw.x[i][k] *
+				sumxiki += 3 * ( data->x_and_aw.x[i][j] *
+					data->x_and_aw.x[i][k] /
+					pow ( xw * KGS_IN_MOL_WATER, 2 ) )*
 					gsl_vector_get ( x, counter );
 				counter++;
 			}

@@ -33,8 +33,7 @@ double get_R_squared ( gsl_multifit_nlinear_workspace *w, System *data ) {
 			xw -= data->x_and_aw.x[i][j];
 		}
 		phi_real = log (aw) / log (xw);
-		SStot += pow ( gsl_vector_get ( errors, i )
-				+ phi_real - avg_phi_real, 2 );
+		SStot += pow ( phi_real - avg_phi_real, 2 );
 		SSres += pow ( gsl_vector_get ( errors, i ), 2 );
 	}
 
@@ -73,7 +72,7 @@ double get_R_squared_check ( double *errors, System *data ) {
 			xw -= data->x_and_aw.x[i][j];
 		}
 		phi_real = log (aw) / log (xw);
-		SStot += pow ( errors[i] + phi_real - avg_phi_real, 2 );
+		SStot += pow ( phi_real - avg_phi_real, 2 );
 		SSres += pow ( errors[i], 2 );
 	}
 

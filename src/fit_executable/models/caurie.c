@@ -72,7 +72,7 @@ void check_caurie ( System *data, info *user_data, double *errors ) {
 			*/
 			phi_real = 1;
 		}
-		errors[i] = fabs ( phi_real - phi_calc );
+		errors[i] = phi_calc - phi_real;
 	}
 
 	free (m);

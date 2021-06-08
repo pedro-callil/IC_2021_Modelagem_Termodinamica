@@ -157,7 +157,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 				( ( 1 - data->x_and_aw.aw[i] ) * KGS_IN_MOL_WATER );
 			phi_real = m_1st_to_aw ( m_std, K_m_1st_to_aw, degree_01 );
 		}
-		errors[i] = fabs ( phi_real - phi_calc );
+		errors[i] = ( phi_calc - phi_real );
 	}
 
 	free_ptrs ( m_1st_vec, m_2nd_vec, aw_vec, m_01_std, aw_01_std, m_02_std,

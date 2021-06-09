@@ -252,7 +252,7 @@ void print_uniquac ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 
 	int p, n;
 	int i;
-	double correction, R_squared;
+	double correction, R_squared, R_squared_aw;
 
 	p = data->description.n_of_comps;
 	n = data->description.dataset_size;
@@ -289,6 +289,7 @@ void print_uniquac ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 		}
 
 		R_squared = get_R_squared ( w, data );
+		R_squared_aw = get_R_squared_aw ( w, data );
 
 		fprintf ( stdout, "initial cost: |f(x)|         = %f\n",
 				sqrt (chisq0) );
@@ -296,6 +297,8 @@ void print_uniquac ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 				sqrt (chisq) );
 		fprintf ( stdout, "adj. coeff. of determination = %f\n",
 				1 - ( 1 - R_squared ) * ( n - 1 ) / ( n - p - 1 ) );
+		fprintf ( stdout, "coeff. of determination (aw) = %f\n",
+				1 - ( 1 - R_squared_aw ) * ( n - 1 ) / ( n - p - 1 ) );
 		fprintf ( stdout, "Exit status is \"%s\".\n\n",
 				gsl_strerror (status) );
 	}

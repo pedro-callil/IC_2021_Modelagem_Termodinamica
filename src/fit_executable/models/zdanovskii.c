@@ -167,7 +167,7 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 void print_zdanovskii ( System *data, info *user_data, double *errors ) {
 
 	int i, n;
-	double R_squared;
+	double R_squared, R_squared_aw;
 
 	n = data->description.dataset_size;
 
@@ -179,10 +179,15 @@ void print_zdanovskii ( System *data, info *user_data, double *errors ) {
 	user_data->cost = sqrt (user_data->cost);
 
 	R_squared = get_R_squared_check ( errors, data );
+	R_squared_aw = get_R_squared_aw_check ( errors, data );
 
 	if ( user_data->is_all == FALSE ) {
-		fprintf ( stdout, "coeff. of determination = %f\n", R_squared );
-		fprintf ( stderr, "final cost:   |f(x)|    = %f\n", user_data->cost );
+		fprintf ( stdout, "coeff. of determination      = %f\n",
+				R_squared );
+		fprintf ( stdout, "coeff. of determination (aw) = %f\n",
+				R_squared_aw );
+		fprintf ( stderr, "final cost:           |f(x)| = %f\n",
+				user_data->cost );
 	}
 
 }

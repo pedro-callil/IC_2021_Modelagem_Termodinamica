@@ -114,7 +114,7 @@ Data convert ( Metadata *system_description, Data *system,
 				"molar_concentration" ) == TRUE ) {
 			for ( i = 0; i < lines; i++ ) {
 				tmp_mw_for_mass_fraction = 1;
-				tmp_xtot_for_mass_fraction = 0;
+				tmp_xtot_for_mass_fraction = MOLALITY_TO_FRACTION;
 				for ( j = 0; j < comps; j++ ) {
 					tmp_xtot_for_mass_fraction += x_var[i][j];
 				}
@@ -151,7 +151,7 @@ Data convert ( Metadata *system_description, Data *system,
 			for ( i = 0; i < lines; i++ ) {
 				tmp_xw_for_phi = 1;
 				for ( j = 0; j < comps; j++ ) {
-					tmp_xw_for_phi -= x_var[i][j];
+					tmp_xw_for_phi -= x[i][j];
 				}
 				aw[i] = pow ( tmp_xw_for_phi, y_var[i] );
 			}

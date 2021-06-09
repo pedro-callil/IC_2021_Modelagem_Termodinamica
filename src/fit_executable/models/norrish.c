@@ -122,6 +122,9 @@ void save_norrish ( System *data, info *user_data,
 	results_file = fopen ( filename, "w" );
 
 	fprintf ( results_file, "phi_calc,phi_exp," );
+	if ( user_data->aw_in_results == TRUE ) {
+		fprintf ( results_file, "aw_calc,aw_exp," );
+	}
 	for ( i = 0; i < comps - 1; i++ ) {
 		fprintf ( results_file, "%s,", data->description.components[i] );
 	}
@@ -140,6 +143,10 @@ void save_norrish ( System *data, info *user_data,
 		phi_calc = ( xw + sumxiki) / xw;
 		phi_exp = log ( data->x_and_aw.aw[i] ) / xw;
 		fprintf ( results_file, "%f,%f,", phi_calc, phi_exp );
+		if ( user_data->aw_in_results == TRUE ) {
+			fprintf ( results_file, "%f,%f,",
+				exp ( xw + sumxiki ), data->x_and_aw.aw[i] );
+		}
 		for ( j = 0; j < comps - 1; j++ ) {
 			fprintf ( results_file, "%f,", data->x_and_aw.x[i][j] );
 		}

@@ -329,6 +329,9 @@ void save_uniquac ( System *data, info *user_data,
 	comps = data->description.n_of_comps;
 
 	fprintf ( results_file, "phi_calc,phi_exp," );
+	if ( user_data->aw_in_results == TRUE ) {
+		fprintf ( results_file, "aw_calc,aw_exp," );
+	}
 
 	for ( i = 0; i < comps - 1; i++ ) {
 		fprintf ( results_file, "%s,", data->description.components[i] );
@@ -438,6 +441,10 @@ void save_uniquac ( System *data, info *user_data,
 		phi_calc = ( ln_gamma_w + log (x_w) ) / log (x_w);
 		phi_real = log (data->x_and_aw.aw[i]) / log (x_w);
 		fprintf ( results_file, "%Lf,%Lf,", phi_calc, phi_real );
+		if ( user_data->aw_in_results == TRUE ) {
+			fprintf ( results_file, "%Lf,%f,",
+				exp (ln_gamma_w) * x_w, data->x_and_aw.aw[i] );
+		}
 		for ( j = 0; j < comps - 1; j++ ) {
 			fprintf ( results_file, "%f,", data->x_and_aw.x[i][j] );
 		}

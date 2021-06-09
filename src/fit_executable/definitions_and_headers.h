@@ -80,6 +80,7 @@ typedef struct {
 	int save_new_results;
 	int has_aw_data;
 	int max_iter;
+	int aw_in_results;
 } info;
 
 typedef struct {

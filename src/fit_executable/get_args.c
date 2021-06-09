@@ -5,26 +5,10 @@ void print_usage (void) {
 
 	fprintf ( stderr, "Usage: FitWaterActivity [OPTIONS]\n" );
 	fprintf ( stderr, "    Options:\n" );
-	fprintf ( stderr, "        -h\n" );
-	fprintf ( stderr, "          Show this help\n" );
-	fprintf ( stderr, "        -q\n" );
-	fprintf ( stderr, "          Quiet; hide verbose output\n" );
 	fprintf ( stderr, "        -f <filename>\n" );
 	fprintf ( stderr, "          File in which the activity data are stored\n" );
 	fprintf ( stderr, "        -F <filename to store predicted values>\n" );
 	fprintf ( stderr, "          File to store the calculated values.\n" );
-	fprintf ( stderr, "        -Z <1st filename> <2nd filename>\n" );
-	fprintf ( stderr, "          If the model chosen is \"zdanovskii\",\n" );
-	fprintf ( stderr, "          these two files must store the isotherms\n" );
-	fprintf ( stderr, "          of the two components of the ternary mixture\n" );
-	fprintf ( stderr, "          in a binary solution.\n" );
-	fprintf ( stderr, "        -E\n" );
-	fprintf ( stderr, "          If passed, we assume that the data marked\n" );
-	fprintf ( stderr, "          \"aw\" are actually molar fraction data of\n" );
-	fprintf ( stderr, "          binary solutions in osmotic equilibrium.\n" );
-	fprintf ( stderr, "          This, obviously, makes sense only for n-ary\n" );
-	fprintf ( stderr, "          solutions. Using with option \"-F\" will\n" );
-	fprintf ( stderr, "          lead to unpredictable gibberish, for now.\n" );
 	fprintf ( stderr, "        -m <model>\n" );
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
 	fprintf ( stderr, "          UNIQUAC, caurie, raoult, zdanovskii \n" );
@@ -34,10 +18,30 @@ void print_usage (void) {
 	fprintf ( stderr, "          MAX_ITER, defined as 100, if not informed. \n" );
 	fprintf ( stderr, "          Useful mainly for the UNIQUAC model, which\n" );
 	fprintf ( stderr, "          demands more iterations for convergence.\n" );
+	fprintf ( stderr, "        -Z <1st filename> <2nd filename>\n" );
+	fprintf ( stderr, "          If the model chosen is \"zdanovskii\",\n" );
+	fprintf ( stderr, "          these two files must store the isotherms\n" );
+	fprintf ( stderr, "          of the two components of the ternary mixture\n" );
+	fprintf ( stderr, "          in a binary solution.\n" );
+	fprintf ( stderr, "        -A\n" );
+	fprintf ( stderr, "          Store also the predicted and real values of\n" );
+	fprintf ( stderr, "          water activity in the file passed to option\n" );
+	fprintf ( stderr, "          -F.\n" );
+	fprintf ( stderr, "        -E\n" );
+	fprintf ( stderr, "          If passed, we assume that the data marked\n" );
+	fprintf ( stderr, "          \"aw\" are actually molar fraction data of\n" );
+	fprintf ( stderr, "          binary solutions in osmotic equilibrium.\n" );
+	fprintf ( stderr, "          This, obviously, makes sense only for n-ary\n" );
+	fprintf ( stderr, "          solutions. Using with option \"-F\" will\n" );
+	fprintf ( stderr, "          lead to unpredictable gibberish, for now.\n" );
+	fprintf ( stderr, "        -h\n" );
+	fprintf ( stderr, "          Show this help\n" );
 	fprintf ( stderr, "        -O\n" );
 	fprintf ( stderr, "          Fit models that need only one one file,\n" );
 	fprintf ( stderr, "          currently all but \"zdanovskii\". Useful\n" );
 	fprintf ( stderr, "          for combination with option \"-m all\".\n" );
+	fprintf ( stderr, "        -q\n" );
+	fprintf ( stderr, "          Quiet; hide verbose output\n" );
 
 }
 
@@ -66,8 +70,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->filename_new_results = NULL;
 	user_data->has_aw_data = TRUE;
 	user_data->max_iter = MAX_ITER;
+	user_data->aw_in_results = FALSE;
 
-	while ( ( opt = getopt ( argc, argv, "hqf:F:m:Z:M:OE" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqf:F:m:Z:M:OEA" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				free (user_data->model);
@@ -82,6 +87,9 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				break;
 			case 'E':
 				user_data->has_aw_data = FALSE;
+				break;
+			case 'A':
+				user_data->aw_in_results = TRUE;
 				break;
 			case 'Z':
 				user_data->files_zdan =

@@ -72,7 +72,7 @@ void callback_virial ( const size_t iter, void *params,
 	size_t size, i;
 
 	fprintf ( stderr, "Iteration number %2zu:\n", iter );
-	fprintf ( stderr, "\t|f(x)| = %.4f\n", gsl_blas_dnrm2 (f) );
+	fprintf ( stderr, "\t|f(x)| = %.4f\n", gsl_blas_dnrm2 (f) / f->size );
 	size = x->size;
 	for ( i = 0; i < size; i++ ) {
 		fprintf ( stderr, "\tK_%ld = %.4f\n", i,

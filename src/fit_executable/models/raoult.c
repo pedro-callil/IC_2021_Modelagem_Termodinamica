@@ -53,7 +53,7 @@ void print_raoult ( System *data, info *user_data, double *errors ) {
 		fprintf ( stdout, "coeff. of determination (aw) = %f\n",
 				R_squared_aw );
 		fprintf ( stdout, "final cost:           |f(x)| = %f\n",
-				user_data->cost );
+				user_data->cost / n );
 	}
 
 }

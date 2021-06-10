@@ -87,7 +87,6 @@ int phi_uniquac ( const gsl_vector *K, void *params, gsl_vector * f ) {
 			u_jj = fabs ( gsl_vector_get ( K, p + j + 2 ) );
 			u_jw = sqrt ( u_jj * u_ww );
 			tau_jw = exp ( - ( u_jw - u_ww ) / ( R * TEMP ) );
-			/*fprintf ( stderr, "tau_jw = %Lf\n", tau_jw );*/
 			sumthetajtaujw += theta_j * tau_jw;
 		}
 
@@ -292,9 +291,9 @@ void print_uniquac ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 		R_squared_aw = get_R_squared_aw ( w, data );
 
 		fprintf ( stdout, "initial cost: |f(x)|         = %f\n",
-				sqrt (chisq0) );
+				sqrt (chisq0) / n );
 		fprintf ( stdout, "final cost:   |f(x)|         = %f\n",
-				sqrt (chisq) );
+				sqrt (chisq) / n );
 		fprintf ( stdout, "adj. coeff. of determination = %f\n",
 				1 - ( 1 - R_squared ) * ( n - 1 ) / ( n - p - 1 ) );
 		fprintf ( stdout, "coeff. of determination (aw) = %f\n",

@@ -9,7 +9,7 @@ void analyze_all_models ( System *data, info *user_data ) {
 	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
 			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for Norrish's model:   \t\t%f\n",
-			user_data->cost );
+			user_data->cost / data->description.dataset_size );
 	} else {
 		fprintf ( stderr,
 			"\t\tFinal cost for Norrish's model not available.\n" );
@@ -22,7 +22,7 @@ void analyze_all_models ( System *data, info *user_data ) {
 	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
 			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for Virial model:      \t\t%f\n",
-			user_data->cost );
+			user_data->cost / data->description.dataset_size );
 	} else {
 		fprintf ( stderr,
 			"\t\tFinal cost for Virial model not available.\n" );
@@ -35,7 +35,7 @@ void analyze_all_models ( System *data, info *user_data ) {
 	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
 			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for UNIQUAC model:      \t\t%f\n",
-			user_data->cost );
+			user_data->cost / data->description.dataset_size );
 	} else {
 		fprintf ( stderr,
 			"\t\tFinal cost for UNIQUAC model not available.\n" );
@@ -48,7 +48,7 @@ void analyze_all_models ( System *data, info *user_data ) {
 	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
 			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for Raoult's model:    \t\t%f\n",
-			user_data->cost );
+			user_data->cost / data->description.dataset_size );
 	} else {
 		fprintf ( stderr,
 			"\t\tFinal cost for Raoult's model not available.\n" );
@@ -61,7 +61,7 @@ void analyze_all_models ( System *data, info *user_data ) {
 	if ( fpclassify ( user_data->cost ) == FP_ZERO ||
 			fpclassify ( user_data->cost ) == FP_NORMAL ) {
 		fprintf ( stdout, "Final cost for Caurie's model:    \t\t%f\n",
-			user_data->cost );
+			user_data->cost / data->description.dataset_size );
 	} else {
 		fprintf ( stderr,
 			"\t\tFinal cost for Caurie's model not available.\n" );
@@ -76,7 +76,7 @@ void analyze_all_models ( System *data, info *user_data ) {
 		if ( fpclassify ( user_data->cost ) == FP_ZERO ||
 				fpclassify ( user_data->cost ) == FP_NORMAL ) {
 			fprintf ( stdout, "Final cost for Zdanovskii's model:\t\t%f\n",
-				user_data->cost );
+				user_data->cost / data->description.dataset_size );
 		} else {
 			fprintf ( stderr,
 			"\t\tFinal cost for Zdanovskii's model not available.\n" );

@@ -11,7 +11,7 @@ O Projeto
 
 Este é o repositório de dados e código-fonte de um projeto de iniciação científica,
 realizado entre Setembro de 2020 e Setembro de 2021, que visa avaliar alguns modelos
-que associam composição e atividade da água em uma mistura consistindo de duas
+que associam composição e atividade da água em uma mistura, consistindo de duas
 partes: dados de atividade de água e dois programas, para converter a ajustar dados
 da literatura.
 
@@ -19,8 +19,8 @@ Os dados estão divididos em dois diretórios: `data/converted/` apresenta
 dados prontos para servir de input ao programa, e `data/originals/` apresenta
 os dados como vistos nas fontes, sendo necessária a sua conversão.
 
-O programa consiste de dois executáveis:  `ConvertWaterActivity` é responsável por
-converter os dados provenientes da literatura em dados que aptos a serem alimentados
+Os programas consistem de dois executáveis:  `ConvertWaterActivity` é responsável
+por converter os dados provenientes da literatura em dados aptos a serem alimentados
 ao executável `FitWaterActivity`, que é responsável por analisar os dados de
 atividade da água de acordo com os modelos.
 

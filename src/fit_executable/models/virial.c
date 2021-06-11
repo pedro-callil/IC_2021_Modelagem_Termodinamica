@@ -8,7 +8,7 @@ int phi_virial ( const gsl_vector *K, void *params, gsl_vector * f ) {
 
 	System *data;
 	double phi_i_calc, phi_i_real;
-	double xw, sumxiki, ln_aw_mono;
+	double xw, sumxiki, ln_aw_mono, m_mono;
 	int n, c_mono;
 	int i, j, k, counter;
 
@@ -23,6 +23,8 @@ int phi_virial ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		counter = 0;
 		for ( j = 0; j < c_mono; j++ ) {
 			xw -= data->x_and_aw.x[i][j];
+		}
+		for ( j = 0; j < c_mono; j++ ) {
 			sumxiki += ( data->x_and_aw.x[i][j]
 					/ ( xw * KGS_IN_MOL_WATER ) ) *
 				( 1 + 2 * gsl_vector_get ( K, counter ) );
@@ -40,7 +42,9 @@ int phi_virial ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		if ( data->description.has_aw_data == TRUE ) {
 			phi_i_real = log ( data->x_and_aw.aw[i] ) / xw;
 		} else {
-			ln_aw_mono = data->x_and_aw.aw[i] * ( 1 + 2 *
+			m_mono = data->x_and_aw.aw[i] /
+				( ( 1 - data->x_and_aw.aw[i] ) * KGS_IN_MOL_WATER );
+			ln_aw_mono = m_mono * ( 1 + 2 *
 					gsl_vector_get ( K, 0 ) );
 			phi_i_real = ln_aw_mono / xw;
 		}      /*

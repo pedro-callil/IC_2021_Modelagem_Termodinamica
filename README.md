@@ -1,26 +1,42 @@
 Repositório do Projeto de Iniciação Científica "Modelagem Termodinâmica de Soluções de Interesse para a Indústria de Alimentos"
 ===============================================================================================================================
 
-Nesse repositório está o código-fonte dos programas utilizados para
+Nesse repositório estão o código-fonte dos programas utilizados para
 conversão e ajuste dos valores de atividade da água de acordo com a
-lista de modelos adotados.
+lista de modelos adotados, e uma coleção de dados da literatura
+associando valores de atividade de água com composições de misturas.
 
 O Projeto
 ---------
 
-Este projeto faz uso da *GNU Scientific Library* para ajustar e avaliar
-diversos modelos propostos na literatura para a relação entre a atividade
-da água em uma solução e sua composição.
+Este é o repositório de dados e código-fonte de um projeto de iniciação científica,
+realizado entre Setembro de 2020 e Setembro de 2021, que visa avaliar alguns modelos
+que associam composição e atividade da água em uma mistura, consistindo de duas
+partes: dados de atividade de água e dois programas, para converter a ajustar dados
+da literatura.
 
-Representa a parte computacional de um projeto de iniciação científica com
-início em Setembro de 2020 e término em Setembro de 2021.
+Os dados estão divididos em dois diretórios: `data/converted/` apresenta
+dados prontos para servir de input ao programa, e `data/originals/` apresenta
+os dados como vistos nas fontes, sendo necessária a sua conversão.
+
+Os programas consistem de dois executáveis:  `ConvertWaterActivity` é responsável
+por converter os dados provenientes da literatura em dados aptos a serem alimentados
+ao executável `FitWaterActivity`, que é responsável por analisar os dados de
+atividade da água de acordo com os modelos.
+
+Este projeto faz uso da *GNU Scientific Library* para as regressões não-lineares.
 
 Instalação
 ----------
 
-Primeiramente se faz necessária a instalação da *GNU Scientific Library*.
+Caso exista interesse pelos executáveis, é necessário obter as dependências,
+clonar o repositório e compilar o programa.
+
+É necessária a instalação da *GNU Scientific Library*.
 As instruções variam de sistema a sistema, estando disponíveis
 [no site do projeto](https://www.gnu.org/software/gsl/).
+
+Além disso, é necessário instalar Git, GCC e Make.
 
 Em seguida basta clonar o repositório e compilar os executáveis:
 
@@ -28,6 +44,17 @@ Em seguida basta clonar o repositório e compilar os executáveis:
 $ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
 $ cd IC_2021_Modelagem_Termodinamica
 $ make
+```
+
+Os dois executáveis estarão no subdiretório `bin/`.
+
+Caso se o interesse seja apenas pelo conjunto de dados, basta clonar o repositório,
+e os dados estarão no subdiretório `data/`; as exigências anteriores não são, nesse
+caso, necessárias.
+
+```
+$ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
+$ cd IC_2021_Modelagem_Termodinamica/data
 ```
 
 Uso

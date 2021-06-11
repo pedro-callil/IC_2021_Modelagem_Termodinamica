@@ -31,11 +31,10 @@ int phi_norrish ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		if ( data->description.has_aw_data == TRUE ) {
 			phi_i_real = log ( data->x_and_aw.aw[i] ) / xw;
 		} else {
-			phi_i_calc = exp ( sumxiki + xw );
 			phi_i_real = gsl_vector_get ( K, 0 ) * data->x_and_aw.aw[i];
 			phi_i_real = phi_i_real * phi_i_real;
 			phi_i_real += 1 - data->x_and_aw.aw[i];
-			phi_i_real = exp (phi_i_real);
+			phi_i_real = phi_i_real / xw;
 		}
 		gsl_vector_set ( f, i, phi_i_calc - phi_i_real );
 	}

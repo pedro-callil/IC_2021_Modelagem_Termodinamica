@@ -70,7 +70,8 @@ void check_caurie ( System *data, info *user_data, double *errors ) {
 			/* This is for non-aw (isopiestic) data.
 			* Check ./virial.c for detailed explanations.
 			*/
-			phi_real = 1;
+			phi_real = ( 1 - log (data->x_and_aw.aw[i]) ) /
+				log (xw);
 		}
 		errors[i] = phi_calc - phi_real;
 	}

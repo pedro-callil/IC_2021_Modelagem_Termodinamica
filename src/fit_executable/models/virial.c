@@ -42,8 +42,7 @@ int phi_virial ( const gsl_vector *K, void *params, gsl_vector * f ) {
 		} else {
 			ln_aw_mono = data->x_and_aw.aw[i] * ( 1 + 2 *
 					gsl_vector_get ( K, 0 ) );
-			phi_i_calc = exp (sumxiki);
-			phi_i_real = exp (ln_aw_mono);
+			phi_i_real = ln_aw_mono / xw;
 		}      /*
 			* This is weird, but instead of graciously
 			* informing the water activity of a n-ary

@@ -148,14 +148,14 @@ void check_zdanovskii ( System *data, info *user_data, double *errors ) {
 
 		aw = m_1st_to_aw ( m_01, K_m_1st_to_aw, degree_01 );
 		data->x_and_aw.aw_calc[i] = aw;
+		phi_calc = log (aw) / log (xw);
 		if ( data->description.has_aw_data == TRUE ) {
 			phi_real = log (data->x_and_aw.aw[i]) / log (xw);
-			phi_calc = log (aw) / log (xw);
 		} else {
-			phi_calc = aw;
 			m_std = ( data->x_and_aw.aw[i] ) /
 				( ( 1 - data->x_and_aw.aw[i] ) * KGS_IN_MOL_WATER );
-			phi_real = m_1st_to_aw ( m_std, K_m_1st_to_aw, degree_01 );
+			aw = m_1st_to_aw ( m_std, K_m_1st_to_aw, degree_01 );
+			phi_real = log (aw) / log (xw);
 		}
 		errors[i] = ( phi_calc - phi_real );
 	}

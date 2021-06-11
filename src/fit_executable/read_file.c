@@ -16,6 +16,7 @@ void initialize ( char *filename, Metadata *system_description,
 	char **composition;
 	double **x_values;
 	double *y_values;
+	double avg_aw;
 	FILE *file;
 
 	file = fopen ( filename, "r" );
@@ -131,6 +132,11 @@ void initialize ( char *filename, Metadata *system_description,
 	}
 
 	fclose ( file );
+
+	avg_aw = 0;
+	for ( i = 0; i < lines; i++ ) {
+		avg_aw += y_values[i] / lines;
+	}
 		/*
 		* And now we have read the data from the file
 		*/
@@ -142,6 +148,11 @@ void initialize ( char *filename, Metadata *system_description,
 
 	system->x = x_values;
 	system->aw = y_values;
+
+	fprintf ( stdout, "%d lines read from file \"%s\" read.\n",
+			lines, filename );
+	fprintf ( stdout, "Average activity: avg(aw) = %f\n", avg_aw );
+
 		/*
 		* And now our data and metadata are stored in our structs
 		*/

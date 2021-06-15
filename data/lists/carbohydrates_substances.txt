@@ -1,6 +1,6 @@
-1_butanetetrol
-1_ethanediol
-1_propanetriol
+1_2_3_4_butanetetrol
+1_2_ethanediol
+1_2_3_propanetriol
 arabinose
 d_fructose
 d_glucose

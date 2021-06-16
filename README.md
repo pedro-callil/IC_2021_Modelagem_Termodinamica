@@ -17,7 +17,9 @@ da literatura.
 
 Os dados estão divididos em dois diretórios: `data/converted/` apresenta
 dados prontos para servir de input ao programa, e `data/originals/` apresenta
-os dados como vistos nas fontes, sendo necessária a sua conversão.
+os dados como vistos nas fontes, sendo necessária a sua conversão. Além disso,
+em `data/lists/` os conjuntos de dados estão classificados em algumas categorias
+para facilitar a análise de diferentes efeitos.
 
 Os programas consistem de dois executáveis:  `ConvertWaterActivity` é responsável
 por converter os dados provenientes da literatura em dados aptos a serem alimentados
@@ -36,7 +38,8 @@ clonar o repositório e compilar o programa.
 As instruções variam de sistema a sistema, estando disponíveis
 [no site do projeto](https://www.gnu.org/software/gsl/).
 
-Além disso, é necessário instalar Git, GCC e Make.
+Além disso, é necessário instalar Git, GCC e Make, além das bibliotecas
+BLAS/CBLAS.
 
 Em seguida basta clonar o repositório e compilar os executáveis:
 

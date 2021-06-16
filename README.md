@@ -51,7 +51,7 @@ $ make
 
 Os dois executáveis estarão no subdiretório `bin/`.
 
-Caso se o interesse seja apenas pelo conjunto de dados, basta clonar o repositório,
+Caso o interesse seja apenas pelo conjunto de dados, basta clonar o repositório,
 e os dados estarão no subdiretório `data/`; as exigências anteriores não são, nesse
 caso, necessárias.
 

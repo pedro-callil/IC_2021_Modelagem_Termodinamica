@@ -94,6 +94,20 @@ $ ./bin/ConvertWaterActivity -h
 $ ./bin/FitWaterActivity -h
 ```
 
+Relatório
+---------
+
+Caso exista interesse no relatório final do projeto, o arquivo `.tex` que constitui
+seu código-fonte está disponível no diretório `doc`. Para compilar o relatório, é
+necessária uma distribuição TeX recente, e, novamente, Make:
+
+```
+$ cd doc
+$ make bib
+```
+
+O relatório final estará disponível no subdiretório `doc/report`.
+
 Autor
 -----
 

@@ -1,0 +1,2402 @@
+%% abtex2-modelo-trabalho-academico.tex, v-1.9.7 laurocesar
+%% Copyright 2012-2018 by abnTeX2 group at http://www.abntex.net.br/
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on
+%% http://www.abntex.net.br/
+%%
+%% This work consists of the files abntex2-modelo-trabalho-academico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Trabalho Academico (tese de doutorado, dissertacao de
+% mestrado e trabalhos monograficos em geral) em conformidade com
+% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos -
+% Apresentacao
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,
+	twoside,
+	a4paper,			% tamanho do papel.
+	% -- opções da classe abntex2 --
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{abntex2}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ltablex}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{statistics}
+\tikzexternalize
+\usetikzlibrary{arrows.meta}
+\usepackage{hhline}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage[brazilian,hyperpageref]{backref}
+\usepackage[alf]{abntex2cite}
+
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+
+\newcommand{\oo}{\textordmasculine\ }
+
+
+\newcolumntype{C}{>{\centering\arraybackslash}p{3em}}
+\newcolumntype{G}{>{\columncolor{lightgray}\centering\arraybackslash}p{3em}}
+
+\DeclareMathOperator*{\minimize}{minimize}
+
+\titulo{Relatório Final de Iniciação Científica/Tecnológica\\
+	Modelagem Termodinâmica de Soluções de Interesse para a Indústria de Alimentos}
+\autor{Pedro Henrique Callil Soares}
+\local{São Paulo}
+\data{2021}
+\orientador{Pedro de Alcântara Pessoa Filho}
+\instituicao{%
+	Universidade de São Paulo -- USP
+	\par
+	Escola Politécnica
+	\par
+	Departamento de Engenharia Química}
+\tipotrabalho{Relatório de Iniciação Científica}
+\preambulo{Relatório de projeto de iniciação científica/tecnológica
+	- análise e modelagem da atividade da água em soluções de carboidratos
+	e aminoácidos.}
+
+
+
+\definecolor{blue}{RGB}{41,5,195}
+\definecolor{pverydarkblue}{rgb}{0,0,0.2}
+\definecolor{pviolindarkblue}{rgb}{0.5,0.5,0.7}
+\definecolor{pviolinblue}{rgb}{0.5,0.5,0.8}
+\definecolor{pviolinbrightblue}{rgb}{0.5,0.5,0.9}
+\definecolor{pdarkblue}{rgb}{0,0,0.4}
+\definecolor{pblue}{rgb}{0,0,0.6}
+\definecolor{pbrightblue}{rgb}{0,0,0.8}
+\definecolor{pverybrightblue}{rgb}{0,0,1.0}
+\definecolor{pverydarkred}{rgb}{0.15,0,0}
+\definecolor{pdarkred}{rgb}{0.3,0,0}
+\definecolor{pred}{rgb}{0.45,0,0}
+\definecolor{pbrightred}{rgb}{0.6,0,0}
+\definecolor{pverybrightred}{rgb}{0.75,0,0}
+\definecolor{pbackground}{rgb}{0.9,0.9,0.87}
+\definecolor{pplanned}{rgb}{0.8,0.8,0.8}
+\definecolor{pdoing}{rgb}{0.65,0.65,0.8}
+\definecolor{pdone}{rgb}{0.5,0.5,0.8}
+
+
+\makeatletter
+\hypersetup{
+		pdftitle={\@title},
+		pdfauthor={\@author},
+		pdfsubject={\imprimirpreambulo},
+		pdfcreator={LuaLaTeX},
+		pdfkeywords={atividade da água} {carboidratos} {aminoácidos},
+		colorlinks=true,
+		linkcolor=blue,
+		citecolor=blue,
+		filecolor=magenta,
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+
+\makeatletter
+\setlength{\@fptop}{5pt}
+\makeatother
+
+\newcommand{\quadroname}{Quadro}
+\newcommand{\listofquadrosname}{Lista de quadros}
+
+\newfloat[chapter]{quadro}{loq}{\quadroname}
+\newlistof{listofquadros}{loq}{\listofquadrosname}
+\newlistentry{quadro}{loq}{0}
+
+\setfloatadjustment{quadro}{\centering}
+\counterwithout{quadro}{chapter}
+\renewcommand{\cftquadroname}{\quadroname\space}
+\renewcommand*{\cftquadroaftersnum}{\hfill--\hfill}
+
+\setfloatlocations{quadro}{hbtp}
+
+
+\setlength{\parindent}{1.3cm}
+
+\setlength{\parskip}{0.2cm}
+
+\makeindex
+
+\begin{document}
+
+\selectlanguage{brazil}
+
+\frenchspacing
+
+\imprimircapa
+
+\imprimirfolhaderosto
+
+
+\setlength{\absparsep}{18pt}
+\begin{resumo}
+	Esse projeto tem o intuito de levantar uma base de dados sobre a
+	atividade da água em soluções de carboidratos e aminoácidos,
+	avaliando alguns modelos propostos com relação à sua capacidade
+	correlativa com os dados experimentais. Foi feita uma revisão
+	bibliográfica, levantando dados de atividade da água em função da
+	composição para algumas soluções de interesse, e foram programadas
+	rotinas computacionais visando avaliar os desvios entre os modelos,
+	ajustados através de regressões não-lineares, e os dados. Por fim,
+	foi feita uma análise da influência de diversos fatores na capacidade
+	correlativa dos modelos examinados.\\
+	\textbf{Palavras-chave}: soluções de carboidratos.
+			soluções de aminoácidos.
+			propriedades termodinâmicas de soluções.
+			atividade da água.
+			modelagem termodinâmica.
+\end{resumo}
+
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+\begin{simbolos}
+	\item[$ \gamma $] coeficiente de atividade
+	\item[$ \phi $] coeficiente osmótico
+	\item[$ \Pi $] pressão osmótica
+	\item[$ a $] atividade
+	\item[$ C_p $] calor específico
+	\item[$ f $] fugacidade
+	\item[$ \Delta H^\text{fus} $] Entalpia de vaporização
+	\item[$ \Delta H^\text{vap} $] Entalpia de fusão
+	\item[$ m $] molalidade
+	\item[$ p^\text{vap} $] pressão de vapor
+	\item[$ X_i $] fração mássica da substância $i$
+	\item[$ x_i $] fração molar da substância $i$
+	\item[$ \Xi_B, \Xi_F $] propriedade $\Xi$ no ponto de ebulição/congelamento
+	\item[$ \Xi^\text{ID} $] propriedade $\Xi$ em um sistema ideal
+	\item[$ \Xi^\text{ref} $] propriedade $\Xi$ no sistema de referência
+	\item[$ \Xi_w $] propriedade $\Xi$ da água ($a_w, \gamma_w$, \textit{etc.} para $\Xi = \alpha, \gamma$, \textit{etc.})
+\end{simbolos}
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+\textual
+
+\chapter{Introdução}
+
+A atividade $a$ de uma substância, definida\cite{sandler2017} como
+a razão entre a fugacidade de uma substância nas condições de um sistema
+e sua fugacidade em uma situação de referência (equação \ref{eq:def_atv}),
+age como sua ``concentração efetiva'', do ponto de vista termodinâmico.
+Portanto, a medição e análise da atividade da água em soluções nos permite
+prever de forma mais exata os fenômenos que dependem do teor de água em
+um sistema. No caso da indústria de alimentos, o principal desses fenômenos
+é a degradação dos alimentos por ação microbiana.
+
+De fato, a grandeza que controla o crescimento microbiano em um alimento é a
+atividade da água. No gráfico da figura \ref{fig:germ} temos os valores de atividade da
+água necessários para a proliferação microbiana para alguns microorganismos.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\draw[->] (5,-0.5) -- (5,10);
+		\draw (5,10) node[anchor=south] {$a_w$};
+		\draw (5,8.75) -- (6.3,8.75);
+		\draw (6.3,8.75) -- (13.5,8.75);
+		\draw (5,7.75) -- (6.3,7.25);
+		\draw (6.3,7.25) -- (13.5,7.25);
+		\draw (5,6.75) -- (6.3,5.8);
+		\draw (6.3,5.8) -- (13.5,5.8);
+		\draw (5,5) -- (6.3,4.2);
+		\draw (6.3,4.2) -- (13.5,4.2);
+		\draw (5,3.75) -- (6.3,3);
+		\draw (6.3,3) -- (13.5,3);
+		\draw (5,1.25) -- (6.3,1.85);
+		\draw (6.3,1.85) -- (13.5,1.85);
+		\draw (5,0.25) -- (6.3,0.35);
+		\draw (6.3,0.35) -- (13.5,0.35);
+		\fill[black] (5,0.25) circle (0.07);
+		\fill[black] (5,1.25) circle (0.07);
+		\fill[black] (5,3.75) circle (0.07);
+		\fill[black] (5,5) circle (0.07);
+		\fill[black] (5,6.75) circle (0.07);
+		\fill[black] (5,7.75) circle (0.07);
+		\fill[black] (5,8.75) circle (0.07);
+		\draw (10,10.4) node[anchor=south, text width=9cm]
+		{\tiny{Microorganismos inibidos pelo menor valor de
+		$a_w$ nessa faixa}};
+		\draw (6.3,9.5) node[anchor=west, text width=7cm]
+		{\tiny{\textit{Pseudomonas}, \textit{Escherichia},
+		\textit{Proteus}, \textit{Shigella}, \textit{Klebsiella},
+		\textit{Bacillus}, \textit{Clostridium perfringens},
+		\textit{C. botulinum} E, G, algumas leveduras}};
+		\draw (6.3,8) node[anchor=west, text width=7cm]
+		{\tiny{\textit{Salmonella}, \textit{Vibrio parahaemolyticus},
+		\textit{Clostridium botulinum} A, B, \textit{Listeria
+		monocytogenes}, \textit{Bacillus cereus}}};
+		\draw (6.3,6.5) node[anchor=west, text width=7cm]
+		{\tiny{\textit{Staphylococcus aureus} (aeróbico), diversas
+		leveduras (como \textit{Candida, Torulopsis, Hansenula}),
+		\textit{Micrococcus}}};
+		\draw (6.3,5) node[anchor=west, text width=7cm]
+		{\tiny{Maior parte dos bolores (\textit{Penicillium}
+		micotoxigênicos), \textit{Staphylococcus aureus},
+		maior parte dos \textit{Saccharomyces}, \textit{Debaryomyces}}};
+		\draw (6.3,3.5) node[anchor=west, text width=7cm]
+		{\tiny{Maior parte das bactérias halófilas, \textit{Aspergillus}
+		micotoxigênicos}};
+		\draw (6.3,2.4) node[anchor=west, text width=7cm]
+		{\tiny{Bolores xerófilos (\textit{Aspergillus chevalieri, A.
+		candidus, Wallemia sebi}), \textit{Saccharomyces bisporus}}};
+		\draw (6.3,1.1) node[anchor=west, text width=7cm]
+		{\tiny{Leveduras osmófilas (\textit{Sacharomyces rouxii},
+		alguns bolores (\textit{Aspergillus echinulatus, Monascus
+		bisporus})}};
+		\draw (6.3,0.1) node[anchor=west, text width=7cm]
+		{\tiny{Não ocorre proliferação microbiana}};
+		\draw (5,0.25) node[anchor=east] {0.61};
+		\draw (5,1.25) node[anchor=east] {0.65};
+		\draw (5,3.75) node[anchor=east] {0.75};
+		\draw (5,5) node[anchor=east] {0.80};
+		\draw (5,6.75) node[anchor=east] {0.87};
+		\draw (5,7.75) node[anchor=east] {0.91};
+		\draw (5,8.75) node[anchor=east] {0.95};
+		\draw (5,10) node[anchor=east] {1.00};
+	\end{tikzpicture}
+	\caption{Valores de $a_w$ para o crescimento microbiano\cite{canovas2007}}
+	\label{fig:germ}
+\end{figure}
+
+Nas condições encontradas na indústria de alimentos, não é absurdo assumir a
+hipótese de gás ideal para a fase gás dos sistemas
+considerados\cite{canovas2007}, em muitas situações. Além disso, a condição de
+referência é tomada como água pura, líquida, à mesma temperatura $T$. Assim
+obtemos:
+
+\begin{equation}
+	\label{eq:def_atv}
+	a_w \equiv \left(\cfrac{f_w}{f^\text{ref}_w}\right)_T%
+		\approx \left(\cfrac{p^\text{vap}_w}{p^\text{vap,ref}_w}\right)_T
+\end{equation}
+
+Para soluções ideais, obter $a_w$ é simples: para todo componente $i$ da
+mistura, a sua atividade é dada, simplesmente por sua fração molar, e portanto
+$a_w = x_w$. Entretanto, essa hipótese nem sempre se verifica; assim sendo,
+para soluções ideais adotamos o coeficiente de atividade $\gamma_w$:
+
+\begin{equation}
+	a_w = \gamma_wx_w \implies \gamma_w = \cfrac{a_w}{x_w}
+\end{equation}
+
+Entretanto, ainda que o coeficiente de atividade seja um indicador para o
+desvio da idealidade em uma solução, apresenta um problema: é uma grandeza ruim
+para avaliarmos os desvios da idealidade em soluções diluídas, já que, sendo
+$a_w$ função contínua da fração molar de água, e dado que a atividade da água
+pura é de 1 (é, afinal, a solução de referência), temos que:
+
+\begin{equation}
+	\lim_{x_w \to 1}\gamma_w = 1
+\end{equation}
+
+E, para muitas soluções de interesse, não somente temos altos desvios da
+idealidade, como também temos soluções extremamente diluídas. Então adotamos
+uma nova grandeza, o coeficiente osmótico $\phi$, dado por:
+
+\begin{equation}
+	\phi = \cfrac{\ln(a_w)}{\ln(x_w)}
+\end{equation}
+
+Para comparar essas grandezas e visualizar um possível comportamento da
+atividade da água com a mudança na composição de uma substância, podemos
+observar o gráfico na figura \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\newsavebox{\minigrafglic}
+		\savebox{\minigrafglic}{%
+		\scalebox{0.5}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+			xmin=0.97,xmax=1.0,
+			ymin=0.97,ymax=1.0,
+			x dir=reverse,
+			width=7cm,
+			height=7cm,
+			xlabel = {$x_w$},
+			ylabel = {$a_w$},
+			]
+			\addplot+[
+				color=pverydarkred,
+				mark=o,
+				only marks,
+			]
+			table[x={xw},y={aw}]{glucose_a_w_and_phi.dat};
+			\addlegendentry{$a_w$ experimental};
+			\addplot+[
+				color=black,
+				no marks,
+				domain=0.96:1.0,
+				samples=5,
+			]{x};
+			\addlegendentry{$a_w=x_w$};
+		\end{axis}
+	\end{tikzpicture}
+	}}
+	\begin{axis}[
+			xmin = 0.97, xmax = 1.0, xlabel = {$x_w$},
+			ymin = 0.96, ymax = 1.05, ylabel = {$\phi$},
+			axis lines = middle,
+			x tick label style={
+				/pgf/number format/.cd,
+				fixed,
+				fixed zerofill,
+				precision=3,
+				/tikz/.cd
+			},
+			legend pos = south west,
+			axis y line=left,
+			x axis line style={-},
+			xlabel near ticks,
+			ylabel near ticks,
+			x dir=reverse,
+		]
+		\addplot+[
+			color=pdarkblue,
+			mark=square,
+			very thick,
+			only marks,
+		]
+		table[x={xw},y={phi}]{glucose_a_w_and_phi.dat};
+		\addlegendentry{$\phi$};
+		\draw (axis cs: 0.981,0.983)node{\usebox{\minigrafglic}};
+		\end{axis}
+		\begin{axis}[
+			xmin = 0.97, xmax = 1.0, xlabel = {$x_w$},
+			ymin = 0.9977, ymax = 1.0001, ylabel = {$\gamma_w$},
+			axis lines = middle,
+			y tick label style={
+				/pgf/number format/.cd,
+				fixed,
+				fixed zerofill,
+				precision=4,
+				/tikz/.cd
+			},
+			axis y line=right,
+			axis x line=none,
+			legend pos = south east,
+			x dir=reverse,
+		]
+		\addplot+[
+			color=pverybrightred,
+			mark=o,
+			very thick,
+			only marks,
+		]
+		table[x={xw},y={gammaw}]{glucose_a_w_and_phi.dat};
+		\addlegendentry{$\gamma_w$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Atividade ($a_w$), coeficiente de atividade ($\gamma_w$) e%
+	coeficiente osmótico ($\phi$) da água em soluções de D-glicose.%
+	Perceba a diferença entre as escalas utilizadas para $\gamma_w$ e $\phi$.}
+	\label{fig_atv_gamma_gluc}
+\end{figure}
+
+Devemos, além disso, lembrar que a medida de atividade da água é, por vezes,
+realizada de modo mais indireto; podemos medir para uma determinada solução ao
+invés de seu valor de atividade da água (através da medição de sua pressão de
+vapor e comparação com a pressão de vapor de água pura nas mesmas condições), o
+seu valor de elevação do ponto de ebulição, de depressão de ponto de início de
+congelamento, ou a composição de uma outra solução em equilíbrio osmótico.
+
+Por exemplo, alguns conjuntos de dados obtidos para soluções $n$-árias de
+carboidratos \cite{abderafi1994} apresentam dados de elevação do ponto de
+ebulição. Essas medidas devem ser convertidas em dados de coeficiente osmótico,
+através das equações \ref{eq:eleb_to_osco} \cite{ge2009,ge2009err}, por
+exemplo, que estão exibidas na figura \ref{fig_ge_and_wang}.
+
+\begin{equation}
+	\label{eq:eleb_to_osco}
+	\begin{cases}
+		\ln(a_w) = -\cfrac{\Delta H^\text{vap}_{0,T_B}\left(\cfrac{1}{T_B}%
+			-\cfrac{1}{T_B+\Delta T_B}\right)-%
+			\Delta C_p^\text{vap}\Bigg[\ln\left(\cfrac{T_B+%
+			\Delta T_B}{T_B}\right) - \cfrac{\Delta T_B}{T_B+%
+			\Delta T_B}\Bigg]}{R}\\
+		\ln(a_w) = \cfrac{\Delta H^\text{fus}_{0,T_F}\left(\cfrac{1}{T_F}-%
+		\cfrac{1}{T_F-\Delta T_F}\right)+\Delta C_p^\text{fus}%
+		\Bigg[\ln\left(\cfrac{T_F-\Delta T_F}{T_F}\right) -%
+		\cfrac{\Delta T_F}{T_F-\Delta T_F}\Bigg]}{R}
+	\end{cases}
+\end{equation}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\begin{tikzpicture}[scale=0.75]
+			\begin{axis}[
+				ylabel={$a_w$},
+				xlabel={$T_B$[\textcelsius]},
+				ymax=1, xmax=115, xmin=100,
+			]
+				\addplot [
+					color=pred,
+					no marks,
+					very thick,
+				]
+					table [x={BPE},y={aw},col sep=comma]
+						{ge_and_wang_bpe.csv};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Ponto de Ebulição}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}
+		\begin{tikzpicture}[scale=0.75]
+			\begin{axis}[
+				ylabel={$a_w$},
+				xlabel={$T_F$[\textcelsius]},
+				ymax=1, xmin=-15, xmax=0,
+			]
+				\addplot [
+					color=pblue,
+					no marks,
+					very thick,
+				]
+					table [x={FPD},y={aw},col sep=comma]
+						{ge_and_wang_fpd.csv};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Ponto de Fusão}
+	\end{subfigure}
+	\caption{Relações entre $T_B$/$T_F$ (em \textcelsius) e $a_w$, %
+		$P=P_\text{atm}$}
+	\label{fig_ge_and_wang}
+\end{figure}
+
+Com $\Delta C_p$ sendo definido como a diferença entre os calores
+específicos, entre as fases: $\Delta C_p^\text{vap} = C_p^\text{vapor} -%
+C_p^\text{líquido}$ e $\Delta C_p^\text{fus} = C_p^\text{líquido} -%
+C_p^\text{sólido}$, $\Delta T_F$ sendo a depressão do ponto de congelamento,
+$\Delta T_B$ a elevação do ponto de ebulição e $\Delta H_{0,T_F}^\text{vap}$ e
+$\Delta H_{0,T_F}^\text{fus}$ sendo as entalpias de vaporização e ebulição do
+solvente puro a $T_F$.
+
+\chapter{Revisão Bibliográfica}
+
+\section{Modelagem da atividade da água}
+
+\subsection{Modelos avaliados}
+
+Foram analisados diversos modelos, desde mais simples como a Lei de Raoult ou
+equação de Caurie a mais complexos como o método iterativo originário da equação
+de Zdanovskii, para posterior comparação com uma equação do tipo virial (equação
+como \ref{eq:ad_pessoa}, a adaptada de \cite{pessoa2008}, na qual $b_i$ e
+$c_{ij}$ são parâmetros ajustáveis e $\theta_i$ é uma medida de concentração,
+com $i,j$ componentes da mistura).
+
+\begin{equation}
+	\label{eq:ad_pessoa}
+	\ln(a_w) = \sum_{i \neq w}\theta_i\Bigg(1 +%
+	2b_i+3\sum_{j \neq w}c_{ij}\theta_j\Bigg)
+\end{equation}
+
+Para obter os valores de $a_w$ para soluções com apenas um soluto, temos
+diversos modelos que podem ser aplicados. Desses, serão analisados e comparados
+os seguintes:
+
+\begin{itemize}
+	\item Lei de Raoult: Modelo mais simples, para soluções ideais. Assume
+		atividade da água $a_w = x_w$, sua fração molar;
+	\item Equação de Norrish \cite{norrish1966}: correção da lei de Raoult.
+		Sendo $x_w$ a fração molar da água e $x_s$ a do soluto e
+		tomando uma constante $K$, experimental, temos a equação
+		\ref{eq_norrish}:
+		\begin{equation}
+			\label{eq_norrish}
+			a_w = x_w\exp\Big[\Big(\sqrt{K}x_s\Big)^2\Big]
+		\end{equation}
+	\item Modelo UNIQUAC (\textit{universal quasi-chemical})
+		\cite{abrams1975} Modelo mais refinado dentre os avaliados no
+		projeto, demanda dois parâmetros para o ajuste para cada par de
+		componentes da mistura (solvente e solutos), podendo ser tanto
+		utilizado para sistemas binários quanto para sistemas $n$-ários.
+		Embora claramente apresente custo computacional elevado para
+		misturas com muitos componentes (já que o número de parâmetros
+		é da ordem do número de componentes ao quadrado), os dados
+		utilizados não são de misturas complexas o suficiente para que
+		isso seja um problema.
+\end{itemize}
+
+Os modelos considerados para análise e comparação serão, para sistemas
+multicomponente, os seguintes:
+
+\begin{itemize}
+	\item Lei de Raoult: atividade da água $a_w$ sendo igual a $x_w$,
+		sua fração molar;
+	\item Equação de Norrish: adotada pequena modificação para equação
+		\ref{eq_norrish}, como visto na equação \ref{eq_norrish_multi};
+		\begin{equation}
+			\label{eq_norrish_multi}
+			a_w = x_w\exp\Big[\Big(\sum_{i \neq w}%
+			\sqrt{K_i}x_i\Big)^2\Big]
+		\end{equation}
+	\item Modelo de Caurie \cite{caurie1986}: atividade da água como uma
+		correção do produto das atividades da água para uma solução
+		com um único componente (equação \ref{eq_caurie}) com
+		$m_i$ a molalidade do componente $i$ em solução, $a_{wi}$
+		sendo a atividade da água em uma mistura com o componente
+		$i$, apenas, tal que $m_i$ se mantenha e $n$ sendo o número de
+		componentes em solução.
+		\begin{equation}
+			\label{eq_caurie}
+			a_w = \prod_{i \neq w}a_{wi}-\left[\cfrac{n}%
+			{55.5^2}\sum_{\substack{i \neq j \\ i,j \neq w}}%
+			m_im_j + \cfrac{(n+1)}{55.5^3}\sum_{%
+			\substack{i\neq j,k \\ j \neq k \\  i,j,k \neq w}}%
+			m_im_jm_k\right]
+		\end{equation}
+		Para a obtenção das atividades da água de substâncias
+		binárias, foi utilizada a Lei de Raoult.
+	\item Relação de Zdanovskii \cite{chen1973,sangster1973}:
+		para uma mistura ternária composta por água e mais dois
+		componentes, digamos, 1 e 2, adotamos duas soluções binárias,
+		cada uma com um componente, em equilíbrio osmótico com uma
+		terceira, ternária. Sendo $m_{01}$ e $m_{02}$ as
+		molalidades do componente 1 na solução na qual é o único
+		soluto e do componente 2 na solução no qual é o único soluto, e
+		sendo $m_1$ e $m_2$ as molalidades de 1 e 2 na solução ternária,
+		temos que $m_1m_{01}^{-1} + m_2m_{0_2}^{-1} = 1$, sendo esta a
+		relação de Zdanovskii. Disso se obtém um procedimento iterativo,
+		que possibilita obter, tendo as isotermas de cada componente, a
+		atividade da água de uma mistura ternária.
+	\item Modelo UNIQUAC (\textit{universal quasi-chemical}), citado
+		anteriormente.
+\end{itemize}
+
+\subsection{Aplicabilidade das amostras aos modelos}
+
+Como não temos interesse apenas em ajustar curvas aos dados para sistemas
+$n$-ários, mas também queremos avaliar a possibilidade de prever coeficientes
+osmóticos para esses sistemas a partir de dados obtidos do ajuste de sistemas
+binários, podemos dividir os modelos estudados em dois grandes grupos. Sendo um
+modelo termodinâmico a $N$ parâmetros $(A_j)_{j \in \{1, 2, \ldots N\}}$ para o
+coeficiente osmótico em um sistema de composição $(x_i)_\text{$i$ componente}$,
+com temperatura $T$ e pressão $P$ dado pela equação \ref{eq:geral_bigphi},
+podemos obter aproximações para os parâmetros $(A_j^*)_{j \in \{1, 2, \ldots, N\}}$
+a partir do método dos mínimos quadrados, dado na expressão \ref{eq:min_quad},
+para um conjunto de $K$ dados experimentais $\{(\phi^k, T^k, P^k,%
+	(x_i)^k_\text{$i$ componente}), k \in \{1,2,\ldots,K\}\}$.
+
+\begin{equation}
+	\label{eq:geral_bigphi}
+	\phi = \Phi((A_j)_{j \in \{1, 2, \ldots, N\}}, (x_i)_\text{$i$ componente da mistura}, T, P)
+\end{equation}
+
+\begin{equation}
+	\label{eq:min_quad}
+	\minimize_{(A_j^*)_{j \in \{1,2,\ldots,N\}} \in \mathbb{R}^N}%
+	\left(\sum_{k \in \{1,2,\ldots,K\}}\left[\phi^k - \Phi((A^*_j)_{j%
+	\in \{1, 2, \ldots, N\}}, (x^k_i)_\text{$i$ componente},%
+	T^k, P^k)\right]^2\right)
+\end{equation}
+
+Para dados obtidos exclusivamente de sistemas binários, temos que:
+
+\begin{equation}
+	\forall k \in \{1,2,\ldots,K\} \;\; \exists i \neq w%
+	\text{ componente } : \forall \;\; i' \neq i, i' \neq w\;\; x^k_{i'} = 0
+\end{equation}
+
+Quando para todo conjunto de dados obtidos exclusivamente de sistemas binários
+temos que é válida a expressão \ref{eq:no_bin_fit},
+dizemos que o modelo apresenta parâmetro ajustável de interação entre os
+solutos. Caso contrário, dizemos que o modelo não apresenta parâmetro
+ajustável de interação entre os solutos.
+
+\begin{equation}
+	\label{eq:no_bin_fit}
+	\exists j' \in \{1,2,\ldots,N\} : \forall \alpha \in \mathbb{R}\;\;%
+	(A_j^*)_{j \in \{1,2,\ldots,N\}, A_{j'}^* = \alpha}%
+	\text{ é solução de \ref{eq:min_quad}}
+\end{equation}
+
+Essa distinção se faz necessária a um dos objetivos do projeto, a saber, avaliar
+a aplicabilidade de parâmetros obtidos a partir do ajuste de um modelo a dados
+de sistemas binários à predição de dados de sistemas $n$-ários, aplicabilidade
+essa que, caso verificada, traria grande vantagem ao modelo em questão, tendo em
+vista a quantidade de dados disponível para um sistema binário qualquer
+ser muito superior à quantidade de dados disponível para um sistema $n$-ário
+qualquer. Além disso, também deve-se levar em conta que os experimentos de
+laboratório necessários ao levantamento de dados representativos para sistemas
+$n$-ários são muito mais custosos.
+
+É exemplo de modelo da segunda categoria o proposto por Norrish; para a
+primeira categoria, mais complexa, o modelo do tipo virial proposto na equação
+\ref{eq:ad_pessoa} pode ser citado como exemplo. Além disso, claramente temos,
+inclusos de forma trivial na segunda categoria, modelos sem parâmetro ajustável
+algum, como a Lei de Raoult. Esses modelos mais simples devem, também, ser
+separados para avaliação de seu poder preditivo.
+
+\subsection{Limitações dos modelos e principais problemas encontrados}
+
+Um dos principais problemas encontrados é a simples não aplicabilidade de
+alguns modelos em determinadas situações: para exemplificar essa situação,
+analisaremos o modelo de Norrish e suas limitações intrínsecas.
+
+O modelo de Norrish, como visto em \ref{eq_norrish} e \ref{eq_norrish_multi},
+apresenta a equação \ref{eq_phi_norrish} para o cálculo do coeficiente
+osmótico $\phi$:
+
+\begin{equation}
+	\label{eq_phi_norrish}
+	\phi = \cfrac{\ln(a_w)}{\ln(x_w)} = \cfrac{\ln(x_w) + \left(\sum_{ i\neq w}
+	\sqrt{K_i}x_1\right)^2}{\ln(x_w)}
+\end{equation}
+
+Como $x_w \le 1 \implies \ln(x_w) \le 0$, temos que o modelo prevê apenas
+valores do coeficiente osmótico menores que 1. Isso definitivamente não se
+verifica nos dados reais: temos diversos comportamentos possíveis, desde
+dados que se assemelham a funções monótonas decrescentes, como exigido pelo
+modelo,\footnote{%
+	Já que $\lim_{x_w \to 1}\phi_\text{Norrish} = 1$.
+} até dados que se assemelham a funções monótonas crescentes, o oposto do
+desejado. Isso pode ser visto na própria figura \ref{fig_atv_gamma_gluc}, e,
+mais claramente, na figura \ref{fig_manose_phi}.
+
+Outro exemplo é a equação de Caurie: como $\lim_{x_w \to 0}m_i = +\infty$,
+temos que existem concentrações a partir das quais o modelo simplesmente não
+retorna resultados físicos, já que $a_w \in [0,1]$ e, como exibido na equação
+\ref{eq_caurie_fail}, existem certos valores para as frações molares de cada
+componente na mistura que retornam valores negativos de $a_{w,\text{Caurie}}$.
+Além disso, conforme a fração molar de água na mistura decresce, $\phi$ deve
+se aproximar de 0, no limite.
+
+\begin{equation}
+	\label{eq_caurie_fail}
+	\begin{split}
+		a_{w,\text{Caurie}} = \prod_{i \neq w}a_{w,i} - \left[\cfrac{n}%
+			{55.5^2}\sum_{\substack{i \neq j \\ i,j \neq w}}%
+			m_im_j + \cfrac{(n+1)}{55.5^3}\sum_{%
+			\substack{i\neq j,k \\ j \neq k \\  i,j,k \neq w}}
+			m_im_jm_k\right] <\\
+		1 - \cfrac{n}{55.5^3}\left[55.5 \times%
+			\sum_{\substack{i \neq j \\ i,j \neq w}}%
+			m_im_j + \cfrac{n+1}{n}\sum_{%
+			\substack{i\neq j,k \\ j \neq k \\  i,j,k \neq w}}
+			m_im_jm_k\right]\implies\\
+		\lim_{\substack{m_k \to +\infty \\%
+				\forall n \neq k, \text{ $m_n$ constante}}}%
+			a_{w,\text{Caurie}} = -\infty \implies%
+		\lim_{x_w \to 0} a_{w,\text{Caurie}} = -\infty
+	\end{split}
+\end{equation}
+
+Essa diversidade de comportamentos pode vir a ser útil. Por exemplo, para o
+modelo virial, a medida de concentração escolhida foi a concentração molar, já
+que é possível demonstrar que os dados dificilmente seguem a forma à qual são
+restritos ao utilizarmos a fração molar (mais intuitiva) como medida. Isso pode
+ser visto na equação \ref{eq_phi_virial_mono_frac}
+\footnote{%
+	Podemos afirmar isso já que temos, $\forall w > 0$:
+	\begin{equation*}
+		\begin{split}
+			e^w = 1 + w + \cfrac{w^2}{2!} + \ldots \ge w +1
+			\stackrel{(z = w+1)}{\implies} e^z \ge ze \implies
+				z \ge \ln(z) + 1
+			\stackrel{\left(y=\cfrac{1}{z}\right)}{\implies}
+				\cfrac{1}{y} \ge
+				\ln\left(\cfrac{1}{y}\right) + 1 \implies\\
+			1-y \ge y\ln\left(\cfrac{1}{y}\right)
+			\stackrel{(x=1-y)}{\implies} x >
+				(1-x)\ln\left(\cfrac{1}{1-x}\right)\implies
+			\cfrac{x}{1-x} + \ln(1-x) > 0 \implies\\
+				\cfrac{d}{dx}\left(\cfrac{x}{\ln(1-x)}\right) > 0
+		\end{split}
+	\end{equation*}
+}
+para sistemas binários, sendo $x$ a fração molar do soluto: o modelo (com
+$\theta_i = x_i$) implica em uma função monótona.
+
+\begin{equation}
+	\label{eq_phi_virial_mono_frac}
+	\begin{split}
+		\ln(a_w) = -x + 2bx \implies \phi =
+			\cfrac{-x + 2bx}{\ln(1-x)}\implies\\
+		\phi = (2b-1)\cfrac{x}{\ln(1-x)} \implies
+			\forall (x_1,x_2) \in (0,1)\times(0,1)\;\;
+			\cfrac{d\phi}{dx}\Big|_{x_1} \times
+			\cfrac{d\phi}{dx}\Big|_{x_2} \ge 0
+	\end{split}
+\end{equation}
+
+Outro problema (não intrínseco aos modelos, mas específico aos dados) é a
+existência de pequenos conjuntos de dados, comparados ao que seria
+necessário para ajustar o modelo UNIQUAC completo, por exemplo. De fato,
+para uma mistura que, seja composta por $n$ substâncias, o modelo exige
+$2n+n^2 \in \mathcal{O}(n^2)$ parâmetros (para contabilizar as energias de
+interação $U_{ij}$ e os parâmetros $r_i$ e $q_i$). Dessa forma, algumas
+simplificações (equações exibidas em \ref{eq_uniquac_simpl}), presentes
+na literatura, foram adotadas.
+
+\begin{equation}
+	\label{eq_uniquac_simpl}
+	\begin{cases}
+		u_{ij} = \sqrt{u_{ii}u_{jj}}\\
+		r_i = q_i
+	\end{cases}\forall\ i, j\text{ componente}
+\end{equation}
+
+Devemos lembrar, além disso, que boa parte dos comjuntos de dados para sistemas
+multicomponente apresenta problemas com colinearidade; isso não prejudica a
+predição de novos dados, mas torna pouco confiáveis os valores obtidos para os
+parâmetros. Por fim, existem problemas quanto a precisão dos dados de coeficiente
+osmótico, como já discutido.
+
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\newsavebox{\minigrafmann}
+		\savebox{\minigrafmann}{%
+		\scalebox{0.5}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+			xmin=0.0,xmax=0.07,
+			ymin=0.93,ymax=1.0,
+			width=7cm,
+			height=7cm,
+			xlabel = {$x$},
+			ylabel = {$a_w$},
+			xlabel near ticks,
+			ylabel near ticks,
+			xticklabel style={
+				/pgf/number format/fixed,
+				/pgf/number format/precision=3,
+				/pgf/number format/fixed zerofill
+			},
+			scaled x ticks=false,
+			]
+			\addplot+[
+				color=pbrightred,
+				mark=o,
+				only marks,
+				thick,
+			]
+			table[x={mannose},y={aw_exp},col sep=comma]
+				{ebrahimi_mannose_norrish.csv};
+			\addplot+[
+				color=pverybrightblue,
+				no marks,
+				thick,
+			]
+			table[x={mannose},y={aw_calc},col sep=comma]
+				{ebrahimi_mannose_norrish.csv};
+			\addplot+[
+				color=pblue,
+				no marks,
+				thick,
+			]
+			table[x={mannose},y={aw_calc},col sep=comma]
+				{ebrahimi_mannose_virial.csv};
+			\addplot+[
+				color=pverydarkblue,
+				no marks,
+				thick,
+			]
+			table[x={mannose},y={aw_calc},col sep=comma]
+				{ebrahimi_mannose_uniquac.csv};
+		\end{axis}
+	\end{tikzpicture}
+	}}
+	\begin{axis}[
+			xmin = 0.0, xmax = 0.072, xlabel = {$x_\text{mannose}$},
+			ymin = 0.975, ymax = 1.029, ylabel = {$\phi$},
+			legend pos = south east,
+			xlabel near ticks,
+			ylabel near ticks,
+			xticklabel style={
+				/pgf/number format/fixed,
+				/pgf/number format/precision=3,
+				/pgf/number format/fixed zerofill
+			},
+			scaled x ticks=false,
+			xtick = {0.015,0.030,0.045,0.060},
+		]
+		\addplot+[
+			smooth,
+			color=pverybrightblue,
+			no marks,
+			thick,
+		]
+		table[x={mannose},y={phi_calc},col sep=comma]
+			{ebrahimi_mannose_norrish.csv};
+		\addlegendentry{Norrish};
+		\addplot+[
+			smooth,
+			color=pblue,
+			no marks,
+			thick,
+		]
+		table[x={mannose},y={phi_calc},col sep=comma]
+			{ebrahimi_mannose_virial.csv};
+		\addlegendentry{virial};
+		\addplot+[
+			smooth,
+			color=pverydarkblue,
+			no marks,
+			thick,
+		]
+		table[x={mannose},y={phi_calc},col sep=comma]
+			{ebrahimi_mannose_uniquac.csv};
+		\addlegendentry{UNIQUAC};
+		\addplot+[
+			color=pbrightred,
+			mark=o,
+			very thick,
+			only marks,
+		]
+		table[x={mannose},y={phi_exp},col sep=comma]
+			{ebrahimi_mannose_uniquac.csv};
+		\addlegendentry{experimental};
+		\draw (axis cs:0.018,1.015) node{\usebox{\minigrafmann}};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Coeficiente osmótico $\phi$ e ajuste de modelos
+		para solução de manose}
+	\label{fig_manose_phi}
+\end{figure}
+
+
+\section{Seleção de dados experimentais}
+
+\label{sec_selec_data}
+
+Devido às presentes circunstâncias, não é prático ou seguro fazer experimentos
+laboratoriais para levantamento de dados. Felizmente, também não é necessário:
+a literatura científica sobre o assunto é extensa o suficiente para possibilitar
+a obtenção uma boa seleção de dados experimentais previamente publicados, para
+sistemas multicomponente e binários, que se encontram resumidos nas listas e
+tabelas que seguem.
+
+\begin{itemize}
+	\item Para sistemas binários:
+		\begin{itemize}
+			\item Bhandari \& Bareyre (2003) \cite{bhandari2003},
+				medidas diretas de $a_w$ para soluções de água
+				e glicose a 25\textcelsius, com valores entre
+				$x_w = 0.808$ e $x_w = 0.917$;
+			\item Bonner (1982) \cite{bonner1982}, medidas de
+				coeficiente osmótico e de atividade para lisina
+				e arginina a temperatura de 298.15K.
+			\item Chen (1987) \cite{chen1987}, medidas para atividade
+				de água de algumas soluções de carboidratos obtidas
+				a partir de dados de umidade relativa de equilíbrio,
+				à temperatura de congelamento.
+			\item Cooke, Jónsdóttir \& Westh (2002) \cite{cooke2002a},
+				medidas de pressão de vapor em temperaturas de
+				24.91\textcelsius, para a sacarose, e
+				44.84\textcelsius, para frutose, e outros
+				carboidratos, com frações molares entre 0 e 0.24 a
+				depender da substância.
+%			\item Dunning, Evans \& Taylor (1951) \cite{dunning1951},
+%				medidas de pressão de vapor da água para soluções de
+%				sacarose com temperaturas entre 60 e
+%				95\textcelsius\ e frações molares $x_w$ entre 0.79
+%				e 0.96.\footnote{%
+%					Não puderam ser utilizados, tendo em vista
+%					que foram, todos, obtidos a temperaturas
+%					distintas, \textit{i.e.} não é coerente
+%					ajustar esse conjunto de dados com uma
+%					isoterma.
+%				}
+			\item Ebrahimi \& Sadeghi (2016) \cite{ebrahimi2016},
+				medidas de coeficiente osmótico para diversos
+				carboidratos entre monosacarídeos (pentoses e
+				hexoses sortidas), dissacarídeos, trissacarídeos
+				e polióis, à temperatura fixa de 308.15K.
+			\item Ellerton, Reinfelds, Mulcahy \& Dunlop (1964)
+				\cite{ellerton1964} medidas de pressão osmótica
+				obtidas através do método isopiéstico para sete
+				aminoácidos à temperatura de 25\textcelsius.
+			\item Himanshu, Priyanka \& Anakshi (2005)
+				\cite{himanshu2005}, medidas de depressão de
+				ponto de fusão foram convertidas em coeficientes
+				osmóticos para soluções de nove aminoácidos
+				(glicina, L-serina, L-prolina, DL-valina,
+				DL-alanina, L-treonina, hidróxi-L-prolina,
+				L-isoleucina e DL-metionina) para soluções binárias
+				de baixa molalidade ($m < 1$mol/kg).
+			\item Kiyosawa (1992) \cite{kiyosawa1992}, medidas de
+				depressão de ponto de congelamento de soluções
+				binárias de polióis.
+			\item Kuramochi, Noritomi, Hoshino \& Nagahama (1997)
+				\cite{kuramochi1997}, medidas de coeficiente de
+				atividade para quatro aminoácidos (glicina,
+				L-alanina, L-serina e L-valina) obtidos através
+				de dados de pressão de vapor, para temperatura
+				de 298.15K.
+			\item Maximo, Meirelles \& Batista (2010) \cite{maximo2010},
+				medidas de coeficiente de atividade obtidas através
+				de elevação do ponto de ebulição para sacarose,
+				frutose e glicose a diferentes pressões.
+			\item Ninni \& Meirelles (2001) \cite{ninni2001}, medidas
+				diretas de atividade da água para soluções binárias
+				de quatro aminoácidos (glicina, DL-alanina, L-prolina
+				e L-arginina) a uma temperatura de 25\textcelsius,
+				com concentrações relativamente baixas
+				($x_w > 0.85$), para sistemas com ou sem tampões
+				ácidos ou básicos.
+			\item Pinho (2008) \cite{pinho2008}, medidas de atividade da
+				água obtidas de forma direta para três aminoácidos
+				(glicina, DL-alanina e L-serina), a uma temperatura
+				de 25\textcelsius\ e frações molares de água
+				próximas de 1.
+			\item Romero \& González (2006) \cite{romero2006}, medidas
+				de coeficiente osmótico obtidas através do método
+				isopiéstico, para glicina, DL-$\alpha$-alanina e
+				ácido DL-$\alpha$-aminobutírico, para temperaturas
+				entre 288.15 e 303.15K.
+			\item Tsurko, Neueder \& Kunz (2007) \cite{tsurko2007},
+				medidas de coeficiente osmótico de três aminoácidos
+				(glicina, ácido glutâmico e histidina), obtidas
+				através de dados de equilíbrio líquido-vapor, a
+				temperaturas de 298.15 e 310.15K.
+			\item Velezmoro, Oliveira, Cabral \& Meirelles (2000)
+				\cite{velezmoro2000}, medidas diretas de $a_w$ nas
+				temperaturas 25, 30 e 35\textcelsius\ para soluções
+				de água e glicose, água e frutose, água e maltose,
+				água e sacarose e uma solução de glicose, frutose
+				e sacarose em base aquosa, com baixas concentrações
+				($x_w > 0.9$).
+		\end{itemize}
+	\item Para sistemas $n$-ários:
+		\begin{itemize}
+			\item Abderafi \& Bounahmidi (1994) \cite{abderafi1994},
+				medidas de elevação do ponto de ebulição
+				para sistemas binários glicose-água,
+				frutose-água, sacarose-água,
+				glicose-frutose-água, glicose-sacarose-água,
+				frutose-sacarose-água e
+				glicose-frutose-sacarose-água, para ampla
+				faixa de $x_w$ e pressão atmosférica.
+			\item Norrish (1966) \cite{norrish1966}, medidas de
+				humidade relativa de equilíbrio para soluções
+				ternárias compostas por água e sacarose, com a
+				adição de sorbitol, glicerol ou dextrose, a
+				temperatura de 25\textcelsius.
+			\item Robinson \& Stokes (1961) \cite{stokes1961},
+				dados de equilíbrio osmótico para a solução
+				ternária água-sacarose-manitol à temperatura
+				de 25\textcelsius.
+			\item Stokes \& Robinson (1966) \cite{stokes1966},
+				dados de equilíbrio osmótico de soluções
+				ternárias de duas substâncias (sacarose e
+				arabinose, sacarose e glicose, sacarose e
+				sorbitol, entre outras).
+			\item Velezmoro, Oliveira, Cabral \& Meirelles (2000)
+				\cite{velezmoro2000}.
+		\end{itemize}
+\end{itemize}
+
+\begin{tabularx}{\textwidth}{ X  c  X }
+	\caption{Dados por estudo para sistemas binários}
+	\label{tab_dados_pontos}\\
+	\toprule
+	Referência & \textnumero\ de pontos & Obtenção\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Referência & \textnumero\ de pontos & Obtenção\\
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{3}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Abderafi \& Bounahmidi (1994) & 36 & Equilíbrio líquido vapor\\
+	Bhandari \& Bareyre (2003) & 10 & Medições diretas de $a_w$\\
+	Bonner (1982) & 34 & Método isopiéstico\\
+	Chen (1987) & 14 & Medições de pressão de vapor\\
+	Cooke, Jónsdóttir \& Westh (2002) & 46 & Medições de pressão de vapor\\
+%	Dunning, Evans \& Taylor (1951) & 102 & Medições de pressão de vapor\\
+	Ellerton, Reinfelds, Mulcahy \& Dunlop (1964) & 91 & Método isopiéstico\\
+	Ebrahimi \& Sadeghi (2016) & 246 & Osmometria de pressão de vapor\\
+	Himanshu, Priyanka \& Anakshi (2005) & 45 &
+		Depressão do ponto de congelamento\\
+	Kiyosawa (1992) & 49 & Depressão do ponto de congelamento\\
+	Kuramochi, Noritomi, Hoshino \& Nagahama (1997) & 44 &
+		Medições de pressão de vapor\\
+	Maximo, Meirelles \& Batista (2010) & 180 & Elevação do ponto de ebulição\\
+	Ninni \& Meirelles (2001) & 31 & Medições de pressão de vapor\\
+	Pinho (2008) & 78 & Medições diretas de $a_w$\\
+	Romero \& González & 108 & Método isopiéstico\\
+	Stokes \& Robinson (1966) & 22 & Método isopiéstico\\
+	Tsurko, Neueder \& Kunz (2007) & 72 & Medições de pressão de vapor\\
+	Velezmoro, Oliveira, Cabral \& Meirelles (2000) &
+		146 & Medições de pressão de vapor\\\hline
+	Total & \multicolumn{2}{c}{1252}\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}{ X  c  X }
+	\caption{Dados por estudo para sistemas $n$-ários}
+	\label{tab_dados_multi_pontos}\\
+	\toprule
+	Referência & \textnumero\ de pontos & Obtenção\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Referência & \textnumero\ de pontos & Obtenção\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{3}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Abderafi \& Bounahmidi (1994) & 38 & Elevação do ponto de ebulição\\
+	Norrish (1966) & 26 & Medições de pressão de vapor\\
+	Robinson \& Stokes (1961) & 31 & Método isopiéstico\\
+	Stokes \& Robinson (1966) & 62 & Método isopiéstico\\
+	Velezmoro, Oliveira, Cabral \& Meirelles (2000) & 6 & Medições de pressão de vapor\\\hline
+	Total & \multicolumn{2}{c}{163}\\\hline
+\end{tabularx}
+
+\chapter{Ferramentas computacionais}
+
+\section{Escolha das ferramentas}
+
+Foi utilizado o método dos mínimos quadrados para o ajuste não-linear dos
+modelos aos dados obtidos. Para isso, foi escrito programa em linguagem
+\texttt{C}, de modo a fazer uso das rotinas fornecidas pela biblioteca
+\textit{GNU Scientific Library} \cite{galassi_book} para otimização não-linear.
+A escolha dessa biblioteca em específico se deu devido ao fácil acesso aos
+passos intermediários dos processos iterativos utilizados para obter os
+parâmetros desejados.
+
+\section{Conversão de propriedades}
+
+Infelizmente, nem todos os dados utilizados estão disponíveis nas mesmas
+propriedades; como visto nas tabelas \ref{tab_dados_pontos} e
+\ref{tab_dados_multi_pontos}, é necessário inicialmente converter todos os dados
+para a mesma base. Mesmo que o programa necessite dos dados de coeficiente
+osmótico para a regressão, todos os dados são alimentados ao programa na forma
+de dados de atividade da água e frações molares, sendo a conversão dos valores de
+$a_w$ em valores de $\phi$ puramente interna, quando possível.
+
+\section{Algoritmos e funções-objetivo}
+
+Foi utilizado o algoritmo de Levenberg-Marquardt com aceleração geodésica para a
+solução do problema de mínimos quadrados para um conjunto de $n$ dados e $N$
+parâmetros dado pela expressão \ref{eq:min_quad_lev}.
+A escolha desse algoritmo se dá pois converge de forma rápida para sistemas com
+uma quantidade de parâmetros razoável, como é o caso aqui (número de parâmetros
+$N$, para minimizar a função objetivo, menor que uma dezena).
+Perceba que para a apresentação dos dados e avaliação do ajuste, foi calculada a
+raiz dessa função (de modo a deixar o valor apto, dimensionalmente, à comparações),
+sendo o resultado dividido pelo número de dados do ajuste (para possibilitar a
+comparação entre diferentes séries de dados); como
+$n>0 \implies \cfrac{\partial}{\partial f}\cfrac{\sqrt{f}}{n} >0$, temos que os
+parâmetros de ajuste dependem monotonicamente da função objetivo, sendo, portanto,
+válidos.
+
+\begin{equation}
+	\label{eq:min_quad_lev}
+	\minimize_{(A_j^*)_{j \in \{1,2,\ldots,N\}} \in \mathbb{R}^N}%
+	\left(\sum_{k \in \{1,2,\ldots,K\}}\left[\phi^k - \Phi((A^*_j)_{j%
+	\in \{1, 2, \ldots, N\}}, (x^k_i)_\text{$i$ componente},%
+	T^k, P^k)\right]^2\right)
+\end{equation}
+
+Claramente, a forma da função $\Phi$ depende do modelo a ser utilizado, variando
+entre expressões simples como a obtida a partir da equação de Norrish, a
+expressões significantemente mais complexas, como a obtida a partir de modelos
+como UNIQUAC. Além disso, os valores iniciais para o processo iterativo serão
+obtidos com mecanismos mais simples ou a partir de consulta à literatura para
+obtenção de dados já obtidos para substâncias semelhantes.
+
+Outra observação é que em caso de dados fornecidos na forma entre uma relação
+entre a composição de uma mistura $n$-ária de interesse $(x_1,x_2,\ldots,x_n)$
+e uma mistura binária de composição $x_1'$ em equilíbrio osmótico com a
+primeira solução. Nesse caso, nada se garante sobre a igualdade entre os
+coeficientes osmóticos $\phi$ e $\phi'$ das duas soluções; podemos apenas
+afirmar que a água apresenta atividade igual nos dois meios. Dessa forma,
+a equação \ref{eq:min_quad_lev} deve ser modificada de modo a comparar os
+valores de $phi$ ``real'' ($\phi=\phi(a_{w,\text{ref}},x_w)$) e teórico
+($\phi=\phi(a_w,x_w)$). Isso se dá especificamente ao analisarmos os dados
+obtidos por Stokes \cite{stokes1966}.
+
+\begin{equation}
+	\label{eq:min_quad_lev_stokes}
+	\begin{split}
+		\minimize_{(A_j^*)_{j \in \{1,2,\ldots,N\}} \in \mathbb{R}^N}%
+		\left(\sum_{k \in \{1,2,\ldots,K\}}\left[%
+		\cfrac{\ln\left(\left(1-x_1^{k\prime}\right)^{\Phi((A^*_j)_{j%
+		\in \{1,2,\ldots,N\}},x^{k\prime}_1,T^k,P^k)}\right)}%
+		{\ln\left(\sum_\text{$i$ componente}x_i^k\right)}%
+		-\right.\right.\\
+		\left.\left.\Phi((A^*_j)_{j%
+		\in \{1, 2, \ldots, N\}}, (x^k_i)_\text{$i$ componente},%
+		T^k, P^k)\right]^2\right)
+	\end{split}
+\end{equation}
+
+Note que os resultados da regressão serão menos precisos, devido a problemas
+relativos à escala dos desvios da não-idealidade da atividade da água, comparados
+com os desvios dos coeficientes osmóticos.
+
+Além da função objetivo explicitada acima, também é interessante avaliar o
+comportamento e utilidade do coeficiente de determinação $R^2$, ajustado para
+considerarmos a quantidade de parâmetros $N$ e a quantidade de dados $n$, como
+parâmetro de ajuste.
+
+\begin{equation}
+	\bar{R^2} = 1 - \cfrac{\left( 1 - R^2 \right) \left( n - 1 \right)}
+		{n - N - 1}
+\end{equation}
+
+O principal problema para a otimização dos modelos é, além dos problemas
+intrínsecos aos modelos, como já discutido, a enorme imprecisão em
+$\sigma_\phi$ obtida ao se calcular o coeficiente osmótico, frente ao erro
+$\sigma_{a_w}$ e $\sigma_{x_w}$ das medições. Mesmo se assumindo que a maior
+fonte de erro seja a medição das atividades (\textit{i.e.} $\sigma_{a_w} \gg
+\sigma_{x_w}$), temos que a incerteza nas medições de coeficiente osmótico
+tende ao infinito quando o valor de $x_w$ tende a 1, de forma que, para avaliar
+e comparar melhor os modelos, deve ser dada maior importância aos conjuntos
+de dados provenientes de soluções com menores diluições.
+
+\section{Código e Dados}
+
+Todo o código desenvolvido e os dados utilizados estão disponíveis no
+\href{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}{repositório}
+\footnote{\url{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}}
+do projeto, no qual estão disponíveis mais detalhes sobre a implementação de
+cada modelo e compilação/execução do programa.
+
+Caso haja interesse em verificar o código-fonte e os executáveis basta clonar o
+repositório e compilar o programa. São necessários, para isso, git, GCC e GSL.
+
+\begin{verbatim}
+$ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
+$ cd IC_2021_Modelagem_Termodinamica
+$ make # Desnecessário caso o interesse seja pelos dados
+\end{verbatim}
+
+Caso não haja interesse em obter os executáveis, os dados podem ser obtidos
+clonando o repositório, simplesmente:
+
+\begin{verbatim}
+$ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
+$ cd IC_2021_Modelagem_Termodinamica/data
+\end{verbatim}
+
+\subsection{Licença}
+
+Como exigido pelo uso da biblioteca científica da GNU (disponível sob a Licença
+Pública Geral, 3\textordfeminine\ versão), o código-fonte também está disponível
+sob os termos dessa licença.
+
+\chapter{Resultados Obtidos}
+
+\section{Observações Gerais}
+
+\subsection{Discriminação entre modelos: $a_w$ \textit{vs.} $\phi$ e %
+parâmetros de ajuste}
+
+Como esperado, os ajustes em $\phi$ nos fornecem muito mais informação que os
+obtidos em dados de $a_w$: enquanto os valores para $\bar{R}^2$ podem estar
+muito próximos a 1 ao analisarmos dados de atividade, dados de coeficiente
+osmótico nos retornam valores de coeficiente (ajustado) de determinação com
+capacidade muito maior de discriminação entre os modelos.
+
+Podemos ver, também, que o coeficiente de determinação não é um bom parâmetro para
+avaliar os modelos: um coeficiente baixo de determinação (ou mesmo negativo) com
+relação aos dados de coeficiente osmótico não implica que o modelo não se aplica
+bem aos dados de $a_w$, de interesse; da mesma forma, um valor de $\bar{R}^2$ muito
+próximo a 1 não é indício, necessariamente de que um modelo seja excepcional para
+predição de valores de atividade: dado que $\lim_{x_w \to 1}\gamma_w = 1$, temos
+que para grandes diluições, mesmo modelos relativamente triviais (como a Lei de
+Raoult) se comportam de forma excelente.
+
+Assim sendo, para avaliarmos o ajuste, o melhor parâmetro é a média dos desvios
+dos valores de $\phi$. Na figura \ref{fig_mannitol_sucrose} temos uma visão clara
+do fenômeno: o ajuste é muito mais próximo para dados de $a_w$ que para $\phi$.
+Os dados desses ajustes (não somente para modelos que necessitam de regressão,
+como na figura) estão na tabela \ref{tab_mannitol_sucrose}, na qual é possível
+perceber a vantagem de se tomar
+$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-\phi_{\text{calc}})^2}$ como medida de
+exatidão dos modelos.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+	\centering
+	\begin{tikzpicture}[scale = 0.75]
+		\begin{axis} [
+				xlabel={$x_\text{sucrose}$},
+				ylabel={$x_\text{manitol}$},
+				zlabel={$\phi$},
+				restrict z to domain=0.4:0.8,
+				view={-70}{40},
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				xtick={0.020,0.040,0.060,0.080},
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=north west,
+			]
+			\addplot3+ [
+				color=pbrightred,
+				only marks,
+				mark = *,
+				mark options={fill=pbrightred},
+				thick,
+			] table [
+				x={sucrose},y={mannitol},z={phi_exp},col sep=comma
+			] {./stokes_61_sucrose_mannitol_uni.csv};
+			\addlegendentry{$\phi_\text{experimental}$};
+			\addplot3+ [
+				mesh,
+				no marks,
+				color=pverybrightblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 50,50 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_nor.csv' u 5:6:1;
+			};
+			\addlegendentry{$\phi_\text{Norrish}$};
+			\addplot3+ [
+				mesh,
+				no marks,
+				color=pblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 25,25 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_vir.csv' u 5:6:1;
+			};
+			\addlegendentry{$\phi_\text{virial}$};
+			\addplot3+ [
+				mesh,
+				no marks,
+				color=pverydarkblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 24,24 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_uni.csv' u 5:6:1;
+			};
+			\addlegendentry{$\phi_\text{UNIQUAC}$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Coeficientes Osmóticos}
+	\label{fig_mannitol_sucrose_osm}
+\end{subfigure}%
+\hfill%
+\begin{subfigure}{.5\textwidth}
+	\centering
+	\begin{tikzpicture}[scale = 0.75]
+		\begin{axis} [
+				xlabel={$x_\text{sucrose}$},
+				ylabel={$x_\text{manitol}$},
+				zlabel={$a_w$},
+				%view={-60}{20},
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				xtick={0.020,0.040,0.060,0.080},
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=north east,
+			]
+			\addplot3+ [
+				color=pbrightred,
+				only marks,
+				mark = *,
+				mark options={fill=pbrightred},
+				thick,
+			] table [
+				x={sucrose},y={mannitol},z={aw_calc},col sep=comma
+			] {./stokes_61_sucrose_mannitol_uni.csv};
+			\addlegendentry{$a_{w,\text{experimental}}$};
+			\addplot3 [
+				mesh,
+				no marks,
+				color=pverybrightblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 15,15 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_nor.csv' u 5:6:3;
+			};
+			\addlegendentry{$a_{w,\text{Norrish}}$};
+			\addplot3 [
+				mesh,
+				no marks,
+				color=pblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 25,25 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_vir.csv' u 5:6:3;
+			};
+			\addlegendentry{$a_{w,\text{Virial}}$};
+			\addplot3 [
+				mesh,
+				no marks,
+				color=pverydarkblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 24,24 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_uni.csv' u 5:6:3;
+			};
+			\addlegendentry{$a_{w,\text{UNIQUAC}}$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Atividades da água}
+	\label{fig_mannitol_sucrose_atv}
+\end{subfigure}
+\caption{Coeficientes osmóticos para uma solução de manitol e sucrose,
+calculados com o uso de modelos que exijam regressão \cite{stokes1961}}
+\label{fig_mannitol_sucrose}
+\end{figure}
+
+\begin{table}[h]
+	\centering
+	\caption{Indicadores para um conjunto de dados \cite{stokes1961}}
+	\label{tab_mannitol_sucrose}
+	\bgroup
+	\def\arraystretch{1.5}
+	\begin{tabular}{l r r r r}\hline
+		Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2}$ &
+			$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
+			\textnumero\ parâmetros\\\hline
+		Raoult & 0.049057 & -25.947383 & 0.440301 & 0 \\
+		Caurie & 0.049952 & -26.940271 & 0.402607 & 0 \\
+		Zdanovskii & 0.049115 & -26.012114 & 0.423267 & 0 \\
+		Norrish & 0.024635 & -5.987272 & 0.814903 & 2\\
+		Virial & 0.006496 & 0.514218 & 0.975995 & 3\\
+		UNIQUAC & 0.006476 & 0.517119 & 0.977335 & 6\\\hline
+	\end{tabular}
+	\egroup
+\end{table}
+
+\subsection{Número de iterações e tempo de computação}
+
+Na figura \ref{fig_violin_iter} estão exibidos os números de iterações necessárias
+para a convergência do método de Levenberg-Marquardt com aceleração geodésica,
+para os conjuntos de dados $a_w = a_w(x_1,\ldots,x_n)$\footnote{%
+	Isto é, excluindo dados de equilíbrio isopiéstico com soluções binárias
+	\cite{stokes1966}, que exigem um ajuste com a função objetivo exibida em
+	\ref{eq:min_quad_lev_stokes}. Além disso, para obter as médias marcadas
+	no gráfico, foram excluídos os \textit{outliers} do método UNIQUAC.
+}.
+Perceba que o modelo virial (que, de fato, é mais simples, ao menos quando se
+consideram conjuntos de dados de soluções binárias) apresenta um número de
+iterações ordens de grandeza menor que o necessário para a convergência dos
+outros modelos, em média. Outro ponto a ser considerado é o número de iterações
+para o modelo UNIQUAC, que é, por sua vez, ordens de grandeza maior que o número
+de iterações necessárias para a convergência do modelo de Norrish. Além disso, é
+importante ressaltar que alguns conjuntos de dados levaram a tempos de máquina
+excepcionalmente longos.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\newsavebox{\violinnorrish}
+		\savebox{\violinnorrish}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.459\textwidth,
+				width=0.9\textwidth,
+				ymin=0,ymax=15,
+				xmin=-2,xmax=6,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinbrightblue,thick]
+				(axis cs:0,0) -- (axis cs:0,10);
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./norrish_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./norrish_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,3.98797)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinvirial}
+		\savebox{\violinvirial}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.459\textwidth,
+				width=0.9\textwidth,
+				ymin=0,ymax=15,
+				xmin=-4,xmax=4,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,5);
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./virial_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./virial_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,2.06878)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinuniquac}
+		\savebox{\violinuniquac}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.459\textwidth,
+				width=0.9\textwidth,
+				ymin=0,ymax=15,
+				xmin=-6,xmax=2,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,15);
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./uniquac_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./uniquac_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,7.8168)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+	\begin{axis}[
+			xmin = 1.0, xmax = 3.0, xlabel = {Modelo},
+			ymin = 0, ymax = 15, ylabel = {\textnumero\ de iterações},
+			height=0.45\textwidth,
+			width=0.9\textwidth,
+			xtick style={draw=none},
+			xtick={1.5,2,2.5},
+			xticklabels={Norrish,Virial,UNIQUAC},
+			ytick={0,3,6,9,12,15},
+			yticklabels={1,8,64,512,4096,32768},
+		]
+		\draw (axis cs:2,7.5) node {\usebox{\violinnorrish}};
+		\draw (axis cs:2,7.5) node {\usebox{\violinvirial}};
+		\draw (axis cs:2,7.5) node {\usebox{\violinuniquac}};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Número de iterações para cada modelo}
+	\label{fig_violin_iter}
+\end{figure}
+
+Podemos ver, como exemplo, o comportamento da função objetivo com as
+iterações, para os três modelos, na figura \ref{fig_obj_iter}, obtida
+ao fazermos o gráfico da função objetivo ao longo das iterações necessárias
+para a obtenção do ajuste exibido na figura \ref{fig_mannitol_sucrose}. Aqui
+percebemos, novamente, a maior exatidão e menor tempo de máquina exigido pelo
+modelo virial, mesmo para um conjunto de dados relativos a uma mistura ternária.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{semilogyaxis} [
+			ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2}$},
+			xlabel={Iteração},
+			xmax=27.5, xmin=-0.5,
+		]
+			\addplot [
+				mark=o,
+				smooth,
+				color=pverybrightblue,
+				very thick,
+				only marks,
+			]
+			table [x={iter},y={cost},col sep=comma]
+				{iter_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot [
+				mark=o,
+				smooth,
+				color=pblue,
+				very thick,
+				only marks,
+			]
+			table [x={iter},y={cost},col sep=comma]
+				{iter_virial.csv};
+			\addlegendentry{Virial};
+			\addplot [
+				mark=o,
+				smooth,
+				color=pverydarkblue,
+				very thick,
+				only marks,
+			]
+			table [x={iter},y={cost},col sep=comma]
+				{iter_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\draw (axis cs: 6,0.0065) -- (axis cs: 10,0.65) -- %
+				(axis cs: 18,0.65);
+			\fill[pblue] (axis cs: 6,0.0065) circle (0.6mm);
+			\draw (axis cs: 8,0.0246) -- (axis cs: 10,0.65);
+			\fill[pverybrightblue] (axis cs: 8,0.0246) circle (0.6mm);
+			\draw (axis cs: 12,0.03) -- (axis cs: 10,0.65);
+			\draw[-{Latex[length=2mm]}]
+				(axis cs: 12,0.03) -- (axis cs: 27,0.03);
+			\draw (axis cs: 12,0.03) node [anchor=south west]%
+				{\tiny{179 iterações para convergência}};
+			\draw (axis cs: 14,0.65) node [anchor=south]%
+				{\tiny{Última iteração}};
+		\end{semilogyaxis}
+	\end{tikzpicture}
+	\caption{Função objetivo em função da iteração \cite{stokes1961}}
+	\label{fig_obj_iter}
+\end{figure}
+
+\subsection{Observações sobre os modelos de Caurie e Zdanovskii}
+
+Para análise de dados de soluções binárias, a relação de Zdanovskii não
+apresenta utilidade; assim sendo, foi considerada apenas na análise de dados
+provenientes de soluções ternárias. Para obter as isotermas necessárias,
+simplesmente se ajustou um polinômio de grau menor que 4 sobre dados de $a_w$
+de soluções binárias de cada soluto.
+
+O modelo de Caurie exige um modelo secundário para o cálculo da atividade da
+água de solução binária com molalidade equivalente a de cada soluto. Foi
+utilizada a Lei de Raoult, nesse caso, sendo a equação \ref{eq_caurie},
+na prática, adotada na forma \ref{eq_caurie_raoult}
+
+\begin{equation}
+	\label{eq_caurie_raoult}
+	a_w = \prod_{i \neq w}x_{wi}-\left[\cfrac{n}%
+	{55.5^2}\sum_{\substack{i \neq j \\ i,j \neq w}}%
+	m_im_j + \cfrac{(n+1)}{55.5^3}\sum_{%
+	\substack{i\neq j,k \\ j \neq k \\  i,j,k \neq w}}%
+	m_im_jm_k\right]
+\end{equation}
+
+\section{Carboidratos e aminoácidos}
+
+Foram obtidos mais dados para soluções de carboidratos (1208, distribuídos em
+91 conjuntos de dados)\footnote{%
+	Dos quais 1160 no formato adequado ao ajuste com a função objetivo
+	\ref{eq:min_quad_lev}, distribuídos em 83 conjuntos.
+}
+do que para soluções de aminoácidos (511, em 45 conjuntos). Além disso, os dados
+para soluções de carboidratos incluem uma variedade maior de substâncias (21,
+entre carboidratos e compostos semelhantes\footnote{%
+	São elas: arabinose, butanotetrol, dextrose, eritritol, etanodiol,
+	frutose, galactose, glicose, glicerol, lactose, maltitol, maltose,
+	manitol, manose, propanotriol, rafinose, ribose, sorbitol, sacarose,
+	xilitol e xilose.
+}
+) que os dados para aminoácidos (16 substâncias\footnote{%
+	São elas: alanina, ácido $\alpha$-aminobutírico, arginina, ácido
+	glutâmico, glicina, glicilglicina, histidina, hidroxiprolina,
+	isoleucina, lactamida, lisina, metionina, prolina, serina,
+	treonina e valina.
+}
+); por fim, dados para sistemas multicomponente incluem apenas carboidratos.
+
+Os dados para aminoácidos apresentam diluições maiores, em média, que os de
+soluções de carboidratos. Isso pode ser visto no histograma da figura
+\ref{fig_hist_dilui}.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\begin{tikzpicture} [scale=0.75]
+			\begin{axis} [
+				ybar,
+				ylabel={\textnumero\ de soluções},
+				xlabel={$a_w$},
+				ymin=0, xmax=1,
+				legend pos=north west,
+			]
+				\addplot+ [
+					hist={bins=20},
+					color=black,
+					fill=pdarkred,
+				] table [y index=0] {aminoacid_aw_avgs.csv};
+				\addlegendentry{Aminoácidos ($\bar{a_w}=0.9861$)};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Aminoácidos}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}
+		\begin{tikzpicture} [scale=0.75]
+			\begin{axis} [
+				ybar,
+				ylabel={\textnumero\ de soluções},
+				xlabel={$a_w$},
+				ymin=0, xmax=1,
+				legend pos=north west,
+			]
+				\addplot+ [
+					hist={bins=40},
+					color=black,
+					fill=pdarkblue,
+				] table [y index=0] {./carbohydrate_aw_avgs.csv};
+				\addlegendentry{Carboidratos ($\bar{a_w}=0.9352$)};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Carboidratos}
+	\end{subfigure}
+	\caption{Distribuição dos valores de $a_w$ real}
+	\label{fig_hist_dilui}
+\end{figure}
+
+Foram comparados os ajustes dos modelos sobre soluções binárias, de carboidratos
+e de aminoácidos. Assim sendo, a Relação de Zdanovskii não se aplica e a Equação
+de Caurie não difere do modelo de Raoult, como discutido anteriormente.
+
+Foi observado um desvio médio nos valores de $\phi$ menor para os dados de $a_w$
+em soluções de aminoácidos, relativo ao desvio médio obtido para soluções de
+carboidratos; além disso, para algumas soluções de carboidratos o modelo de
+Caurie não retornou um resultado físico, possibilidade discutida anteriormente,
+devido às grandes molalidades das soluções em questão. De fato, é esperado que
+soluções com baixas diluições apresentem maiores desvios da idealidade (e de
+quaisquer hipóteses que tenham sido adotadas na dedução dos modelos) e portanto
+é natural que obtenhamos resultados menos precisos, nesse caso.\footnote{%
+	Excetuando-se, claro, a questão dos erros de medição, que aumentam
+	conforme aumenta a diluição, como discutido anteriormente.
+}
+
+Os modelos se comportaram de forma distinta para cada grupo; enquanto para dados
+obtidos a partir de soluções de aminoácidos o modelo virial se destacou, para
+soluções de carboidratos o modelo UNIQUAC obteve os melhores desvios. Isso pode
+ser observado na tabela \ref{tab_model_amino_carb}.
+
+
+\begin{table}[h]
+	\centering
+	\caption{Performance dos modelos para diferentes substâncias}
+	\label{tab_model_amino_carb}
+	\bgroup
+	\def\arraystretch{1.5}
+	\begin{tabular}{l r r}\hline
+		Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2_\text{aminoácidos, médio}}$ &
+			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2_\text{carboidratos, médio}}$\\\hline
+		Raoult & 0.04530 & 0.22998 \\
+		Norrish & 0.03254 & 0.22343 \\
+		Virial & 0.01375 & 0.12857 \\
+		UNIQUAC & 0.02580 & 0.07282 \\\hline
+	\end{tabular}
+	\egroup
+\end{table}
+
+\section{Soluções binárias e sistemas multicomponente}
+
+Foram comparados os ajustes sobre soluções binárias e $n$-árias de carboidratos.
+Quando possível (soluções ternárias) se fez uso da Relação de Zdanovskii.
+
+Estão disponíveis 823 dados para soluções binárias apenas, 207 dados para soluções
+binárias e ternárias, apenas e 213 dados para soluções quaternárias. A cada
+conjunto de dados foram ajustados cada um dos modelos, e os valores médios dos
+desvios dos coeficientes osmóticos estão disponíveis na tabela \ref{tab_comp_mono}.
+
+Nessa tabela estão inclusos apenas os resultados obtidos em situações que façam
+sentido físico; situações nas quais o modelo de Caurie não retorna um resultado
+razoável \cite{abderafi1994} foram excluídos da média do modelo. Conjuntos de dados
+de misturas com dois solutos desacompanhados de dados para esses solutos em mistura
+binária não foram inclusos nos dados da relação de Zdanovskii. Assim sendo, esses
+dois modelos devem ser analisados separadamente.
+
+\begin{table}[h]
+	\centering
+	\caption{Performance dos modelos para sistemas binários, ternários %
+		e quaternários}
+	\label{tab_comp_mono}
+	\bgroup
+	\def\arraystretch{1.5}
+	\begin{tabular}{l r r r}\hline
+		\multirow{2}*{Modelo} & \multicolumn{3}{c}%
+			{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2_\text{médio}}$}\\
+			& Sistemas Binários & Sistemas Ternários &%
+				Sistemas Quaternários \\\hline
+		Raoult & 0.22998 & 0.12130 & 0.11738 \\
+		Caurie & 0.22998 & 0.07157 & 0.12532 \\
+		Zdanovskii & \textemdash  & 0.17849 & \textemdash \\
+		Norrish & 0.22343 & 0.09630 & 0.10383 \\
+		Virial & 0.12857 & 0.01618 & 0.04871 \\
+		UNIQUAC & 0.07282 & 0.02172 & 0.09575 \\\hline
+	\end{tabular}
+	\egroup
+\end{table}
+
+\subsection{Relação de Zdanovskii}
+
+O comportamento desse modelo foi ruim para os dados binários analisados; uma
+comparação com os resultados obtidos com Raoult, Norrish, Virial e UNIQUAC está
+na tabela \ref{tab_zdan_multi}, que compara os desvios quadrados médios dos
+coeficientes osmóticos para os conjuntos de dados para os quais a Relação de
+Zdanovskii pode ser aplicada.
+
+\begin{table}[h]
+	\centering
+	\caption{Comparação com o modelo de Zdanovskii}
+	\label{tab_zdan_multi}
+	\bgroup
+	\def\arraystretch{1.5}
+	\begin{tabular}{l r}\hline
+		Modelo & %
+			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2_\text{sistemas binários, %
+				médio}}$\\\hline
+		Raoult & 0.11567 \\
+		Zdanovskii & 0.17849 \\
+		Norrish & 0.05251 \\
+		Virial & 0.01561 \\
+		UNIQUAC & 0.01314 \\\hline
+	\end{tabular}
+	\egroup
+\end{table}
+
+\subsection{Modelo de Caurie}
+
+O modelo de Caurie retorna resultados não-físicos para alguns conujuntos de dados.
+Excluindo esses conjuntos e comparando os resultados, percebemos que o modelo
+apresenta resultados razoavelmente bons. Esses dados estão na tabela
+\ref{tab_caurie_multi}.
+
+\begin{table}[h]
+	\centering
+	\caption{Comparação com o modelo de Zdanovskii}
+	\label{tab_caurie_multi}
+	\bgroup
+	\def\arraystretch{1.5}
+	\begin{tabular}{l r}\hline
+		Modelo & %
+			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2_\text{Caurie, %
+				médio}}$\\\hline
+		Raoult & 0.11551 \\
+		Caurie & 0.09844 \\
+		Norrish & 0.11144 \\
+		Virial & 0.03774 \\
+		UNIQUAC & 0.07792 \\\hline
+	\end{tabular}
+	\egroup
+\end{table}
+
+\subsection{Observações sobre os resultados}
+
+Podemos observar que os modelos virial e UNIQUAC são, tanto para sistemas
+binários quanto para sistemas multicomponente, os melhores em termos de
+reduzir o valor da função objetivo, e que isso se dá não somente devido ao maior
+número de parâmetros, já que, para sistemas binários tanto o modelo de Norrish
+quanto o modelo virial apresentam apenas um parâmetro, apesar de apresentarem desvios
+claramente diferentes.
+
+Além disso, a versão (simplificada) do modelo UNIQUAC (que chega a contar com até 8
+parâmetros) não apresenta valores consistentemente menores da função objetivo que o
+modelo virial (que apresenta no máximo 6 parâmetros).
+
+Por fim, vale ressaltar que, para alguns conjuntos de dados\footnote{%
+	\cite{norrish1966}, dados para uma mistura de sacarose e dextrose.
+}, a quantidade de pontos foi insuficiente para ajuste via modelo UNIQUAC;
+entretanto, isso não é um grande problema, já que análises do modelo para
+dados da mesma fonte não apresentaram peculiaridades. Ao contrário das situações
+vistas com Caurie, isso foi decorrente da simples quantidade de dados.
+
+\section{Influência da diluição}
+
+Observando os dados como um todo, podemos observar que a diluição parece não
+afetar de forma significativa o valor dos desvios, para os modelos avaliados.
+Isso pode ser visto no gráfico exibido na figura \ref{fig_dilution_all}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{semilogyaxis} [
+			ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2}$},
+			xlabel={$x_w$},
+			legend pos=south west,
+			xmin=0.85,
+			xmax=1.0,
+		]
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={xw},y={raoult},col sep=comma]
+				{dilution_mono.csv};
+			\addlegendentry{Raoult};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverybrightblue,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={xw},y={norrish},col sep=comma]
+				{dilution_mono.csv};
+			\addlegendentry{Norrish};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pblue,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={xw},y={virial},col sep=comma]
+				{dilution_mono.csv};
+			\addlegendentry{Virial};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverydarkblue,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={xw},y={uniquac},col sep=comma]
+				{dilution_mono.csv};
+			\addlegendentry{UNIQUAC};
+		\end{semilogyaxis}
+	\end{tikzpicture}
+	\caption{Função objetivo em função da diluição (sistemas binários)}
+	\label{fig_dilution_all}
+\end{figure}
+
+\section{Influência do Método de Obtenção}
+
+Como visto na seção \ref{sec_selec_data}, os dados foram obtidos através de
+diversos métodos, como medidas de pressão de vapor, depressão do ponto de fusão,
+elevação do ponto de ebulição, entre outros. Dentre conjuntos de dados obtidos
+a partir de substâncias similares, podemos comparar os desvios obtidos entre os
+dados e os modelos para diferentes procedimentos experimentais.
+
+\subsection{Aminoácidos}
+
+Foram comparados dados obtidos a partir de medições de coeficiente osmótico,
+medidas diretas de atividade da água, depressão do ponto de fusão e dados de
+pressão de vapor, de acordo com as fontes delineadas na seção \ref{sec_selec_data}.
+A única diferença estatisticamente significante observada foi entre os desvios
+obtidos através do modelo UNIQUAC para dados obtidos a partir de coeficiente
+osmótico e para dados obtidos através de depressão de ponto de fusão.
+
+Entretanto, como os experimentos que compõem esse último grupo geraram poucos
+dados experimentais, e como tem todos a mesma fonte, a explicação mais provável
+é a simples ocorrência de \textit{overfitting} ao utilizar nesses dados o modelo
+UNIQUAC, tornando os desvios excepcionalmente pequenos.
+
+\subsection{Carboidratos}
+
+Foram analisados os desvios dos ajustes para dados obtidos a partir de medições
+diretas de $a_w$, medições de coeficientes osmóticos, depressões de ponto de fusão,
+elevações de ponto de ebulição e umidade relativa. Para manter a coerência com a
+análise dos aminoácidos, foram avaliados apenas ajustes sobre dados provenientes de
+sistemas binários.
+
+Existe diferença estatisticamente significante entre os desvios obtidos a partir
+de dados de elevação do ponto de ebulição, de coeficientes osmóticos, e do resto.
+De forma similar a anterior, entretanto, a explicação mais provável para essa
+diferença são as diferenças entre os estudos: entre os dados de elevação de ponto
+de ebulição, por exemplo, se incluem os obtidos, por Abderafi \& Bounahmidi
+\cite{abderafi1994}, que, por terem sido obtidos em condições muito diferentes
+das condições nos quais foram obtidos os outros dados, apresentam algumas
+peculiaridades\footnote{%
+	\textit{E.g.} a diferença na temperatura dos exeperimentos.
+}.
+
+\section{Valores Ajustados \textendash\ Observações Gerais}
+
+\subsection{Modelo de Norrish}
+
+Como discutido anteriormente, o modelo de Norrish apresenta dificuldades para
+lidar com sistemas que apresentem $\phi > 1$. Nesse caso, o processo iterativo
+deixará os parâmetros $K_i$ tão próximos quanto o possível de 0, de modo a
+maximizar o valor de $\phi$.
+
+\subsection{Modelo UNIQUAC}
+
+O modelo UNIQUAC apresenta, mesmo para soluções binárias, um grande número
+de parâmetros. Isso pode levar a problemas com \textit{overfitting}. Além disso,
+existem problemas relativos a colinearidade, já que o conjunto de valores
+possíveis $(x_1,x_2,\ldots,x_p)$ para a composição de uma mistura com $p$
+componentes (incluindo a água) pertence a um subespaço de dimensão $p-1$
+de $\mathbb{R}^p$.
+
+\subsection{Modelo Virial}
+
+As estimativas para os valores de $b_i$ apresentaram boa coerência (especialmente
+entre conjuntos de dados provenientes das mesmas fontes), e foi possível obter
+valores razoáveis para o ajuste. Exemplos para três carboidratos estão na figura
+\ref{fig_violin_virial_carb}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\newsavebox{\violinsucrose}
+		\savebox{\violinsucrose}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.459\textwidth,
+				width=0.9\textwidth,
+				ymin=-2,ymax=0,
+				xmin=-4,xmax=12,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,-3);
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./sucrose_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./sucrose_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,-1.065754)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinglucose}
+		\savebox{\violinglucose}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.459\textwidth,
+				width=0.9\textwidth,
+				ymin=-2,ymax=0,
+				xmin=-8,xmax=8,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,-3);
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./glucose_violin.csv};
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,-3);
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./glucose_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,-1.16826)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinfructose}
+		\savebox{\violinfructose}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.459\textwidth,
+				width=0.9\textwidth,
+				ymin=-2,ymax=0,
+				xmin=-12,xmax=4,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolindarkblue,thick]
+				(axis cs:0,0) -- (axis cs:0,-3);
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./fructose_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./fructose_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,-1.23545)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+	\begin{axis}[
+			xmin = 1.0, xmax = 3.0, xlabel = {Carboidrato},
+			ymin = -2, ymax = 0, ylabel = {$K_\text{Carboidrato}$},
+			height=0.45\textwidth,
+			width=0.9\textwidth,
+			xtick style={draw=none},
+			xtick={1.5,2,2.5},
+			xticklabels={Sacarose,Glicose,Frutose},
+		]
+		\draw (axis cs:2,-1) node {\usebox{\violinsucrose}};
+		\draw (axis cs:2,-1) node {\usebox{\violinglucose}};
+		\draw (axis cs:2,-1) node {\usebox{\violinfructose}};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Valores obtidos para o parâmetro $K$ para sacarose, %
+		glucose e frutose.}
+	\label{fig_violin_virial_carb}
+\end{figure}
+
+Entretanto, para os valores de $c_i$, a situação se torna diferente: diferentes
+estudos (apesar de coerentes entre si) apresentaram estimativas ordens de grandeza
+diferentes. Isso possivelmente está associado a temperatura ou diluição (já que
+diferentes experimentos\footnote{%
+	\cite{abderafi1994,velezmoro2000}
+}
+apresentam diferentes temperaturas e diluições).
+
+\section{Influência da Temperatura}
+
+Para avaliar a influência da temperatura, avaliamos separadamente dados
+provenientes de estudos feitos a diferentes temperaturas, tanto para carboidratos
+\cite{velezmoro2000} quanto para aminoácidos \cite{romero2006,tsurko2007}.
+
+Com isso, pode ser observado que a influência da temperatura sobre a função
+objetivo não é universal. ocorrendo apenas em situações específicas, a
+depender de outros fatores como natureza química dos solutos ou diluição.
+
+\subsection{Carboidratos}
+
+Avaliando dados de $a_w$ em função de $(x_\text{frutose},x_\text{glicose},%
+x_\text{sacaraose})$ \cite{velezmoro2000}, não foi possível afirmar que
+as pequenas diferenças observadas entre os desvios para $T=25,30,25$
+\textcelsius\ são estatisticamente significantes, para os modelos
+virial e UNIQUAC.
+
+Entretanto, o modelo de Norrish e a lei de Raoult apresentam desvios
+estatisticamente significantes diferentes entre medidas obtidas a
+25\textcelsius\ ou 30\textcelsius\ e medidas obtidas a 35\textcelsius.
+
+Além disso, os desvios para Norrish e Raoult foram muito similares; sendo
+assim, podemos concluir que para esse conjunto de dados, temos, de forma
+geral, $\phi>1$; além disso, o crescimento de $T$ deve levar a um aumento
+no valor de $\phi$, o que torna os modelos de Norrish e Raoult ainda menos
+adequados. Isso pode ser visto na figura \ref{fig_temp_carbs}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis} [
+			ylabel={$\phi$},
+			xlabel={$x_\text{maltose}$},
+			xtick={0.004,0.008,0.012,0.016,0.020},
+			xlabel near ticks,
+			ylabel near ticks,
+			xticklabel style={
+				/pgf/number format/fixed,
+				/pgf/number format/precision=3,
+				/pgf/number format/fixed zerofill
+			},
+			scaled x ticks=false,
+		]
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverybrightred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={maltose},y={phi_exp},col sep=comma]
+				{./velezmoro_maltose_25.csv};
+			\addlegendentry{25\textcelsius};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={maltose},y={phi_exp},col sep=comma]
+				{./velezmoro_maltose_30.csv};
+			\addlegendentry{30\textcelsius};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverydarkred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={maltose},y={phi_exp},col sep=comma]
+				{./velezmoro_maltose_35.csv};
+			\addlegendentry{35\textcelsius};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Valores experimentais obtidos para $\phi$ em uma solução de maltose}
+	\label{fig_temp_carbs}
+\end{figure}
+
+\subsection{Aminoácidos}
+
+Foram analisados dois estudos: um comparando três aminoácidos (ácido glutâmico,
+glicina e histidina) às temperaturas de 298.15K e 310.15K \cite{tsurko2007}, e
+outro comparando três aminoácidos (alanina, ácido $\alpha$-aminobutírico e glicina)
+às temperaturas de 288.15K, 293.15K, 298.15K e 303.15K \cite{romero2006}.
+
+Analisando os dados obtidos em cada um, não foi encontrada diferença significativa
+entre os desvios a uma temperatura e a outra, para modelo algum, tanto para os
+dados do primeiro conjunto de dados, quanto para os dados do segundo.
+
+Isso se explica já que não temos, como no caso anterior, valores de $\phi$ maiores
+que 1; assim sendo, para os valores de temperatura em questão é possível obter
+um ajuste, para os modelos avaliados; além disso, o comportamento não se modifica
+de forma qualitativa (como no caso anterior, que passa a exibir pontos de mínimo
+perceptíveis para maiores temperaturas).
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis} [
+			ylabel={$\phi$},
+			xlabel={$x_\text{glicina}$},
+			xtick={0.002,0.006,0.010,0.014,0.018,0.022},
+			xlabel near ticks,
+			ylabel near ticks,
+			xticklabel style={
+				/pgf/number format/fixed,
+				/pgf/number format/precision=3,
+				/pgf/number format/fixed zerofill
+			},
+			scaled x ticks=false,
+		]
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverybrightred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={glycine},y={phi_exp},col sep=comma]
+				{./romero_glycine_288_15_K.csv};
+			\addlegendentry{288.15K};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={glycine},y={phi_exp},col sep=comma]
+				{./romero_glycine_293_15_K.csv};
+			\addlegendentry{293.15K};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverydarkred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={glycine},y={phi_exp},col sep=comma]
+				{./romero_glycine_298_15_K.csv};
+			\addlegendentry{288.15K};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=black,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={glycine},y={phi_exp},col sep=comma]
+				{./romero_glycine_303_15_K.csv};
+			\addlegendentry{303.15K};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Valores experimentais obtidos para $\phi$ em uma solução de glicina}
+	\label{fig_temp_amins}
+\end{figure}
+
+\phantompart
+
+\chapter{Cronograma}
+
+O cronograma original (tabela \ref{tab:cronograma}) proposto para o projeto
+está sendo obedecido: já foi feita a compilação e interpretação dos dados da
+literatura, e estão sendo escritos os códigos-fonte dos programas responsáveis
+por ajustar os modelos aos dados.
+
+\begin{table}[h]
+	\centering
+	\caption{Cronograma e etapas já cumpridas}
+	\label{tab:cronograma}
+	\begin{tabular}{l C C C C}\hline
+		Etapa & \multicolumn{4}{c}{Trimestre}\\
+			& 1 & 2 & 3 & 4\\\hline
+		Revisão bibliográfica & \multicolumn{4}{|c|}%
+		{\cellcolor{pdone}Concluída}\\\hhline{~----}
+		Análise e interpretação da literatura &
+		\multicolumn{2}{|c|}{\cellcolor{pdone}Concluída} & & \\\hhline{~---~}
+		Programação das rotinas computacionais & &
+		\multicolumn{2}{|c|}{\cellcolor{pdone}Concluída} & \\\hhline{~~---}
+		Ajuste do modelo & & &
+			\multicolumn{2}{|c|}{\cellcolor{pdone}Concluída}\\
+		\hhline{~~---}
+		Redação de relatório & &
+			\multicolumn{1}{|c|}{\cellcolor{pdone}Concluída}
+		& & \multicolumn{1}{|c|}{\cellcolor{pdoing}Em conclusão}\\\hline
+	\end{tabular}
+\end{table}
+
+
+\postextual
+
+\nocite{nocedal2006}
+\bibliography{bibliography}
+
+\end{document}

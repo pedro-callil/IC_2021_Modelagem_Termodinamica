@@ -2,4 +2,19 @@ bin/**
 
 test/**
 
+doc/main-*
+doc/*.aux
+!doc/abntex2-modelo-include-comandos.aux
+doc/*.auxlock
+doc/*.bbl
+doc/*.blg
+doc/*.brf
+doc/*.idx
+doc/*.lof
+doc/*.log
+doc/*.lot
+doc/*.pdf
+doc/*.toc
+
+doc/report/**
 

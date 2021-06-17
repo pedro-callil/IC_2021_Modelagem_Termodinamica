@@ -45,16 +45,18 @@ RFILE		= report/relatorioIniciacaoCientificaAtividadeDaAgua.pdf
 
 all: $(LSRC) $(LSRCDEPS)
 	$(LC) $(LCFLAGS) $(LSRC); \
-		$(LC) $(LCFLAGS) $(LSRC); \
-			cp $(LSOUT) $(RFILE)
+	$(LC) $(LCFLAGS) $(LSRC); \
+		if [ ! -d "./report" ]; then mkdir report; fi; \
+		cp $(LSOUT) $(RFILE)
 
 bib: $(LSRC) $(LSRCDEPS) $(BSRCDEPS)
 	$(LC) $(LCFLAGS) $(LSRC); \
 		$(BC) $(BSRC); \
 			$(LC) $(LCFLAGS) $(LSRC); \
-				$(LC) $(LCFLAGS) $(LSRC); \
-					$(LC) $(LCFLAGS) $(LSRC); \
-						cp $(LSOUT) $(RFILE)
+			$(LC) $(LCFLAGS) $(LSRC); \
+			$(LC) $(LCFLAGS) $(LSRC); \
+				if [ ! -d "./report" ]; then mkdir report; fi; \
+				cp $(LSOUT) $(RFILE)
 
 clean:
 	rm -f main-* \

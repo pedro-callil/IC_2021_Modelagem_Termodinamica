@@ -9,6 +9,7 @@ doc/*.auxlock
 doc/*.bbl
 doc/*.blg
 doc/*.brf
+doc/*.gnuplot
 doc/*.idx
 doc/*.lof
 doc/*.log

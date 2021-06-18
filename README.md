@@ -99,7 +99,7 @@ Relatório
 
 Caso exista interesse no relatório final do projeto, o arquivo `.tex` que constitui
 seu código-fonte está disponível no diretório `doc`. Para compilar o relatório, é
-necessária uma distribuição TeX recente, e, novamente, Make:
+necessário TeX Live 2021, gnuplot, e, novamente, Make:
 
 ```
 $ cd doc

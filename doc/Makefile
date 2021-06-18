@@ -65,6 +65,7 @@ clean:
 		*.bbl \
 		*.blg \
 		*.brf \
+		*.gnuplot \
 		*.idx \
 		*.lof \
 		*.log \

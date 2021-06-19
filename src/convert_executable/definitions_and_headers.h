@@ -79,6 +79,16 @@
 #define D_I -0.913445257884
 #define E_I 0.999967849643
 
+#define A_SR -1.6948e9
+#define B_SR 6.8748e8
+#define C_SR -1.1619e8
+#define D_SR 1.0608e7
+#define E_SR -566802
+#define F_SR 17939.7
+#define G_SR -326.705
+#define H_SR 2.49334
+#define I_SR 0.989401
+
 /*
  * Data structures
  */

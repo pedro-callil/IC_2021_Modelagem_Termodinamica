@@ -14,6 +14,7 @@ double freezing_point ( double P );
 double delta_H_fus ( double T );
 double delta_C_fus ( double T );
 double scatchard_isopiestic ( double x_nacl );
+double stokes_isopiestic ( double x_sucrose );
 
 
 /*
@@ -204,8 +205,13 @@ Data convert ( Metadata *system_description, Data *system,
 		else if ( strcmp ( user_data->y_property,
 					"isopiestic_nacl" ) == TRUE ||
 				strcmp ( user_data->y_property,
-					"nacl" ) == TRUE ) {
-			if ( strcmp ( user_data->isopiestic_property,
+					"nacl" ) == TRUE ||
+				strcmp ( user_data->y_property,
+					"isopiestic_sucrose" ) == TRUE ||
+				strcmp ( user_data->y_property,
+					"sucrose" ) == TRUE ) {
+			if ( user_data->isopiestic_property == NULL ) {
+			} else if ( strcmp ( user_data->isopiestic_property,
 					"molality" ) == TRUE ) {
 				for ( i = 0; i < lines; i++ ) {
 					y_var[i] = y_var[i] /
@@ -227,15 +233,26 @@ Data convert ( Metadata *system_description, Data *system,
 						( 1 / MASS_TO_FRACTION ) );
 				}
 			}
-			for ( i = 0; i < lines; i++ ) {
-				aw[i] = scatchard_isopiestic ( y_var[i] );
+			if ( strcmp ( user_data->y_property,
+					"sucrose" ) == TRUE ||
+				strcmp ( user_data->y_property,
+					"isopiestic_sucrose" ) == TRUE ) {
+				for ( i = 0; i < lines; i++ ) {
+					aw[i] = stokes_isopiestic ( y_var[i] );
+				}
+			} else {
+				for ( i = 0; i < lines; i++ ) {
+					aw[i] = scatchard_isopiestic ( y_var[i] );
+				}
 			}
 		}
 		/*
 		* We use data from Scatchard et. al (1938) to obtain water
 		* activity values from isopiestic measurements, i.e. from the
 		* NaCl solution in osmotic equilibrium with the solution to be
-		* analysed.
+		* analysed. It's also possible to use data from Stokes &
+		* Robinson to obtain water activity from isopiestic sucrose
+		* data.
 		*/
 
 		else if ( strcmp ( user_data->y_property,
@@ -412,6 +429,30 @@ double scatchard_isopiestic ( double x_nacl ) {
 	aw_equiv += C_I * pow ( x_nacl, 2 );
 	aw_equiv += D_I * x_nacl;
 	aw_equiv += E_I;
+
+	return aw_equiv;
+
+}
+
+/*
+ * This function converts data of molar fraction of sucrose in binary solution
+ * to water activity data.
+ */
+
+double stokes_isopiestic ( double x_sucrose ) {
+
+	double aw_equiv;
+
+	aw_equiv = 0;
+	aw_equiv += A_SR * pow ( x_sucrose, 8 );
+	aw_equiv += B_SR * pow ( x_sucrose, 7 );
+	aw_equiv += C_SR * pow ( x_sucrose, 6 );
+	aw_equiv += D_SR * pow ( x_sucrose, 5 );
+	aw_equiv += E_SR * pow ( x_sucrose, 4 );
+	aw_equiv += F_SR * pow ( x_sucrose, 3 );
+	aw_equiv += G_SR * pow ( x_sucrose, 2 );
+	aw_equiv += H_SR * x_sucrose;
+	aw_equiv += I_SR;
 
 	return aw_equiv;
 

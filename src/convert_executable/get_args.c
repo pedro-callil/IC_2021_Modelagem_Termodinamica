@@ -27,7 +27,8 @@ void print_usage (void) {
 	fprintf ( stderr, "      Property to convert to water activity.\n" );
 	fprintf ( stderr, "      Can be one of \"vapour_pressure\", \"BPE\",\n" );
 	fprintf ( stderr, "      \"FPD\", \"phi\" or \"osmotic_coefficient\",\n" );
-	fprintf ( stderr, "      \"isopiestic_nacl\" or \"nacl\", or\n" );
+	fprintf ( stderr, "      \"isopiestic_nacl\" (or \"nacl\"), \n" );
+	fprintf ( stderr, "      \"isopiestic_sucrose\" (or \"sucrose\") or \n" );
 	fprintf ( stderr, "      \"molality\".\n" );
 	fprintf ( stderr, "      If set, the following options are valid:\n" );
 	fprintf ( stderr, "        -k\n" );

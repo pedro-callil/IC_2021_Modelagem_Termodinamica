@@ -1303,7 +1303,7 @@ propriedades; como visto nas tabelas \ref{tab_dados_pontos} e
 para a mesma base. Mesmo que o programa necessite dos dados de coeficiente
 osmótico para a regressão, todos os dados são alimentados ao programa na forma
 de dados de atividade da água e frações molares, sendo a conversão dos valores de
-$a_w$ em valores de $\phi$ puramente interna, quando possível.
+$a_w$ em valores de $\phi$ puramente interna.
 
 \section{Algoritmos e funções-objetivo}
 
@@ -1598,12 +1598,7 @@ calculados com o uso de modelos que exijam regressão \cite{stokes1961}}
 
 Na figura \ref{fig_violin_iter} estão exibidos os números de iterações necessárias
 para a convergência do método de Levenberg-Marquardt com aceleração geodésica,
-para os conjuntos de dados $a_w = a_w(x_1,\ldots,x_n)$\footnote{%
-	Isto é, excluindo dados de equilíbrio isopiéstico com soluções binárias
-	\cite{stokes1966}, que exigem um ajuste com a função objetivo exibida em
-	\ref{eq:min_quad_lev_stokes}. Além disso, para obter as médias marcadas
-	no gráfico, foram excluídos os \textit{outliers} do método UNIQUAC.
-}.
+para os conjuntos de dados avaliados.
 Perceba que o modelo virial (que, de fato, é mais simples, ao menos quando se
 consideram conjuntos de dados de soluções binárias) apresenta um número de
 iterações ordens de grandeza menor que o necessário para a convergência dos
@@ -1963,7 +1958,7 @@ ser observado na tabela \ref{tab_model_amino_carb}.
 Foram comparados os ajustes sobre soluções binárias e $n$-árias de carboidratos.
 Quando possível (soluções ternárias) se fez uso da Relação de Zdanovskii.
 
-Estão disponíveis 823 dados para soluções binárias apenas, 207 dados para soluções
+Estão disponíveis 823 dados para soluções binárias apenas, 235 dados para soluções
 binárias e ternárias, apenas e 213 dados para soluções quaternárias. A cada
 conjunto de dados foram ajustados cada um dos modelos, e os valores médios dos
 desvios dos coeficientes osmóticos estão disponíveis na tabela \ref{tab_comp_mono}.
@@ -1988,12 +1983,12 @@ dois modelos devem ser analisados separadamente.
 			\phi_{\text{calc}})^2_\text{médio}}$}\\
 			& Sistemas Binários & Sistemas Ternários &%
 				Sistemas Quaternários \\\hline
-		Raoult & 0.22998 & 0.12130 & 0.11738 \\
-		Caurie & 0.22998 & 0.07157 & 0.12532 \\
+		Raoult & 0.22998 & 0.14672 & 0.11738 \\
+		Caurie & 0.22998 & 0.14091 & 0.12532 \\
 		Zdanovskii & \textemdash  & 0.17849 & \textemdash \\
-		Norrish & 0.22343 & 0.09630 & 0.10383 \\
-		Virial & 0.12857 & 0.01618 & 0.04871 \\
-		UNIQUAC & 0.07282 & 0.02172 & 0.09575 \\\hline
+		Norrish & 0.22343 & 0.06190 & 0.10383 \\
+		Virial & 0.12857 & 0.01109 & 0.04871 \\
+		UNIQUAC & 0.07282 & 0.01262 & 0.09575 \\\hline
 	\end{tabular}
 	\egroup
 \end{table}
@@ -2044,11 +2039,11 @@ apresenta resultados razoavelmente bons. Esses dados estão na tabela
 			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2_\text{Caurie, %
 				médio}}$\\\hline
-		Raoult & 0.11551 \\
-		Caurie & 0.09844 \\
-		Norrish & 0.11144 \\
-		Virial & 0.03774 \\
-		UNIQUAC & 0.07792 \\\hline
+		Raoult & 0.13890 \\
+		Caurie & 0.13666 \\
+		Norrish & 0.073084 \\
+		Virial & 0.021138 \\
+		UNIQUAC & 0.037825 \\\hline
 	\end{tabular}
 	\egroup
 \end{table}
@@ -3171,9 +3166,7 @@ Aqui estão os dados obtidos de conjuntos de experimentos que incluem análises
 de soluções ternárias ou quaternárias. Isso inclui (em alguns casos) séries de
 dados obtidas a partir de soluções binárias.
 
-\subsection{Dados de $a_w$ em função da composição}
-
-\subsubsection{Dados de Abderafi \& Bounahmidi (1994)}
+\subsection{Dados de Abderafi \& Bounahmidi (1994)}
 
 Dados para soluções binárias ternárias e quaternárias de carboidratos, em baixas
 diluições, foram obtidos através de experimentos de elevação do ponto de ebulição.
@@ -3225,7 +3218,7 @@ Esses dados foram analisados, com os resultados estando disponíveis nas tabelas
 
 \FloatBarrier
 
-\subsubsection{Dados de Norrish (1966)}
+\subsection{Dados de Norrish (1966)}
 
 Dados de umidade relativa de equilíbrio (à temperatura de 298.15K) para três
 soluções ternárias de carboidratos foram analisados e ajustados, resultando
@@ -3254,72 +3247,37 @@ não foi possível fazer o ajuste do modelo UNIQUAC.\footnote{\cite{norrish1966}
 
 \FloatBarrier
 
-\subsubsection{Dados de Robinson \& Stokes (1961)}
+\subsection{Dados de Robinson \& Stokes (1961)}
 
 Foram obtidos dados de equilíbrio osmótico para soluções binárias e ternárias
 de sacarose e manitol. Esses dados foram analisados, estando presentes nas tabelas
 \ref{tab_stokes_61_mannitol}, \ref{tab_stokes_61_sucrose} e
 \ref{tab_stokes_61_sucrose_mannitol}.\footnote{\cite{stokes1961}}
 
-\tablemonofirst
-	{30.9063}
-	{6.47875}
-	{1721.05}
-	{0.00442844}
-	{80090.2}
-\tablemonosecond{manitol}
-	{tab_stokes_61_mannitol}
-	{0.127764}
-	{0.000349}
-	{0.000203}
-	{0.049152}
-	{0.992993}
-	{0.986216}
-	{-0.750839}
+\tablemonofirst{30.9063}{6.47875}{1721.05}{0.00442844}{80090.2}
+\tablemonosecond{manitol}{tab_stokes_61_mannitol}{0.127764}{0.000349}
+	{0.000203}{0.049152}{0.992993}{0.986216}{-0.750839}
 
-\tablemonofirst
-	{6.10767}
-	{10.6227}
-	{1719.5}
-	{0.000829092}
-	{134361}
-\tablemonosecond{sacarose}
-	{tab_stokes_61_sucrose}
-	{0.071781}
-	{0.014774}
-	{0.014750}
-	{0.046452}
-	{0.971910}
-	{0.958065}
-	{-0.808283}
+\tablemonofirst{6.10767}{10.6227}{1719.5}{0.000829092}{134361}
+\tablemonosecond{sacarose}{tab_stokes_61_sucrose}{0.071781}{0.014774}
+	{0.014750}{0.046452}{0.971910}{0.958065}{-0.808283}
 
-
-
-\tablebifirst
-	{-0.807777}
-	{-0.744528}
-	{-0.366574}
-	{5.08667}
-	{31.8823}
-	{23.9702}
-	{1720.9}
-	{0.00292195}
-	{84866.7}
-\tablebisecond
-	{0.0039379}
-	{84031.8}
-\tablebithird{sacarose}{manitol}
-	{tab_stokes_61_sucrose_mannitol}
-	{0.977671}
-	{0.965048}
-	{0.024635}
-	{0.006496}
-	{0.006476}
-	{0.049057}
+\tablebifirst{-0.807777}{-0.744528}{-0.366574}{5.08667}{31.8823}
+	{23.9702}{1720.9}{0.00292195}{84866.7}
+\tablebisecond{0.0039379}{84031.8}
+\tablebithird{sacarose}{manitol}{tab_stokes_61_sucrose_mannitol}
+	{0.977671}{0.965048}{0.024635}{0.006496}{0.006476}{0.049057}
 
 \FloatBarrier
 
-\subsubsection{Dados de Velezmoro, Oliveira, Cabral \& Meirelles (2000)}
+\subsection{Dados de Stokes \& Robinson (1966)}
+
+Dados isopiésticos de soluções binárias contendo sacarose foram convertidos
+em dados de $a_w$.
+
+\FloatBarrier
+
+\subsection{Dados de Velezmoro, Oliveira, Cabral \& Meirelles (2000)}
 
 Medidas diretas de $a_w$ obtidas para soluções de carboidratos foram analisadas,
 resultando nos dados exibidos nas tabelas \ref{tab_velezmoro_00_fructose_25_C},

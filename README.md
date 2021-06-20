@@ -102,7 +102,8 @@ seu código-fonte está disponível no diretório `doc`. Para compilar o relató
 necessário TeX Live 2021, gnuplot, e, novamente, Make:
 
 ```
-$ cd doc
+$ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
+$ cd IC_2021_Modelagem_Termodinamica/doc
 $ make bib
 ```
 

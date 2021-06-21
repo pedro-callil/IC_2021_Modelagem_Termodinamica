@@ -95,11 +95,13 @@
 		\label{#2}
 		\bgroup
 		\def\arraystretch{1.5}
-		\begin{tabular}{| c | l | l |}\hline
+		\scalebox{0.9}{%
+		\begin{tabular}{| p{0.2\textwidth} | p{0.4\textwidth} | %
+				p{0.4\textwidth} |}\hline
 			\multirow{2}*{Composição} &
 				\multicolumn{2}{c|}{Modelos}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
-			\multirow{5}*{\makecell{Água,\\#1}} &
+			\multirow{5}*{\makecell[l]{Água,\\#1}} &
 				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#3$ &
 				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#4$%
 					\\\hhline{~-~}
@@ -111,7 +113,7 @@
 				\\\hhline{-~~}
 			$\bar{a_w}=#7$ & $u_\text{água}=\ArgXII$ & \\
 			$\bar{x_w}=#8$ & $u_\text{#1}=\ArgXIV$ & \\\hline
-		\end{tabular}
+		\end{tabular}}
 		\egroup
 	\end{table}
 }
@@ -161,11 +163,13 @@
 		\label{#3}
 		\bgroup
 		\def\arraystretch{1.5}
-		\begin{tabular}{| c | l | l |}\hline
+		\scalebox{0.9}{%
+		\begin{tabular}{| p{0.2\textwidth} | p{0.4\textwidth} | %
+				p{0.4\textwidth} |}\hline
 			\multirow{2}*{Composição} &
 				\multicolumn{2}{c|}{Modelos}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
-			\multirow{7}*{\makecell{Água,\\#1 e\\#2}} &
+			\multirow{7}*{\makecell[l]{Água,\\#1 e\\#2}} &
 				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#9$ &
 				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#7$%
 					\\\hhline{~-~}
@@ -182,7 +186,7 @@
 			$\bar{a_w}=#4$ & $u_\text{#1}=\ArgXVIII$ &
 				$K_\text{#2} = \ArgXIV$ \\
 			$\bar{x_w}=#5$ & $u_\text{#2}=\ArgXX$ & \\\hline
-		\end{tabular}
+		\end{tabular}}
 		\egroup
 	\end{table}
 }
@@ -218,11 +222,13 @@
 		\label{#3}
 		\bgroup
 		\def\arraystretch{1.5}
-		\begin{tabular}{| c | l | l |}\hline
+		\scalebox{0.9}{%
+		\begin{tabular}{| p{0.2\textwidth} | p{0.4\textwidth} | %
+				p{0.4\textwidth} |}\hline
 			\multirow{2}*{Composição} &
 				\multicolumn{2}{c|}{Modelos}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
-			\multirow{10}*{\makecell{Água,\\#1,\\#2 e\\\ArgXXVII}} &
+			\multirow{10}*{\makecell[l]{Água,\\#1,\\#2 e\\\ArgXXVII}} &
 				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#9$ &
 				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#7$%
 					\\\hhline{~-~}
@@ -244,7 +250,7 @@
 			$\bar{a_w}=#4$ & $u_\text{\ArgXXVII}=\ArgXXVI$ &
 				$K_\text{#2} = \ArgXVII$ \\
 			$\bar{x_w}=#5$ & & $K_\text{\ArgXXVII}=\ArgXVIII$ \\\hline
-		\end{tabular}
+		\end{tabular}}
 		\egroup
 	\end{table}
 }
@@ -253,6 +259,7 @@
 \tabletrisecondzero{1}{1}{1}{1}{1}{1}{1}{1}{1}
 
 \newcolumntype{C}{>{\centering\arraybackslash}p{3em}}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
 \newcolumntype{G}{>{\columncolor{lightgray}\centering\arraybackslash}p{3em}}
 
 \DeclareMathOperator*{\minimize}{minimize}
@@ -1578,26 +1585,34 @@ calculados com o uso de modelos que exijam regressão \cite{stokes1961}}
 \label{fig_mannitol_sucrose}
 \end{figure}
 
-\begin{table}[h]
-	\centering
+\begin{tabularx}{\textwidth}{ X  r  r  r  r }
 	\caption{Indicadores para um conjunto de dados \cite{stokes1961}}
-	\label{tab_mannitol_sucrose}
-	\bgroup
-	\def\arraystretch{1.5}
-	\begin{tabular}{l r r r r}\hline
-		Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2}$ &
-			$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
-			\textnumero\ parâmetros\\\hline
-		Raoult & 0.049057 & -25.947383 & 0.440301 & 0 \\
-		Caurie & 0.049952 & -26.940271 & 0.402607 & 0 \\
-		Zdanovskii & 0.049115 & -26.012114 & 0.423267 & 0 \\
-		Norrish & 0.024635 & -5.987272 & 0.814903 & 2\\
-		Virial & 0.006496 & 0.514218 & 0.975995 & 3\\
-		UNIQUAC & 0.006476 & 0.517119 & 0.977335 & 6\\\hline
-	\end{tabular}
-	\egroup
-\end{table}
+	\label{tab_mannitol_sucrose}\\
+	\toprule
+	Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}$ &
+		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
+		\textnumero\ parâmetros\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}$ &
+		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
+		\textnumero\ parâmetros\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{5}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.049057 & -25.947383 & 0.440301 & 0 \\
+	Caurie & 0.049952 & -26.940271 & 0.402607 & 0 \\
+	Zdanovskii & 0.049115 & -26.012114 & 0.423267 & 0 \\
+	Norrish & 0.024635 & -5.987272 & 0.814903 & 2\\
+	Virial & 0.006496 & 0.514218 & 0.975995 & 3\\
+	UNIQUAC & 0.006476 & 0.517119 & 0.977335 & 6\\\hline
+\end{tabularx}
 
 \subsection{Número de iterações e tempo de computação}
 
@@ -1939,24 +1954,32 @@ soluções de carboidratos o modelo UNIQUAC obteve os melhores desvios. Isso pod
 ser observado na tabela \ref{tab_model_amino_carb}.
 
 
-\begin{table}[h]
-	\centering
+\begin{tabularx}{\textwidth}{ l R R }
 	\caption{Performance dos modelos para diferentes substâncias}
-	\label{tab_model_amino_carb}
-	\bgroup
-	\def\arraystretch{1.5}
-	\begin{tabular}{l r r}\hline
-		Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2_\text{aminoácidos, médio}}$ &
+	\label{tab_model_amino_carb}\\
+	\toprule
+	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
 			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2_\text{carboidratos, médio}}$\\\hline
-		Raoult & 0.04530 & 0.22998 \\
-		Norrish & 0.03254 & 0.22343 \\
-		Virial & 0.01375 & 0.12857 \\
-		UNIQUAC & 0.02580 & 0.07282 \\\hline
-	\end{tabular}
-	\egroup
-\end{table}
+			\phi_{\text{calc}})^2_\text{médio}}$} \\
+		& Aminoácidos & Carboidratos \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
+			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2_\text{médio}}$} \\
+		& Aminoácidos & Carboidratos \\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{3}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.04530 & 0.22998 \\
+	Norrish & 0.03254 & 0.22343 \\
+	Virial & 0.01375 & 0.12857 \\
+	UNIQUAC & 0.02580 & 0.07282 \\\hline
+\end{tabularx}
 
 \section{Soluções binárias e sistemas multicomponente}
 
@@ -1975,28 +1998,37 @@ de misturas com dois solutos desacompanhados de dados para esses solutos em mist
 binária não foram inclusos nos dados da relação de Zdanovskii. Assim sendo, esses
 dois modelos devem ser analisados separadamente.
 
-\begin{table}[h]
-	\centering
+\begin{tabularx}{\textwidth}{ X r r r }
 	\caption{Performance dos modelos para sistemas binários, ternários %
 		e quaternários}
-	\label{tab_comp_mono}
-	\bgroup
-	\def\arraystretch{1.5}
-	\begin{tabular}{l r r r}\hline
-		\multirow{2}*{Modelo} & \multicolumn{3}{c}%
-			{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2_\text{médio}}$}\\
-			& Sistemas Binários & Sistemas Ternários &%
-				Sistemas Quaternários \\\hline
-		Raoult & 0.22998 & 0.14672 & 0.11738 \\
-		Caurie & 0.22998 & 0.14091 & 0.12532 \\
-		Zdanovskii & \textemdash  & 0.17849 & \textemdash \\
-		Norrish & 0.22343 & 0.06190 & 0.10383 \\
-		Virial & 0.12857 & 0.01109 & 0.04871 \\
-		UNIQUAC & 0.07282 & 0.01262 & 0.09575 \\\hline
-	\end{tabular}
-	\egroup
-\end{table}
+	\label{tab_comp_mono}\\
+	\toprule
+	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
+		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{médio}}$}\\
+		& Sistemas Binários & Sistemas Ternários &%
+			Sistemas Quaternários \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
+		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{médio}}$}\\
+		& Sistemas Binários & Sistemas Ternários &%
+			Sistemas Quaternários \\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{4}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.22998 & 0.14672 & 0.11738 \\
+	Caurie & 0.22998 & 0.14091 & 0.12532 \\
+	Zdanovskii & \textemdash  & 0.17849 & \textemdash \\
+	Norrish & 0.22343 & 0.06190 & 0.10383 \\
+	Virial & 0.12857 & 0.01109 & 0.04871 \\
+	UNIQUAC & 0.07282 & 0.01262 & 0.09575 \\\hline
+\end{tabularx}
 
 \subsection{Relação de Zdanovskii}
 
@@ -2006,25 +2038,33 @@ na tabela \ref{tab_zdan_multi}, que compara os desvios quadrados médios dos
 coeficientes osmóticos para os conjuntos de dados para os quais a Relação de
 Zdanovskii pode ser aplicada.
 
-\begin{table}[h]
-	\centering
+\begin{tabularx}{\textwidth}{ X  r }
 	\caption{Comparação com o modelo de Zdanovskii}
-	\label{tab_zdan_multi}
-	\bgroup
-	\def\arraystretch{1.5}
-	\begin{tabular}{l r}\hline
-		Modelo & %
-			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2_\text{sistemas binários, %
-				médio}}$\\\hline
-		Raoult & 0.11567 \\
-		Zdanovskii & 0.17849 \\
-		Norrish & 0.05251 \\
-		Virial & 0.01561 \\
-		UNIQUAC & 0.01314 \\\hline
-	\end{tabular}
-	\egroup
-\end{table}
+	\label{tab_zdan_multi}\\
+	\toprule
+	Modelo & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{Zdanovskii, %
+			médio}}$\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Modelo & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{Zdanovskii, %
+			médio}}$\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.11567 \\
+	Zdanovskii & 0.17849 \\
+	Norrish & 0.05251 \\
+	Virial & 0.01561 \\
+	UNIQUAC & 0.01314 \\\hline
+\end{tabularx}
 
 \subsection{Modelo de Caurie}
 
@@ -2033,25 +2073,33 @@ Excluindo esses conjuntos e comparando os resultados, percebemos que o modelo
 apresenta resultados razoavelmente bons. Esses dados estão na tabela
 \ref{tab_caurie_multi}.
 
-\begin{table}[h]
-	\centering
-	\caption{Comparação com o modelo de Zdanovskii}
-	\label{tab_caurie_multi}
-	\bgroup
-	\def\arraystretch{1.5}
-	\begin{tabular}{l r}\hline
-		Modelo & %
-			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2_\text{Caurie, %
-				médio}}$\\\hline
-		Raoult & 0.13890 \\
-		Caurie & 0.13666 \\
-		Norrish & 0.073084 \\
-		Virial & 0.021138 \\
-		UNIQUAC & 0.037825 \\\hline
-	\end{tabular}
-	\egroup
-\end{table}
+\begin{tabularx}{\textwidth}{ X  r }
+	\caption{Comparação com o modelo de Caurie}
+	\label{tab_caurie_multi}\\
+	\toprule
+	Modelo & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{Caurie, %
+			médio}}$\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Modelo & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{Caurie, %
+			médio}}$\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.13890 \\
+	Caurie & 0.13666 \\
+	Norrish & 0.073084 \\
+	Virial & 0.021138 \\
+	UNIQUAC & 0.037825 \\\hline
+\end{tabularx}
 
 \subsection{Observações sobre os resultados}
 
@@ -2531,7 +2579,7 @@ por ajustar os modelos aos dados.
 	\caption{Cronograma e etapas já cumpridas}
 	\label{tab:cronograma}
 	\begin{tabular}{l C C C C}\hline
-		Etapa & \multicolumn{4}{c}{Trimestre}\\
+		\multirow{2}*{Etapa} & \multicolumn{4}{c}{Trimestre}\\
 			& 1 & 2 & 3 & 4\\\hline
 		Revisão bibliográfica & \multicolumn{4}{|c|}%
 		{\cellcolor{pdone}Concluída}\\\hhline{~----}
@@ -3338,7 +3386,7 @@ em dados de $a_w$ e analisados, estando os resultados obtidos nas tabelas
 \ref{tab_stokes_66_sucrose_arabinose_ref_sucrose},
 \ref{tab_stokes_66_sucrose_glucose_ref_sucrose},
 \ref{tab_stokes_66_sucrose_glycerol_ref_sucrose} e
-\ref{tab_stokes_66_sucrose_sorbitol_ref_sucrose}.
+\ref{tab_stokes_66_sucrose_sorbitol_ref_sucrose}.\footnote{\cite{stokes1966}}
 
 \tablebifirst{-0.804487}{-0.751579}{0.16571}{9.0086}{9.35874}{0.440633}{1748.82}%
 	{1.4884}{775.512}

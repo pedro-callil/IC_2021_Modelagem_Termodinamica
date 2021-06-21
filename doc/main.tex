@@ -2391,6 +2391,135 @@ perceptíveis para maiores temperaturas).
 	\label{fig_temp_amins}
 \end{figure}
 
+\section{Influência da Pressão}
+
+Os modelos de Norrish e virial foram ajustados aos dados de $a_w$ em função da
+composição à diferentes pressões, para soluções de frutose e glicose. Como a
+quantidade de dados para cada valor de $P$ era pequena (5 pontos), um ajuste
+do modelo UNIQUAC não resultaria em dados interessante.
+
+Foi observado que o modelo de Norrish manteve a tendência de simplesmente se
+aproximar da Lei de Raoult, como visto para soluções de carboidratos. Assim sendo,
+estão comparados apenas os desvios para a Lei de Raoult e para o modelo virial,
+nos gráficos exibidos na figura \ref{fig_pressure}.
+
+Podemos observar que apesar de existir (para dados obtidos a partir de soluções
+de frutose) uma leve tendência à diminuição dos desvios com o aumento da temperatura,
+tal tendência não é estatisticamente significante.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}{%
+		\begin{tikzpicture}[scale=0.75]
+			\begin{axis} [
+				ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(%
+					\phi_{\text{exp}}-%
+				\phi_{\text{calc}})^2}$},
+				xlabel={Pressão (kPa)},
+				xlabel near ticks,
+				ylabel near ticks,
+				scaled x ticks=false,
+				ymin=0.1,ymax=0.8,
+			]
+				\addplot [
+					mark=*,
+					color=black,
+					fill=pblue,
+					only marks,
+					mark size=3pt,
+				]
+				table [x={pressure},y={virial},col sep=comma]
+					{./pressure_glucose.csv};
+				\addlegendentry{Modelo Virial};
+				\addplot [
+					no marks,
+					color=pblue,
+					samples=3,
+					domain=20:100,
+					ultra thick,
+				] plot {-0.00023889*x+0.288077};
+				\addlegendentry{$R^2=0.0064$};
+				\addplot [
+					mark=*,
+					color=black,
+					fill=pred,
+					only marks,
+					mark size=3pt,
+				]
+				table [x={pressure},y={raoult},col sep=comma]
+					{./pressure_glucose.csv};
+				\addlegendentry{Lei de Raoult};
+				\addplot [
+					no marks,
+					color=pred,
+					samples=3,
+					domain=20:100,
+					ultra thick,
+				] plot {-0.000519161*x+0.43544};
+				\addlegendentry{$R^2=0.0204$};
+			\end{axis}
+		\end{tikzpicture}}
+		\caption{Glicose}
+		\label{fig_pressure_glic}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}{%
+		\begin{tikzpicture}[scale=0.75]
+			\begin{axis} [
+				ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(%
+					\phi_{\text{exp}}-%
+				\phi_{\text{calc}})^2}$},
+				xlabel={Pressão (kPa)},
+				xlabel near ticks,
+				ylabel near ticks,
+				scaled x ticks=false,
+				ymin=0.1,ymax=0.8,
+			]
+				\addplot [
+					mark=*,
+					color=black,
+					fill=pblue,
+					only marks,
+					mark size=3pt,
+				]
+				table [x={pressure},y={virial},col sep=comma]
+					{./pressure_fructose.csv};
+				\addlegendentry{Modelo Virial};
+				\addplot [
+					no marks,
+					color=pblue,
+					samples=3,
+					domain=20:100,
+					ultra thick,
+				] plot {-0.0014502*x+0.413874};
+				\addlegendentry{$R^2=0.3086$};
+				\addplot [
+					mark=*,
+					color=black,
+					fill=pred,
+					only marks,
+					mark size=3pt,
+				]
+				table [x={pressure},y={raoult},col sep=comma]
+					{./pressure_fructose.csv};
+				\addlegendentry{Lei de Raoult};
+				\addplot [
+					no marks,
+					color=pred,
+					samples=3,
+					domain=20:100,
+					ultra thick,
+				] plot {-0.002172*x+0.6495};
+				\addlegendentry{$R^2=0.4052$};
+			\end{axis}
+		\end{tikzpicture}}
+		\caption{Frutose}
+		\label{fig_pressure_fruc}
+	\end{subfigure}
+	\caption{Desvios obtidos para $\phi$ sob diferentes pressões}
+	\label{fig_pressure}
+\end{figure}
+
 \section{Valores Ajustados \textendash\ Observações Gerais}
 
 \subsection{Modelo de Norrish}

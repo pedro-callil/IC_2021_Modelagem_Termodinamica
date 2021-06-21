@@ -2002,6 +2002,281 @@ para soluções de carboidratos; isso se torna ainda mais claro ao compararmos
 as variações nos desvios entre carboidratos e aminoácidos para os modelos
 avaliados.
 
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}%
+		\centering
+		\begin{tikzpicture}[scale=0.75]
+			\newsavebox{\minigrafarg}
+			\savebox{\minigrafarg}{%
+			\scalebox{0.5}{%
+			\begin{tikzpicture}
+				\begin{axis}[
+				xmin=0.0,xmax=0.015,
+				ymin=0.985,ymax=1.0,
+				width=7cm,
+				height=7cm,
+				xlabel = {$x$},
+				ylabel = {$a_w$},
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=south west,
+				]
+				\addplot+[
+					no marks,
+					color=black,
+					samples=2,
+					domain=-0.001:0.016,
+				] plot {1-x};
+				\addlegendentry{$a_w=x_w$};
+				\addplot+[
+					color=pbrightred,
+					mark=o,
+					only marks,
+					thick,
+				]
+				table[x={l_arginine},y={aw_exp},col sep=comma]
+					{ninni_arginine_norrish.csv};
+				\addplot+[
+					color=pverybrightblue,
+					no marks,
+					thick,
+				]
+				table[x={l_arginine},y={aw_calc},col sep=comma]
+					{ninni_arginine_norrish.csv};
+				\addplot+[
+					color=pblue,
+					no marks,
+					thick,
+				]
+				table[x={l_arginine},y={aw_calc},col sep=comma]
+					{ninni_arginine_virial.csv};
+				\addplot+[
+					color=pverydarkblue,
+					no marks,
+					thick,
+				]
+				table[x={l_arginine},y={aw_calc},col sep=comma]
+					{ninni_arginine_uniquac.csv};
+			\end{axis}
+		\end{tikzpicture}
+		}}
+		\begin{axis}[
+				xmin = 0.002, xmax = 0.015,
+				xlabel = {$x_\text{arginina}$},
+				ymin = 0.62, ymax = 0.85, ylabel = {$\phi$},
+				legend pos = north west,
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				xtick = {0.003,0.006,0.009,0.012},
+			]
+			\addplot+[
+				smooth,
+				color=pverybrightblue,
+				no marks,
+				thick,
+			]
+			table[x={l_arginine},y={phi_calc},col sep=comma]
+				{ninni_arginine_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot+[
+				smooth,
+				color=pblue,
+				no marks,
+				thick,
+			]
+			table[x={l_arginine},y={phi_calc},col sep=comma]
+				{ninni_arginine_virial.csv};
+			\addlegendentry{virial};
+			\addplot+[
+				smooth,
+				color=pverydarkblue,
+				no marks,
+				thick,
+			]
+			table[x={l_arginine},y={phi_calc},col sep=comma]
+				{ninni_arginine_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\addplot+[
+				color=pbrightred,
+				mark=o,
+				very thick,
+				only marks,
+			]
+			table[x={l_arginine},y={phi_exp},col sep=comma]
+				{ninni_arginine_uniquac.csv};
+			\addlegendentry{experimental};
+			\draw (axis cs:0.0055,0.68) node{\usebox{\minigrafarg}};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Arginina -- exemplo de aminoácido}
+		\label{fig_arginine_phi}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}%
+		\centering
+		\begin{tikzpicture}[scale=0.75]
+			\newsavebox{\minigrafxyl}
+			\savebox{\minigrafxyl}{%
+			\scalebox{0.5}{%
+			\begin{tikzpicture}
+				\begin{axis}[
+				xmin=0.0,xmax=0.061,
+				ymin=0.94,ymax=1.0,
+				width=7cm,
+				height=7cm,
+				xlabel = {$x$},
+				ylabel = {$a_w$},
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=south west,
+				]
+				\addplot+[
+					no marks,
+					color=black,
+					samples=2,
+					domain=-0.001:0.061,
+				] plot {1-x};
+				\addlegendentry{$a_w=x_w$};
+				\addplot+[
+					color=pbrightred,
+					mark=o,
+					only marks,
+					thick,
+				]
+				table[x={xylose},y={aw_exp},col sep=comma]
+					{./ebrahimi_xylose_norrish.csv};
+				\addplot+[
+					color=pverybrightblue,
+					no marks,
+					thick,
+				]
+				table[x={xylose},y={aw_calc},col sep=comma]
+					{./ebrahimi_xylose_norrish.csv};
+				\addplot+[
+					color=pblue,
+					no marks,
+					thick,
+				]
+				table[x={xylose},y={aw_calc},col sep=comma]
+					{./ebrahimi_xylose_virial.csv};
+				\addplot+[
+					color=pverydarkblue,
+					no marks,
+					thick,
+				]
+				table[x={xylose},y={aw_calc},col sep=comma]
+					{./ebrahimi_xylose_uniquac.csv};
+			\end{axis}
+		\end{tikzpicture}
+		}}
+		\begin{axis}[
+				xmin = 0.000, xmax = 0.061,
+				xlabel = {$x_\text{xilose}$},
+				ymin = 0.978, ymax = 1.02, ylabel = {$\phi$},
+				legend pos = south east,
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				xtick = {0.015,0.030,0.045,0.060},
+			]
+			\addplot+[
+				smooth,
+				color=pverybrightblue,
+				no marks,
+				thick,
+			]
+			table[x={xylose},y={phi_calc},col sep=comma]
+				{ebrahimi_xylose_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot+[
+				smooth,
+				color=pblue,
+				no marks,
+				thick,
+			]
+			table[x={xylose},y={phi_calc},col sep=comma]
+				{ebrahimi_xylose_virial.csv};
+			\addlegendentry{virial};
+			\addplot+[
+				smooth,
+				color=pverydarkblue,
+				no marks,
+				thick,
+			]
+			table[x={xylose},y={phi_calc},col sep=comma]
+				{ebrahimi_xylose_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\addplot+[
+				color=pbrightred,
+				mark=o,
+				very thick,
+				only marks,
+			]
+			table[x={xylose},y={phi_exp},col sep=comma]
+				{ebrahimi_xylose_uniquac.csv};
+			\addlegendentry{experimental};
+			\draw (axis cs:0.017,1.008) node{\usebox{\minigrafxyl}};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Xilose -- exemplo de carboidrato}
+		\label{fig_xylose_phi}
+	\end{subfigure}
+	\caption{Exemplos de conjuntos de dados e ajustes dos modelos}
+	\label{fig_tipi_datasets}
+\end{figure}
+
+Podemos ver um exemplo do comportamento dos dados (e do ajuste dos modelos) na
+figura \ref{fig_tipi_datasets}\footnote{\cite{ninni2001,ebrahimi2016}}: perceba
+que o maior desvio da idealidade para a solução de aminoácido torna a Lei de
+Raoult muito inferior aos outros modelos; além disso, $\phi$ é consistentemente
+menor que 1, o que torna o modelo de Norrish superior, para essa solução, ao
+caso ideal. Outro ponto a ser comentado é a semelhança entre os modelos UNIQUAC
+e virial; enquanto no primeiro caso ambos se aproximam do caso em que $\phi$ e
+$x_w$ não estão correlacionados, no segundo caso temos duas funções semelhantes
+para diluições menores que $x_w=0.99$.
+
 \section{Influência da diluição}
 
 Observando os dados como um todo, podemos observar que a diluição parece não

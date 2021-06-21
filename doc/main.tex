@@ -428,9 +428,9 @@ microorganismos.
 
 \begin{figure}[h]
 	\centering
-	\begin{tikzpicture}
-		\draw[->] (5,-0.5) -- (5,10);
-		\draw (5,10) node[anchor=south] {$a_w$};
+	\begin{tikzpicture}[>=Stealth]
+		\draw[->] (5,-0.5) -- (5,11);
+		\draw (5,0.0) node[anchor=west] {$a_w$};
 		\draw (5,8.75) -- (6.3,8.75);
 		\draw (6.3,8.75) -- (13.5,8.75);
 		\draw (5,7.75) -- (6.3,7.25);
@@ -452,6 +452,7 @@ microorganismos.
 		\fill[black] (5,6.75) circle (0.07);
 		\fill[black] (5,7.75) circle (0.07);
 		\fill[black] (5,8.75) circle (0.07);
+		\fill[black] (5,10) circle (0.07);
 		\draw (10,10.4) node[anchor=south, text width=9cm]
 		{\tiny{Microorganismos inibidos pelo menor valor de
 		$a_w$ nessa faixa}};
@@ -576,8 +577,14 @@ observar o gráfico na figura \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
 	\begin{axis}[
 			xmin = 0.97, xmax = 1.0, xlabel = {$x_w$},
 			ymin = 0.96, ymax = 1.05, ylabel = {$\phi$},
-			axis lines = middle,
 			x tick label style={
+				/pgf/number format/.cd,
+				fixed,
+				fixed zerofill,
+				precision=3,
+				/tikz/.cd
+			},
+			y tick label style={
 				/pgf/number format/.cd,
 				fixed,
 				fixed zerofill,
@@ -590,6 +597,7 @@ observar o gráfico na figura \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
 			xlabel near ticks,
 			ylabel near ticks,
 			x dir=reverse,
+			ytick={0.97,0.985,1.00,1.015,1.03,1.045},
 		]
 		\addplot+[
 			color=pdarkblue,
@@ -599,12 +607,11 @@ observar o gráfico na figura \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
 		]
 		table[x={xw},y={phi}]{glucose_a_w_and_phi.dat};
 		\addlegendentry{$\phi$};
-		\draw (axis cs: 0.981,0.983)node{\usebox{\minigrafglic}};
+		\draw (axis cs: 0.981,0.99)node{\usebox{\minigrafglic}};
 		\end{axis}
 		\begin{axis}[
 			xmin = 0.97, xmax = 1.0, xlabel = {$x_w$},
 			ymin = 0.9977, ymax = 1.0001, ylabel = {$\gamma_w$},
-			axis lines = middle,
 			y tick label style={
 				/pgf/number format/.cd,
 				fixed,
@@ -628,7 +635,7 @@ observar o gráfico na figura \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
 		\end{axis}
 	\end{tikzpicture}
 	\caption{Atividade ($a_w$), coeficiente de atividade ($\gamma_w$) e%
-	coeficiente osmótico ($\phi$) da água em soluções de D-glicose.%
+	coeficiente osmótico ($\phi$) da água em soluções de D-glicose. %
 	Perceba a diferença entre as escalas utilizadas para $\gamma_w$ e $\phi$.}
 	\label{fig_atv_gamma_gluc}
 \end{figure}

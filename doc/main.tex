@@ -2276,18 +2276,291 @@ avaliados.
 		\label{fig_xylose_phi}
 	\end{subfigure}
 	\caption{Exemplos de conjuntos de dados e ajustes dos modelos}
-	\label{fig_tipi_datasets}
+	\label{fig_tipi_datasets_xylose_arginine}
 \end{figure}
 
 Podemos ver um exemplo do comportamento dos dados (e do ajuste dos modelos) na
-figura \ref{fig_tipi_datasets}\footnote{\cite{ninni2001,ebrahimi2016}}: perceba
-que o maior desvio da idealidade para a solução de aminoácido torna a Lei de
-Raoult muito inferior aos outros modelos; além disso, $\phi$ é consistentemente
-menor que 1, o que torna o modelo de Norrish superior, para essa solução, ao
-caso ideal. Outro ponto a ser comentado é a semelhança entre os modelos UNIQUAC
-e virial; enquanto no primeiro caso ambos se aproximam do caso em que $\phi$ e
-$x_w$ não estão correlacionados, no segundo caso temos duas funções semelhantes
-para diluições menores que $x_w=0.99$.
+figura \ref{fig_tipi_datasets_xylose_arginine}
+\footnote{\cite{ninni2001,ebrahimi2016}}: perceba que o maior desvio da idealidade
+para a solução de aminoácido torna a Lei de Raoult muito inferior aos outros
+modelos; além disso, $\phi$ é consistentemente menor que 1, o que torna o modelo
+de Norrish superior, para essa solução, ao caso ideal. Outro ponto a ser comentado é
+a semelhança entre os modelos UNIQUAC e virial; enquanto no primeiro caso ambos se
+aproximam do caso em que $\phi$ e $x_w$ não estão correlacionados, no segundo caso
+temos duas funções semelhantes para diluições menores que $x_w=0.99$.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}%
+		\centering
+		\begin{tikzpicture}[scale=0.75]
+			\newsavebox{\minigrafglyc}
+			\savebox{\minigrafglyc}{%
+			\scalebox{0.5}{%
+			\begin{tikzpicture}
+				\begin{axis}[
+				xmin=0.0,xmax=0.030,
+				ymin=0.985,ymax=1.0,
+				width=7cm,
+				height=3.5cm,
+				xlabel = {$x$},
+				ylabel = {$a_w$},
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=south west,
+				]
+				\addplot+[
+					no marks,
+					color=black,
+					samples=2,
+					domain=-0.001:0.03,
+				] plot {1-x};
+				\addlegendentry{$a_w=x_w$};
+				\addplot+[
+					color=pbrightred,
+					mark=o,
+					only marks,
+					thick,
+				]
+				table[x={glycylglycine},y={aw_exp},col sep=comma]
+					{ellerton_glycylglycine_norrish.csv};
+				\addplot+[
+					color=pverybrightblue,
+					no marks,
+					thick,
+				]
+				table[x={glycylglycine},y={aw_calc},col sep=comma]
+					{ellerton_glycylglycine_norrish.csv};
+				\addplot+[
+					color=pblue,
+					no marks,
+					thick,
+				]
+				table[x={glycylglycine},y={aw_calc},col sep=comma]
+					{ellerton_glycylglycine_virial.csv};
+				\addplot+[
+					color=pverydarkblue,
+					no marks,
+					thick,
+				]
+				table[x={glycylglycine},y={aw_calc},col sep=comma]
+					{ellerton_glycylglycine_uniquac.csv};
+			\end{axis}
+		\end{tikzpicture}
+		}}
+		\begin{axis}[
+				xmin = 0.0, xmax = 0.03,
+				xlabel = {$x_\text{glicilglicina}$},
+				ymin = 0.42, ymax = 0.5, ylabel = {$\phi$},
+				legend pos = north east,
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				xtick = {0.006,0.012,0.018,0.024},
+			]
+			\addplot+[
+				smooth,
+				color=pverybrightblue,
+				no marks,
+				thick,
+			]
+			table[x={glycylglycine},y={phi_calc},col sep=comma]
+				{ellerton_glycylglycine_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot+[
+				smooth,
+				color=pblue,
+				no marks,
+				thick,
+			]
+			table[x={glycylglycine},y={phi_calc},col sep=comma]
+				{ellerton_glycylglycine_virial.csv};
+			\addlegendentry{virial};
+			\addplot+[
+				color=pverydarkblue,
+				no marks,
+				thick,
+			]
+			table[x={glycylglycine},y={phi_calc},col sep=comma]
+				{ellerton_glycylglycine_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\addplot+[
+				color=pbrightred,
+				mark=o,
+				very thick,
+				only marks,
+			]
+			table[x={glycylglycine},y={phi_exp},col sep=comma]
+				{ellerton_glycylglycine_uniquac.csv};
+			\addlegendentry{experimental};
+			\draw (axis cs:0.009,0.432) node{\usebox{\minigrafglyc}};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Glicilglicina -- exemplo de aminoácido}
+		\label{fig_glycylglycine_phi}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}%
+		\centering
+		\begin{tikzpicture}[scale=0.75]
+			\newsavebox{\minigrafsuc}
+			\savebox{\minigrafsuc}{%
+			\scalebox{0.5}{%
+			\begin{tikzpicture}
+				\begin{axis}[
+				xmin=0.0,xmax=0.1,
+				ymin=0.9,ymax=1.0,
+				width=7cm,
+				height=7cm,
+				xlabel = {$x$},
+				ylabel = {$a_w$},
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=south west,
+				]
+				\addplot+[
+					no marks,
+					color=black,
+					samples=2,
+					domain=-0.001:0.1,
+				] plot {1-x};
+				\addlegendentry{$a_w=x_w$};
+				\addplot+[
+					color=pbrightred,
+					mark=o,
+					only marks,
+					thick,
+				]
+				table[x={sucrose},y={aw_exp},col sep=comma]
+					{./stokes_sucrose_uniquac_orig.csv};
+				\addplot+[
+					color=pverybrightblue,
+					no marks,
+					thick,
+				]
+				table[x={sucrose},y={aw_calc},col sep=comma]
+					{./stokes_sucrose_norrish.csv};
+				\addplot+[
+					color=pblue,
+					no marks,
+					thick,
+				]
+				table[x={sucrose},y={aw_calc},col sep=comma]
+					{./stokes_sucrose_virial.csv};
+				\addplot+[
+					color=pverydarkblue,
+					no marks,
+					thick,
+				]
+				table[x={sucrose},y={aw_calc},col sep=comma]
+					{./stokes_sucrose_uniquac.csv};
+			\end{axis}
+		\end{tikzpicture}
+		}}
+		\begin{axis}[
+				xmin = 0.000, xmax = 0.1,
+				xlabel = {$x_\text{sacarose}$},
+				ymin = 0.45, ymax = 1.0, ylabel = {$\phi$},
+				legend pos = south east,
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				xtick = {0.016,0.032,0.048,0.064,0.080},
+			]
+			\addplot+[
+				smooth,
+				color=pverybrightblue,
+				no marks,
+				thick,
+			]
+			table[x={sucrose},y={phi_calc},col sep=comma]
+				{stokes_sucrose_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot+[
+				smooth,
+				color=pblue,
+				no marks,
+				thick,
+			]
+			table[x={sucrose},y={phi_calc},col sep=comma]
+				{stokes_sucrose_virial.csv};
+			\addlegendentry{virial};
+			\addplot+[
+				smooth,
+				color=pverydarkblue,
+				no marks,
+				thick,
+			]
+			table[x={sucrose},y={phi_calc},col sep=comma]
+				{stokes_sucrose_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\addplot+[
+				color=pbrightred,
+				mark=o,
+				very thick,
+				only marks,
+			]
+			table[x={sucrose},y={phi_exp},col sep=comma]
+				{stokes_sucrose_uniquac_orig.csv};
+			\addlegendentry{experimental};
+			\draw (axis cs:0.07,0.870) node{\usebox{\minigrafsuc}};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Sacarose -- exemplo de carboidrato}
+		\label{fig_sucrose_phi}
+	\end{subfigure}
+	\caption{Exemplos de conjuntos de dados e ajustes dos modelos}
+	\label{fig_tipi_datasets_sucrose_glycylglycine}
+\end{figure}
+
+Podemos observar na figura \ref{fig_tipi_datasets_sucrose_glycylglycine}
+\footnote{\cite{ellerton1964,stokes1961}}
+outro motivo para as grandes diferenças observadas entre o modelo de Norrish no
+ajuste de aminoácidos e carboidratos; de forma geral, temos que conforme a diluição
+diminui, o coeficiente osmótico tende a aumentar, para uma solução de carboidratos,
+a partir de determinado valor de $x_w$, o que não é tão comum em soluções de
+aminoácidos; assim, sendo, o modelo de Norrish, que não apresenta meio de lidar com
+valores negativos de $\frac{\partial \phi}{\partial x_w}$.
 
 \section{Influência da diluição}
 

@@ -409,6 +409,12 @@
 	\item[$ \Xi^\text{ref} $] propriedade $\Xi$ no sistema de referência
 	\item[$ \Xi_w $] propriedade $\Xi$ da água ($a_w, \gamma_w$, \textit{etc.} %
 		para $\Xi = \alpha, \gamma$, \textit{etc.})
+	\item[$K_i$] parâmetros do modelo de Norrish
+	\item[$b_i$, $c_{ij}$] parâmetros do modelo virial
+	\item[$q_i$, $u_{ii}$] parâmetros do modelo UNIQUAC
+	\item[$A_i$] parâmetro de um modelo genérico
+	\item[$\Phi$] Estimativa de coeficiente osmótico obtido através de %
+		modelo genérico
 \end{simbolos}
 
 \pdfbookmark[0]{\contentsname}{toc}
@@ -419,7 +425,7 @@
 
 \part{Introdução}
 
-A atividade $a$ de uma substância, definida\cite{sandler2017} como
+A atividade $a$ de uma substância, definida \cite{sandler2017} como
 a razão entre a fugacidade de uma substância nas condições de um sistema
 e sua fugacidade em uma situação de referência (equação \ref{eq:def_atv}),
 age como sua ``concentração efetiva'', do ponto de vista termodinâmico.
@@ -429,9 +435,9 @@ um sistema. No caso da indústria de alimentos, o principal desses fenômenos
 é a degradação dos alimentos por ação microbiana.
 
 De fato, a grandeza que controla o crescimento microbiano em um alimento é a
-atividade da água. No gráfico da figura \ref{fig:germ} temos os valores de
-atividade da água necessários para a proliferação microbiana para alguns
-microorganismos.
+atividade da água. No gráfico da figura \ref{fig:germ}\footnote{\cite{canovas2007}}
+temos os valores de atividade da água necessários para a proliferação microbiana
+para alguns microorganismos.
 
 \begin{figure}[h]
 	\centering
@@ -501,13 +507,13 @@ microorganismos.
 		\draw (5,8.75) node[anchor=east] {0.95};
 		\draw (5,10) node[anchor=east] {1.00};
 	\end{tikzpicture}
-	\caption{Valores de $a_w$ para o crescimento microbiano\cite{canovas2007}}
+	\caption{Valores de $a_w$ para o crescimento microbiano}
 	\label{fig:germ}
 \end{figure}
 
 Nas condições encontradas na indústria de alimentos, não é absurdo assumir a
 hipótese de gás ideal para a fase gás dos sistemas
-considerados\cite{canovas2007}, em muitas situações. Além disso, a condição de
+considerados \cite{canovas2007}, em muitas situações. Além disso, a condição de
 referência é tomada como água pura, líquida, à mesma temperatura $T$. Assim
 obtemos:
 
@@ -1343,7 +1349,7 @@ Perceba que para a apresentação dos dados e avaliação do ajuste, foi calcula
 raiz dessa função (de modo a deixar o valor apto, dimensionalmente, à comparações),
 sendo o resultado dividido pelo número de dados do ajuste (para possibilitar a
 comparação entre diferentes séries de dados); como
-$n>0 \implies \cfrac{\partial}{\partial f}\cfrac{\sqrt{f}}{n} >0$, temos que os
+$n>0 \implies \frac{\partial}{\partial f}\frac{\sqrt{f}}{n} >0$, temos que os
 parâmetros de ajuste dependem monotonicamente da função objetivo, sendo, portanto,
 válidos.
 
@@ -1396,7 +1402,8 @@ de dados provenientes de soluções com menores diluições.
 
 Todo o código desenvolvido e os dados utilizados estão disponíveis no
 \href{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}{repositório}
-\footnote{\url{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}}
+\footnote{Disponível em
+	\url{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}.}
 do projeto, no qual estão disponíveis mais detalhes sobre a implementação de
 cada modelo e compilação/execução do programa.
 
@@ -1446,11 +1453,11 @@ que para grandes diluições, mesmo modelos relativamente triviais (como a Lei d
 Raoult) se comportam de forma excelente.
 
 Assim sendo, para avaliarmos o ajuste, o melhor parâmetro é a média dos desvios
-dos valores de $\phi$. Na figura \ref{fig_mannitol_sucrose} temos uma visão clara
-do fenômeno: o ajuste é muito mais próximo para dados de $a_w$ que para $\phi$.
-Os dados desses ajustes (não somente para modelos que necessitam de regressão,
-como na figura) estão na tabela \ref{tab_mannitol_sucrose}, na qual é possível
-perceber a vantagem de se tomar
+dos valores de $\phi$. Na figura \ref{fig_mannitol_sucrose}
+\footnote{\cite{stokes1961}} temos uma visão clara do fenômeno: o ajuste é muito
+mais próximo para dados de $a_w$ que para $\phi$. Os dados desses ajustes (não
+somente para modelos que necessitam de regressão, como na figura) estão na tabela
+\ref{tab_mannitol_sucrose}, na qual é possível perceber a vantagem de se tomar
 $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-\phi_{\text{calc}})^2}$
 como medida de exatidão dos modelos.
 
@@ -1594,13 +1601,13 @@ como medida de exatidão dos modelos.
 	\caption{Atividades da água}
 	\label{fig_mannitol_sucrose_atv}
 \end{subfigure}
-\caption{Coeficientes osmóticos para uma solução de manitol e sucrose,
-calculados com o uso de modelos que exijam regressão \cite{stokes1961}}
+\caption{Valores de $\phi$ (experimentais e calculados com os modelos) para %
+	uma solução de manitol e sucrose}
 \label{fig_mannitol_sucrose}
 \end{figure}
 
 \begin{tabularx}{\textwidth}{ X  r  r  r  r }
-	\caption{Indicadores para um conjunto de dados \cite{stokes1961}}
+	\caption{Indicadores para um conjunto de dados}
 	\label{tab_mannitol_sucrose}\\
 	\toprule
 	Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
@@ -1848,7 +1855,7 @@ modelo virial, mesmo para um conjunto de dados relativos a uma mistura ternária
 				{\tiny{Última iteração}};
 		\end{semilogyaxis}
 	\end{tikzpicture}
-	\caption{Função objetivo em função da iteração \cite{stokes1961}}
+	\caption{Função objetivo em função da iteração}
 	\label{fig_obj_iter}
 \end{figure}
 
@@ -3264,8 +3271,16 @@ a serem ajustados, encontram grande utilidade prática; além disso, o equaciona
 mais simples desses modelos facilita a regressão através de métodos numéricos. Outra
 observação a ser feita reside na aplicabilidade desses modelos: enquanto o modelo
 de Norrish é relativamente mais restrito, o modelo virial (assim como UNIQUAC)
-conseguem se adaptar a uma grande gama de valores possíveis de coeficiente osmótico
+consegue se adaptar a uma grande gama de valores possíveis de coeficiente osmótico
 $\phi$.
+
+Por fim, é importante ressaltar que, apesar de esses modelos (Norrish, Virial e
+UNIQUAC) serem superiores ao caso ideal (Lei de Raoult) e às correções (Zdanovskii
+e Caurie) propostas, a Lei de Raoult (e, quando aplicáveis, os outros dois modelos)
+apresenta grande concordância com os dados experimentais de $a_w$ em uma fração
+considerável das séries de dados analisadas: assim, para misturas não muito
+complexas, em altas diluições, em situações nas quais a precisão no valor
+de $a_w$ não é crítica, é válido adotar a Lei de Raoult.
 
 \phantompart
 

@@ -2730,7 +2730,9 @@ O comportamento desse modelo foi ruim para os dados binários analisados; uma
 comparação com os resultados obtidos com Raoult, Norrish, Virial e UNIQUAC está
 na tabela \ref{tab_zdan_multi}, que compara os desvios quadrados médios dos
 coeficientes osmóticos para os conjuntos de dados para os quais a Relação de
-Zdanovskii pode ser aplicada.
+Zdanovskii pode ser aplicada. Perceba que os desvios obtidos com a Relação de
+Zdanovskii são maiores que os obtidos assumindo solução ideal (Lei de Raoult),
+por exemplo.
 
 \begin{tabularx}{\textwidth}{ X  r }
 	\caption{Comparação com o modelo de Zdanovskii}
@@ -2760,10 +2762,11 @@ Zdanovskii pode ser aplicada.
 
 \subsection{Modelo de Caurie}
 
-O modelo de Caurie retorna resultados não-físicos para alguns conujuntos de dados.
+O modelo de Caurie retorna resultados não-físicos para alguns conjuntos de dados.
 Excluindo esses conjuntos e comparando os resultados, percebemos que o modelo
 apresenta resultados razoavelmente bons. Esses dados estão na tabela
-\ref{tab_caurie_multi}.
+\ref{tab_caurie_multi}; observe que os desvios para o modelo de Caurie são
+ligeiramente menores que os desvios para a Lei de Raoult.
 
 \begin{tabularx}{\textwidth}{ X  r }
 	\caption{Comparação com o modelo de Caurie}
@@ -2993,8 +2996,6 @@ diferentes experimentos\footnote{%
 	sob maiores diluições. \cite{abderafi1994,velezmoro2000}
 }
 apresentam diferentes temperaturas e diluições).
-
-\phantompart
 
 \part{Conclusões}
 

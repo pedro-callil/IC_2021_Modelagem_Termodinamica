@@ -290,9 +290,6 @@
 
 \definecolor{blue}{RGB}{41,5,195}
 \definecolor{pverydarkblue}{rgb}{0,0,0.2}
-\definecolor{pviolindarkblue}{rgb}{0.5,0.5,0.7}
-\definecolor{pviolinblue}{rgb}{0.5,0.5,0.8}
-\definecolor{pviolinbrightblue}{rgb}{0.5,0.5,0.9}
 \definecolor{pdarkblue}{rgb}{0,0,0.4}
 \definecolor{pblue}{rgb}{0,0,0.6}
 \definecolor{pbrightblue}{rgb}{0,0,0.8}
@@ -302,6 +299,12 @@
 \definecolor{pred}{rgb}{0.45,0,0}
 \definecolor{pbrightred}{rgb}{0.6,0,0}
 \definecolor{pverybrightred}{rgb}{0.75,0,0}
+\definecolor{pviolindarkred}{rgb}{0.7,0.5,0.5}
+\definecolor{pviolinred}{rgb}{0.8,0.5,0.5}
+\definecolor{pviolinbrightred}{rgb}{0.9,0.5,0.5}
+\definecolor{pviolindarkblue}{rgb}{0.5,0.5,0.7}
+\definecolor{pviolinblue}{rgb}{0.5,0.5,0.8}
+\definecolor{pviolinbrightblue}{rgb}{0.5,0.5,0.9}
 \definecolor{pbackground}{rgb}{0.9,0.9,0.87}
 \definecolor{pplanned}{rgb}{0.8,0.8,0.8}
 \definecolor{pdoing}{rgb}{0.65,0.65,0.8}
@@ -1966,7 +1969,9 @@ quaisquer hipóteses que tenham sido adotadas na dedução dos modelos) e portan
 Os modelos se comportaram de forma distinta para cada grupo; enquanto para dados
 obtidos a partir de soluções de aminoácidos o modelo virial se destacou, para
 soluções de carboidratos o modelo UNIQUAC obteve os melhores desvios. Isso pode
-ser observado na tabela \ref{tab_model_amino_carb}.
+ser observado na tabela \ref{tab_model_amino_carb}, que exibe a média dos desvios
+(ponderada pela quantidade de dados em cada experimento) ao ajustarmos cada modelo
+a cada conjunto de dados para sistemas binários.
 
 
 \begin{tabularx}{\textwidth}{ l R R }
@@ -1990,10 +1995,10 @@ ser observado na tabela \ref{tab_model_amino_carb}.
 	\multicolumn{3}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.04530 & 0.22998 \\
-	Norrish & 0.03254 & 0.22343 \\
-	Virial & 0.01375 & 0.12857 \\
-	UNIQUAC & 0.02580 & 0.07282 \\\hline
+	Raoult & 0.04202 & 0.16505 \\
+	Norrish & 0.02688 & 0.15668 \\
+	Virial & 0.01347 & 0.08805 \\
+	UNIQUAC & 0.01556 & 0.06193 \\\hline
 \end{tabularx}
 
 Além disso, podemos observar que o modelo de Norrish apresenta resultados
@@ -2683,14 +2688,16 @@ Quando possível (soluções ternárias) se fez uso da Relação de Zdanovskii.
 Estão disponíveis 823 dados para soluções binárias apenas, 235 dados para soluções
 binárias e ternárias, apenas e 213 dados para soluções quaternárias. A cada
 conjunto de dados foram ajustados cada um dos modelos, e os valores médios dos
-desvios dos coeficientes osmóticos estão disponíveis na tabela \ref{tab_comp_mono}.
+desvios dos coeficientes osmóticos estão disponíveis na tabela \ref{tab_comp_mono},
+ponderados pela quantidade de dados em cada série.
 
-Nessa tabela estão inclusos apenas os resultados obtidos em situações que façam
-sentido físico; situações nas quais o modelo de Caurie não retorna um resultado
-razoável \cite{abderafi1994} foram excluídos da média do modelo. Conjuntos de dados
-de misturas com dois solutos desacompanhados de dados para esses solutos em mistura
-binária não foram inclusos nos dados da relação de Zdanovskii. Assim sendo, esses
-dois modelos devem ser analisados separadamente.
+Nessa tabela, estão inclusos apenas os modelos que são aplicáveis a todas as séries
+de dados; assim sendo, foi necessário excluir os modelos de Caurie (que apresentam
+resultados não físicos para soluções com baixas diluições\footnote{%
+	\cite{abderafi1994}
+}, e também o modelo de Zdanovskii, que exige duas séries auxiliares, nem sempre
+presentes, de dados sobre sistemas binários. Assim sendo, esses dois modelos devem
+ser analisados separadamente.
 
 \begin{tabularx}{\textwidth}{ X r r r }
 	\caption{Performance dos modelos para sistemas binários, ternários %
@@ -2716,12 +2723,10 @@ dois modelos devem ser analisados separadamente.
 	\multicolumn{4}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.22998 & 0.14672 & 0.11738 \\
-	Caurie & 0.22998 & 0.14091 & 0.12532 \\
-	Zdanovskii & \textemdash  & 0.17849 & \textemdash \\
-	Norrish & 0.22343 & 0.06190 & 0.10383 \\
-	Virial & 0.12857 & 0.01109 & 0.04871 \\
-	UNIQUAC & 0.07282 & 0.01262 & 0.09575 \\\hline
+	Raoult & 0.16505 & 0.11053 & 0.11332 \\
+	Norrish & 0.15669 & 0.04901 & 0.09413 \\
+	Virial & 0.08805 & 0.01316 & 0.04453 \\
+	UNIQUAC & 0.06193 & 0.01324 & 0.08449 \\\hline
 \end{tabularx}
 
 \subsection{Relação de Zdanovskii}
@@ -2732,7 +2737,17 @@ na tabela \ref{tab_zdan_multi}, que compara os desvios quadrados médios dos
 coeficientes osmóticos para os conjuntos de dados para os quais a Relação de
 Zdanovskii pode ser aplicada. Perceba que os desvios obtidos com a Relação de
 Zdanovskii são maiores que os obtidos assumindo solução ideal (Lei de Raoult),
-por exemplo.
+por exemplo. Isso não indica necessariamente que o modelo seja ruim; como,
+de todos os dados para soluções binárias disponíveis, apenas 4 conjuntos de
+dados estavam acompanhados por séries de dados para modelos binários para cada
+componente, comportamentos aberrantes do modelo para as condições de algum desses
+experimentos podem ser responsabilizados pelo aumento dos desvios.
+
+De fato, dos 178 pontos experimentais em questão, 103 (57.8\%) são provenientes de
+dados obtidos a baixíssimas diluições\footnote{\cite{abderafi1994}}, e de fato, o
+modelo de Zdanovskii é inferior justamente nesses dados; uma comparação com o ajuste
+obtido para diluições mais baixas (visto na tabela \ref{tab_mannitol_sucrose}, por
+exemplo) mostra que existem situações nas quais o modelo se porta de forma razoável.
 
 \begin{tabularx}{\textwidth}{ X  r }
 	\caption{Comparação com o modelo de Zdanovskii}
@@ -2753,11 +2768,11 @@ por exemplo.
 	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.11567 \\
-	Zdanovskii & 0.17849 \\
-	Norrish & 0.05251 \\
-	Virial & 0.01561 \\
-	UNIQUAC & 0.01314 \\\hline
+	Raoult & 0.09994 \\
+	Zdanovskii & 0.14775 \\
+	Norrish & 0.04597 \\
+	Virial & 0.01373 \\
+	UNIQUAC & 0.04596 \\\hline
 \end{tabularx}
 
 \subsection{Modelo de Caurie}
@@ -2787,11 +2802,11 @@ ligeiramente menores que os desvios para a Lei de Raoult.
 	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.13890 \\
-	Caurie & 0.13666 \\
-	Norrish & 0.073084 \\
-	Virial & 0.021138 \\
-	UNIQUAC & 0.037825 \\\hline
+	Raoult & 0.10132 \\
+	Caurie & 0.09701 \\
+	Norrish & 0.09346 \\
+	Virial & 0.03880 \\
+	UNIQUAC & 0.077710 \\\hline
 \end{tabularx}
 
 \section{Observações sobre os resultados}
@@ -2832,7 +2847,242 @@ de parâmetros. Isso pode levar a problemas com \textit{overfitting}. Além diss
 existem problemas relativos a colinearidade, já que o conjunto de valores
 possíveis $(x_1,x_2,\ldots,x_p)$ para a composição de uma mistura com $p$
 componentes (incluindo a água) pertence a um subespaço de dimensão $p-1$
-de $\mathbb{R}^p$.
+de $\mathbb{R}^p$. Entretanto, ainda foram observados valores coerentes
+para alguns parâmetros, analisando diversos experimentos; por exemplo,
+$u_\text{água}$ se manteve consistentemente em torno de 1700J/mol, enquanto
+outras substâncias como a sacarose apresentaram grandes variações. Isso
+pode ser visto claramente na figura \ref{fig_violin_uniquac_u}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\newsavebox{\violinglycineu}
+		\savebox{\violinglycineu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.9\textwidth,
+				width=0.9\textwidth,
+				ymin=2,ymax=6,
+				xmin=-5,xmax=2,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolindarkred,thick]
+				(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolindarkred,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_glycine_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolindarkred,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_glycine_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.714)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinalanineu}
+		\savebox{\violinalanineu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.9\textwidth,
+				width=0.9\textwidth,
+				ymin=2,ymax=6,
+				xmin=-6,xmax=1,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinbrightred,thick]
+				(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolinbrightred,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_alanine_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinbrightred,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_alanine_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.683)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinfructoseu}
+		\savebox{\violinfructoseu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.9\textwidth,
+				width=0.9\textwidth,
+				ymin=2,ymax=6,
+				xmin=-3,xmax=4,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinbrightblue,thick]
+				(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_fructose_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_fructose_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.198)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinsucroseu}
+		\savebox{\violinsucroseu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.9\textwidth,
+				width=0.9\textwidth,
+				ymin=2,ymax=6,
+				xmin=-2,xmax=5,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_sucrose_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_sucrose_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.604)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinglucoseu}
+		\savebox{\violinglucoseu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.9\textwidth,
+				width=0.9\textwidth,
+				ymin=2,ymax=6,
+				xmin=-1,xmax=6,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolindarkblue,thick]
+				(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_glucose_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_glucose_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.714)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+	\begin{axis}[
+			xmin = 0.0, xmax = 1.4, xlabel = {Substância},
+			ymin = 2, ymax = 6, ylabel = {$u_\text{substância}$},
+			height=0.88\textwidth,
+			width=0.9\textwidth,
+			xtick style={draw=none},
+			xtick={0.2,0.4,0.6,1.0,1.2},
+			xticklabels={Glicose,Sacarose,Frutose,Glicina,Alanina},
+			ytick={2,3,4,5,6},
+			yticklabels={$10^2$,$10^3$,$10^4$,$10^5$,$10^6$},
+		]
+		\draw (axis cs:0.7,4) node {\usebox{\violinfructoseu}};
+		\draw (axis cs:0.7,4) node {\usebox{\violinsucroseu}};
+		\draw (axis cs:0.7,4) node {\usebox{\violinglucoseu}};
+		\draw (axis cs:0.7,4) node {\usebox{\violinglycineu}};
+		\draw (axis cs:0.7,4) node {\usebox{\violinalanineu}};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Valores obtidos para o parâmetro $u$ para diversas substâncias}
+	\label{fig_violin_uniquac_u}
+\end{figure}
+
 
 \subsection{Modelo Virial}
 
@@ -2848,7 +3098,7 @@ valores razoáveis para o ajuste. Exemplos para três carboidratos estão na fig
 		\savebox{\violinsucrose}{%
 		\begin{tikzpicture}
 			\begin{axis}[
-				height=0.459\textwidth,
+				height=0.9\textwidth,
 				width=0.9\textwidth,
 				ymin=-2,ymax=0,
 				xmin=-4,xmax=12,
@@ -2889,7 +3139,7 @@ valores razoáveis para o ajuste. Exemplos para três carboidratos estão na fig
 		\savebox{\violinglucose}{%
 		\begin{tikzpicture}
 			\begin{axis}[
-				height=0.459\textwidth,
+				height=0.9\textwidth,
 				width=0.9\textwidth,
 				ymin=-2,ymax=0,
 				xmin=-8,xmax=8,
@@ -2932,7 +3182,7 @@ valores razoáveis para o ajuste. Exemplos para três carboidratos estão na fig
 		\savebox{\violinfructose}{%
 		\begin{tikzpicture}
 			\begin{axis}[
-				height=0.459\textwidth,
+				height=0.9\textwidth,
 				width=0.9\textwidth,
 				ymin=-2,ymax=0,
 				xmin=-12,xmax=4,
@@ -2972,7 +3222,7 @@ valores razoáveis para o ajuste. Exemplos para três carboidratos estão na fig
 	\begin{axis}[
 			xmin = 1.0, xmax = 3.0, xlabel = {Carboidrato},
 			ymin = -2, ymax = 0, ylabel = {$b_\text{carboidrato}$},
-			height=0.45\textwidth,
+			height=0.88\textwidth,
 			width=0.9\textwidth,
 			xtick style={draw=none},
 			xtick={1.5,2,2.5},

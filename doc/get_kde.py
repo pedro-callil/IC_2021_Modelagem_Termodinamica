@@ -49,8 +49,10 @@ def main ():
             ylin.append((kde(X,x)))
         ylin.append(0)
         file = open(new_filename, "w")
+        file.write("x,yplus,yminus\n")
         for i in range(len(xlin)):
-            file.write(str(xlin[i])+","+str(ylin[i])+","+str(-ylin[i])+"\n")
+            if ( i%20 == 0 or i==(len(xlin)-1)):
+                file.write(str(xlin[i])+","+str(ylin[i])+","+str(-ylin[i])+"\n")
         file.close()
 
 main()

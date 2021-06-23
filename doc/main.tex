@@ -58,6 +58,7 @@
 \usepgfplotslibrary{statistics}
 \tikzexternalize
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.text}
 \usepackage{hhline}
 \usepackage{array}
 \usepackage{colortbl}
@@ -1656,10 +1657,10 @@ excepcionalmente longos.
 		\savebox{\violinnorrish}{%
 		\begin{tikzpicture}
 			\begin{axis}[
-				height=0.459\textwidth,
+				height=0.9\textwidth,
 				width=0.9\textwidth,
 				ymin=0,ymax=15,
-				xmin=-2,xmax=6,
+				xmin=-1,xmax=3,
 				axis line style={draw=none},
 				tick style={draw=none},
 				xticklabels={,,},
@@ -1697,10 +1698,10 @@ excepcionalmente longos.
 		\savebox{\violinvirial}{%
 		\begin{tikzpicture}
 			\begin{axis}[
-				height=0.459\textwidth,
+				height=0.9\textwidth,
 				width=0.9\textwidth,
 				ymin=0,ymax=15,
-				xmin=-4,xmax=4,
+				xmin=-2,xmax=2,
 				axis line style={draw=none},
 				tick style={draw=none},
 				xticklabels={,,},
@@ -1738,10 +1739,10 @@ excepcionalmente longos.
 		\savebox{\violinuniquac}{%
 		\begin{tikzpicture}
 			\begin{axis}[
-				height=0.459\textwidth,
+				height=0.9\textwidth,
 				width=0.9\textwidth,
 				ymin=0,ymax=15,
-				xmin=-6,xmax=2,
+				xmin=-3,xmax=1,
 				axis line style={draw=none},
 				tick style={draw=none},
 				xticklabels={,,},
@@ -1778,7 +1779,7 @@ excepcionalmente longos.
 	\begin{axis}[
 			xmin = 1.0, xmax = 3.0, xlabel = {Modelo},
 			ymin = 0, ymax = 15, ylabel = {\textnumero\ de iterações},
-			height=0.45\textwidth,
+			height=0.88\textwidth,
 			width=0.9\textwidth,
 			xtick style={draw=none},
 			xtick={1.5,2,2.5},
@@ -2678,76 +2679,6 @@ Com isso, pode ser observado que a influência da temperatura sobre a função
 objetivo não é universal. ocorrendo apenas em situações específicas, a
 depender de outros fatores como natureza química dos solutos ou diluição.
 
-\subsection{Carboidratos}
-
-Avaliando dados de $a_w$ em função de $(x_\text{frutose},x_\text{glicose},%
-x_\text{sacaraose})$ \cite{velezmoro2000}, não foi possível afirmar que
-as pequenas diferenças observadas entre os desvios para $T=25,30,25$
-\textcelsius\ são estatisticamente significantes, para os modelos
-virial e UNIQUAC.
-
-Entretanto, o modelo de Norrish e a lei de Raoult apresentam desvios
-estatisticamente significantes diferentes entre medidas obtidas a
-25\textcelsius\ ou 30\textcelsius\ e medidas obtidas a 35\textcelsius.
-
-Além disso, os desvios para Norrish e Raoult foram muito similares; sendo
-assim, podemos concluir que para esse conjunto de dados, temos, de forma
-geral, $\phi>1$; além disso, o crescimento de $T$ deve levar a um aumento
-no valor de $\phi$, o que torna os modelos de Norrish e Raoult ainda menos
-adequados. Isso pode ser visto na figura \ref{fig_temp_carbs}.
-
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}
-		\begin{axis} [
-			ylabel={$\phi$},
-			xlabel={$x_\text{maltose}$},
-			xtick={0.004,0.008,0.012,0.016,0.020},
-			xlabel near ticks,
-			ylabel near ticks,
-			xticklabel style={
-				/pgf/number format/fixed,
-				/pgf/number format/precision=3,
-				/pgf/number format/fixed zerofill
-			},
-			scaled x ticks=false,
-		]
-			\addplot [
-				mark=*,
-				color=black,
-				fill=pverybrightred,
-				only marks,
-				mark size=3pt,
-			]
-			table [x={maltose},y={phi_exp},col sep=comma]
-				{./velezmoro_maltose_25.csv};
-			\addlegendentry{25\textcelsius};
-			\addplot [
-				mark=*,
-				color=black,
-				fill=pred,
-				only marks,
-				mark size=3pt,
-			]
-			table [x={maltose},y={phi_exp},col sep=comma]
-				{./velezmoro_maltose_30.csv};
-			\addlegendentry{30\textcelsius};
-			\addplot [
-				mark=*,
-				color=black,
-				fill=pverydarkred,
-				only marks,
-				mark size=3pt,
-			]
-			table [x={maltose},y={phi_exp},col sep=comma]
-				{./velezmoro_maltose_35.csv};
-			\addlegendentry{35\textcelsius};
-		\end{axis}
-	\end{tikzpicture}
-	\caption{Valores experimentais obtidos para $\phi$ em uma solução de maltose}
-	\label{fig_temp_carbs}
-\end{figure}
-
 \subsection{Aminoácidos}
 
 Foram analisados dois estudos: um comparando três aminoácidos (ácido glutâmico,
@@ -2827,6 +2758,95 @@ perceptíveis para maiores temperaturas).
 	\label{fig_temp_amins}
 \end{figure}
 
+\subsection{Carboidratos}
+
+Avaliando dados de $a_w$ em função de $(x_\text{frutose},x_\text{glicose},%
+x_\text{sacaraose},x_\text{maltose})$ \cite{velezmoro2000}, não foi possível
+afirmar que as pequenas diferenças observadas entre os desvios para
+$T=25,30,25$ \textcelsius\ são estatisticamente significantes, para
+os modelos virial e UNIQUAC.
+
+Entretanto, o modelo de Norrish e a lei de Raoult apresentam desvios
+estatisticamente significantes diferentes entre medidas obtidas a
+25\textcelsius\ ou 30\textcelsius\ e medidas obtidas a 35\textcelsius.
+
+Além disso, os desvios para Norrish e Raoult foram muito similares; sendo
+assim, podemos concluir que para esse conjunto de dados, temos, de forma
+geral, $\phi>1$; além disso, o crescimento de $T$ deve levar a um aumento
+no valor de $\phi$, o que torna os modelos de Norrish e Raoult ainda menos
+adequados. Isso pode ser visto na figura \ref{fig_temp_carbs}\footnote{%
+\cite{velezmoro2000}}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis} [
+			ylabel={$\phi$},
+			xlabel={$x_\text{maltose}$},
+			xtick={0.004,0.008,0.012,0.016,0.020},
+			xlabel near ticks,
+			ylabel near ticks,
+			xticklabel style={
+				/pgf/number format/fixed,
+				/pgf/number format/precision=3,
+				/pgf/number format/fixed zerofill
+			},
+			scaled x ticks=false,
+			xmin=0.0000,
+		]
+			\draw[black,thick] (axis cs:0.0000,1) -- (axis cs:0.022,1);
+			\draw (axis cs: 0.016,0.9)
+				node[anchor=north] {\tiny{Lei de Raoult}};
+			\draw (axis cs: 0.0135,0.9) -- (axis cs:0.0185,0.9);
+			\draw (axis cs: 0.0125,1.0) -- (axis cs: 0.0135,0.9);
+			\draw (axis cs: 0.0128,1.0) -- (axis cs: 0.0138,0.9);
+			\draw (axis cs: 0.0131,1.0) -- (axis cs: 0.0141,0.9);
+			\fill [
+				color=lightgray,
+				opacity=0.5,
+			]
+				(axis cs: 0.0000,1.0) rectangle (axis cs: 0.022,2.8);
+			\draw (rel axis cs: 0.5,0.75)
+				node[anchor=south]
+				{\tiny{Região inacessível}};
+			\draw (rel axis cs: 0.5,0.75)
+				node[anchor=north]
+				{\tiny{ao modelo de Norrish}};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverybrightred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={maltose},y={phi_exp},col sep=comma]
+				{./velezmoro_maltose_25.csv};
+			\addlegendentry{25\textcelsius};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={maltose},y={phi_exp},col sep=comma]
+				{./velezmoro_maltose_30.csv};
+			\addlegendentry{30\textcelsius};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverydarkred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={maltose},y={phi_exp},col sep=comma]
+				{./velezmoro_maltose_35.csv};
+			\addlegendentry{35\textcelsius};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Valores experimentais obtidos para $\phi$ em uma solução de maltose}
+	\label{fig_temp_carbs}
+\end{figure}
 
 \section{Influência da Pressão}
 
@@ -3190,11 +3210,12 @@ pode ser visto claramente na figura \ref{fig_violin_uniquac_u}.
 				xticklabels={,,},
 				yticklabels={,,},
 			]
-			\draw[pviolinbrightred,thick]
-				(axis cs:0,2) -- (axis cs:0,6);
+			%\draw[pviolinbrightred,thin,opacity=0.3]
+				%(axis cs:0,2) -- (axis cs:0,6);
 			\addplot+[
 				color=black,
 				fill=pviolinbrightred,
+				fill opacity=0.6,
 				no marks,
 				thick,
 				smooth,
@@ -3204,6 +3225,7 @@ pode ser visto claramente na figura \ref{fig_violin_uniquac_u}.
 			\addplot+[
 				color=black,
 				fill=pviolinbrightred,
+				fill opacity=0.6,
 				no marks,
 				thick,
 				smooth,

@@ -6,15 +6,27 @@ import numpy as np
 from math import pi, exp, log
 from matplotlib import pyplot as plt
 
+#
+# This script reads a file and returns the kernel density estimation,
+# assuming normal pdf.
+#
+
 def plot (X, Y):
+    """ This function plots and shows the kernel density estimation.
+        It requires the terminal emulator 'kitty'.
+    """
     plt.plot(X, Y);
     plt.savefig("/tmp/plt.png")
     os.system("kitty +kitten icat /tmp/plt.png")
 
 def kernel (x):
+    """ We use a standard normal kernel.
+    """
     return ( exp (-0.5*x**2) ) / ((2*pi)**0.5)
 
 def bandwith (X):
+    """ We assume the distribution as normal.
+    """
     sigma_hat = np.std(X)
     n = len(X)
     iqr = np.subtract(*np.percentile(X, [75,25]))
@@ -22,6 +34,8 @@ def bandwith (X):
     return h
 
 def kde (X, x):
+    """ Kernel density estimation implementation.
+    """
     h = bandwith (X)
     n = len(X);
     f = 0

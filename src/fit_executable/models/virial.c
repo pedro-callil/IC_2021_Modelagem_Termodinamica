@@ -104,7 +104,7 @@ void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 		counter = 0;
 
 		for ( i = 0; i < p; i++ ) {
-			fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t", counter,
+			fprintf ( stdout, "\tb_%ld = %.5e\t+/-\t%.5e\t", counter,
 				gsl_vector_get ( w->x, counter),
 				correction * sqrt ( gsl_matrix_get
 					( covar, counter, counter ) ) );
@@ -112,7 +112,7 @@ void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 			/* add solute name */
 			counter++;
 			for ( j = 0; j < i; j++ ) {
-				fprintf ( stdout, "\tK_%ld = %.5e\t+/-\t%.5e\t",
+				fprintf ( stdout, "\tc_%ld = %.5e\t+/-\t%.5e\t",
 					counter, gsl_vector_get ( w->x, counter),
 					correction * sqrt ( gsl_matrix_get
 						( covar, counter, counter ) ) );

@@ -9,6 +9,17 @@ void print_usage (void) {
 	fprintf ( stderr, "          File in which the activity data are stored\n" );
 	fprintf ( stderr, "        -F <filename to store predicted values>\n" );
 	fprintf ( stderr, "          File to store the calculated values.\n" );
+	fprintf ( stderr, "        -K <param 1> <param 2> <param 3> ...\n" );
+	fprintf ( stderr, "          \"param n\" is the n-th previously\n" );
+	fprintf ( stderr, "          obtained parameter (K_n for norrish, b_n or\n" );
+	fprintf ( stderr, "          c_nm for virial and q_n/u_nn for UNIQUAC).\n" );
+	fprintf ( stderr, "          passed, this option will skip the fitting\n" );
+	fprintf ( stderr, "          step, and replace the parameters that would\n" );
+	fprintf ( stderr, "          be obtained through regression with\n" );
+	fprintf ( stderr, "          user-informed ones. This is useful to test\n" );
+	fprintf ( stderr, "          predictive abilities of the regression\n" );
+	fprintf ( stderr, "          (training and test data) and also to set\n" );
+	fprintf ( stderr, "          the initial values of the iterative process.\n" );
 	fprintf ( stderr, "        -m <model>\n" );
 	fprintf ( stderr, "          Model: can be one of norrish, virial, \n" );
 	fprintf ( stderr, "          UNIQUAC, caurie, raoult, zdanovskii \n" );
@@ -48,7 +59,11 @@ void print_usage (void) {
 /* read arguments and options from user */
 void getargs ( int argc, char **argv, info *user_data ) {
 
-	int opt, gave_file, index, count;
+	int opt, gave_file, index, count, K;
+	double next, *tmp_K;
+	char *endptr_K;
+
+	opterr = 0;
 
 	gave_file = FALSE;
 	user_data->gave_filenames = FALSE;
@@ -63,6 +78,8 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	strcpy ( user_data->model, "raoult" );
 	user_data->quiet = FALSE;
 	user_data->cost = 0;
+	user_data->K = NULL;
+	user_data->K_number = 0;
 	user_data->is_all = FALSE;
 	user_data->not_zdan = FALSE;
 	user_data->files_zdan = NULL;
@@ -72,7 +89,7 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	user_data->max_iter = MAX_ITER;
 	user_data->aw_in_results = FALSE;
 
-	while ( ( opt = getopt ( argc, argv, "hqf:F:m:Z:M:OEA" ) ) != -1 ) {
+	while ( ( opt = getopt ( argc, argv, "hqf:F:m:Z:M:K:OEA" ) ) != -1 ) {
 		switch (opt) {
 			case 'h':
 				free (user_data->model);
@@ -148,6 +165,28 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				break;
 			case 'M':
 				user_data->max_iter = atoi (optarg);
+				break;
+			case 'K':
+				index = optind - 1;
+				K = 0;
+				while ( index < argc ) {
+					errno = 0;
+					next = strtod ( argv[index], &endptr_K );
+					if ( errno == 0 && *endptr_K == '\0' ) {
+						K++;
+						tmp_K = realloc ( user_data->K,
+							K * sizeof (double) );
+						if ( tmp_K == NULL ) {
+							fprintf ( stderr,
+								"Memory error\n" );
+							exit (56);
+						}
+						user_data->K = tmp_K;
+						user_data->K[K-1] = next;
+						user_data->K_number = K;
+					} else break;
+					index++;
+				}
 				break;
 		}
 

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 #include <math.h>
 #include <getopt.h>
 #include <unistd.h>
@@ -73,6 +74,8 @@ typedef struct {
 	char *filename_new_results;
 	char **files_zdan;
 	double cost;
+	double *K;
+	int K_number;
 	int quiet;
 	int is_all;
 	int gave_filenames;
@@ -126,7 +129,7 @@ typedef double (*polynomial_function)
 extern void getargs ( int argc, char **argv, info *user_data );
 extern void initialize ( char *filename, Metadata *system_description,
 		Data *system, info *user_data );
-extern void init_data ( char *model, double *x_init, int p );
+extern void init_data ( char *model, double *x_init, int p, info *user_data );
 extern void finalize ( Metadata *system_description, Data *system,
 		info *user_data );
 extern int fit_to_model ( System *data, info *user_data );

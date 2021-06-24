@@ -80,7 +80,7 @@ int fit_to_model ( System *data, info *user_data ) {
 
 	covar = gsl_matrix_alloc ( p, p );
 	x_init = malloc ( p * sizeof (double) );
-	init_data ( user_data->model, x_init, p );
+	init_data ( user_data->model, x_init, p, user_data );
 
 	x = gsl_vector_view_array ( x_init, p );
 

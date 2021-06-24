@@ -168,19 +168,31 @@ void initialize ( char *filename, Metadata *system_description,
 /*
  * Initialize solver for different models.
  */
-void init_data ( char *model, double *x_init, int p ) {
+void init_data ( char *model, double *x_init, int p, info *user_data ) {
 
 	int i, n;
 
-	if ( strcmp ( model, "uniquac" ) == TRUE ) {
-		n = ( p / 2 );
-		for ( i = 0; i < n; i++ ) {
-			x_init[i] = 10;
-			x_init[n+i] = 1000;
+	if ( user_data->K_number != p ) {
+		if ( user_data->K_number != 0 ) {
+			fprintf ( stderr,
+				"Testing impossible; not enough parameters.\n" );
+			fprintf ( stderr,
+				"Fitting as normally\n" );
+		}
+		if ( strcmp ( model, "uniquac" ) == TRUE ) {
+			n = ( p / 2 );
+			for ( i = 0; i < n; i++ ) {
+				x_init[i] = 10;
+				x_init[n+i] = 1000;
+			}
+		} else {
+			for ( i = 0; i < p; i++ ) {
+				x_init[i] = 1.0;
+			}
 		}
 	} else {
 		for ( i = 0; i < p; i++ ) {
-			x_init[i] = 1.0;
+			x_init[i] = user_data->K[i];
 		}
 	}
 }
@@ -233,6 +245,11 @@ void finalize ( Metadata *system_description, Data *system,
 	for ( i = 0; i < components; i++ ) {
 		free (system_description->components[i]);
 	}
+
+	if ( user_data->K != NULL ) {
+		free (user_data->K);
+	}
+
 	free (system_description->components);
 	free (user_data->model);
 	free (user_data->filename);

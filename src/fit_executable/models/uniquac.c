@@ -272,6 +272,8 @@ void print_uniquac ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 				fprintf ( stdout, "(water)\n" );
 			}
 			/* add solute name */
+		}
+		for ( i = -1; i < p; i++ ) {
 			fprintf ( stdout, "\tu_%d%d = %.5e\t+/-\t%.5e\t",
 				i + 1, i + 1,
 				fabs ( gsl_vector_get ( w->x, p + i + 2 ) ),

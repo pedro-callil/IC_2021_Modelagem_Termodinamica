@@ -94,6 +94,20 @@ $ ./bin/ConvertWaterActivity -h
 $ ./bin/FitWaterActivity -h
 ```
 
+Para a obtenção dos dados exibidos no relatório, existe um *script* em `bash` que faz
+uso da utilidade GNU datamash para obter essas informações. Basta executar:
+
+```
+$ ./src/gen_data_and_print_table
+```
+
+Além disso, para a divisão das dez maiores séries de dados em conjuntos de treino e
+teste, e avaliação desses dados como no relatório, temos outro *script* em `bash`:
+
+```
+$ ./src/test_and_train
+```
+
 Relatório
 ---------
 

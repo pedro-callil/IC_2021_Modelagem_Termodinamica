@@ -5,7 +5,8 @@
 
 for model in virial norrish uniquac;
 do
-	echo test_obj,train_obj,raoult_obj
+	echo "$model" model
+	echo test_minus_train,raoult_minus_train
 	for file in $(
 		for file in data/converted/*.csv; do
 			wc $file -l; done | sort -n | tail -n 10 | cut -d ' ' -f 2
@@ -33,7 +34,6 @@ do
 			| grep final | tr -cd '[0-9]\n\.' \
 			| tr '\n' ',' | sed -e 's/,$//g'
 		echo
-	done
+	done | awk -F ',' '{print sqrt(($2-$1)^2)","sqrt(($2-$3)^2)}'
 done
-
 

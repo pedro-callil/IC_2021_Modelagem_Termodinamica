@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+# This script splits a file in test and traing subsets.
+
 original_file=$1
 training_file=$2
 test_file=$3

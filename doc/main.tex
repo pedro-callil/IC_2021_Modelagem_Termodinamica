@@ -1882,6 +1882,24 @@ na prática, adotada na forma \ref{eq_caurie_raoult}
 	m_im_jm_k\right]
 \end{equation}
 
+\section{Capacidade preditiva dos modelos}
+
+É interessante analisarmos a aplicação de parâmetros obtidos sobre um conjunto de
+dados a outro conjunto de dados em condições semelhantes; para isso, dentre as
+séries de dados avaliadas, separamos cada uma das dez maiores (em número de pontos)
+em duas séries, cada uma com metade dos dados da série inicial, de form aleatória;
+em seguida, ajustamos o modelo a uma dessas séries (dados de treino) e utilizamos
+os valores obtidos para os parâmetros para uma avaliação da outra (dados de teste).
+
+Para todos os modelos avaliados, o uso dos parâmetros obtidos na série de treino
+foi um melhor ajuste à série de teste que o modelo de Raoult; em quase todos os
+casos a diferença das funções objetivo entre a aplicação do modelo aos dados de
+treino e teste foi uma ou mais ordens de grandeza inferior à diferença entre a
+aplicação do modelo em questão e a aplicação do modelo de Raoult, aos dados de
+teste.\footnote{A exceção reside em conjuntos de dados para os quais o modelo
+de Norrish acaba convergindo para o modelo de Raoult, como discutido
+anteriormente.}.
+
 
 
 \chapter{Análise dos Dados Experimentais}

@@ -1,0 +1,79 @@
+#! /usr/bin/env bash
+
+# This script will compare the test and training data results of the fitting
+# parameters of the three models (that demand regression) with the Raoult's law.
+
+echo Virial
+echo
+for file in $(
+	for file in data/converted/*.csv; do
+		wc $file -l; done | sort -n | tail -n 10 | cut -d ' ' -f 2
+	); do
+	name=$(basename -- $file)
+	echo $name
+	./src/split_file $file /tmp/train_$name /tmp/test_$name 50
+	kopts=$(./bin/FitWaterActivity \
+			-M 2000 -f /tmp/train_$name -m virial -q \
+			| grep "b_[0-9]\|c_[0-9]"\
+			| cut -d '=' -f 2 \
+			| cut -f 1 -d '/' \
+			| sed -e 's/\+$//g' \
+			| tr -d '\t\ ' \
+			| tr '\n' ' ' && echo)
+	./bin/FitWaterActivity -f /tmp/test_$name -m virial -M 0 \
+		-K $kopts 2>/dev/null | grep initial
+	./bin/FitWaterActivity -M 2000 -f /tmp/train_$name -m virial -q \
+		| grep final
+	./bin/FitWaterActivity -m raoult -f /tmp/test_$name | grep final
+done
+
+echo UNIQUAC
+echo
+for file in $(
+	for file in data/converted/*.csv; do
+		wc $file -l; done | sort -n | tail -n 10 | cut -d ' ' -f 2
+	); do
+	name=$(basename -- $file)
+	echo $name
+	./src/split_file $file /tmp/train_$name /tmp/test_$name 50
+	kopts=$(./bin/FitWaterActivity \
+			-M 2000 -f /tmp/train_$name -m uniquac -q \
+			| grep "u_[0-9]\|q_[0-9]" \
+			| cut -d '=' -f 2 \
+			| cut -f 1 -d '/' \
+			| sed -e 's/\+$//g' \
+			| tr -d '\t\ ' \
+			| tr '\n' ' ' && echo)
+	./bin/FitWaterActivity -f /tmp/test_$name -m uniquac -M 0 \
+		-K $kopts 2>/dev/null | grep initial
+	./bin/FitWaterActivity -M 2000 -f /tmp/train_$name -m uniquac -q \
+		| grep final
+	./bin/FitWaterActivity -m raoult -f /tmp/test_$name | grep final
+done
+
+echo Norrish
+echo
+for file in $(
+	for file in data/converted/*.csv; do
+		wc $file -l
+	done | sort -n | tail -n 10 | cut -d ' ' -f 2
+	); do
+	name=$(basename -- $file)
+	echo $name
+	./src/split_file $file /tmp/train_$name /tmp/test_$name 50
+	kopts=$(./bin/FitWaterActivity \
+			-M 2000 -f /tmp/train_$name -m norrish -q \
+			| grep "K_[0-9]" \
+			| cut -d '=' -f 2 \
+			| cut -f 1 -d '/' \
+			| sed -e 's/\+$//g' \
+			| tr -d '\t\ ' \
+			| tr '\n' ' ' && echo)
+	./bin/FitWaterActivity -f /tmp/test_$name -m norrish -M 0 \
+		-K $kopts 2>/dev/null | grep initial
+	./bin/FitWaterActivity -M 2000 -f /tmp/train_$name -m norrish -q \
+		| grep final
+	./bin/FitWaterActivity -m raoult -f /tmp/test_$name | grep final
+done
+
+

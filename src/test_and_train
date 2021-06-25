@@ -3,77 +3,37 @@
 # This script will compare the test and training data results of the fitting
 # parameters of the three models (that demand regression) with the Raoult's law.
 
-echo Virial
-echo
-for file in $(
-	for file in data/converted/*.csv; do
-		wc $file -l; done | sort -n | tail -n 10 | cut -d ' ' -f 2
-	); do
-	name=$(basename -- $file)
-	echo $name
-	./src/split_file $file /tmp/train_$name /tmp/test_$name 50
-	kopts=$(./bin/FitWaterActivity \
-			-M 2000 -f /tmp/train_$name -m virial -q \
-			| grep "b_[0-9]\|c_[0-9]"\
-			| cut -d '=' -f 2 \
-			| cut -f 1 -d '/' \
-			| sed -e 's/\+$//g' \
-			| tr -d '\t\ ' \
-			| tr '\n' ' ' && echo)
-	./bin/FitWaterActivity -f /tmp/test_$name -m virial -M 0 \
-		-K $kopts 2>/dev/null | grep initial
-	./bin/FitWaterActivity -M 2000 -f /tmp/train_$name -m virial -q \
-		| grep final
-	./bin/FitWaterActivity -m raoult -f /tmp/test_$name | grep final
-done
-
-echo UNIQUAC
-echo
-for file in $(
-	for file in data/converted/*.csv; do
-		wc $file -l; done | sort -n | tail -n 10 | cut -d ' ' -f 2
-	); do
-	name=$(basename -- $file)
-	echo $name
-	./src/split_file $file /tmp/train_$name /tmp/test_$name 50
-	kopts=$(./bin/FitWaterActivity \
-			-M 2000 -f /tmp/train_$name -m uniquac -q \
-			| grep "u_[0-9]\|q_[0-9]" \
-			| cut -d '=' -f 2 \
-			| cut -f 1 -d '/' \
-			| sed -e 's/\+$//g' \
-			| tr -d '\t\ ' \
-			| tr '\n' ' ' && echo)
-	./bin/FitWaterActivity -f /tmp/test_$name -m uniquac -M 0 \
-		-K $kopts 2>/dev/null | grep initial
-	./bin/FitWaterActivity -M 2000 -f /tmp/train_$name -m uniquac -q \
-		| grep final
-	./bin/FitWaterActivity -m raoult -f /tmp/test_$name | grep final
-done
-
-echo Norrish
-echo
-for file in $(
-	for file in data/converted/*.csv; do
-		wc $file -l
-	done | sort -n | tail -n 10 | cut -d ' ' -f 2
-	); do
-	name=$(basename -- $file)
-	echo $name
-	./src/split_file $file /tmp/train_$name /tmp/test_$name 50
-	kopts=$(./bin/FitWaterActivity \
-			-M 2000 -f /tmp/train_$name -m norrish -q \
-			| grep "K_[0-9]" \
-			| cut -d '=' -f 2 \
-			| cut -f 1 -d '/' \
-			| sed -e 's/\+$//g' \
-			| tr -d '\t\ ' \
-			| tr '\n' ' ' && echo)
-	./bin/FitWaterActivity -f /tmp/test_$name -m norrish -M 0 \
-		-K $kopts 2>/dev/null | grep initial
-	./bin/FitWaterActivity -M 2000 -f /tmp/train_$name -m norrish -q \
-		| grep final
-	./bin/FitWaterActivity -m raoult -f /tmp/test_$name | grep final
+for model in virial norrish uniquac;
+do
+	echo test_obj,train_obj,raoult_obj
+	for file in $(
+		for file in data/converted/*.csv; do
+			wc $file -l; done | sort -n | tail -n 10 | cut -d ' ' -f 2
+		); do
+		name=$(basename -- $file)
+		./src/split_file $file /tmp/"$model"_train_"$name" \
+			/tmp/"$model"_test_"$name" 50
+		kopts=$(./bin/FitWaterActivity \
+				-M 2000 -f /tmp/"$model"_train_"$name" -m "$model" -q \
+				-A -F /tmp/"$model"_train_results_"$name" \
+				| grep "b_[0-9]\|c_[0-9]\|K_[0-9]\|q_[0-9]\|u_[0-9]"\
+				| cut -d '=' -f 2 \
+				| cut -f 1 -d '/' \
+				| sed -e 's/\+$//g' \
+				| tr -d '\t\ ' \
+				| tr '\n' ' ' && echo)
+		./bin/FitWaterActivity -f /tmp/"$model"_test_"$name" -m "$model" -M 0 \
+			-A -F /tmp/"$model"_test_results_"$name" \
+			-K $kopts 2>/dev/null | grep initial | tr -cd '[0-9]\n\.' \
+			| tr '\n' ','
+		./bin/FitWaterActivity -M 2000 -f /tmp/"$model"_train_"$name" \
+			-m "$model" -q \
+			| grep final | tr -cd '[0-9]\n\.' | tr '\n' ','
+		./bin/FitWaterActivity -m raoult -f /tmp/"$model"_test_"$name" \
+			| grep final | tr -cd '[0-9]\n\.' \
+			| tr '\n' ',' | sed -e 's/,$//g'
+		echo
+	done
 done
 
 

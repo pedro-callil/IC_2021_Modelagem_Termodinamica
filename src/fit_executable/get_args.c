@@ -63,7 +63,19 @@ void getargs ( int argc, char **argv, info *user_data ) {
 	double next, *tmp_K;
 	char *endptr_K;
 
-	opterr = 0;
+	opterr = 0; /* This is a very ugly hack; if the user-informed
+			* fitting parameters passed to the option '-K'
+			* are negative, getopt will interpret any value
+			* after the first as an option; this is a consequence
+			* of the (other) hack we used to pass several arguments
+			* to an option, that has also been used in the convert
+			* source code (../convert_executable/get_args.c) to
+			* supply the molar masses of the components of a solution;
+			* unfortunately, here that solution won't work optimally,
+			* due to the possibility of negative arguments. Luckily,
+			* however, the absence of an "invalid option" warning is
+			* not a problem in this situation.
+			*/
 
 	gave_file = FALSE;
 	user_data->gave_filenames = FALSE;
@@ -167,11 +179,24 @@ void getargs ( int argc, char **argv, info *user_data ) {
 				user_data->max_iter = atoi (optarg);
 				break;
 			case 'K':
+				/*
+				* This option reads the values of the fitting
+				* parameters informed by the user; this is required
+				* by the analysis of test and training data
+				* differences.
+				*/
 				index = optind - 1;
 				K = 0;
 				while ( index < argc ) {
 					errno = 0;
 					next = strtod ( argv[index], &endptr_K );
+					/* Unlike the other use of this solution
+					* to pass multiple arguments to a single
+					* option, here we can't assume positive
+					* arguments; therefore, to check if the
+					* next string in *argv is an option or an
+					* argument, we simply check if it's possible
+					* to convert it to a double.*/
 					if ( errno == 0 && *endptr_K == '\0' ) {
 						K++;
 						tmp_K = realloc ( user_data->K,

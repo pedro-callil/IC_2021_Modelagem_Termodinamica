@@ -2,7 +2,7 @@ LC		= lualatex
 LCFLAGS		= -shell-escape
 BC		= bibtex
 
-LSRC		= main.tex
+LSRC		= main_pt.tex
 LSRCDEPS	= abntex2-modelo-include-comandos.aux \
 		  aminoacid_aw_avgs.csv \
 		  carbohydrate_aw_avgs.csv \
@@ -19,7 +19,7 @@ LSRCDEPS	= abntex2-modelo-include-comandos.aux \
 		  iter_norrish.csv \
 		  iter_uniquac.csv \
 		  iter_virial.csv \
-		  main.tex \
+		  main_pt.tex \
 		  norrish_violin.csv \
 		  romero_glycine_288_15_K.csv \
 		  romero_glycine_293_15_K.csv \
@@ -35,10 +35,10 @@ LSRCDEPS	= abntex2-modelo-include-comandos.aux \
 		  velezmoro_maltose_35.csv \
 		  virial_violin.csv
 
-BSRC		= main
+BSRC		= main_pt
 BSRCDEPS	= bibliography.bib
 
-LSOUT		= main.pdf
+LSOUT		= main_pt.pdf
 RFILE		= report/relatorioIniciacaoCientificaAtividadeDaAgua.pdf
 
 .PHONY: all bib clean

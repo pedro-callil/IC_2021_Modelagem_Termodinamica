@@ -2,7 +2,8 @@ bin/**
 
 test/**
 
-doc/main-*
+doc/main_pt*
+doc/main_en*
 doc/*.aux
 !doc/abntex2-modelo-include-comandos.aux
 doc/*.auxlock

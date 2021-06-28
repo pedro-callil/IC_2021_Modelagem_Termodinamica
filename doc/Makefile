@@ -3,6 +3,7 @@ LCFLAGS		= -shell-escape
 BC		= bibtex
 
 LSRC		= main_pt.tex
+LSRCEN		= main_en.tex
 LSRCDEPS	= abntex2-modelo-include-comandos.aux \
 		  aminoacid_aw_avgs.csv \
 		  carbohydrate_aw_avgs.csv \
@@ -19,7 +20,6 @@ LSRCDEPS	= abntex2-modelo-include-comandos.aux \
 		  iter_norrish.csv \
 		  iter_uniquac.csv \
 		  iter_virial.csv \
-		  main_pt.tex \
 		  norrish_violin.csv \
 		  romero_glycine_288_15_K.csv \
 		  romero_glycine_293_15_K.csv \
@@ -36,18 +36,27 @@ LSRCDEPS	= abntex2-modelo-include-comandos.aux \
 		  virial_violin.csv
 
 BSRC		= main_pt
+BSRCEN		= main_en
 BSRCDEPS	= bibliography.bib
 
 LSOUT		= main_pt.pdf
+LSOUTEN		= main_en.pdf
 RFILE		= report/relatorioIniciacaoCientificaAtividadeDaAgua.pdf
+RFILEEN		= report/undergraduateResearchProjectReportWaterActivity.pdf
 
-.PHONY: all bib clean
+.PHONY: all en bib biben clean
 
 all: $(LSRC) $(LSRCDEPS)
 	$(LC) $(LCFLAGS) $(LSRC); \
 	$(LC) $(LCFLAGS) $(LSRC); \
 		if [ ! -d "./report" ]; then mkdir report; fi; \
 		cp $(LSOUT) $(RFILE)
+
+en: $(LSRCEN) $(LSRCDEPS)
+	$(LC) $(LCFLAGS) $(LSRCEN); \
+	$(LC) $(LCFLAGS) $(LSRCEN); \
+		if [ ! -d "./report" ]; then mkdir report; fi; \
+		cp $(LSOUTEN) $(RFILEEN)
 
 bib: $(LSRC) $(LSRCDEPS) $(BSRCDEPS)
 	$(LC) $(LCFLAGS) $(LSRC); \
@@ -58,8 +67,18 @@ bib: $(LSRC) $(LSRCDEPS) $(BSRCDEPS)
 				if [ ! -d "./report" ]; then mkdir report; fi; \
 				cp $(LSOUT) $(RFILE)
 
+biben: $(LSRCEN) $(LSRCDEPS) $(BSRCDEPS)
+	$(LC) $(LCFLAGS) $(LSRCEN); \
+		$(BC) $(BSRCEN); \
+			$(LC) $(LCFLAGS) $(LSRCEN); \
+			$(LC) $(LCFLAGS) $(LSRCEN); \
+			$(LC) $(LCFLAGS) $(LSRCEN); \
+				if [ ! -d "./report" ]; then mkdir report; fi; \
+				cp $(LSOUTEN) $(RFILEEN)
+
 clean:
-	rm -f main-* \
+	rm -f main_pt-* \
+		main_en-* \
 		main.aux \
 		*.auxlock \
 		*.bbl \

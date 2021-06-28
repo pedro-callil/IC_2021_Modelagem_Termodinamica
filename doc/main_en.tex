@@ -36,10 +36,10 @@
 	a4paper,			% tamanho do papel.
 	% -- opções da classe abntex2 --
 	% -- opções do pacote babel --
-	english,			% idioma adicional para hifenização
+	brazil,			% idioma adicional para hifenização
 	french,				% idioma adicional para hifenização
 	spanish,			% idioma adicional para hifenização
-	brazil				% o último idioma é o principal do documento
+	english				% o último idioma é o principal do documento
 	]{abntex2}
 
 \usepackage[T1]{fontenc}
@@ -72,15 +72,15 @@
 \@addtoreset{chapter}{part}
 \makeatother
 
-\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+\renewcommand{\backrefpagesname}{Cited in pages(s):~}
 \renewcommand{\backref}{}
 \renewcommand*{\backrefalt}[4]{
 	\ifcase #1 %
-		Nenhuma citação no texto.%
+		No citation in text.%
 	\or
-		Citado na página #2.%
+		Cited in page #2.%
 	\else
-		Citado #1 vezes nas páginas #2.%
+		Cited #1 times in pages #2.%
 	\fi}%
 
 \newcommand{\oo}{\textordmasculine\ }
@@ -96,27 +96,27 @@
 \newcommand{\tablemonosecond}[9]{%
 	\begin{table}[h]
 		\centering
-		\caption{Análise dos dados para soluções de #1 e água}
+		\caption{Analysis of solutions of #1 in water}
 		\label{#2}
 		\bgroup
 		\def\arraystretch{1.5}
 		\scalebox{0.9}{%
 		\begin{tabular}{| p{0.2\textwidth} | p{0.4\textwidth} | %
 				p{0.4\textwidth} |}\hline
-			\multirow{2}*{Composição} &
-				\multicolumn{2}{c|}{Modelos}\\\hhline{~--}
+			\multirow{2}*{Composition} &
+				\multicolumn{2}{c|}{Models}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
-			\multirow{5}*{\makecell[l]{Água,\\#1}} &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#3$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#4$%
+			\multirow{5}*{\makecell[l]{Water,\\#1}} &
+				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#3$ &
+				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#4$%
 					\\\hhline{~-~}
 			& UNIQUAC & $b_\text{#1}=#9$\\\hhline{~~-}
-			& $\frac{\sqrt{\sum\text{desvios}^2}}{n}=#5$ & Norrish\\
-			& $q_\text{água}=\ArgXI$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#6$\\
+			& $\frac{\sqrt{\sum\text{deviations}^2}}{n}=#5$ & Norrish\\
+			& $q_\text{water}=\ArgXI$ &
+				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#6$\\
 			& $q_\text{#1}=\ArgXIII$ & $K_\text{#1}=\ArgX$%
 				\\\hhline{-~~}
-			$\bar{a_w}=#7$ & $u_\text{água}=\ArgXII$ & \\
+			$\bar{a_w}=#7$ & $u_\text{water}=\ArgXII$ & \\
 			$\bar{x_w}=#8$ & $u_\text{#1}=\ArgXIV$ & \\\hline
 		\end{tabular}}
 		\egroup
@@ -164,29 +164,29 @@
 \newcommand{\tablebithird}[9]{%
 	\begin{table}[h]
 		\centering
-		\caption{Análise dos dados para soluções de #1, #2 e água}
+		\caption{Analysis of solutions of #1 and #2 in water}
 		\label{#3}
 		\bgroup
 		\def\arraystretch{1.5}
 		\scalebox{0.9}{%
 		\begin{tabular}{| p{0.2\textwidth} | p{0.4\textwidth} | %
 				p{0.4\textwidth} |}\hline
-			\multirow{2}*{Composição} &
-				\multicolumn{2}{c|}{Modelos}\\\hhline{~--}
+			\multirow{2}*{Composition} &
+				\multicolumn{2}{c|}{Models}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
-			\multirow{7}*{\makecell[l]{Água,\\#1 e\\#2}} &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#9$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#7$%
+			\multirow{7}*{\makecell[l]{Water,\\#1 and\\#2}} &
+				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#9$ &
+				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#7$%
 					\\\hhline{~-~}
 			& UNIQUAC & $b_\text{#1}=\ArgX$\\
-			& $\frac{\sqrt{\sum\text{desvios}^2}}{n}=#8$ &
+			& $\frac{\sqrt{\sum\text{deviations}^2}}{n}=#8$ &
 				$b_\text{#2}=\ArgXI$\\
-			& $q_\text{água}=\ArgXV$ &
+			& $q_\text{water}=\ArgXV$ &
 				$c_\text{#1/#2}=\ArgXII$\\\hhline{~~-}
 			& $q_\text{#1}=\ArgXVII$ & Norrish \\
 			& $q_\text{#2}=\ArgXIX$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#6$ \\
-			& $u_\text{água}=\ArgXVI$ & $K_\text{#1}=\ArgXIII$%
+				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#6$ \\
+			& $u_\text{water}=\ArgXVI$ & $K_\text{#1}=\ArgXIII$%
 				\\\hhline{-~~}
 			$\bar{a_w}=#4$ & $u_\text{#1}=\ArgXVIII$ &
 				$K_\text{#2} = \ArgXIV$ \\
@@ -223,33 +223,34 @@
 \newcommand{\tabletrithird}[9]{%
 	\begin{table}[h]
 		\centering
-		\caption{Análise dos dados para soluções de #1, #2, \ArgXXVII\ e água}
+		\caption{Analysis of solutions of #1, #2 and \ArgXXVII\ in water}
 		\label{#3}
 		\bgroup
 		\def\arraystretch{1.5}
 		\scalebox{0.9}{%
 		\begin{tabular}{| p{0.2\textwidth} | p{0.4\textwidth} | %
 				p{0.4\textwidth} |}\hline
-			\multirow{2}*{Composição} &
-				\multicolumn{2}{c|}{Modelos}\\\hhline{~--}
+			\multirow{2}*{Composition} &
+				\multicolumn{2}{c|}{Models}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
-			\multirow{10}*{\makecell[l]{Água,\\#1,\\#2 e\\\ArgXXVII}} &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#9$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#7$%
+			\multirow{10}*{\makecell[l]{Water,\\#1,\\#2 and\\\ArgXXVII}} &
+				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#9$ &
+				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#7$%
 					\\\hhline{~-~}
 			& UNIQUAC & $b_\text{#1}=\ArgX$\\
-			& $\frac{\sqrt{\sum\text{desvios}^2}}{n}=#8$ &
+			& $\frac{\sqrt{\sum\text{deviations}^2}}{n}=#8$ &
 				$b_\text{#2}=\ArgXI$\\
-			& $q_\text{água}=\ArgXIX$ & $b_\text{\ArgXXVII} = \ArgXIII$ \\
+			& $q_\text{water}=\ArgXIX$ &
+				$b_\text{\ArgXXVII} = \ArgXIII$ \\
 			& $q_\text{#1}=\ArgXXI$ &
 				$c_\text{#2/#1}=\ArgXII$\\
 			& $q_\text{#2}=\ArgXXIII$
 				& $c_\text{\ArgXXVII/#1}=\ArgXIV$\\
 			& $q_\text{\ArgXXVII}=\ArgXXV$
 				& $c_\text{\ArgXXVII/#2}=\ArgXV$\\\hhline{~~-}
-			& $u_\text{água}=\ArgXX$ & Norrish \\
+			& $u_\text{water}=\ArgXX$ & Norrish \\
 			& $u_\text{#1}=\ArgXXII$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#6$ \\
+				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#6$ \\
 			& $u_\text{#2}=\ArgXXIV$ & $K_\text{#1}=\ArgXVI$%
 				\\\hhline{-~~}
 			$\bar{a_w}=#4$ & $u_\text{\ArgXXVII}=\ArgXXVI$ &
@@ -269,9 +270,9 @@
 
 \DeclareMathOperator*{\minimize}{minimize}
 
-\titulo{Relatório Final de Iniciação Científica/Tecnológica\\
-	Modelagem Termodinâmica de Soluções de Interesse para a %
-	Indústria de Alimentos}
+\titulo{Final Report for Undergraduate Research Project\\
+	Thermodynamical Modelling of Solutions of Interest for the %
+	Food Industry}
 \autor{Pedro Henrique Callil Soares}
 \local{São Paulo}
 \data{2021}
@@ -282,10 +283,10 @@
 	Escola Politécnica
 	\par
 	Departamento de Engenharia Química}
-\tipotrabalho{Relatório de Iniciação Científica}
-\preambulo{Relatório de projeto de iniciação científica/tecnológica
-	- análise e modelagem da atividade da água em soluções de carboidratos
-	e aminoácidos.}
+\tipotrabalho{Undergraduate Research Project Report}
+\preambulo{Undergraduate Research Project Report
+	- analysis and modelling of water activity in solutions of carbohydrates
+	and aminoacids.}
 
 
 
@@ -318,7 +319,7 @@
 		pdfauthor={\@author},
 		pdfsubject={\imprimirpreambulo},
 		pdfcreator={LuaLaTeX},
-		pdfkeywords={atividade da água} {carboidratos} {aminoácidos},
+		pdfkeywords={water activity} {carbohydrates} {aminoacids},
 		colorlinks=true,
 		linkcolor=blue,
 		citecolor=blue,
@@ -332,19 +333,19 @@
 \setlength{\@fptop}{5pt}
 \makeatother
 
-\newcommand{\quadroname}{Quadro}
-\newcommand{\listofquadrosname}{Lista de quadros}
+%\newcommand{\quadroname}{Quadro}
+%\newcommand{\listofquadrosname}{Lista de quadros}
 
-\newfloat[chapter]{quadro}{loq}{\quadroname}
-\newlistof{listofquadros}{loq}{\listofquadrosname}
-\newlistentry{quadro}{loq}{0}
+%\newfloat[chapter]{quadro}{loq}{\quadroname}
+%\newlistof{listofquadros}{loq}{\listofquadrosname}
+%\newlistentry{quadro}{loq}{0}
 
-\setfloatadjustment{quadro}{\centering}
-\counterwithout{quadro}{chapter}
-\renewcommand{\cftquadroname}{\quadroname\space}
-\renewcommand*{\cftquadroaftersnum}{\hfill--\hfill}
+%\setfloatadjustment{quadro}{\centering}
+%\counterwithout{quadro}{chapter}
+%\renewcommand{\cftquadroname}{\quadroname\space}
+%\renewcommand*{\cftquadroaftersnum}{\hfill--\hfill}
 
-\setfloatlocations{quadro}{hbtp}
+%\setfloatlocations{quadro}{hbtp}
 
 
 \setlength{\parindent}{1.3cm}
@@ -355,7 +356,7 @@
 
 \begin{document}
 
-\selectlanguage{brazil}
+\selectlanguage{english}
 
 \frenchspacing
 
@@ -366,21 +367,20 @@
 
 \setlength{\absparsep}{18pt}
 \begin{resumo}
-	Esse projeto tem o intuito de levantar uma base de dados sobre a
-	atividade da água em soluções de carboidratos e aminoácidos,
-	avaliando alguns modelos propostos com relação à sua capacidade
-	correlativa com os dados experimentais. Foi feita uma revisão
-	bibliográfica, levantando dados de atividade da água em função da
-	composição para algumas soluções de interesse, e foram programadas
-	rotinas computacionais visando avaliar os desvios entre os modelos,
-	ajustados através de regressões não-lineares, e os dados. Por fim,
-	foi feita uma análise da influência de diversos fatores na capacidade
-	correlativa dos modelos examinados.\\
-	\textbf{Palavras-chave}: soluções de carboidratos.
-			soluções de aminoácidos.
-			propriedades termodinâmicas de soluções.
-			atividade da água.
-			modelagem termodinâmica.
+	This project aims to build a database of water activity data in
+	carbohydrate and aminoacid solutions, analysing the correlative
+	capabilities of a number of models found in the literature. Water
+	activity data as a function of composition were obtained from previous
+	studies on the subject, and computational routines were programmed
+	to evaluate the deviations between calculated osmotic coefficients
+	(using models obtained through nonlinear least-squares fitting) and
+	experimental data. Afterwards we performed an analysis of the influence
+	of several factors in the correlative capabilities of each model.\\
+	\textbf{Keywords}: carbohydrate solutions.
+			aminoacid solutions.
+			thermodynamical properties of solutions.
+			water activity.
+			thermodynamical modelling.
 \end{resumo}
 
 \pdfbookmark[0]{\listfigurename}{lof}
@@ -393,29 +393,29 @@
 \cleardoublepage
 
 \begin{simbolos}
-	\item[$ \gamma $] coeficiente de atividade
-	\item[$ \phi $] coeficiente osmótico
-	\item[$ \Pi $] pressão osmótica
-	\item[$ a $] atividade
-	\item[$ C_p $] calor específico
-	\item[$ f $] fugacidade
-	\item[$ \Delta H^\text{fus} $] Entalpia de vaporização
-	\item[$ \Delta H^\text{vap} $] Entalpia de fusão
-	\item[$ m $] molalidade
-	\item[$ p^\text{vap} $] pressão de vapor
-	\item[$ X_i $] fração mássica da substância $i$
-	\item[$ x_i $] fração molar da substância $i$
-	\item[$ \Xi_B, \Xi_F $] propriedade $\Xi$ no ponto de ebulição/congelamento
-	\item[$ \Xi^\text{ID} $] propriedade $\Xi$ em um sistema ideal
-	\item[$ \Xi^\text{ref} $] propriedade $\Xi$ no sistema de referência
-	\item[$ \Xi_w $] propriedade $\Xi$ da água ($a_w, \gamma_w$, \textit{etc.} %
-		para $\Xi = \alpha, \gamma$, \textit{etc.})
-	\item[$K_i$] parâmetros do modelo de Norrish
-	\item[$b_i$, $c_{ij}$] parâmetros do modelo virial
-	\item[$q_i$, $u_{ii}$] parâmetros do modelo UNIQUAC
-	\item[$A_i$] parâmetro de um modelo genérico
-	\item[$\Phi$] Estimativa de coeficiente osmótico obtido através de %
-		modelo genérico
+	\item[$ \gamma $] activity coefficient
+	\item[$ \phi $] osmotic coefficient
+	\item[$ \Pi $] osmotic pressure
+	\item[$ a $] activity
+	\item[$ C_p $] specific heat
+	\item[$ f $] fugacity
+	\item[$ \Delta H^\text{fus} $] enthalpy of vaporization
+	\item[$ \Delta H^\text{vap} $] enthalpy of fusion
+	\item[$ m $] molality
+	\item[$ p^\text{vap} $] vapor pressure
+	\item[$ X_i $] mass fraction (substance $i$)
+	\item[$ x_i $] molar fraction (substance $i$)
+	\item[$ \Xi_B, \Xi_F $] property $\Xi$ (boiling/freezing point)
+	\item[$ \Xi^\text{ID} $] property $\Xi$ (ideal system)
+	\item[$ \Xi^\text{ref} $] property $\Xi$ (reference system)
+	\item[$ \Xi_w $] property $\Xi$ (water, \textit{e.g.} $a_w, %
+		\gamma_w$, \textit{etc.} %
+		for $\Xi = \alpha, \gamma$, \textit{etc.})
+	\item[$K_i$] parameters for Norrish's model.
+	\item[$b_i$, $c_{ij}$] parameters for virial model
+	\item[$q_i$, $u_{ii}$] parameters for UNIQUAC model
+	\item[$A_i$] parameters for a generic model
+	\item[$\Phi$] osmotic coefficient estimate obtained through a generic model
 \end{simbolos}
 
 \pdfbookmark[0]{\contentsname}{toc}
@@ -424,21 +424,20 @@
 
 \textual
 
-\part{Introdução}
+\part{Introduction}
 
-A atividade $a$ de uma substância, definida \cite{sandler2017} como
-a razão entre a fugacidade de uma substância nas condições de um sistema
-e sua fugacidade em uma situação de referência (equação \ref{eq:def_atv}),
-age como sua ``concentração efetiva'', do ponto de vista termodinâmico.
-Portanto, a medição e análise da atividade da água em soluções nos permite
-prever de forma mais exata os fenômenos que dependem do teor de água em
-um sistema. No caso da indústria de alimentos, o principal desses fenômenos
-é a degradação dos alimentos por ação microbiana.
+The activity $a$ of a substance in a system, defined \cite{sandler2017} as
+the ratio between the fugacity of the substance in the system and its fugacity
+in a reference system (equation \ref{eq:def_atv}), acts as its thermodynamically
+``effective concentration''. Therefore, the measurement and analysis of the water
+activity in solutions allows better predictions of phenomena related to the water
+contents of a system. To the food industry, the most important of those phenomena
+is the microbial-induced food spoilage.
 
-De fato, a grandeza que controla o crescimento microbiano em um alimento é a
-atividade da água. No gráfico da figura \ref{fig:germ}\footnote{\cite{canovas2007}}
-temos os valores de atividade da água necessários para a proliferação microbiana
-para alguns microorganismos.
+Indeed, the property controlling microbial growth in a food product is the
+water activity. In the graph exhibited at the figure
+\ref{fig:germ}\footnote{\cite{canovas2007}}, one can see the values of water
+activity required for the growth of a few microorganisms of interest.
 
 \begin{figure}[h]
 	\centering
@@ -468,37 +467,37 @@ para alguns microorganismos.
 		\fill[black] (5,8.75) circle (0.07);
 		\fill[black] (5,10) circle (0.07);
 		\draw (10,10.4) node[anchor=south, text width=9cm]
-		{\tiny{Microorganismos inibidos pelo menor valor de
-		$a_w$ nessa faixa}};
+		{\tiny{Microorganisms inhibited at the smallest value of
+		$a_w$ in the range}};
 		\draw (6.3,9.5) node[anchor=west, text width=7cm]
 		{\tiny{\textit{Pseudomonas}, \textit{Escherichia},
 		\textit{Proteus}, \textit{Shigella}, \textit{Klebsiella},
 		\textit{Bacillus}, \textit{Clostridium perfringens},
-		\textit{C. botulinum} E, G, algumas leveduras}};
+		\textit{C. botulinum} E, G, a few yeasts}};
 		\draw (6.3,8) node[anchor=west, text width=7cm]
 		{\tiny{\textit{Salmonella}, \textit{Vibrio parahaemolyticus},
 		\textit{Clostridium botulinum} A, B, \textit{Listeria
 		monocytogenes}, \textit{Bacillus cereus}}};
 		\draw (6.3,6.5) node[anchor=west, text width=7cm]
-		{\tiny{\textit{Staphylococcus aureus} (aeróbico), diversas
-		leveduras (como \textit{Candida, Torulopsis, Hansenula}),
+		{\tiny{\textit{Staphylococcus aureus} (aerobic), several
+		yeasts (as \textit{Candida, Torulopsis, Hansenula}),
 		\textit{Micrococcus}}};
 		\draw (6.3,5) node[anchor=west, text width=7cm]
-		{\tiny{Maior parte dos bolores (\textit{Penicillium}
-		micotoxigênicos), \textit{Staphylococcus aureus},
-		maior parte dos \textit{Saccharomyces}, \textit{Debaryomyces}}};
+		{\tiny{Most molds (mycotoxigenic \textit{Penicillium}),
+		\textit{Staphylococcus aureus},
+		most \textit{Saccharomyces}, \textit{Debaryomyces}}};
 		\draw (6.3,3.5) node[anchor=west, text width=7cm]
-		{\tiny{Maior parte das bactérias halófilas, \textit{Aspergillus}
-		micotoxigênicos}};
+		{\tiny{Most halophile bacteria,
+		mycotoxigenic \textit{Aspergillus}}};
 		\draw (6.3,2.4) node[anchor=west, text width=7cm]
-		{\tiny{Bolores xerófilos (\textit{Aspergillus chevalieri, A.
+		{\tiny{Xerophile molds (\textit{Aspergillus chevalieri, A.
 		candidus, Wallemia sebi}), \textit{Saccharomyces bisporus}}};
 		\draw (6.3,1.1) node[anchor=west, text width=7cm]
-		{\tiny{Leveduras osmófilas (\textit{Sacharomyces rouxii},
-		alguns bolores (\textit{Aspergillus echinulatus, Monascus
+		{\tiny{Osmophile yeasts (\textit{Sacharomyces rouxii},
+		a few molds (\textit{Aspergillus echinulatus, Monascus
 		bisporus})}};
 		\draw (6.3,0.1) node[anchor=west, text width=7cm]
-		{\tiny{Não ocorre proliferação microbiana}};
+		{\tiny{No microbial proliferation}};
 		\draw (5,0.25) node[anchor=east] {0.61};
 		\draw (5,1.25) node[anchor=east] {0.65};
 		\draw (5,3.75) node[anchor=east] {0.75};
@@ -508,15 +507,14 @@ para alguns microorganismos.
 		\draw (5,8.75) node[anchor=east] {0.95};
 		\draw (5,10) node[anchor=east] {1.00};
 	\end{tikzpicture}
-	\caption{Valores de $a_w$ para o crescimento microbiano}
+	\caption{$a_w$ values for microbial growth}
 	\label{fig:germ}
 \end{figure}
 
-Nas condições encontradas na indústria de alimentos, não é absurdo assumir a
-hipótese de gás ideal para a fase gás dos sistemas
-considerados \cite{canovas2007}, em muitas situações. Além disso, a condição de
-referência é tomada como água pura, líquida, à mesma temperatura $T$. Assim
-obtemos:
+In the conditions usually found in the food industry, is reasonable to assume
+that the gas phase of the system behaves as an ideal gas\cite{canovas2007},
+in most situations. Furthermore, the reference condition is taken as pure and liquid
+water at the same pressure and temperature as the system. Therefore, one can obtain:
 
 \begin{equation}
 	\label{eq:def_atv}
@@ -524,36 +522,37 @@ obtemos:
 		\approx \left(\cfrac{p^\text{vap}_w}{p^\text{vap,ref}_w}\right)_T
 \end{equation}
 
-Para soluções ideais, obter $a_w$ é simples: para todo componente $i$ da
-mistura, a sua atividade é dada, simplesmente por sua fração molar, e portanto
-$a_w = x_w$. Entretanto, essa hipótese nem sempre se verifica; assim sendo,
-para soluções ideais adotamos o coeficiente de atividade $\gamma_w$:
+For ideal solutions, the evaluation of water activity is straightforward: for all
+component $u$ in a mixture, its activity $a_i$ is simply its molar fraction $x_i$;
+hence, $a_w = x_w$. However, not all systems are ideal, and therefore one needs to
+adopt another property, the activity coefficient of the water, $\gamma_w$:
 
 \begin{equation}
 	a_w = \gamma_wx_w \implies \gamma_w = \cfrac{a_w}{x_w}
 \end{equation}
 
-Entretanto, ainda que o coeficiente de atividade seja um indicador para o
-desvio da idealidade em uma solução, apresenta um problema: é uma grandeza ruim
-para avaliarmos os desvios da idealidade em soluções diluídas, já que, sendo
-$a_w$ função contínua da fração molar de água, e dado que a atividade da água
-pura é de 1 (é, afinal, a solução de referência), temos que:
+Yet, even if one now has an indicator of the deviation of a solution from
+ideality , another problem arises: the activity coefficient is not a good
+parameter to evaluate the deviations when applied to very diluted solutions;
+after all, $a_w=a_w(x_w)$ is a continuous function, and as the solution is diluted,
+$a_w$ must go to 1 (because the limit $x_w=1$ is the reference solution), and
+therefore one will observe that:
 
 \begin{equation}
 	\lim_{x_w \to 1}\gamma_w = 1
 \end{equation}
 
-E, para muitas soluções de interesse, não somente temos altos desvios da
-idealidade, como também temos soluções extremamente diluídas. Então adotamos
-uma nova grandeza, o coeficiente osmótico $\phi$, dado por:
+And for many solutions of interest, one can observe not only high deviations from
+ideal behavior, but also extremely diluted solutions. Thus, one adopts another
+property, the osmotic coefficient $\phi$, defined as:
 
 \begin{equation}
 	\phi = \cfrac{\ln(a_w)}{\ln(x_w)}
 \end{equation}
 
-Para comparar essas grandezas e visualizar um possível comportamento da
-atividade da água com a mudança na composição de uma mistura, podemos
-observar o gráfico na figura \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
+One can compare these two properties and visualize a possible behavior of
+the water activity as the composition of a mixture changes by observing
+the data plotted in the figure \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
 
 \begin{figure}[h]
 	\centering
@@ -577,7 +576,7 @@ observar o gráfico na figura \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
 				only marks,
 			]
 			table[x={xw},y={aw}]{glucose_a_w_and_phi.dat};
-			\addlegendentry{$a_w$ experimental};
+			\addlegendentry{$a_w$ (experimental)};
 			\addplot+[
 				color=black,
 				no marks,
@@ -648,24 +647,24 @@ observar o gráfico na figura \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
 		\addlegendentry{$\gamma_w$};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Atividade ($a_w$), coeficiente de atividade ($\gamma_w$) e%
-	coeficiente osmótico ($\phi$) da água em soluções de D-glicose. %
-	Perceba a diferença entre as escalas utilizadas para $\gamma_w$ e $\phi$.}
+	\caption{Activity ($a_w$), Activity coefficient ($\gamma_w$) and%
+	osmotic coefficient ($\phi$) of water in D-glucose solutions. %
+	One should observe the difference in the $\gamma_w$ and $\phi$ axis scales.}
 	\label{fig_atv_gamma_gluc}
 \end{figure}
 
-Devemos, além disso, lembrar que a medida de atividade da água é, por vezes,
-realizada de modo mais indireto; podemos medir para uma determinada solução ao
-invés de seu valor de atividade da água (através da medição de sua pressão de
-vapor e comparação com a pressão de vapor de água pura nas mesmas condições), o
-seu valor de elevação do ponto de ebulição, de depressão de ponto de início de
-congelamento, ou a composição de uma outra solução em equilíbrio osmótico.
+In addition, one must remember that water activity measurements are sometimes
+obtained indirectly; instead of measurements of vapor pressure in the system
+and comparison with the same property in the reference system (as shown in the
+equation \ref{eq:def_atv}), one can measure properties as freezing point
+depression, boiling point elevation, or the composition of another solution
+in osmotic equilibrium with the system under analysis.
 
-Por exemplo, alguns conjuntos de dados obtidos para soluções $n$-árias de
-carboidratos \cite{abderafi1994} apresentam dados de elevação do ponto de
-ebulição. Essas medidas devem ser convertidas em dados de coeficiente osmótico,
-através das equações \ref{eq:eleb_to_osco} \cite{ge2009,ge2009err}, por
-exemplo, que estão exibidas na figura \ref{fig_ge_and_wang}.
+For instance, a few data sets obtained for $n$-ary solutions of carbohydrates
+\cite{abderafi1994} are, in fact, boiling point elevation data. Hence, the
+experimental measurements must first be converted to osmotic coefficient data,
+through the equations \ref{eq:eleb_to_osco} \cite{ge2009,ge2009err}, which are
+plotted in the figure \ref{fig_ge_and_wang}.
 
 \begin{equation}
 	\label{eq:eleb_to_osco}
@@ -700,7 +699,7 @@ exemplo, que estão exibidas na figura \ref{fig_ge_and_wang}.
 						{ge_and_wang_bpe.csv};
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Ponto de Ebulição}
+		\caption{Boiling Point}
 	\end{subfigure}%
 	\hfill%
 	\begin{subfigure}{0.5\textwidth}
@@ -719,20 +718,21 @@ exemplo, que estão exibidas na figura \ref{fig_ge_and_wang}.
 						{ge_and_wang_fpd.csv};
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Ponto de Fusão}
+		\caption{Freezing Point}
 	\end{subfigure}
-	\caption{Relações entre $T_B$/$T_F$ (em \textcelsius) e $a_w$, %
+	\caption{Relation between $T_B$/$T_F$ (in \textcelsius) and $a_w$, %
 		$P=P_\text{atm}$}
 	\label{fig_ge_and_wang}
 \end{figure}
 
-Com $\Delta C_p$ sendo definido como a diferença entre os calores
-específicos, entre as fases: $\Delta C_p^\text{vap} = C_p^\text{vapor} -%
-C_p^\text{líquido}$ e $\Delta C_p^\text{fus} = C_p^\text{líquido} -%
-C_p^\text{sólido}$, $\Delta T_F$ sendo a depressão do ponto de congelamento,
-$\Delta T_B$ a elevação do ponto de ebulição e $\Delta H_{0,T_B}^\text{vap}$ e
-$\Delta H_{0,T_F}^\text{fus}$ sendo as entalpias de vaporização e ebulição do
-solvente puro a $T_B$/$T_F$.
+
+With $\Delta C_p$ defined as the difference in specific heat between the
+phases: $\Delta C_p^\text{vap} = C_p^\text{vapor} -%
+C_p^\text{liquid}$ and $\Delta C_p^\text{fus} = C_p^\text{liquid} -%
+C_p^\text{solid}$, $\Delta T_F$ defined as the freezing point depression,
+$\Delta T_B$ the boiling point elevation and $\Delta H_{0,T_B}^\text{vap}$ and
+$\Delta H_{0,T_F}^\text{fus}$ representing the enthalpies of vaporization and fusion
+of the solvent at $T_B$/$T_F$.
 
 \part{Revisão Bibliográfica}
 

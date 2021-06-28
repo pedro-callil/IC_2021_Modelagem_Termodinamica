@@ -734,18 +734,18 @@ $\Delta T_B$ the boiling point elevation and $\Delta H_{0,T_B}^\text{vap}$ and
 $\Delta H_{0,T_F}^\text{fus}$ representing the enthalpies of vaporization and fusion
 of the solvent at $T_B$/$T_F$.
 
-\part{Revisão Bibliográfica}
+\part{Bibliographic Revision}
 
-\chapter{Modelagem da atividade da água}
+\chapter{Water activity modelling}
 
-\section{Modelos avaliados}
+\section{Analysed models}
 
-Foram analisados diversos modelos, desde mais simples como a Lei de Raoult ou
-equação de Caurie a mais complexos como o método iterativo originário da equação
-de Zdanovskii, para posterior comparação com uma equação do tipo virial (equação
-como \ref{eq:ad_pessoa}, a adaptada de \cite{pessoa2008}, na qual $b_i$ e
-$c_{ij}$ são parâmetros ajustáveis e $\theta_i$ é uma medida de concentração,
-com $i,j$ componentes da mistura).
+Several models were analysed, ranging in complexity from simple as Raoult's Law
+or Caurie's equation to complex as the iterative procedure derived from the
+Zdanovskii's relation or the UNIQUAC model, for subsequent comparison with a
+virial equation (as in \ref{eq:ad_pessoa}, adapted from \cite{pessoa2008}, in
+which $b_i$ and $c_{ij}$ are adjustable parameters and $\theta$ is a measure
+of concentration).
 
 \begin{equation}
 	\label{eq:ad_pessoa}
@@ -753,53 +753,53 @@ com $i,j$ componentes da mistura).
 	2b_i+3\sum_{j \neq w}c_{ij}\theta_j\Bigg)
 \end{equation}
 
-Para obter os valores de $a_w$ para soluções com apenas um soluto, temos
-diversos modelos que podem ser aplicados. Desses, serão analisados e comparados
-os seguintes:
+For obtaining $a_w$ values in binary solutions, one has several distinct models
+to choose from. From those models, the following shall be analysed and compared:
 
 \begin{itemize}
-	\item Lei de Raoult: Modelo mais simples, para soluções ideais. Assume
-		atividade da água $a_w = x_w$, sua fração molar;
-	\item Equação de Norrish \cite{norrish1966}: correção da lei de Raoult.
-		Sendo $x_w$ a fração molar da água e $x_s$ a do soluto e
-		tomando uma constante $K$, experimental, temos a equação
+	\item Raoult's Law: Simplest model, for ideal solutions. Assumes
+		water activity $a_w = x_w$, its molar fraction;
+	\item Norrish's Equation \cite{norrish1966}: Raoult's Law, corrected.
+		One can, with the molar fraction of water, $x_w$, molar
+		fraction of the other substance, $x_s$, and one adjustable
+		parameter ($K$), utilize the equation \ref{eq_norrish} to
+		obtain the water activity of a solution.
 		\ref{eq_norrish}:
 		\begin{equation}
 			\label{eq_norrish}
 			a_w = x_w\exp\Big[\Big(\sqrt{K}x_s\Big)^2\Big]
 		\end{equation}
-	\item Modelo UNIQUAC (\textit{universal quasi-chemical})
-		\cite{abrams1975} Modelo mais refinado dentre os avaliados no
-		projeto, demanda dois parâmetros para o ajuste para cada par de
-		componentes da mistura (solvente e solutos), podendo ser tanto
-		utilizado para sistemas binários quanto para sistemas $n$-ários.
-		Embora claramente apresente custo computacional elevado para
-		misturas com muitos componentes (já que o número de parâmetros
-		é da ordem do número de componentes ao quadrado), os dados
-		utilizados não são de misturas complexas o suficiente para que
-		isso seja um problema.
+	\item UNIQUAC (\textit{universal quasi-chemical}) Model
+		\cite{abrams1975}: Possibly the most complex model among the
+		chosen ones; requiring two adjustable parameters for each pair
+		of substances present in the mixture (between solvents and
+		solutes), can be used for binary or $n$-ary systems. Even though
+		the nonlinear fitting for the model presents a high computational
+		cost, as we are dealing with simple mixtures (with a maximum of
+		four components), the complexity of the model is not a problem.
 \end{itemize}
 
-Os modelos considerados para análise e comparação serão, para sistemas
-multicomponente, os seguintes:
+For $n$-ary solutions, a few other models were chosen for analysis and
+comparisons:
 
 \begin{itemize}
-	\item Lei de Raoult: atividade da água $a_w$ sendo igual a $x_w$,
-		sua fração molar;
-	\item Equação de Norrish: adotada pequena modificação para equação
-		\ref{eq_norrish}, como visto na equação \ref{eq_norrish_multi};
+	\item Raoult's Law: water activity $a_w$ equals $x_w$,
+		its molar fraction;
+	\item Norrish's Equation: adopted with a small modification to the equation
+		\ref{eq_norrish}, as shown in the equation \ref{eq_norrish_multi};
 		\begin{equation}
 			\label{eq_norrish_multi}
 			a_w = x_w\exp\Big[\Big(\sum_{i \neq w}%
 			\sqrt{K_i}x_i\Big)^2\Big]
 		\end{equation}
-	\item Modelo de Caurie \cite{caurie1986}: atividade da água como uma
-		correção do produto das atividades da água para uma solução
-		com um único componente (equação \ref{eq_caurie}) com
-		$m_i$ a molalidade do componente $i$ em solução, $a_{wi}$
-		sendo a atividade da água em uma mistura com o componente
-		$i$, apenas, tal que $m_i$ se mantenha e $n$ sendo o número de
-		componentes em solução.
+	\item Caurie's Model \cite{caurie1986}: water activity as a correction
+		of the product of the water activities of binary solutions
+		in which each component's molalities are either zero or equal
+		to the its molality in the solution of interest, as presented
+		in the equation \ref{eq_caurie}, in which $a_{wi}$ is the
+		water activity in a binary solution in which the molality $m_i$
+		of the substance $i$ remains the same and $n$ is the total number
+		of solutes in the mixture.
 		\begin{equation}
 			\label{eq_caurie}
 			a_w = \prod_{i \neq w}a_{wi}-\left[\cfrac{n}%
@@ -808,98 +808,94 @@ multicomponente, os seguintes:
 			\substack{i\neq j,k \\ j \neq k \\  i,j,k \neq w}}%
 			m_im_jm_k\right]
 		\end{equation}
-		Para a obtenção das atividades da água de substâncias
-		binárias, foi utilizada a Lei de Raoult.
-	\item Relação de Zdanovskii \cite{chen1973,sangster1973}:
-		para uma mistura ternária composta por água e mais dois
-		componentes, digamos, 1 e 2, adotamos duas soluções binárias,
-		cada uma com um componente, em equilíbrio osmótico com uma
-		terceira, ternária. Sendo $m_{01}$ e $m_{02}$ as
-		molalidades do componente 1 na solução na qual é o único
-		soluto e do componente 2 na solução no qual é o único soluto, e
-		sendo $m_1$ e $m_2$ as molalidades de 1 e 2 na solução ternária,
-		temos que $m_1m_{01}^{-1} + m_2m_{0_2}^{-1} = 1$, sendo esta a
-		relação de Zdanovskii. Disso se obtém um procedimento iterativo,
-		que possibilita obter, tendo as isotermas de cada componente, a
-		atividade da água de uma mistura ternária.
-	\item Modelo UNIQUAC (\textit{universal quasi-chemical}), citado
-		anteriormente.
+		To obtain the water activities of the binary solutions,
+		we assumed ideal solution (Raoult's Law).
+	\item Zdanovskii's Relation \cite{chen1973,sangster1973}:
+		applied for ternary mixtures only, it's an iterative process
+		based in the Zdanovskii relation; for a ternary mixture with
+		two generic solutes 1 and 2, we adopt two binary solutions, one
+		with 1 as its only solute, the other with 2, in osmotic equilibrium
+		with the solution of interest. With $m_{01}$ and $m_{02}$ as the
+		molalities of each solute in each the binary solution, and
+		$m_1$ and $m_2$ as the molalities of each solute in the solution
+		of interest, the Zdanovskii's relation ($m_1m_{01}^{-1} +
+		m_2m_{02}^{-1} = 1$) generates an iterative procedure that
+		returns the water activity of a ternary mixture from the
+		curves $a_w=a_w(x_w)$ of binary mixtures of each solute.
+	\item UNIQUAC (\textit{universal quasi-chemical}) Model, previously
+		cited.
 \end{itemize}
 
-\section{Aplicabilidade das amostras aos modelos}
+\section{Applicability of the models to the samples}
 
-Como não temos interesse apenas em ajustar curvas aos dados para sistemas
-$n$-ários, mas também queremos avaliar a possibilidade de prever coeficientes
-osmóticos para esses sistemas a partir de dados obtidos do ajuste de sistemas
-binários, podemos dividir os modelos estudados em dois grandes grupos. Sendo um
-modelo termodinâmico a $N$ parâmetros $(A_j)_{j \in \{1, 2, \ldots N\}}$ para o
-coeficiente osmótico em um sistema de composição $(x_i)_\text{$i$ componente}$,
-com temperatura $T$ e pressão $P$ dado pela equação \ref{eq:geral_bigphi},
-podemos obter aproximações para os parâmetros $(A_j^*)_{j \in \{1, 2, \ldots, N\}}$
-a partir do método dos mínimos quadrados, dado na expressão \ref{eq:min_quad},
-para um conjunto de $K$ dados experimentais $\{(\phi^k, T^k, P^k,%
-	(x_i)^k_\text{$i$ componente}), k \in \{1,2,\ldots,K\}\}$.
+Since one is not only interested in fitting curves to data sets, but also in
+assessing the possibility of predicting water activities for $n$-ary systems
+based on data from binary systems, one can split the available models in two
+great groups. For a thermodynamical model (as shown in equation
+\ref{eq:geral_bigphi}) with $N$ parameters $(A_j)_{j \in \{1, 2, \ldots N\}}$
+for the osmotic coefficient in a system of composition given by the molar
+fractions of each component $(x_i)_\text{$i$ component}$, at temperature $T$
+and pressure $P$, one can obtain estimates $(A^*_j)_{j \in \{1, 2, \ldots N\}}$
+for the parameters through the use of nonlinear least-squares fitting,
+as shown in equation \ref{eq:min_quad}, for a set of $K > N$ experimental data
+points
+$\{(\phi^k, T^k, P^k, (x_i)^k_\text{$i$ component}), k \in \{1,2,\ldots,K\}\}$.
 
 \begin{equation}
 	\label{eq:geral_bigphi}
 	\phi = \Phi((A_j)_{j \in \{1, 2, \ldots, N\}}, (x_i)_\text{$i$ %
-		componente da mistura}, T, P)
+		component of the mixture}, T, P)
 \end{equation}
 
 \begin{equation}
 	\label{eq:min_quad}
 	\minimize_{(A_j^*)_{j \in \{1,2,\ldots,N\}} \in \mathbb{R}^N}%
 	\left(\sum_{k \in \{1,2,\ldots,K\}}\left[\phi^k - \Phi((A^*_j)_{j%
-	\in \{1, 2, \ldots, N\}}, (x^k_i)_\text{$i$ componente},%
+	\in \{1, 2, \ldots, N\}}, (x^k_i)_\text{$i$ component},%
 	T^k, P^k)\right]^2\right)
 \end{equation}
 
-Para dados obtidos exclusivamente de sistemas binários, temos que:
+For data obtained exclusively from binary systems, one may write:
 
 \begin{equation}
 	\forall k \in \{1,2,\ldots,K\} \;\; \exists i \neq w%
-	\text{ componente } : \forall \;\; i' \neq i, i' \neq w\;\; x^k_{i'} = 0
+	\text{ component } : \forall \;\; i' \neq i, i' \neq w\;\; x^k_{i'} = 0
 \end{equation}
 
-Quando para todo conjunto de dados obtidos exclusivamente de sistemas binários
-temos que é válida a expressão \ref{eq:no_bin_fit},
-dizemos que o modelo apresenta parâmetro ajustável de interação entre os
-solutos. Caso contrário, dizemos que o modelo não apresenta parâmetro
-ajustável de interação entre os solutos.
+When for all sets of data obtained exclusively from binary systems the equation
+\ref{eq:no_bin_fit} is valid, one can say that the model presents an adjustable
+parameter of component-component interaction. Otherwise, one can say that the model
+has no parameters accounting for the interaction between two components.
 
 \begin{equation}
 	\label{eq:no_bin_fit}
 	\exists j' \in \{1,2,\ldots,N\} : \forall \alpha \in \mathbb{R}\;\;%
 	(A_j^*)_{j \in \{1,2,\ldots,N\}, A_{j'}^* = \alpha}%
-	\text{ é solução de \ref{eq:min_quad}}
+	\text{ is a solution of \ref{eq:min_quad}}
 \end{equation}
 
-Essa distinção se faz necessária a um dos objetivos do projeto, a saber, avaliar
-a aplicabilidade de parâmetros obtidos a partir do ajuste de um modelo a dados
-de sistemas binários à predição de dados de sistemas $n$-ários, aplicabilidade
-essa que, caso verificada, traria grande vantagem ao modelo em questão, tendo em
-vista a quantidade de dados disponível para um sistema binário qualquer
-ser muito superior à quantidade de dados disponível para um sistema $n$-ário
-qualquer. Além disso, também deve-se levar em conta que os experimentos de
-laboratório necessários ao levantamento de dados representativos para sistemas
-$n$-ários são muito mais custosos.
+One must differentiate these two groups, for one of the aims of the project
+is the assessment of the applicability of parameter estimates, obtained through
+fitting curves through binary data, to $n$-ary data; this is important, primarily
+because experimental data for binary systems are more abundant and easier to
+obtain, but also due to the high computational cost in multivariate nonlinear
+fitting.
 
-É exemplo de modelo da segunda categoria o proposto por Norrish; para a
-primeira categoria, mais complexa, o modelo do tipo virial proposto na equação
-\ref{eq:ad_pessoa} pode ser citado como exemplo. Além disso, claramente temos,
-inclusos de forma trivial na segunda categoria, modelos sem parâmetro ajustável
-algum, como a Lei de Raoult. Esses modelos mais simples devem, também, ser
-separados para avaliação de seu poder preditivo.
+An example of a model in the second category is the one proposed by Norrish; also,
+one could trivially place models such as Zdanovskii's procedure and Caurie's
+relation in the category. For the first one, more complex, the virial model defined
+in the equation \ref{eq:ad_pessoa} or the UNIQUAC model can be considered as
+examples.
 
-\section{Limitações dos modelos e principais problemas encontrados}
+\section{Limitations of the models and problems found}
 
-Um dos principais problemas encontrados é a simples não aplicabilidade de
-alguns modelos em determinadas situações: para exemplificar essa situação,
-analisaremos o modelo de Norrish e suas limitações intrínsecas.
+One of the main problems found is the simple non-applicability of some models
+to a few sets of data; as an example, one may check the intrinsical limitations
+of the Norrish's model.
 
-O modelo de Norrish, como visto em \ref{eq_norrish} e \ref{eq_norrish_multi},
-apresenta a equação \ref{eq_phi_norrish} para o cálculo do coeficiente
-osmótico $\phi$:
+Norrish's model, as seen in the equations \ref{eq_norrish} and
+\ref{eq_norrish_multi}, can be algebraically manipulated to yield equation
+\ref{eq_phi_norrish} for the calculation of the osmotic coefficient $\phi$.
 
 \begin{equation}
 	\label{eq_phi_norrish}
@@ -907,23 +903,24 @@ osmótico $\phi$:
 	\sqrt{K_i}x_1\right)^2}{\ln(x_w)}
 \end{equation}
 
-Como $x_w \le 1 \implies \ln(x_w) \le 0$, temos que o modelo prevê apenas
-valores do coeficiente osmótico menores que 1. Isso definitivamente não se
-verifica nos dados reais: temos diversos comportamentos possíveis, desde
-dados que se assemelham a funções monótonas decrescentes, como exigido pelo
-modelo,\footnote{%
-	Já que $\lim_{x_w \to 1}\phi_\text{Norrish} = 1$.
-} até dados que se assemelham a funções monótonas crescentes, o oposto do
-desejado. Isso pode ser visto na própria figura \ref{fig_atv_gamma_gluc}, e,
-mais claramente, na figura \ref{fig_manose_phi}.
+As $x_w \le 1 \implies \ln(x_w) \le 0$, one can observe that the model can't
+predict a value for $\phi$ greater than 1; however, this is not verified
+in all real solutions, that can show several behaviors, ranging from
+monotonically decreasing functions (as the model requires,\footnote{%
+	Since $\lim_{x_w \to 1}\phi_\text{Norrish} = 1$.
+} to monotonically increasing functions, the opposite of the desired
+behavior, which can be seen in figure \ref{fig_atv_gamma_gluc}
+and, more clearly, in figure \ref{fig_manose_phi}.
 
-Outro exemplo é a equação de Caurie: como $\lim_{x_w \to 0}m_i = +\infty$,
-temos que existem concentrações a partir das quais o modelo simplesmente não
-retorna resultados físicos, já que $a_w \in [0,1]$ e, como exibido na equação
-\ref{eq_caurie_fail}, existem certos valores para as frações molares de cada
-componente na mistura que retornam valores negativos de $a_{w,\text{Caurie}}$.
-Além disso, conforme a fração molar de água na mistura decresce, $\phi$ deve
-se aproximar de 0, no limite.
+Another example is Caurie's equation; since $\lim_{x_w \to 0}m_i = +\infty$,
+one can observe the existence of crtical dilutions, beyond which the
+model simply fails to return a physically meaningful result, because
+$a_w \in [0,1]$ and, as shown in the equations \ref{eq_caurie_fail},
+there are values for the molar fractions of each component in the mixture
+that, according to the model, must force the system to exhibit negative
+values of $a_{w,\text{Caurie}}$. Besides, as the molar fraction of water
+in a mixture decreases, $\phi$ must, in the limit, be as close as
+desired to 0.
 
 \begin{equation}
 	\label{eq_caurie_fail}
@@ -939,19 +936,19 @@ se aproximar de 0, no limite.
 			\substack{i\neq j,k \\ j \neq k \\  i,j,k \neq w}}
 			m_im_jm_k\right]\implies\\
 		\lim_{\substack{m_k \to +\infty \\%
-				\forall n \neq k, \text{ $m_n$ constante}}}%
+				\forall n \neq k, \text{ $m_n$ constant}}}%
 			a_{w,\text{Caurie}} = -\infty \implies%
 		\lim_{x_w \to 0} a_{w,\text{Caurie}} = -\infty
 	\end{split}
 \end{equation}
 
-Essa diversidade de comportamentos pode vir a ser útil. Por exemplo, para o
-modelo virial, a medida de concentração escolhida foi a concentração molar, já
-que é possível demonstrar que os dados dificilmente seguem a forma à qual são
-restritos ao utilizarmos a fração molar (mais intuitiva) como medida. Isso pode
-ser visto na equação \ref{eq_phi_virial_mono_frac}
+This diversity of behaviors can be useful. For instance, for the virial model,
+the measure chosen for the concentration was molar concentration, since one can
+show that the data rarely follow the curves to which they are restricted when
+one utilizes instead the molar fraction, as one would naïvely do. This can be
+seen in the equations \ref{eq_phi_virial_mono_frac}
 \footnote{%
-	Podemos afirmar isso já que temos, $\forall w > 0$:
+	This can be affirmed since, $\forall w > 0$:
 	\begin{equation*}
 		\begin{split}
 			e^w = 1 + w + \cfrac{w^2}{2!} + \ldots \ge w +1
@@ -968,8 +965,8 @@ ser visto na equação \ref{eq_phi_virial_mono_frac}
 		\end{split}
 	\end{equation*}
 }
-para sistemas binários, sendo $x$ a fração molar do soluto: o modelo (com
-$\theta_i = x_i$) implica em uma função monótona.
+for binary systems, with $x$ as the molar fraction of the solute: the model
+(with $\theta_i = x_i$) is obligatorily a monotonic function.
 
 \begin{equation}
 	\label{eq_phi_virial_mono_frac}
@@ -983,29 +980,29 @@ $\theta_i = x_i$) implica em uma função monótona.
 	\end{split}
 \end{equation}
 
-Outro problema (não intrínseco aos modelos, mas específico aos dados) é a
-existência de pequenos conjuntos de dados, comparados ao que seria
-necessário para ajustar o modelo UNIQUAC completo, por exemplo. De fato,
-para uma mistura que, seja composta por $n$ substâncias, o modelo exige
-$2n+n^2 \in \mathcal{O}(n^2)$ parâmetros (para contabilizar as energias de
-interação $U_{ij}$ e os parâmetros $r_i$ e $q_i$). Dessa forma, algumas
-simplificações (equações exibidas em \ref{eq_uniquac_simpl}), presentes
-na literatura, foram adotadas.
+Another challenge (not intrinsical to the models, but specific to the data)
+is the distribution of the data in small sets, compared to the amount of
+data points required to fit a large model (as the complete UNIQUAC model,
+for instance). Indeed, for a mixture of $n$ components, the model requires
+$2n+n^2 \in \mathcal{O}(n^2)$ parameters (accounting for the interaction
+energies $U_{ij}$ and the parameters $r_i$ and $q_i$. To solve this problem,
+a few simplifications, from the literature, were adopted, as exhibited in
+the equations \ref{eq_uniquac_simpl}.
 
 \begin{equation}
 	\label{eq_uniquac_simpl}
 	\begin{cases}
 		u_{ij} = \sqrt{u_{ii}u_{jj}}\\
 		r_i = q_i
-	\end{cases}\forall\ i, j\text{ componente}
+	\end{cases}\forall\ i, j\text{ component}
 \end{equation}
 
-Devemos lembrar, além disso, que boa parte dos comjuntos de dados para sistemas
-multicomponente apresenta problemas com colinearidade; isso não prejudica a
-predição de novos dados, mas torna pouco confiáveis os valores obtidos para os
-parâmetros. Por fim, existem problemas quanto a precisão dos dados de coeficiente
-osmótico, como já discutido.
-
+Additionally, one must consider that a non-negligible amount of the datasets
+exhibits colinearity-related problems, which, even if not a problem for correlation,
+makes the values of the parameters adjusted to the data set less reliable. Finally,
+for very diluted solutions, one can observe that the osmotic coefficient values
+have big uncertainties, due to the relatively high uncertainties in the measures
+of the logarithm of numbers close to 1.
 
 \begin{figure}[h]
 	\centering
@@ -1115,44 +1112,41 @@ osmótico, como já discutido.
 		\draw (axis cs:0.018,1.015) node{\usebox{\minigrafmann}};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Coeficiente osmótico $\phi$ e ajuste de modelos
-		para solução de manose}
+	\caption{Osmotic coefficient $\phi$ e adjusted models for a mannose solution}
 	\label{fig_manose_phi}
 \end{figure}
 
 
-\chapter{Seleção de dados experimentais}
+\chapter{Experimental data sets analysed}
 
 \label{sec_selec_data}
 
-Devido às presentes circunstâncias, não é prático ou seguro fazer experimentos
-laboratoriais para levantamento de dados. Felizmente, também não é necessário:
-a literatura científica sobre o assunto é extensa o suficiente para possibilitar
-a obtenção uma boa seleção de dados experimentais previamente publicados, para
-sistemas multicomponente e binários, que se encontram resumidos nas listas e
-tabelas que seguem.
+Due to external circunstances, laboratorial experiments are neither safe nor
+practical; fortunately, they are also not needed: the previous research on the
+area is rich enough to supply a good selection of experimental data for binary
+and/or multicomponent systems. The data used in the project and its sources are
+listed below.
 
 \begin{itemize}
-	\item Para sistemas binários:
+	\item For binary systems:
 		\begin{itemize}
 			\item Abderafi \& Bounahmidi (1994) \cite{abderafi1994};
 			\item Bhandari \& Bareyre (2003) \cite{bhandari2003},
-				medidas diretas de $a_w$ para soluções de água
-				e glicose a 25\textcelsius, com valores entre
-				$x_w = 0.808$ e $x_w = 0.917$;
-			\item Bonner (1982) \cite{bonner1982}, medidas de
-				coeficiente osmótico e de atividade para lisina
-				e arginina a temperatura de 298.15K.
-			\item Chen (1987) \cite{chen1987}, medidas para atividade
-				de água de algumas soluções de carboidratos obtidas
-				a partir de dados de umidade relativa de equilíbrio,
-				à temperatura de congelamento.
+				direct measurements of $a_w$ for solutions of water
+				and glucose at 25\textcelsius, with values between
+				$x_w = 0.808$ and $x_w = 0.917$;
+			\item Bonner (1982) \cite{bonner1982}, osmotic coefficient
+				and activity measurements for lisine
+				and arginine at a temperature of 298.15K.
+			\item Chen (1987) \cite{chen1987}, water activity
+				measurements of a few solutions of carbohydrates
+				obtained through equilibrium relative humidity, at
+				freezing temperatures.
 			\item Cooke, Jónsdóttir \& Westh (2002) \cite{cooke2002a},
-				medidas de pressão de vapor em temperaturas de
-				24.91\textcelsius, para a sacarose, e
-				44.84\textcelsius, para frutose, e outros
-				carboidratos, com frações molares entre 0 e 0.24 a
-				depender da substância.
+				vapor pressure measurements at temperatures of
+				24.91\textcelsius\ and 44.84\textcelsius, for
+				sucrose and other carbohydrates, with molar fractions
+				between 0 and 0.24.
 %			\item Dunning, Evans \& Taylor (1951) \cite{dunning1951},
 %				medidas de pressão de vapor da água para soluções de
 %				sacarose com temperaturas entre 60 e
@@ -1165,154 +1159,136 @@ tabelas que seguem.
 %					isoterma.
 %				}
 			\item Ebrahimi \& Sadeghi (2016) \cite{ebrahimi2016},
-				medidas de coeficiente osmótico para diversos
-				carboidratos entre monosacarídeos (pentoses e
-				hexoses sortidas), dissacarídeos, trissacarídeos
-				e polióis, à temperatura fixa de 308.15K.
+				osmotic coefficient data for several carbohydrates,
+				including monosaccharides, dissacharides,
+				trissacharides and polyols, at 308.15K.
 			\item Ellerton, Reinfelds, Mulcahy \& Dunlop (1964)
-				\cite{ellerton1964} medidas de pressão osmótica
-				obtidas através do método isopiéstico para cinco
-				aminoácidos à temperatura de 25\textcelsius.
+				\cite{ellerton1964} osmotic pressure measurements
+				obtained through the isopiestic method for five
+				aminoacids at the temperature of 25\textcelsius.
 			\item Himanshu, Priyanka \& Anakshi (2005)
-				\cite{himanshu2005}, medidas de depressão de
-				ponto de fusão foram convertidas em coeficientes
-				osmóticos para soluções de nove aminoácidos
-				(glicina, L-serina, L-prolina, DL-valina,
-				DL-alanina, L-treonina, hidróxi-L-prolina,
-				L-isoleucina e DL-metionina) para soluções binárias
-				de baixa molalidade ($m < 1$mol/kg).
-			\item Kiyosawa (1992) \cite{kiyosawa1992}, medidas de
-				depressão de ponto de congelamento de soluções
-				binárias de polióis.
+				\cite{himanshu2005}, freezing point depression
+				measurements were converted to osmotic coefficient
+				data for diluted binary solutions of nine aminoacids
+				(glycine, L-serine, L-proline, DL-valine,
+				DL-alanine, L-threonine, hidroxy-L-proline,
+				L-isoleucine and DL-methionine).
+			\item Kiyosawa (1992) \cite{kiyosawa1992}, freezing
+				point depression measurements of binary polyol
+				solutions
 			\item Kuramochi, Noritomi, Hoshino \& Nagahama (1997)
-				\cite{kuramochi1997}, medidas de coeficiente de
-				atividade para quatro aminoácidos (glicina,
-				L-alanina, L-serina e L-valina) obtidos através
-				de dados de pressão de vapor, para temperatura
-				de 298.15K.
+				\cite{kuramochi1997}, activity coefficient
+				measurements for four aminoacids (glycine,
+				L-alanine, L-serine and L-valine), at 298.15K
 			\item Maximo, Meirelles \& Batista (2010) \cite{maximo2010},
-				medidas de coeficiente de atividade obtidas através
-				de elevação do ponto de ebulição para sacarose,
-				frutose e glicose a diferentes pressões.
-			\item Ninni \& Meirelles (2001) \cite{ninni2001}, medidas
-				diretas de atividade da água para soluções binárias
-				de quatro aminoácidos (glicina, DL-alanina, L-prolina
-				e L-arginina) a uma temperatura de 25\textcelsius,
-				com concentrações relativamente baixas
-				($x_w > 0.85$), para sistemas com ou sem tampões
-				ácidos ou básicos.
-			\item Pinho (2008) \cite{pinho2008}, medidas de atividade da
-				água obtidas de forma direta para três aminoácidos
-				(glicina, DL-alanina e L-serina), a uma temperatura
-				de 25\textcelsius\ e frações molares de água
-				próximas de 1.
-			\item Romero \& González (2006) \cite{romero2006}, medidas
-				de coeficiente osmótico obtidas através do método
-				isopiéstico, para glicina, DL-$\alpha$-alanina e
-				ácido DL-$\alpha$-aminobutírico, para temperaturas
-				entre 288.15 e 303.15K.
+				activity coefficient measurements obtained through
+				boiling point elevation for sucrose, fructose and
+				glucose at different pressures.
+			\item Ninni \& Meirelles (2001) \cite{ninni2001}, direct
+				measurements of water activity for binary solutions
+				of four aminoacids (glycine, DL-alanine, L-proline
+				and L-arginine), at 25\textcelsius.
+			\item Pinho (2008) \cite{pinho2008}, direct water activity
+				measurements for solutions of three aminoacids
+				(glycine, DL-alanine and L-serine) at
+				25\textcelsius\ and $x_w$ values close to 1.
+			\item Romero \& González (2006) \cite{romero2006}, osmotic
+				coefficient measurements obtained through the
+				isopiestic method, for glycine, DL-$\alpha$-alanine
+				and DL-$\alpha$-aminobutyric acid, at temperatures
+				ranging from 288.15K and 303.15K.
 			\item Tsurko, Neueder \& Kunz (2007) \cite{tsurko2007},
-				medidas de coeficiente osmótico de três aminoácidos
-				(glicina, ácido glutâmico e histidina), obtidas
-				através de dados de equilíbrio líquido-vapor, a
-				temperaturas de 298.15 e 310.15K.
+				osmotic coefficient data for three aminoacid
+				solutions (glycine, glutamic acid and histidine),
+				obtained through vapor-liquid equilibria, at
+				temperatures of 298.15K and 310.15K.
 			\item Velezmoro, Oliveira, Cabral \& Meirelles (2000)
 				\cite{velezmoro2000}.
 		\end{itemize}
-	\item Para sistemas $n$-ários:
+	\item For $n$-ary systems:
 		\begin{itemize}
 			\item Abderafi \& Bounahmidi (1994) \cite{abderafi1994},
-				medidas de elevação do ponto de ebulição
-				para sistemas binários glicose-água,
-				frutose-água, sacarose-água,
-				glicose-frutose-água, glicose-sacarose-água,
-				frutose-sacarose-água e
-				glicose-frutose-sacarose-água, para ampla
-				faixa de $x_w$ e pressão atmosférica.
-			\item Norrish (1966) \cite{norrish1966}, medidas de
-				humidade relativa de equilíbrio para soluções
-				ternárias compostas por água e sacarose, com a
-				adição de sorbitol, glicerol ou dextrose, a
-				temperatura de 25\textcelsius.
+				boiling point elevation data for binary, ternary
+				and quaternary solutions of sucrose, glucose and
+				fructose, at low dilutions and atmospheric pressure.
+			\item Norrish (1966) \cite{norrish1966}, equilibrium
+				relative humidity measurements for ternary solutions
+				of water, sucrose and sorbitol, glycerol or dextrose,
+				at 25\textcelsius.
 			\item Robinson \& Stokes (1961) \cite{stokes1961},
-				dados de equilíbrio osmótico para a solução
-				ternária água-sacarose-manitol à temperatura
-				de 25\textcelsius.
+				osmotic equilibria data for ternary solutions
+				of sucrose and mannitol at 25\textcelsius.
 			\item Stokes \& Robinson (1966) \cite{stokes1966},
-				dados de equilíbrio osmótico de soluções
-				ternárias de duas substâncias (sacarose e
-				arabinose, sacarose e glicose, sacarose e
-				sorbitol, entre outras).
+				osmotic equilibria data of ternary solutions with
+				sucrose as a solute.
 			\item Velezmoro, Oliveira, Cabral \& Meirelles (2000)
-				\cite{velezmoro2000}, medidas diretas de $a_w$ nas
-				temperaturas 25, 30 e 35\textcelsius\ para soluções
-				de água e glicose, água e frutose, água e maltose,
-				água e sacarose e uma solução de glicose, frutose
-				e sacarose em base aquosa, com baixas concentrações
-				($x_w > 0.9$).
+				\cite{velezmoro2000}, direct $a_w$ measurements
+				at temperaturas of 25, 30 and 35\textcelsius\ for
+				glucose, fructose, sucrose and maltose binary and
+				quaternary solutions at high dilutions.
 		\end{itemize}
 \end{itemize}
 
 \begin{tabularx}{\textwidth}{ X  c  X }
-	\caption{Dados por estudo para sistemas binários}
+	\caption{Data points distribution by source (binary systems)}
 	\label{tab_dados_pontos}\\
 	\toprule
-	Referência & \textnumero\ de pontos & Obtenção\\
+	Reference & \textnumero\ of points & Method utilized\\
 	\midrule
 	\endfirsthead
 	\toprule
-	Referência & \textnumero\ de pontos & Obtenção\\
+	Reference & \textnumero\ of points & Method utilized\\\hline
 	\midrule
 	\endhead
 	\midrule
-	\multicolumn{3}{r}{\footnotesize(Continua na página seguinte)}
+	\multicolumn{3}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
-	Abderafi \& Bounahmidi (1994) & 36 & Equilíbrio líquido vapor\\
-	Bhandari \& Bareyre (2003) & 10 & Medições diretas de $a_w$\\
-	Bonner (1982) & 34 & Método isopiéstico\\
-	Chen (1987) & 14 & Medições de pressão de vapor\\
-	Cooke, Jónsdóttir \& Westh (2002) & 40 & Medições de pressão de vapor\\
+	Abderafi \& Bounahmidi (1994) & 36 & Vapor-liquid equilibria\\
+	Bhandari \& Bareyre (2003) & 10 & Direct $a_w$ measurements\\
+	Bonner (1982) & 34 & Isopiestic method\\
+	Chen (1987) & 14 & Vapor pressure measurements\\
+	Cooke, Jónsdóttir \& Westh (2002) & 40 & Vapor pressure measurements\\
 %	Dunning, Evans \& Taylor (1951) & 102 & Medições de pressão de vapor\\
-	Ellerton, Reinfelds, Mulcahy \& Dunlop (1964) & 91 & Método isopiéstico\\
-	Ebrahimi \& Sadeghi (2016) & 246 & Osmometria de pressão de vapor\\
+	Ellerton, Reinfelds, Mulcahy \& Dunlop (1964) & 91 & Isopiestic method\\
+	Ebrahimi \& Sadeghi (2016) & 246 & Vapor pressure osmometry\\
 	Himanshu, Priyanka \& Anakshi (2005) & 45 &
-		Depressão do ponto de congelamento\\
-	Kiyosawa (1992) & 49 & Depressão do ponto de congelamento\\
+		Freezing point depression\\
+	Kiyosawa (1992) & 49 & Freezing point depression\\
 	Kuramochi, Noritomi, Hoshino \& Nagahama (1997) & 44 &
-		Medições de pressão de vapor\\
-	Maximo, Meirelles \& Batista (2010) & 168 & Elevação do ponto de ebulição\\
-	Ninni \& Meirelles (2001) & 31 & Medições de pressão de vapor\\
-	Pinho (2008) & 75 & Medições diretas de $a_w$\\
-	Romero \& González & 144 & Método isopiéstico\\
-	Robinson \& Stokes (1961) & 43 & Método isopiéstico\\
-	Tsurko, Neueder \& Kunz (2007) & 57 & Medições de pressão de vapor\\
+		Vapor pressure measurements\\
+	Maximo, Meirelles \& Batista (2010) & 168 & Boiling point elevation\\
+	Ninni \& Meirelles (2001) & 31 & Vapor pressure measurements\\
+	Pinho (2008) & 75 & Direct $a_w$ measurements\\
+	Romero \& González & 144 & Isopiestic method\\
+	Robinson \& Stokes (1961) & 43 & Isopiestic method\\
+	Tsurko, Neueder \& Kunz (2007) & 57 & Vapor pressure measurements\\
 	Velezmoro, Oliveira, Cabral \& Meirelles (2000) &
-		145 & Medições de pressão de vapor\\\hline
+		145 & Vapor pressure measurements\\\hline
 	Total & \multicolumn{2}{c}{1251}\\\hline
 \end{tabularx}
 
 \begin{tabularx}{\textwidth}{ X  c  X }
-	\caption{Dados por estudo para sistemas $n$-ários}
+	\caption{Data points distribution by source ($n$-ary systems)}
 	\label{tab_dados_multi_pontos}\\
 	\toprule
-	Referência & \textnumero\ de pontos & Obtenção\\
+	Reference & \textnumero\ of points & Method utilized\\
 	\midrule
 	\endfirsthead
 	\toprule
-	Referência & \textnumero\ de pontos & Obtenção\\\hline
+	Reference & \textnumero\ of points & Method utilized\\\hline
 	\midrule
 	\endhead
 	\midrule
-	\multicolumn{3}{r}{\footnotesize(Continua na página seguinte)}
+	\multicolumn{3}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
-	Abderafi \& Bounahmidi (1994) & 174 & Elevação do ponto de ebulição\\
-	Norrish (1966) & 26 & Medições de pressão de vapor\\
-	Robinson \& Stokes (1961) & 74 & Método isopiéstico\\
-	Stokes \& Robinson (1966) & 24 & Método isopiéstico\\
+	Abderafi \& Bounahmidi (1994) & 174 & Boiling point elevation\\
+	Norrish (1966) & 26 & Vapor pressure measurements\\
+	Robinson \& Stokes (1961) & 74 & Isopiestic method\\
+	Stokes \& Robinson (1966) & 24 & Isopiestic method\\
 	Velezmoro, Oliveira, Cabral \& Meirelles (2000) & 135 &
-		Medições de pressão de vapor\\\hline
+		Vapor pressure measurements\\\hline
 	Total & \multicolumn{2}{c}{358}\\\hline
 \end{tabularx}
 

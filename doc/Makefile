@@ -44,9 +44,11 @@ LSOUTEN		= main_en.pdf
 RFILE		= report/relatorioIniciacaoCientificaAtividadeDaAgua.pdf
 RFILEEN		= report/undergraduateResearchProjectReportWaterActivity.pdf
 
-.PHONY: all en bib biben clean
+.PHONY: all pt en bib bibpt biben clean
 
-all: $(LSRC) $(LSRCDEPS)
+all: pt en
+
+pt: $(LSRC) $(LSRCDEPS)
 	$(LC) $(LCFLAGS) $(LSRC); \
 	$(LC) $(LCFLAGS) $(LSRC); \
 		if [ ! -d "./report" ]; then mkdir report; fi; \
@@ -58,7 +60,9 @@ en: $(LSRCEN) $(LSRCDEPS)
 		if [ ! -d "./report" ]; then mkdir report; fi; \
 		cp $(LSOUTEN) $(RFILEEN)
 
-bib: $(LSRC) $(LSRCDEPS) $(BSRCDEPS)
+bib: bibpt biben
+
+bibpt: $(LSRC) $(LSRCDEPS) $(BSRCDEPS)
 	$(LC) $(LCFLAGS) $(LSRC); \
 		$(BC) $(BSRC); \
 			$(LC) $(LCFLAGS) $(LSRC); \

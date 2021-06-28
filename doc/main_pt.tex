@@ -762,13 +762,13 @@ os seguintes:
 		atividade da água $a_w = x_w$, sua fração molar;
 	\item Equação de Norrish \cite{norrish1966}: correção da lei de Raoult.
 		Sendo $x_w$ a fração molar da água e $x_s$ a do soluto e
-		tomando uma constante $K$, experimental, temos a equação
-		\ref{eq_norrish}:
+		tomando um parâmetro ajustável $K$, experimental, obtemos o
+		valor de $a_w$ através da equação \ref{eq_norrish}.
 		\begin{equation}
 			\label{eq_norrish}
 			a_w = x_w\exp\Big[\Big(\sqrt{K}x_s\Big)^2\Big]
 		\end{equation}
-	\item Modelo UNIQUAC (\textit{universal quasi-chemical})
+	\item Modelo UNIQUAC (\textit{universal quasi-chemical}):
 		\cite{abrams1975} Modelo mais refinado dentre os avaliados no
 		projeto, demanda dois parâmetros para o ajuste para cada par de
 		componentes da mistura (solvente e solutos), podendo ser tanto
@@ -799,7 +799,7 @@ multicomponente, os seguintes:
 		$m_i$ a molalidade do componente $i$ em solução, $a_{wi}$
 		sendo a atividade da água em uma mistura com o componente
 		$i$, apenas, tal que $m_i$ se mantenha e $n$ sendo o número de
-		componentes em solução.
+		solutos em solução.
 		\begin{equation}
 			\label{eq_caurie}
 			a_w = \prod_{i \neq w}a_{wi}-\left[\cfrac{n}%
@@ -826,11 +826,11 @@ multicomponente, os seguintes:
 		anteriormente.
 \end{itemize}
 
-\section{Aplicabilidade das amostras aos modelos}
+\section{Aplicabilidade dos modelos às amostras}
 
 Como não temos interesse apenas em ajustar curvas aos dados para sistemas
-$n$-ários, mas também queremos avaliar a possibilidade de prever coeficientes
-osmóticos para esses sistemas a partir de dados obtidos do ajuste de sistemas
+$n$-ários, mas também queremos avaliar a possibilidade de prever valores de
+$a_w$ para esses sistemas a partir de dados obtidos do ajuste de sistemas
 binários, podemos dividir os modelos estudados em dois grandes grupos. Sendo um
 modelo termodinâmico a $N$ parâmetros $(A_j)_{j \in \{1, 2, \ldots N\}}$ para o
 coeficiente osmótico em um sistema de composição $(x_i)_\text{$i$ componente}$,
@@ -888,8 +888,7 @@ $n$-ários são muito mais custosos.
 primeira categoria, mais complexa, o modelo do tipo virial proposto na equação
 \ref{eq:ad_pessoa} pode ser citado como exemplo. Além disso, claramente temos,
 inclusos de forma trivial na segunda categoria, modelos sem parâmetro ajustável
-algum, como a Lei de Raoult. Esses modelos mais simples devem, também, ser
-separados para avaliação de seu poder preditivo.
+algum, como a Lei de Raoult.
 
 \section{Limitações dos modelos e principais problemas encontrados}
 
@@ -986,7 +985,7 @@ $\theta_i = x_i$) implica em uma função monótona.
 Outro problema (não intrínseco aos modelos, mas específico aos dados) é a
 existência de pequenos conjuntos de dados, comparados ao que seria
 necessário para ajustar o modelo UNIQUAC completo, por exemplo. De fato,
-para uma mistura que, seja composta por $n$ substâncias, o modelo exige
+para uma mistura composta por $n$ substâncias, o modelo exige
 $2n+n^2 \in \mathcal{O}(n^2)$ parâmetros (para contabilizar as energias de
 interação $U_{ij}$ e os parâmetros $r_i$ e $q_i$). Dessa forma, algumas
 simplificações (equações exibidas em \ref{eq_uniquac_simpl}), presentes
@@ -1004,7 +1003,8 @@ Devemos lembrar, além disso, que boa parte dos comjuntos de dados para sistemas
 multicomponente apresenta problemas com colinearidade; isso não prejudica a
 predição de novos dados, mas torna pouco confiáveis os valores obtidos para os
 parâmetros. Por fim, existem problemas quanto a precisão dos dados de coeficiente
-osmótico, como já discutido.
+osmótico, devido às grandes incertezas nas medidas de logaritmos de números
+próximos de 1.
 
 
 \begin{figure}[h]

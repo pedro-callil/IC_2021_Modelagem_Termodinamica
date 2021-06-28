@@ -1366,8 +1366,8 @@ Claramente, a forma da função $\Phi$ depende do modelo a ser utilizado, varian
 entre expressões simples como a obtida a partir da equação de Norrish, a
 expressões significantemente mais complexas, como a obtida a partir de modelos
 como UNIQUAC. Além disso, os valores iniciais para o processo iterativo serão
-obtidos com mecanismos mais simples ou a partir de consulta à literatura para
-obtenção de dados já obtidos para substâncias semelhantes.
+obtidos a partir de consulta à literatura para obtenção de dados já obtidos para
+substâncias semelhantes.
 
 Para alguns conjuntos de dados, foram informados dados de composição de duas
 soluções, com a mesmo valor de $a_w$. Nesse caso, foi ajustado um polinômio
@@ -1393,11 +1393,9 @@ O principal problema para a otimização dos modelos é, além dos problemas
 intrínsecos aos modelos, como já discutido, a enorme imprecisão em
 $\sigma_\phi$ obtida ao se calcular o coeficiente osmótico, frente ao erro
 $\sigma_{a_w}$ e $\sigma_{x_w}$ das medições. Mesmo se assumindo que a maior
-fonte de erro seja a medição das atividades (\textit{i.e.} $\sigma_{a_w} \gg
-\sigma_{x_w}$), temos que a incerteza nas medições de coeficiente osmótico
-tende ao infinito quando o valor de $x_w$ tende a 1, de forma que, para avaliar
-e comparar melhor os modelos, deve ser dada maior importância aos conjuntos
-de dados provenientes de soluções com menores diluições.
+fonte de erro seja a medição das atividades (\textit{e.g.} $\sigma_{a_w} \gg
+\sigma_{x_w}$), temos que a incerteza nos cálculos de coeficiente osmótico
+tende ao infinito quando o valor de $x_w$ tende a 1.
 
 \chapter{Código e Dados}
 
@@ -1409,7 +1407,8 @@ do projeto, no qual estão disponíveis mais detalhes sobre a implementação de
 cada modelo e compilação/execução do programa.
 
 Caso haja interesse em verificar o código-fonte e os executáveis basta clonar o
-repositório e compilar o programa. São necessários, para isso, git, GCC e GSL.
+repositório e compilar o programa. São necessários, para isso, git, GCC, GSL e as
+bibliotecas numéricas BLAS e CBLAS.
 
 \begin{verbatim}
 $ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica

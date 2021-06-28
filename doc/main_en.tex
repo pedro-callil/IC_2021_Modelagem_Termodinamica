@@ -1292,43 +1292,42 @@ listed below.
 	Total & \multicolumn{2}{c}{358}\\\hline
 \end{tabularx}
 
-\part{Ferramentas computacionais}
+\part{Computational tools}
 
-\chapter{Escolha das ferramentas}
+\chapter{Choice of computational tools}
 
-Foi utilizado o método dos mínimos quadrados para o ajuste não-linear dos
-modelos aos dados obtidos. Para isso, foi escrito programa em linguagem
-\texttt{C}, de modo a fazer uso das rotinas fornecidas pela biblioteca
-\textit{GNU Scientific Library} \cite{galassi_book} para otimização não-linear.
-A escolha dessa biblioteca em específico se deu devido ao fácil acesso aos
-passos intermediários dos processos iterativos utilizados para obter os
-parâmetros desejados.
+The least-squares method was utilized for the nonlinear fitting of the models
+to the experimental data sets. This was achieved with a program in the \texttt{C}
+programming language, utilizing the functions and routines of the GNU Scientific
+Library (GSL), a library for numerical computations under the GNU General Public
+License \cite{galassi_book}. The choice of this library for nonlinear optimizations
+was due to the ease of access of the intermediate steps in the iterative calculations
+of the desired parameters.
 
-\chapter{Conversão de propriedades}
+\chapter{Property conversion}
 
-Infelizmente, nem todos os dados utilizados estão disponíveis nas mesmas
-propriedades; como visto nas tabelas \ref{tab_dados_pontos} e
-\ref{tab_dados_multi_pontos}, é necessário inicialmente converter todos os dados
-para a mesma base. Mesmo que o programa necessite dos dados de coeficiente
-osmótico para a regressão, todos os dados são alimentados ao programa na forma
-de dados de atividade da água e frações molares, sendo a conversão dos valores de
-$a_w$ em valores de $\phi$ puramente interna.
+Unfortunately, not all data sets utilized were available as series of $a_w$ values
+as a function of composition; as seen in the tables \ref{tab_dados_pontos} and
+\ref{tab_dados_multi_pontos}, one must, initially, convert all data to the same
+basis, before supplying the data to the program responsible for fitting. The basis
+of choice was simply water activity as a function of molar fraction, with all
+conversion of the activity data to osmotic coefficient data being internal to the
+fitting program.
 
-\chapter{Algoritmos e funções-objetivo}
+\chapter{Algorithms and cost functions}
 
-Foi utilizado o algoritmo de Levenberg-Marquardt com aceleração geodésica para a
-solução do problema de mínimos quadrados para um conjunto de $n$ dados e $N$
-parâmetros dado pela expressão \ref{eq:min_quad_lev}.
-A escolha desse algoritmo se dá pois converge de forma rápida para sistemas com
-uma quantidade de parâmetros razoável, como é o caso aqui (número de parâmetros
-$N$, para minimizar a função objetivo, menor que uma dezena).
-Perceba que para a apresentação dos dados e avaliação do ajuste, foi calculada a
-raiz dessa função (de modo a deixar o valor apto, dimensionalmente, à comparações),
-sendo o resultado dividido pelo número de dados do ajuste (para possibilitar a
-comparação entre diferentes séries de dados); como
-$n>0 \implies \frac{\partial}{\partial f}\frac{\sqrt{f}}{n} >0$, temos que os
-parâmetros de ajuste dependem monotonicamente da função objetivo, sendo, portanto,
-válidos.
+The Levenberg-Marquardt algorithm with geodesic acceleration was used to solve
+the least-squares problem as shown in the equation \ref{eq:min_quad_lev},
+fitting a model of $N$ parameters to set of $n>N$ experimental data points.
+The algorithm was chosen due to its fast convergence to a solution, for reasonably
+small values of $N$, as they are in the examples analysed.
+One must observe that, for the exhibition of the fitting parameters and comparison
+of the deviations, the value actually being shown is the ratio between the square
+root of the function (so the value is dimensionally correct) and the number of data
+points (so the comparisons between different data series are fair); as $n>0 %
+\implies \frac{\partial}{\partial f}\frac{\sqrt{f}}{n} >0$, this scaling is not a
+problem, since the fitting evaluation parameters are monotonically dependent on
+the cost function.
 
 \begin{equation}
 	\label{eq:min_quad_lev}
@@ -1338,54 +1337,51 @@ válidos.
 	T^k, P^k)\right]^2\right)
 \end{equation}
 
-Claramente, a forma da função $\Phi$ depende do modelo a ser utilizado, variando
-entre expressões simples como a obtida a partir da equação de Norrish, a
-expressões significantemente mais complexas, como a obtida a partir de modelos
-como UNIQUAC. Além disso, os valores iniciais para o processo iterativo serão
-obtidos com mecanismos mais simples ou a partir de consulta à literatura para
-obtenção de dados já obtidos para substâncias semelhantes.
+Clearly, the function $\Phi$ depends on the model to be fitted, ranging from simple
+expressions as the one derived from Norrish's equation, to relatively complex
+ones, as the one derived from the UNIQUAC model. Besides, the initial values for
+the iterative process were obtained through values registered in the literature for
+similar substances.
 
-Para alguns conjuntos de dados, foram informados dados de composição de duas
-soluções, com a mesmo valor de $a_w$. Nesse caso, foi ajustado um polinômio
-de grau alto a uma série de dados de referência, e foram, dessa forma, obtidos
-valores de atividade para comparação.
+For a few data sets, the property supplied was the composition of a binary mixture
+in osmotic equilibrium with the solution of interest. In this situation, a high
+degree polynomial was fitted through a reference data series, obtaining values of
+water activity for analysis.
 
-As substâncias de referência foram NaCl (cuja curva de ajuste foi obtida a
-partir de dados de Scatchard\footnote{\cite{scatchard1938}}) e sacarose (cuja
-curva de ajuste foi obtida a partir de dados de Stokes \& Robinson\footnote{%
-\cite{stokes1961}}).
+The reference substances were sodium chloride (to which the reference data were
+obtained from Scatchard\footnote{\cite{scatchard1938}}) and sucrose (to which
+the reference data were obtained from Stokes \& Robinson\footnote{\cite{%
+stokes1961}}).
 
-Além da função objetivo explicitada acima, também é interessante avaliar o
-comportamento e utilidade do coeficiente de determinação $R^2$, ajustado para
-considerarmos a quantidade de parâmetros $N$ e a quantidade de dados $n$, como
-parâmetro de ajuste.
+Apart from the cost function above, one may also be interested in other fitting
+evaluation parameters, such as the determination coefficient $R^2$, adjusted
+to account for the amount of parameters $N$ and the amount of data points $n$,
+obtaining the adjusted coefficient of determination $\bar{R^2}$.
 
 \begin{equation}
 	\bar{R^2} = 1 - \cfrac{\left( 1 - R^2 \right) \left( n - 1 \right)}
 		{n - N - 1}
 \end{equation}
 
-O principal problema para a otimização dos modelos é, além dos problemas
-intrínsecos aos modelos, como já discutido, a enorme imprecisão em
-$\sigma_\phi$ obtida ao se calcular o coeficiente osmótico, frente ao erro
-$\sigma_{a_w}$ e $\sigma_{x_w}$ das medições. Mesmo se assumindo que a maior
-fonte de erro seja a medição das atividades (\textit{i.e.} $\sigma_{a_w} \gg
-\sigma_{x_w}$), temos que a incerteza nas medições de coeficiente osmótico
-tende ao infinito quando o valor de $x_w$ tende a 1, de forma que, para avaliar
-e comparar melhor os modelos, deve ser dada maior importância aos conjuntos
-de dados provenientes de soluções com menores diluições.
+One of the main problems in the optimization of the models, beyond the previously
+listed ones, lies on the big values of $\sigma_\phi$, compared to the values of
+$\sigma_{x_w}$ and $\sigma_{a_w}$. Even if one assumes the activity measurements as
+greatest source of uncertainty (\textit{e.g} $\sigma_{a_w} \gg \sigma_{x_w}$), the
+uncertainty in the osmotic coefficient calculations goes to infinity as $x_w$
+approaches 1.
 
-\chapter{Código e Dados}
+\chapter{Code and data}
 
-Todo o código desenvolvido e os dados utilizados estão disponíveis no
-\href{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}{repositório}
-\footnote{Disponível em
+All the code developed and all the data utilized are available at the project
+\href{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}{repository}
+\footnote{Available at
 	\url{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}.}
-do projeto, no qual estão disponíveis mais detalhes sobre a implementação de
-cada modelo e compilação/execução do programa.
+in which are available more details about the implementation of each model and
+compilation, installation and execution of each binary.
 
-Caso haja interesse em verificar o código-fonte e os executáveis basta clonar o
-repositório e compilar o programa. São necessários, para isso, git, GCC e GSL.
+If one is interested in verifying the source-code and the executables, one needs
+only to clone the repository and compile the program. To do this, are required
+git, GCC, the GSL and the numerical libraries BLAS/CBLAS.
 
 \begin{verbatim}
 $ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
@@ -1393,19 +1389,19 @@ $ cd IC_2021_Modelagem_Termodinamica
 $ make # Desnecessário caso o interesse seja pelos dados
 \end{verbatim}
 
-Caso não haja interesse em obter os executáveis, os dados podem ser obtidos
-clonando o repositório, simplesmente:
+If the interest is restricted to the data utilized, they can also be obtained,
+simply cloning the repository:
 
 \begin{verbatim}
 $ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
 $ cd IC_2021_Modelagem_Termodinamica/data
 \end{verbatim}
 
-\section{Licença}
+\section{License}
 
-Como exigido pelo uso da biblioteca científica da GNU (disponível sob a Licença
-Pública Geral, 3\textordfeminine\ versão), o código-fonte também está disponível
-sob os termos dessa licença.
+As the use of the GNU Scientific Library requires, the source-code is available
+under the GNU General Public License, 3\textsuperscript{rd} version, as the
+library itself is.
 
 \part{Resultados Obtidos}
 

@@ -1403,36 +1403,39 @@ As the use of the GNU Scientific Library requires, the source-code is available
 under the GNU General Public License, 3\textsuperscript{rd} version, as the
 library itself is.
 
-\part{Resultados Obtidos}
+\part{Results Obtained}
 
-\chapter{Análise Computacional}
+\chapter{Computational Analysis}
 
-\section{Discriminação entre modelos: $a_w$ \textit{vs.} $\phi$ e %
-parâmetros de ajuste}
+\section{Discrimination between models: $a_w$ \textit{vs.} $\phi$ and %
+fitting evaluation parameters}
 
-Como esperado, os ajustes em $\phi$ nos fornecem muito mais informação que os
-obtidos em dados de $a_w$: enquanto os valores para $\bar{R}^2$ podem estar
-muito próximos a 1 ao analisarmos dados de atividade, dados de coeficiente
-osmótico nos retornam valores de coeficiente (ajustado) de determinação com
-capacidade muito maior de discriminação entre os modelos.
+As one would expect, fitting the models to values of $\phi$ gives us more
+information than fitting the models to values of $a_w$: while $\bar{R^2}$ values
+may be to close to 1 when one analyses water activity data, the analysis of
+the very same dataset, converted to osmotic coefficient data, yields a very
+different picture, with pronouncedly different values of $\bar{R²}$, which
+better discriminates between a good or bad fit; the problems with an analysis
+of $\bar{R^2}_{a_w}$ arise from the fact that $\lim_{x_w \to 1}\gamma_w = 1$,
+and, therefore, for high dilutions, even relatively trivial models seem to be
+an excellent fit.
 
-Podemos ver, também, que o coeficiente de determinação não é um bom parâmetro para
-avaliar os modelos: um coeficiente baixo de determinação (ou mesmo negativo) com
-relação aos dados de coeficiente osmótico não implica que o modelo não se aplica
-bem aos dados de $a_w$, de interesse; da mesma forma, um valor de $\bar{R}^2$ muito
-próximo a 1 não é indício, necessariamente de que um modelo seja excepcional para
-predição de valores de atividade: dado que $\lim_{x_w \to 1}\gamma_w = 1$, temos
-que para grandes diluições, mesmo modelos relativamente triviais (como a Lei de
-Raoult) se comportam de forma excelente.
+In the same way, one may also observe that the (adjusted) coefficient of
+determination is not a good fitting evaluation parameter: a low (even negative)
+value of $\bar{R^2}_\phi$ is not a certain indicator of a bad fit: indeed, one
+is usually not interested in the behavior of the osmotic coefficient; instead, the
+property of interest is the water activity.
 
-Assim sendo, para avaliarmos o ajuste, o melhor parâmetro é a média dos desvios
-dos valores de $\phi$. Na figura \ref{fig_mannitol_sucrose}
-\footnote{\cite{stokes1961}} temos uma visão clara do fenômeno: o ajuste é muito
-mais próximo para dados de $a_w$ que para $\phi$. Os dados desses ajustes (não
-somente para modelos que necessitam de regressão, como na figura) estão na tabela
-\ref{tab_mannitol_sucrose}, na qual é possível perceber a vantagem de se tomar
-$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-\phi_{\text{calc}})^2}$
-como medida de exatidão dos modelos.
+Therefore, to evaluate the quality of the fit, one must find a different parameter;
+from the three under scrutiny, the best is, actually, the scaled cost function.
+In the figure \ref{fig_mannitol_sucrose}\footnote{\cite{stokes1961}} one can easily
+visualize the phenomena: the fitted activity models lie much closer to the
+experimental activity data than the osmotic coefficient models derived from them
+lie to the experimental osmotic coefficient data. The fit evaluation parameters are
+exhibited (not only for models that require least-squares fitting) at the table
+\ref{tab_mannitol_sucrose}, in which one can observe the advantage in the use of
+the scaled cost function ($\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+\phi_{\text{calc}})^2}$) as a fit evaluation parameter.
 
 \begin{figure}[h]
 \centering
@@ -1502,7 +1505,7 @@ como medida de exatidão dos modelos.
 			\addlegendentry{$\phi_\text{UNIQUAC}$};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Coeficientes Osmóticos}
+	\caption{Osmotic coefficients}
 	\label{fig_mannitol_sucrose_osm}
 \end{subfigure}%
 \hfill%
@@ -1571,33 +1574,33 @@ como medida de exatidão dos modelos.
 			\addlegendentry{$a_{w,\text{UNIQUAC}}$};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Atividades da água}
+	\caption{Water activities}
 	\label{fig_mannitol_sucrose_atv}
 \end{subfigure}
-\caption{Valores de $\phi$ (experimentais e calculados com os modelos) para %
-	uma solução de manitol e sucrose}
+\caption{Values of $\phi$ and $a_w$ (obtained experimentally and from the models) %
+	for a solution with mannitol and sucrose.}
 \label{fig_mannitol_sucrose}
 \end{figure}
 
 \begin{tabularx}{\textwidth}{ X  r  r  r  r }
-	\caption{Indicadores para um conjunto de dados}
+	\caption{Indicators for a data set}
 	\label{tab_mannitol_sucrose}\\
 	\toprule
-	Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+	Model & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}$ &
 		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
-		\textnumero\ parâmetros\\
+		\textnumero\ parameters\\
 	\midrule
 	\endfirsthead
 	\toprule
-	Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+	Model & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}$ &
 		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
-		\textnumero\ parâmetros\\\hline
+		\textnumero\ parameters\\\hline
 	\midrule
 	\endhead
 	\midrule
-	\multicolumn{5}{r}{\footnotesize(Continua na página seguinte)}
+	\multicolumn{5}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
 	Raoult & 0.049057 & -25.947383 & 0.440301 & 0 \\

@@ -1791,7 +1791,7 @@ excepcionalmente longos.
 		\draw (axis cs:2,7.5) node {\usebox{\violinuniquac}};
 	\end{axis}
 	\end{tikzpicture}
-	\caption{Número de iterações para cada modelo}
+	\caption{Número de iterações para a convergência de cada modelo}
 	\label{fig_violin_iter}
 \end{figure}
 
@@ -1886,13 +1886,9 @@ na prática, adotada na forma \ref{eq_caurie_raoult}
 \section{Carboidratos e aminoácidos}
 
 Foram obtidos mais dados para soluções de carboidratos (1208, distribuídos em
-91 conjuntos de dados)\footnote{%
-	Dos quais 1160 no formato adequado ao ajuste com a função objetivo
-	\ref{eq:min_quad_lev}, distribuídos em 83 conjuntos.
-}
-do que para soluções de aminoácidos (511, em 45 conjuntos). Além disso, os dados
-para soluções de carboidratos incluem uma variedade maior de substâncias (21,
-entre carboidratos e compostos semelhantes\footnote{%
+91 conjuntos de dados) do que para soluções de aminoácidos (511, em 45 conjuntos).
+Além disso, os dados para soluções de carboidratos incluem uma variedade maior de
+substâncias (21, entre carboidratos e compostos semelhantes\footnote{%
 	São elas: arabinose, butanotetrol, dextrose, eritritol, etanodiol,
 	frutose, galactose, glicose, glicerol, lactose, maltitol, maltose,
 	manitol, manose, propanotriol, rafinose, ribose, sorbitol, sacarose,
@@ -1961,12 +1957,10 @@ de Caurie não difere do modelo de Raoult, como discutido anteriormente.
 
 Foi observado um desvio médio nos valores de $\phi$ menor para os dados de $a_w$
 em soluções de aminoácidos, relativo ao desvio médio obtido para soluções de
-carboidratos; além disso, para algumas soluções de carboidratos o modelo de
-Caurie não retornou um resultado físico, possibilidade discutida anteriormente,
-devido às grandes molalidades das soluções em questão. De fato, é esperado que
-soluções com baixas diluições apresentem maiores desvios da idealidade (e de
-quaisquer hipóteses que tenham sido adotadas na dedução dos modelos) e portanto
-é natural que obtenhamos resultados menos precisos, nesse caso.\footnote{%
+carboidratos; de fato, é esperado que soluções com baixas diluições apresentem
+maiores desvios da idealidade (e de quaisquer hipóteses que tenham sido adotadas
+na dedução dos modelos) e portanto é natural que obtenhamos resultados menos
+precisos, nesse caso.\footnote{%
 	Excetuando-se, claro, a questão dos erros de medição, que aumentam
 	conforme aumenta a diluição, como discutido anteriormente.
 }
@@ -1986,7 +1980,7 @@ a cada conjunto de dados para sistemas binários.
 	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
 			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2_\text{médio}}$} \\
-		& Aminoácidos & Carboidratos \\
+		& Soluções de aminoácidos & Soluções de carboidratos \\
 	\midrule
 	\endfirsthead
 	\toprule
@@ -2281,11 +2275,13 @@ Podemos ver um exemplo do comportamento dos dados (e do ajuste dos modelos) na
 figura \ref{fig_tipi_datasets_xylose_arginine}
 \footnote{\cite{ninni2001,ebrahimi2016}}: perceba que o maior desvio da idealidade
 para a solução de aminoácido torna a Lei de Raoult muito inferior aos outros
-modelos; além disso, $\phi$ é consistentemente menor que 1, o que torna o modelo
-de Norrish superior, para essa solução, ao caso ideal. Outro ponto a ser comentado é
-a semelhança entre os modelos UNIQUAC e virial; enquanto no primeiro caso ambos se
-aproximam do caso em que $\phi$ e $x_w$ não estão correlacionados, no segundo caso
-temos duas funções semelhantes para diluições menores que $x_w=0.99$.
+modelos; além disso, $\phi$ é consistentemente menor que 1 nessas soluções, como
+requerido pelo modelo de Norrish, matematicamente, mas não para as soluções de
+carboidratos, exemplificando a diferença exibida na tabela. Outro ponto a ser
+comentado é a semelhança entre os modelos UNIQUAC e virial; enquanto no primeiro
+caso ambos se aproximam do caso em que $\phi$ e $x_w$ não estão correlacionados,
+no segundo caso temos duas funções semelhantes para diluições menores que
+$x_w=0.99$.
 
 \begin{figure}[h]
 	\centering
@@ -2634,6 +2630,8 @@ dados e os modelos para diferentes procedimentos experimentais.
 
 \subsection{Aminoácidos}
 
+\label{sec_metod_amin}
+
 Foram comparados dados obtidos a partir de medições de coeficiente osmótico,
 medidas diretas de atividade da água, depressão do ponto de fusão e dados de
 pressão de vapor, de acordo com as fontes delineadas na seção \ref{sec_selec_data}.
@@ -2651,8 +2649,8 @@ UNIQUAC, tornando os desvios excepcionalmente pequenos.
 Foram analisados os desvios dos ajustes para dados obtidos a partir de medições
 diretas de $a_w$, medições de coeficientes osmóticos, depressões de ponto de fusão,
 elevações de ponto de ebulição e umidade relativa. Para manter a coerência com a
-análise dos aminoácidos, foram avaliados apenas ajustes sobre dados provenientes de
-sistemas binários.
+seção \ref{sec_metod_amin}, foram avaliados apenas ajustes sobre dados
+provenientes de sistemas binários.
 
 Existe diferença estatisticamente significante entre os desvios obtidos a partir
 de dados de elevação do ponto de ebulição, de coeficientes osmóticos, e do resto.
@@ -2673,7 +2671,7 @@ provenientes de estudos feitos a diferentes temperaturas, tanto para carboidrato
 \cite{velezmoro2000} quanto para aminoácidos \cite{romero2006,tsurko2007}.
 
 Com isso, pode ser observado que a influência da temperatura sobre a função
-objetivo não é universal. ocorrendo apenas em situações específicas, a
+objetivo não é universal. Ocorrendo apenas em situações específicas, a
 depender de outros fatores como natureza química dos solutos ou diluição.
 
 \subsection{Aminoácidos}
@@ -2687,7 +2685,7 @@ Analisando os dados obtidos em cada um, não foi encontrada diferença significa
 entre os desvios a uma temperatura e a outra, para modelo algum, tanto para os
 dados do primeiro conjunto de dados, quanto para os dados do segundo.
 
-Isso se explica já que não temos, como no caso anterior, valores de $\phi$ maiores
+Isso se explica já que não temos, como no caso a seguir, valores de $\phi$ maiores
 que 1; assim sendo, para os valores de temperatura em questão é possível obter
 um ajuste, para os modelos avaliados; além disso, o comportamento não se modifica
 de forma qualitativa (como no caso anterior, que passa a exibir pontos de mínimo
@@ -2760,7 +2758,7 @@ perceptíveis para maiores temperaturas).
 Avaliando dados de $a_w$ em função de $(x_\text{frutose},x_\text{glicose},%
 x_\text{sacaraose},x_\text{maltose})$ \cite{velezmoro2000}, não foi possível
 afirmar que as pequenas diferenças observadas entre os desvios para
-$T=25,30,25$ \textcelsius\ são estatisticamente significantes, para
+$T=25,30,35$ \textcelsius\ são estatisticamente significantes, para
 os modelos virial e UNIQUAC.
 
 Entretanto, o modelo de Norrish e a lei de Raoult apresentam desvios
@@ -2859,7 +2857,7 @@ estão comparados apenas os desvios para a Lei de Raoult e para o modelo virial,
 nos gráficos exibidos na figura \ref{fig_pressure}.
 
 Podemos observar que apesar de existir (para dados obtidos a partir de soluções
-de frutose) uma leve tendência à diminuição dos desvios com o aumento da temperatura,
+de frutose) uma leve tendência à diminuição dos desvios com o aumento da pressão,
 tal tendência não é estatisticamente significante.
 
 \begin{figure}[h]

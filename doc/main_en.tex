@@ -72,7 +72,7 @@
 \@addtoreset{chapter}{part}
 \makeatother
 
-\renewcommand{\backrefpagesname}{Cited in pages(s):~}
+\renewcommand{\backrefpagesname}{Cited in page(s):~}
 \renewcommand{\backref}{}
 \renewcommand*{\backrefalt}[4]{
 	\ifcase #1 %
@@ -1611,19 +1611,18 @@ the scaled cost function ($\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
 	UNIQUAC & 0.006476 & 0.517119 & 0.977335 & 6\\\hline
 \end{tabularx}
 
-\section{Número de iterações e tempo de computação}
+\section{Required number of iterations and computer time}
 
-Na figura \ref{fig_violin_iter} estão exibidos os números de iterações necessárias
-para a convergência do método de Levenberg-Marquardt com aceleração geodésica,
-para os conjuntos de dados avaliados.
-Perceba que o modelo virial (que, de fato, é mais simples, ao menos quando se
-consideram conjuntos de dados de soluções binárias) apresenta um número de
-iterações ordens de grandeza menor que o necessário para a convergência dos
-outros modelos, em média. Outro ponto a ser considerado é o número de iterações
-para o modelo UNIQUAC, que é, por sua vez, ordens de grandeza maior que o número
-de iterações necessárias para a convergência do modelo de Norrish. Além disso, é
-importante ressaltar que alguns conjuntos de dados levaram a tempos de máquina
-excepcionalmente longos.
+In figure \ref{fig_violin_iter} are exhibited the numbers of iterations required
+for the convergence of Levenberg-Marquardt algorithm (with geodesic acceleration),
+for the data sets analysed. One can observe the small number of iterations required
+for the convergence when fitting the virial model to the data, due to its relative
+simplicity (especially when comparing data from binary systems alone). Another point
+to be observed is the relatively large number of iterations for the UNIQUAC model,
+several magnitudes larger than the required for the other two. Besides, a few data
+sets lead to extremely long computer times (a couple seconds), compared to the
+majority of data sets (a few hundredths of seconds).
+
 
 \begin{figure}[h]
 	\centering
@@ -1752,8 +1751,8 @@ excepcionalmente longos.
 		\end{tikzpicture}
 		}
 	\begin{axis}[
-			xmin = 1.0, xmax = 3.0, xlabel = {Modelo},
-			ymin = 0, ymax = 15, ylabel = {\textnumero\ de iterações},
+			xmin = 1.0, xmax = 3.0, xlabel = {Model},
+			ymin = 0, ymax = 15, ylabel = {\textnumero\ of iterations},
 			height=0.59\textwidth,
 			width=0.6\textwidth,
 			xtick style={draw=none},
@@ -1767,16 +1766,16 @@ excepcionalmente longos.
 		\draw (axis cs:2,7.5) node {\usebox{\violinuniquac}};
 	\end{axis}
 	\end{tikzpicture}
-	\caption{Número de iterações para cada modelo}
+	\caption{Number of iterations required for the convergence of each model}
 	\label{fig_violin_iter}
 \end{figure}
 
-Podemos ver, como exemplo, o comportamento da função objetivo com as
-iterações, para os três modelos, na figura \ref{fig_obj_iter}, obtida
-ao fazermos o gráfico da função objetivo ao longo das iterações necessárias
-para a obtenção do ajuste exibido na figura \ref{fig_mannitol_sucrose}. Aqui
-percebemos, novamente, a maior exatidão e menor tempo de máquina exigido pelo
-modelo virial, mesmo para um conjunto de dados relativos a uma mistura ternária.
+One may visualize the behavior of the (scaled) cost function as the iterative
+process runs, for the three models that require it, in figure \ref{fig_obj_iter},
+a plot of the scaled cost function at each step of the process to obtain the fit
+shown in figure \ref{fig_mannitol_sucrose}. One may observe, again, the smaller
+computer time required and smaller cost function associated with the virial
+model, even for data originating from a ternary system.
 
 \begin{figure}[h]
 	\centering
@@ -1826,27 +1825,24 @@ modelo virial, mesmo para um conjunto de dados relativos a uma mistura ternária
 			\draw[-{Latex[length=2mm]}]
 				(axis cs: 12,0.03) -- (axis cs: 27,0.03);
 			\draw (axis cs: 12,0.03) node [anchor=south west]%
-				{\tiny{179 iterações para convergência}};
+				{\tiny{179 iterations for convergence}};
 			\draw (axis cs: 14,0.65) node [anchor=south]%
-				{\tiny{Última iteração}};
+				{\tiny{Las iteration}};
 		\end{semilogyaxis}
 	\end{tikzpicture}
-	\caption{Função objetivo em função da iteração}
+	\caption{Scaled cost function for each step of the iterative process}
 	\label{fig_obj_iter}
 \end{figure}
 
-\section{Observações sobre os modelos de Caurie e Zdanovskii}
+\section{Observations about Caurie's and Zdanovskii's models}
 
-Para análise de dados de soluções binárias, a relação de Zdanovskii não
-apresenta utilidade; assim sendo, foi considerada apenas na análise de dados
-provenientes de soluções ternárias. Para obter as isotermas necessárias,
-simplesmente se ajustou um polinômio de grau menor que 4 sobre dados de $a_w$
-de soluções binárias de cada soluto.
+Zdanovskii's relation is useless to analyse binary solutions; therefore, it was
+only considered and compared when analysing ternary solutions. The required
+isotherms were obtained through polynomial fitting over binary $a_w$ data.
 
-O modelo de Caurie exige um modelo secundário para o cálculo da atividade da
-água de solução binária com molalidade equivalente a de cada soluto. Foi
-utilizada a Lei de Raoult, nesse caso, sendo a equação \ref{eq_caurie},
-na prática, adotada na forma \ref{eq_caurie_raoult}
+Caurie's model requires a secondary model for the computation of the water activity
+of binary systems. In this report this model was Raoult's law, and the equation
+\ref{eq_caurie} was replaced with the equation \ref{eq_caurie_raoult}.
 
 \begin{equation}
 	\label{eq_caurie_raoult}
@@ -1857,33 +1853,27 @@ na prática, adotada na forma \ref{eq_caurie_raoult}
 	m_im_jm_k\right]
 \end{equation}
 
-\chapter{Análise dos Dados Experimentais}
+\chapter{Experimental Data Analysis}
 
-\section{Carboidratos e aminoácidos}
+\section{Carbohydrates and Aminoacids}
 
-Foram obtidos mais dados para soluções de carboidratos (1208, distribuídos em
-91 conjuntos de dados)\footnote{%
-	Dos quais 1160 no formato adequado ao ajuste com a função objetivo
-	\ref{eq:min_quad_lev}, distribuídos em 83 conjuntos.
-}
-do que para soluções de aminoácidos (511, em 45 conjuntos). Além disso, os dados
-para soluções de carboidratos incluem uma variedade maior de substâncias (21,
-entre carboidratos e compostos semelhantes\footnote{%
-	São elas: arabinose, butanotetrol, dextrose, eritritol, etanodiol,
-	frutose, galactose, glicose, glicerol, lactose, maltitol, maltose,
-	manitol, manose, propanotriol, rafinose, ribose, sorbitol, sacarose,
-	xilitol e xilose.
-}
-) que os dados para aminoácidos (16 substâncias\footnote{%
-	São elas: alanina, ácido $\alpha$-aminobutírico, arginina, ácido
-	glutâmico, glicina, glicilglicina, histidina, hidroxiprolina,
-	isoleucina, lactamida, lisina, metionina, prolina, serina,
-	treonina e valina.
-}
-); por fim, dados para sistemas multicomponente incluem apenas carboidratos.
+More data were obtained for carbohydrate solutions (1208 data points,
+distributed among 91 data sets) than for aminoacid solutions (511 data
+points in 45 data sets). Besides, the number of distinct substances was
+greater for carbohydrates (21, between carbohydrates and similar compounds
+\footnote{%
+	Namely, arabinose, butanetetrol, dextrose, erythritol, ethanediol,
+	fructose, galactose, glucose, glycerol, lactose, maltitol, maltose,
+	mannitol, mannose, propanetriol, raffinose, ribose, sorbitol, sucrose,
+	xylitol and xylose.
+}) than it was for aminoacids (16 different substances\footnote{%
+	Namely, alanine, $\alpha$-aminobutyric acid, arginine, glutamic acid,
+	glycine, glycylglycine, histidine, hydroxyproline, isoleucine,
+	lactamide, lisine, methionine, proline, serine, threonine and valine.
+}); multicomponent data were only available for carbohydrate solutions.
 
-Os dados para aminoácidos apresentam diluições maiores, em média, que os de
-soluções de carboidratos. Isso pode ser visto no histograma da figura
+The aminoacid solutions analysed exhibit smaller concentrations, in average,
+than the carbohydrate solutions, as one can see in the histogram in figure
 \ref{fig_hist_dilui}.
 
 \begin{figure}[h]
@@ -1892,7 +1882,7 @@ soluções de carboidratos. Isso pode ser visto no histograma da figura
 		\begin{tikzpicture} [scale=0.75]
 			\begin{axis} [
 				ybar,
-				ylabel={\textnumero\ de soluções},
+				ylabel={\textnumero\ of solutions},
 				xlabel={$a_w$},
 				ymin=0, xmax=1,
 				legend pos=north west,
@@ -1902,17 +1892,17 @@ soluções de carboidratos. Isso pode ser visto no histograma da figura
 					color=black,
 					fill=pdarkred,
 				] table [y index=0] {aminoacid_aw_avgs.csv};
-				\addlegendentry{Aminoácidos ($\bar{a_w}=0.9861$)};
+				\addlegendentry{Aminoacids ($\bar{a_w}=0.9861$)};
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Aminoácidos}
+		\caption{Aminoacids}
 	\end{subfigure}%
 	\hfill%
 	\begin{subfigure}{0.5\textwidth}
 		\begin{tikzpicture} [scale=0.75]
 			\begin{axis} [
 				ybar,
-				ylabel={\textnumero\ de soluções},
+				ylabel={\textnumero\ of solutions},
 				xlabel={$a_w$},
 				ymin=0, xmax=1,
 				legend pos=north west,
@@ -1922,58 +1912,54 @@ soluções de carboidratos. Isso pode ser visto no histograma da figura
 					color=black,
 					fill=pdarkblue,
 				] table [y index=0] {./carbohydrate_aw_avgs.csv};
-				\addlegendentry{Carboidratos ($\bar{a_w}=0.9352$)};
+				\addlegendentry{Carbohydrates ($\bar{a_w}=0.9352$)};
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Carboidratos}
+		\caption{Carbohydrates}
 	\end{subfigure}
-	\caption{Distribuição dos valores de $a_w$ real}
+	\caption{Distribution of $a_w$ data}
 	\label{fig_hist_dilui}
 \end{figure}
 
-Foram comparados os ajustes dos modelos sobre soluções binárias, de carboidratos
-e de aminoácidos. Assim sendo, a Relação de Zdanovskii não se aplica e a Equação
-de Caurie não difere do modelo de Raoult, como discutido anteriormente.
+The scaled cost function was compared between each model, fitted over data from
+binary solutions; therefore, Zdanovskii's relation is not applicable and Caurie's
+equation is simply Raoult's law.
 
-Foi observado um desvio médio nos valores de $\phi$ menor para os dados de $a_w$
-em soluções de aminoácidos, relativo ao desvio médio obtido para soluções de
-carboidratos; além disso, para algumas soluções de carboidratos o modelo de
-Caurie não retornou um resultado físico, possibilidade discutida anteriormente,
-devido às grandes molalidades das soluções em questão. De fato, é esperado que
-soluções com baixas diluições apresentem maiores desvios da idealidade (e de
-quaisquer hipóteses que tenham sido adotadas na dedução dos modelos) e portanto
-é natural que obtenhamos resultados menos precisos, nesse caso.\footnote{%
-	Excetuando-se, claro, a questão dos erros de medição, que aumentam
-	conforme aumenta a diluição, como discutido anteriormente.
+In average, the cost function was smaller for data from aminoacid solutions,
+compared to the cost functions observed for carbohydrate data. Indeed, one
+may expect larger deviations from ideality (and, therefore, of the assumptions
+of the models) as the dilution diminishes, and, therefore, is natural that the
+models are less precise.\footnote{%
+	An opposite tendency to the uncertainties originated from measurement,
+	that, as commented before, grow with the dilution.
 }
 
-Os modelos se comportaram de forma distinta para cada grupo; enquanto para dados
-obtidos a partir de soluções de aminoácidos o modelo virial se destacou, para
-soluções de carboidratos o modelo UNIQUAC obteve os melhores desvios. Isso pode
-ser observado na tabela \ref{tab_model_amino_carb}, que exibe a média dos desvios
-(ponderada pela quantidade de dados em cada experimento) ao ajustarmos cada modelo
-a cada conjunto de dados para sistemas binários.
-
+The models behaved differently in each group of substances; while the virial model
+exhibited the smallest values (in average) of the scaled cost function for
+aminoacid solutions, the UNIQUAC model was the best for carbohydrate systems. This
+may be observed in the table \ref{tab_model_amino_carb}, that presents the average
+of the scaled cost functions (weighted with the size of each data set) of the
+fitting of each model to each bynary data series.
 
 \begin{tabularx}{\textwidth}{ l R R }
-	\caption{Performance dos modelos para diferentes substâncias}
+	\caption{Model performance for different substances}
 	\label{tab_model_amino_carb}\\
 	\toprule
-	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
+	\multirow{2}*{Model} & \multicolumn{2}{c}{%
 			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2_\text{médio}}$} \\
-		& Aminoácidos & Carboidratos \\
+			\phi_{\text{calc}})^2_\text{average}}$} \\
+		& Aminoacid solutions & Carbohydrate solutions \\
 	\midrule
 	\endfirsthead
 	\toprule
-	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
+	\multirow{2}*{Model} & \multicolumn{2}{c}{%
 			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2_\text{médio}}$} \\
-		& Aminoácidos & Carboidratos \\\hline
+			\phi_{\text{calc}})^2_\text{average}}$} \\
+		& Aminoacid solutions & Carbohydrate solutions \\\hline
 	\midrule
 	\endhead
 	\midrule
-	\multicolumn{3}{r}{\footnotesize(Continua na página seguinte)}
+	\multicolumn{3}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
 	Raoult & 0.04202 & 0.16505 \\
@@ -1982,11 +1968,10 @@ a cada conjunto de dados para sistemas binários.
 	UNIQUAC & 0.01556 & 0.06193 \\\hline
 \end{tabularx}
 
-Além disso, podemos observar que o modelo de Norrish apresenta resultados
-consideravelmente melhores para aminoácidos, em comparação com os desvios obtidos
-para soluções de carboidratos; isso se torna ainda mais claro ao compararmos
-as variações nos desvios entre carboidratos e aminoácidos para os modelos
-avaliados.
+Furthermore, one may also observe that the performance of Norrish's model,
+compared to the other three, was significantly better for aminoacid solutions;
+this is even clearer from scaled cost function comparisons between aminoacids
+and carbohydrates for the other models.
 
 \begin{figure}[h]
 	\centering
@@ -2113,7 +2098,7 @@ avaliados.
 			\draw (axis cs:0.0055,0.68) node{\usebox{\minigrafarg}};
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Arginina -- exemplo de aminoácido}
+		\caption{Arginine -- aminoacid example}
 		\label{fig_arginine_phi}
 	\end{subfigure}%
 	\hfill%
@@ -2246,22 +2231,23 @@ avaliados.
 			\draw (axis cs:0.017,1.008) node{\usebox{\minigrafxyl}};
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Xilose -- exemplo de carboidrato}
+		\caption{Xylose -- carbohydrate example}
 		\label{fig_xylose_phi}
 	\end{subfigure}
-	\caption{Exemplos de conjuntos de dados e ajustes dos modelos}
+	\caption{Examples of data sets and model fitting}
 	\label{fig_tipi_datasets_xylose_arginine}
 \end{figure}
 
-Podemos ver um exemplo do comportamento dos dados (e do ajuste dos modelos) na
-figura \ref{fig_tipi_datasets_xylose_arginine}
-\footnote{\cite{ninni2001,ebrahimi2016}}: perceba que o maior desvio da idealidade
-para a solução de aminoácido torna a Lei de Raoult muito inferior aos outros
-modelos; além disso, $\phi$ é consistentemente menor que 1, o que torna o modelo
-de Norrish superior, para essa solução, ao caso ideal. Outro ponto a ser comentado é
-a semelhança entre os modelos UNIQUAC e virial; enquanto no primeiro caso ambos se
-aproximam do caso em que $\phi$ e $x_w$ não estão correlacionados, no segundo caso
-temos duas funções semelhantes para diluições menores que $x_w=0.99$.
+An example of the behavior of the data (and the models) is shown in figure
+\ref{fig_tipi_datasets_xylose_arginine}\footnote{\cite{ninni2001,ebrahimi2016}}:
+one can observe a larger deviation from ideality in the aminoacid solutions,
+making Raoult's law even worse than the other models, in comparison with its
+performance for the carbohydrate solution; besides, $\phi$ is never greater than 1,
+as Norrish's model mathematically requires, for the aminoacid solution, but not
+for the carbohydrate data, exemplifying the difference shown in the table. Another
+observation can be done about the similarities between UNIQUAC and Virial models,
+with both approaching the average of the data in the first plot, and presenting
+similar curves for dilutions higher than $x_w=0.99$, in the second one.
 
 \begin{figure}[h]
 	\centering
@@ -2387,7 +2373,7 @@ temos duas funções semelhantes para diluições menores que $x_w=0.99$.
 			\draw (axis cs:0.009,0.432) node{\usebox{\minigrafglyc}};
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Glicilglicina -- exemplo de aminoácido}
+		\caption{Glycylglycine -- aminoacid example}
 		\label{fig_glycylglycine_phi}
 	\end{subfigure}%
 	\hfill%
@@ -2520,27 +2506,26 @@ temos duas funções semelhantes para diluições menores que $x_w=0.99$.
 			\draw (axis cs:0.07,0.870) node{\usebox{\minigrafsuc}};
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Sacarose -- exemplo de carboidrato}
+		\caption{Sucrose -- carbohydrate example}
 		\label{fig_sucrose_phi}
 	\end{subfigure}
-	\caption{Exemplos de conjuntos de dados e ajustes dos modelos}
+	\caption{Examples of data sets and model fitting}
 	\label{fig_tipi_datasets_sucrose_glycylglycine}
 \end{figure}
 
-Podemos observar na figura \ref{fig_tipi_datasets_sucrose_glycylglycine}
+One may observe in figure \ref{fig_tipi_datasets_sucrose_glycylglycine}
 \footnote{\cite{ellerton1964,stokes1961}}
-outro motivo para as grandes diferenças observadas entre o modelo de Norrish no
-ajuste de aminoácidos e carboidratos; de forma geral, temos que conforme a diluição
-diminui, o coeficiente osmótico tende a aumentar, para uma solução de carboidratos,
-a partir de determinado valor de $x_w$, o que não é tão comum em soluções de
-aminoácidos; assim, sendo, o modelo de Norrish, que não apresenta meio de lidar com
-valores negativos de $\frac{\partial \phi}{\partial x_w}$.
+a different reason for the large differences between fitting Norrish's model over
+aminoacid or carbohydrate data; for carbohydrate solutions, usually the data
+resembles a decreasing function $a_w=a_w(x_w)$ in a range of its domain, which is not
+as usual for data from aminoacids. This is a problem for the model, since it can't
+handle negative values of $\frac{\partial \phi}{\partial x_w}$.
 
-\section{Influência da diluição}
+\section{Dilution effects}
 
-Observando os dados como um todo, podemos observar que a diluição parece não
-afetar de forma significativa o valor dos desvios, para os modelos avaliados.
-Isso pode ser visto no gráfico exibido na figura \ref{fig_dilution_all}.
+The dilution doesn't appear as a significant factor in the values of the
+scaled cost function, when fitting the models analysed. This can be seen in
+figure \ref{fig_dilution_all}.
 
 \begin{figure}[h]
 	\centering
@@ -2595,86 +2580,88 @@ Isso pode ser visto no gráfico exibido na figura \ref{fig_dilution_all}.
 			\addlegendentry{UNIQUAC};
 		\end{semilogyaxis}
 	\end{tikzpicture}
-	\caption{Função objetivo em função da diluição (sistemas binários)}
+	\caption{Scaled cost function and dilution data (binary systems)}
 	\label{fig_dilution_all}
 \end{figure}
 
 
-\section{Influência do Método de Obtenção}
+\section{Effects originated from differences in experimental procedures}
 
-Como visto na seção \ref{sec_selec_data}, os dados foram obtidos através de
-diversos métodos, como medidas de pressão de vapor, depressão do ponto de fusão,
-elevação do ponto de ebulição, entre outros. Dentre conjuntos de dados obtidos
-a partir de substâncias similares, podemos comparar os desvios obtidos entre os
-dados e os modelos para diferentes procedimentos experimentais.
+As seen in section \ref{sec_selec_data}, the data were obtained through
+a plethora of experimental procedures, such as vapor pressure measurements,
+freezing point depression, boiling point elevation, \textit{etc.} Among the
+data sets obtained from similar substances (\textit{i.e.} aminoacids and
+carbohydrates), one may compare the differences in the scaled cost function
+between data sets obtained through distinct experimental procedures.
 
-\subsection{Aminoácidos}
+\subsection{Aminoacids}
 
-Foram comparados dados obtidos a partir de medições de coeficiente osmótico,
-medidas diretas de atividade da água, depressão do ponto de fusão e dados de
-pressão de vapor, de acordo com as fontes delineadas na seção \ref{sec_selec_data}.
-A única diferença estatisticamente significante observada foi entre os desvios
-obtidos através do modelo UNIQUAC para dados obtidos a partir de coeficiente
-osmótico e para dados obtidos através de depressão de ponto de fusão.
+\label{sec_metod_amin}
 
-Entretanto, como os experimentos que compõem esse último grupo geraram poucos
-dados experimentais, e como tem todos a mesma fonte, a explicação mais provável
-é a simples ocorrência de \textit{overfitting} ao utilizar nesses dados o modelo
-UNIQUAC, tornando os desvios excepcionalmente pequenos.
+The four models suitable for binary data were fitted to data obtained through
+osmotic coefficient, water activity, freezing point depression and vapor pressure
+measurements, as listed in the sources in section \ref{sec_selec_data}, and the
+differences in the scaled cost function were analysed. The only statistically
+significant difference among the groups was between the scaled cost functions of
+fitting an UNIQUAC model to data obtained through freezing point depression and
+to data originated from osmotic coefficients measurements.
 
-\subsection{Carboidratos}
+However, since the data sets comprising the former group were rather small, the
+most reasonable explanation lies in the ocurrence of overfitting, due to the small
+diferences between the number $N$ of fitting parameters and the number $n$ of
+experimental data points.
 
-Foram analisados os desvios dos ajustes para dados obtidos a partir de medições
-diretas de $a_w$, medições de coeficientes osmóticos, depressões de ponto de fusão,
-elevações de ponto de ebulição e umidade relativa. Para manter a coerência com a
-análise dos aminoácidos, foram avaliados apenas ajustes sobre dados provenientes de
-sistemas binários.
+\subsection{Carbohydrates}
 
-Existe diferença estatisticamente significante entre os desvios obtidos a partir
-de dados de elevação do ponto de ebulição, de coeficientes osmóticos, e do resto.
-De forma similar a anterior, entretanto, a explicação mais provável para essa
-diferença são as diferenças entre os estudos: entre os dados de elevação de ponto
-de ebulição, por exemplo, se incluem os obtidos, por Abderafi \& Bounahmidi
-\cite{abderafi1994}, que, por terem sido obtidos em condições muito diferentes
-das condições nos quais foram obtidos os outros dados, apresentam algumas
-peculiaridades\footnote{%
-	\textit{E.g.} a diferença na temperatura dos experimentos.
-}.
+The four models suitable for binary data were fitted to the data sets obtained
+through osmotic coefficient, water activity, freezing point depression, boiling
+point elevation and equilibrium relative humidity measurements. For coherence with
+section \ref{sec_metod_amin}, only data obtained from binary systems were analysed.
 
+A statistically significant difference exists, between the scaled cost functions
+obtained from data from boiling point elevation, osmotic coefficient measurements
+and the remaining data sets. However, this can, again, be more reasonably explained
+through differences between studies; indeed, a large part of first of these
+groups consists data from Abderafi \& Bounahmidi \footnote{Namely, the experiments
+were performed under higher temperatures.} \cite{abderafi1994} which may lead to
+a few peculiarities in the group, arising from characteristics of one specific
+experiment.
 
-\section{Influência da Temperatura}
+\section{Temperature influence}
 
-Para avaliar a influência da temperatura, avaliamos separadamente dados
-provenientes de estudos feitos a diferentes temperaturas, tanto para carboidratos
-\cite{velezmoro2000} quanto para aminoácidos \cite{romero2006,tsurko2007}.
+To assess the temperature effect in the quality of the fit, one needs to
+evaluate the average of the scaled cost functions when fitting the models
+to data obtained at different temperatures; there are data sets suitable
+for this analysis, for carbohydrates \cite{velezmoro2000} and aminoacids
+\cite{romero2006,tsurko2007} alike.
 
-Com isso, pode ser observado que a influência da temperatura sobre a função
-objetivo não é universal. ocorrendo apenas em situações específicas, a
-depender de outros fatores como natureza química dos solutos ou diluição.
+Through this procedure, one may observe that the effects of the temperature
+over the quality of the fit are not universal, ocurring in a few specific
+conditions dependent on the chemical nature of the components and their dilution.
 
-\subsection{Aminoácidos}
+\subsection{Aminoacids}
 
-Foram analisados dois estudos: um comparando três aminoácidos (ácido glutâmico,
-glicina e histidina) às temperaturas de 298.15K e 310.15K \cite{tsurko2007}, e
-outro comparando três aminoácidos (alanina, ácido $\alpha$-aminobutírico e glicina)
-às temperaturas de 288.15K, 293.15K, 298.15K e 303.15K \cite{romero2006}.
+Data from two articles were analysed; the first \cite{tsurko2007} presents a
+comparison of three aminoacids (glutamic acid, glycine and histidine) under
+temperatures of 298.15K and 310.15K. The other \cite{romero2006} compares
+another three (alanine, $\alpha$-aminobutyric acid and glycine) under
+temperatures ranging from 288.15K to 303.15K. As an example, four data sets from
+the latter were plotted in figure \ref{fig_temp_amins}.
 
-Analisando os dados obtidos em cada um, não foi encontrada diferença significativa
-entre os desvios a uma temperatura e a outra, para modelo algum, tanto para os
-dados do primeiro conjunto de dados, quanto para os dados do segundo.
+No statistically significant difference was found through the scaled cost
+functions obtained when fitting the models to data obtained under each
+temperature value, for data from both articles.
 
-Isso se explica já que não temos, como no caso anterior, valores de $\phi$ maiores
-que 1; assim sendo, para os valores de temperatura em questão é possível obter
-um ajuste, para os modelos avaliados; além disso, o comportamento não se modifica
-de forma qualitativa (como no caso anterior, que passa a exibir pontos de mínimo
-perceptíveis para maiores temperaturas).
+The reason for this is the same reason for the better adjustment of Norrish's
+model to aminoacid data: as $\phi$ is smaller than one, an adjustment remains
+possible as the temperature changes.
 
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
 		\begin{axis} [
 			ylabel={$\phi$},
-			xlabel={$x_\text{glicina}$},
+			xlabel={$x_\text{glycine}$},
 			xtick={0.002,0.006,0.010,0.014,0.018,0.022},
 			xlabel near ticks,
 			ylabel near ticks,
@@ -2727,28 +2714,23 @@ perceptíveis para maiores temperaturas).
 			\addlegendentry{303.15K};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Valores experimentais obtidos para $\phi$ em uma solução de glicina}
+	\caption{Experimental values of $\phi$ obtained from glycine solution data}
 	\label{fig_temp_amins}
 \end{figure}
 
-\subsection{Carboidratos}
+\subsection{Carbohydrates}
 
-Avaliando dados de $a_w$ em função de $(x_\text{frutose},x_\text{glicose},%
-x_\text{sacaraose},x_\text{maltose})$ \cite{velezmoro2000}, não foi possível
-afirmar que as pequenas diferenças observadas entre os desvios para
-$T=25,30,25$ \textcelsius\ são estatisticamente significantes, para
-os modelos virial e UNIQUAC.
-
-Entretanto, o modelo de Norrish e a lei de Raoult apresentam desvios
-estatisticamente significantes diferentes entre medidas obtidas a
-25\textcelsius\ ou 30\textcelsius\ e medidas obtidas a 35\textcelsius.
-
-Além disso, os desvios para Norrish e Raoult foram muito similares; sendo
-assim, podemos concluir que para esse conjunto de dados, temos, de forma
-geral, $\phi>1$; além disso, o crescimento de $T$ deve levar a um aumento
-no valor de $\phi$, o que torna os modelos de Norrish e Raoult ainda menos
-adequados. Isso pode ser visto na figura \ref{fig_temp_carbs}\footnote{%
-\cite{velezmoro2000}}.
+Through an analysis of water activity data as a function of composition
+\cite{velezmoro2000}, one may not assert the existence of a significant
+difference between the average scaled cost functions, when fitting virial
+and UNIQUAC models. However, both Norrish's and Raoult's models exhibit
+greater cost function values when fitting experiments at 35\textcelsius,
+in comparison with the quality of the fit for data obtained at 25 or
+30\textcelsius. Besides, the scaled cost functions were very similar for
+the two models; therefore, one may deduce that for the data sets analysed,
+the Norrish model converges to Raoult's law, and, even with $\phi > 1$ at
+25\textcelsius, the rise in temperatures must cause the rise in the values
+of $\phi$ as well. This can, indeed, be visualized in figure \ref{fig_temp_carbs}.
 
 \begin{figure}[h]
 	\centering
@@ -2769,7 +2751,7 @@ adequados. Isso pode ser visto na figura \ref{fig_temp_carbs}\footnote{%
 		]
 			\draw[black,thick] (axis cs:0.0000,1) -- (axis cs:0.022,1);
 			\draw (axis cs: 0.016,0.9)
-				node[anchor=north] {\tiny{Lei de Raoult}};
+				node[anchor=north] {\tiny{Raoult's Law}};
 			\draw (axis cs: 0.0135,0.9) -- (axis cs:0.0185,0.9);
 			\draw (axis cs: 0.0125,1.0) -- (axis cs: 0.0135,0.9);
 			\draw (axis cs: 0.0128,1.0) -- (axis cs: 0.0138,0.9);
@@ -2781,10 +2763,10 @@ adequados. Isso pode ser visto na figura \ref{fig_temp_carbs}\footnote{%
 				(axis cs: 0.0000,1.0) rectangle (axis cs: 0.022,2.8);
 			\draw (rel axis cs: 0.5,0.75)
 				node[anchor=south]
-				{\tiny{Região inacessível}};
+				{\tiny{Region unapproachable}};
 			\draw (rel axis cs: 0.5,0.75)
 				node[anchor=north]
-				{\tiny{ao modelo de Norrish}};
+				{\tiny{to Norrish's model}};
 			\addplot [
 				mark=*,
 				color=black,
@@ -2817,26 +2799,24 @@ adequados. Isso pode ser visto na figura \ref{fig_temp_carbs}\footnote{%
 			\addlegendentry{35\textcelsius};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Valores experimentais obtidos para $\phi$ em uma solução de maltose}
+	\caption{Experimental $\phi$ values obtained from maltose solutions}
 	\label{fig_temp_carbs}
 \end{figure}
 
-\section{Influência da Pressão}
+\section{Pressure influence}
 
-Os modelos de Norrish e virial foram ajustados aos dados de $a_w$
-\footnote{\cite{maximo2010}} em função da composição à diferentes pressões,
-para soluções de frutose e glicose. Como a quantidade de dados para cada
-valor de $P$ era pequena (5 pontos), um ajuste do modelo UNIQUAC não resultaria
-em dados interessantes.
+The virial and Norrish's models were fitted to the data of water activity as
+a function of composition of glucose and fructose solutions at different
+pressures, obtained from Maximo, Meirelles \& Batista \cite{maximo2010}.
+As the size of each data set was small (5 points), the UNIQUAC model was not
+applied.
 
-Foi observado que o modelo de Norrish manteve a tendência de simplesmente se
-aproximar da Lei de Raoult, como visto para soluções de carboidratos. Assim sendo,
-estão comparados apenas os desvios para a Lei de Raoult e para o modelo virial,
-nos gráficos exibidos na figura \ref{fig_pressure}.
+As Norrish's model kept its trend to simply converge to Raoult's law,
+the only two models actually analysed were the virial model and Raoult's law,
+as exhibited in figure \ref{fig_pressure}.
 
-Podemos observar que apesar de existir (para dados obtidos a partir de soluções
-de frutose) uma leve tendência à diminuição dos desvios com o aumento da temperatura,
-tal tendência não é estatisticamente significante.
+One can observe a slight downwards trend of the cost function with pressure
+increases, but the trend is not statistically significant.
 
 \begin{figure}[h]
 	\centering
@@ -2846,7 +2826,7 @@ tal tendência não é estatisticamente significante.
 				ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(%
 					\phi_{\text{exp}}-%
 				\phi_{\text{calc}})^2}$},
-				xlabel={Pressão (kPa)},
+				xlabel={Pressure (kPa)},
 				xlabel near ticks,
 				ylabel near ticks,
 				scaled x ticks=false,
@@ -2861,7 +2841,7 @@ tal tendência não é estatisticamente significante.
 				]
 				table [x={pressure},y={virial},col sep=comma]
 					{./pressure_glucose.csv};
-				\addlegendentry{Modelo Virial};
+				\addlegendentry{Virial Model};
 				\addplot [
 					no marks,
 					color=pblue,
@@ -2879,7 +2859,7 @@ tal tendência não é estatisticamente significante.
 				]
 				table [x={pressure},y={raoult},col sep=comma]
 					{./pressure_glucose.csv};
-				\addlegendentry{Lei de Raoult};
+				\addlegendentry{Raoult's Law};
 				\addplot [
 					no marks,
 					color=pred,
@@ -2890,7 +2870,7 @@ tal tendência não é estatisticamente significante.
 				\addlegendentry{$R^2=0.0204$};
 			\end{axis}
 		\end{tikzpicture}}
-		\caption{Glicose}
+		\caption{Glucose}
 		\label{fig_pressure_glic}
 	\end{subfigure}%
 	\hfill%
@@ -2900,7 +2880,7 @@ tal tendência não é estatisticamente significante.
 				ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(%
 					\phi_{\text{exp}}-%
 				\phi_{\text{calc}})^2}$},
-				xlabel={Pressão (kPa)},
+				xlabel={Pressure (kPa)},
 				xlabel near ticks,
 				ylabel near ticks,
 				scaled x ticks=false,
@@ -2915,7 +2895,7 @@ tal tendência não é estatisticamente significante.
 				]
 				table [x={pressure},y={virial},col sep=comma]
 					{./pressure_fructose.csv};
-				\addlegendentry{Modelo Virial};
+				\addlegendentry{Virial Model};
 				\addplot [
 					no marks,
 					color=pblue,
@@ -2933,7 +2913,7 @@ tal tendência não é estatisticamente significante.
 				]
 				table [x={pressure},y={raoult},col sep=comma]
 					{./pressure_fructose.csv};
-				\addlegendentry{Lei de Raoult};
+				\addlegendentry{Raoult's Law};
 				\addplot [
 					no marks,
 					color=pred,
@@ -2944,10 +2924,11 @@ tal tendência não é estatisticamente significante.
 				\addlegendentry{$R^2=0.4052$};
 			\end{axis}
 		\end{tikzpicture}}
-		\caption{Frutose}
+		\caption{Fructose}
 		\label{fig_pressure_fruc}
 	\end{subfigure}
-	\caption{Desvios obtidos para $\phi$ sob diferentes pressões}
+	\caption{Cost functions (scaled) for model fitting over $\phi$ data %
+		under different pressures}
 	\label{fig_pressure}
 \end{figure}
 

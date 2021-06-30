@@ -1941,7 +1941,7 @@ may be observed in the table \ref{tab_model_amino_carb}, that presents the avera
 of the scaled cost functions (weighted with the size of each data set) of the
 fitting of each model to each bynary data series.
 
-\begin{tabularx}{\textwidth}{ l R R }
+\begin{tabularx}{\textwidth}{ X r r }
 	\caption{Model performance for different substances}
 	\label{tab_model_amino_carb}\\
 	\toprule
@@ -2932,49 +2932,47 @@ increases, but the trend is not statistically significant.
 	\label{fig_pressure}
 \end{figure}
 
-\chapter{Análise dos Modelos}
+\chapter{Model Analysis}
 
-\section{Soluções binárias e sistemas multicomponente}
+\section{Binary and $n$-ary solutions}
 
-Foram comparados os ajustes sobre soluções binárias e $n$-árias de carboidratos.
-Quando possível (soluções ternárias) se fez uso da Relação de Zdanovskii.
+Scaled cost functions were compared for model fitting over data from binary and
+$n$-ary solutions. When reasonable (a some ternary solutions), Zdanovskii's
+relation was also used.
 
-Estão disponíveis 823 dados para soluções binárias apenas, 235 dados para soluções
-binárias e ternárias, apenas e 213 dados para soluções quaternárias. A cada
-conjunto de dados foram ajustados cada um dos modelos, e os valores médios dos
-desvios dos coeficientes osmóticos estão disponíveis na tabela \ref{tab_comp_mono},
-ponderados pela quantidade de dados em cada série.
+There are 823 data points from data sets obtained from binary solutions only,
+235 from data sets from binary and ternary solutions and 213 for binary, ternary
+and quaternary solutions. Each model was fitted over each data set, and the weighted
+average scaled cost functions are available in table \ref{tab_comp_mono}.
 
-Nessa tabela, estão inclusos apenas os modelos que são aplicáveis a todas as séries
-de dados; assim sendo, foi necessário excluir os modelos de Caurie (que apresentam
-resultados não físicos para soluções com baixas diluições\footnote{%
-	\cite{abderafi1994}
-}, e também o modelo de Zdanovskii, que exige duas séries auxiliares, nem sempre
-presentes, de dados sobre sistemas binários. Assim sendo, esses dois modelos devem
-ser analisados separadamente.
+The data, from which the values in the table were calculated, were obtained from
+fitting only the models suitable to all data sets; therefore, Caurie's and
+Zdanovskii's models are not in it, and must be analysed in another place, since
+both exhibit problems for a few data series (such as non-physical results for
+concentrated solutions\footnote{\cite{abderafi1994}} -- Caurie -- or necessity
+of two auxiliary data series not always available -- Zdanovskii).
 
 \begin{tabularx}{\textwidth}{ X r r r }
-	\caption{Performance dos modelos para sistemas binários, ternários %
-		e quaternários}
+	\caption{Model performance for binary, ternary and quaternary solutions}
 	\label{tab_comp_mono}\\
 	\toprule
-	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
+	\multirow{2}*{Model} & \multicolumn{3}{c}%
 		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$}\\
-		& Sistemas Binários & Sistemas Ternários &%
-			Sistemas Quaternários \\
+		\phi_{\text{calc}})^2_\text{average}}$}\\
+		& Binary systems & Ternary systems &%
+			Quaternary systems \\
 	\midrule
 	\endfirsthead
 	\toprule
-	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
+	\multirow{2}*{Model} & \multicolumn{3}{c}%
 		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$}\\
-		& Sistemas Binários & Sistemas Ternários &%
-			Sistemas Quaternários \\\hline
+		\phi_{\text{calc}})^2_\text{average}}$}\\
+		& Binary systems & Ternary systems &%
+			Quaternary systems \\\hline
 	\midrule
 	\endhead
 	\midrule
-	\multicolumn{4}{r}{\footnotesize(Continua na página seguinte)}
+	\multicolumn{4}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
 	Raoult & 0.16505 & 0.11053 & 0.11332 \\
@@ -2983,43 +2981,42 @@ ser analisados separadamente.
 	UNIQUAC & 0.06193 & 0.01324 & 0.08449 \\\hline
 \end{tabularx}
 
-\subsection{Relação de Zdanovskii}
+\subsection{Zdanovskii's relation}
 
-O comportamento desse modelo foi ruim para os dados binários analisados; uma
-comparação com os resultados obtidos com Raoult, Norrish, Virial e UNIQUAC está
-na tabela \ref{tab_zdan_multi}, que compara os desvios quadrados médios dos
-coeficientes osmóticos para os conjuntos de dados para os quais a Relação de
-Zdanovskii pode ser aplicada. Perceba que os desvios obtidos com a Relação de
-Zdanovskii são maiores que os obtidos assumindo solução ideal (Lei de Raoult),
-por exemplo. Isso não indica necessariamente que o modelo seja ruim; como,
-de todos os dados para soluções binárias disponíveis, apenas 4 conjuntos de
-dados estavam acompanhados por séries de dados para modelos binários para cada
-componente, comportamentos aberrantes do modelo para as condições de algum desses
-experimentos podem ser responsabilizados pelo aumento dos desvios.
+The model exhibited a bad behavior for the ternary data analysed; a comparison
+with the results obtained fitting Raoult's, Norrish's, virial and UNIQUAC models
+to the same data (to which Zdanovskii's model may be applied) is in table
+\ref{tab_zdan_multi}. One may observe that the scaled cost function values are
+greater for the model, even when compared with the cost functions obtained assuming
+ideal behavior (Raoult's law). This is not necessarily indicative of a bad model,
+however; as the number of data sets to which the relation may be applied is small
+(only four ternary data sets), abnormal behavior of the model in the conditions
+of one experiment may result in a huge increase in the cost function.
 
-De fato, dos 178 pontos experimentais em questão, 103 (57.8\%) são provenientes de
-dados obtidos a baixíssimas diluições\footnote{\cite{abderafi1994}}, e de fato, o
-modelo de Zdanovskii é inferior justamente nesses dados; uma comparação com o ajuste
-obtido para diluições mais baixas (visto na tabela \ref{tab_mannitol_sucrose}, por
-exemplo) mostra que existem situações nas quais o modelo se porta de forma razoável.
+Indeed, from the 178 experimental data points to which the model could be applied,
+103 (57.8\%) were obtained from data at very low dilutions
+\footnote{\cite{abderafi1994}}, in which it behaves badly; this was not observed
+for the remaining data set, and a comparison with the cost functions obtained fitting
+the model to more usual data (as seen in table \ref{tab_mannitol_sucrose}) shows
+that it may behave reasonably in certain conditions.
 
 \begin{tabularx}{\textwidth}{ X  r }
-	\caption{Comparação com o modelo de Zdanovskii}
+	\caption{Comparison Zdanovskii's model}
 	\label{tab_zdan_multi}\\
 	\toprule
-	Modelo & %
+	Model & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\
+		\phi_{\text{calc}})^2_\text{average}}$\\
 	\midrule
 	\endfirsthead
 	\toprule
-	Modelo & %
+	Model & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\\hline
+		\phi_{\text{calc}})^2_\text{average}}$\\\hline
 	\midrule
 	\endhead
 	\midrule
-	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
+	\multicolumn{2}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
 	Raoult & 0.09994 \\
@@ -3029,83 +3026,82 @@ exemplo) mostra que existem situações nas quais o modelo se porta de forma raz
 	UNIQUAC & 0.04596 \\\hline
 \end{tabularx}
 
-\subsection{Modelo de Caurie}
+\subsection{Caurie's model}
 
-O modelo de Caurie retorna resultados não-físicos para alguns conjuntos de dados.
-Excluindo esses conjuntos e comparando os resultados, percebemos que o modelo
-apresenta resultados razoavelmente bons. Esses dados estão na tabela
-\ref{tab_caurie_multi}; observe que os desvios para o modelo de Caurie são
-ligeiramente menores que os desvios para a Lei de Raoult.
+Caurie's model exhibits non-physical results when applied to a few sets of data, as
+previously explained; excluding them and applying the models to the suitable data
+sets, one can observe relatively small cost functions (when compared with Raoult's
+model). The data are in table \ref{tab_caurie_multi}.
 
 \begin{tabularx}{\textwidth}{ X  r }
-	\caption{Comparação com o modelo de Caurie}
+	\caption{Comparison with Caurie's model}
 	\label{tab_caurie_multi}\\
 	\toprule
-	Modelo & %
+	Model & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\
+		\phi_{\text{calc}})^2_\text{average}}$\\
 	\midrule
 	\endfirsthead
 	\toprule
-	Modelo & %
+	Model & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\\hline
+		\phi_{\text{calc}})^2_\text{average}}$\\\hline
 	\midrule
 	\endhead
 	\midrule
-	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
+	\multicolumn{2}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
 	Raoult & 0.10132 \\
 	Caurie & 0.09701 \\
 	Norrish & 0.09346 \\
 	Virial & 0.03880 \\
-	UNIQUAC & 0.077710 \\\hline
+	UNIQUAC & 0.07771 \\\hline
 \end{tabularx}
 
-\section{Observações sobre os resultados}
+\section{Observations about the results obtained}
 
-Podemos observar que os modelos virial e UNIQUAC são, tanto para sistemas
-binários quanto para sistemas multicomponente, os melhores em termos de
-reduzir o valor da função objetivo, e que isso se dá não somente devido ao maior
-número de parâmetros, já que, para sistemas binários tanto o modelo de Norrish
-quanto o modelo virial apresentam apenas um parâmetro, apesar de apresentarem desvios
-claramente diferentes.
+One can observe the smaller values of the scaled cost function obtained when
+fitting virial and UNIQUAC models, to binary and $n$-ary data alike and that the
+phenomenon is not explainable through the number of parameters used, only,
+since Norrish's model requires the same number of adjustable parameters as the
+virial model, exhibiting, however, significantly worse performance.
 
-Além disso, a versão (simplificada) do modelo UNIQUAC (que chega a contar com até 8
-parâmetros) não apresenta valores consistentemente menores da função objetivo que o
-modelo virial (que apresenta no máximo 6 parâmetros).
+Besides, the (simplified) version of the UNIQUAC model is not consistently better
+performant than the virial model, despite the former requiring a maximum of
+six adjustable parameters (and usually only one) and the latter requiring a maximum
+of eight (and no less than four).
 
-Por fim, vale ressaltar que, para alguns conjuntos de dados\footnote{%
-	\cite{norrish1966}, dados para uma mistura de sacarose e dextrose.
-}, a quantidade de pontos foi insuficiente para ajuste via modelo UNIQUAC;
-entretanto, isso não é um grande problema, já que análises do modelo para
-dados da mesma fonte não apresentaram peculiaridades. Ao contrário das situações
-vistas com Caurie, isso foi decorrente da simples quantidade de dados.
+Finally, one might notice that for a few sets of data\footnote{%
+	\cite{norrish1966} data obtained from a sucrose and dextrose solution.
+}, the size of the sample was insufficiently large to allow fitting the UNIQUAC
+model; fortunately, no problems arise from this lack of data, since model analysis
+for similar substances, data from the same source and similar experimental conditions
+indicate no peculiarities in the data set. Unlike the situations saw applying
+Caurie's model in some conditions, the cause of this problem lies only in the
+amount of data available.
 
+\section{Observations about the parameters obtained}
 
+\subsection{Norrish's model}
 
-\section{Valores Ajustados \textendash\ Observações Gerais}
+As previously shown, Norrish's model exhibits difficulties when fitted to data
+obtained from a system where $\phi$ might be greater than 1. In this situation,
+the iterative procedure utilized will lead to values of $K_i$ as close as zero as
+possible, maximizing the values of $\phi_\text{calc}$.
 
-\subsection{Modelo de Norrish}
+\subsection{UNIQUAC model}
 
-Como discutido anteriormente, o modelo de Norrish apresenta dificuldades para
-lidar com sistemas que apresentem $\phi > 1$. Nesse caso, o processo iterativo
-deixará os parâmetros $K_i$ tão próximos quanto o possível de 0, de modo a
-maximizar o valor de $\phi$.
-
-\subsection{Modelo UNIQUAC}
-
-O modelo UNIQUAC apresenta, mesmo para soluções binárias, um grande número
-de parâmetros. Isso pode levar a problemas com \textit{overfitting}. Além disso,
-existem problemas relativos a colinearidade, já que o conjunto de valores
-possíveis $(x_1,x_2,\ldots,x_p)$ para a composição de uma mistura com $p$
-componentes (incluindo a água) pertence a um subespaço de dimensão $p-1$
-de $\mathbb{R}^p$. Entretanto, ainda foram observados valores coerentes
-para alguns parâmetros, analisando diversos experimentos; por exemplo,
-$u_\text{água}$ se manteve consistentemente em torno de 1700J/mol, enquanto
-outras substâncias como a sacarose apresentaram grandes variações. Isso
-pode ser visto claramente na figura \ref{fig_violin_uniquac_u}.
+The model exhibits a large number of adjustable parameters, even for simple
+solutions, which may lead to problems arising from overfitting. Besides, since
+the properties that the model requires as argument are not linearly independent
+(as the sum $x_\text{water} + \sum_{i\text{ solute}}x_i$ is fixed as 1), there
+may be colinearity-related uncertainties in the obtained values for the adjustable
+parameters. However, a certain degree of coherence was observed among some values;
+while parameters as $q_\text{sucrose}$ assumed wildly different values when different
+data were fitted, parameters as $u_\text{water}$ remained consistently close
+to the mean (for $u_\text{water}$, around 1700J/mol). This behavior can be
+seen in figure \ref{fig_violin_uniquac_u}.
 
 \begin{figure}[h]
 	\centering
@@ -3318,13 +3314,13 @@ pode ser visto claramente na figura \ref{fig_violin_uniquac_u}.
 		\end{tikzpicture}
 		}
 	\begin{axis}[
-			xmin = 0.0, xmax = 1.4, xlabel = {Substância},
-			ymin = 2, ymax = 6, ylabel = {$u_\text{substância}$},
+			xmin = 0.0, xmax = 1.4, xlabel = {Substance},
+			ymin = 2, ymax = 6, ylabel = {$u_\text{substance}$},
 			height=0.59\textwidth,
 			width=0.8\textwidth,
 			xtick style={draw=none},
 			xtick={0.2,0.4,0.6,1.0,1.2},
-			xticklabels={Glicose,Sacarose,Frutose,Glicina,Alanina},
+			xticklabels={Glucose,Sucrose,Fructose,Glycine,Alanine},
 			ytick={2,3,4,5,6},
 			yticklabels={$10^2$,$10^3$,$10^4$,$10^5$,$10^6$},
 		]
@@ -3335,16 +3331,15 @@ pode ser visto claramente na figura \ref{fig_violin_uniquac_u}.
 		\draw (axis cs:0.7,4) node {\usebox{\violinalanineu}};
 	\end{axis}
 	\end{tikzpicture}
-	\caption{Valores obtidos para o parâmetro $u$ para diversas substâncias}
+	\caption{Values obtained for $u$ for different substances}
 	\label{fig_violin_uniquac_u}
 \end{figure}
 
+\subsection{Virial model}
 
-\subsection{Modelo Virial}
-
-As estimativas para os valores de $b_i$ apresentaram boa coerência (especialmente
-entre conjuntos de dados provenientes das mesmas fontes), e foi possível obter
-valores razoáveis para o ajuste. Exemplos para três carboidratos estão na figura
+Estmations for $b_i$ values were coherent, especially between data sets from the
+same sources, and reasonable values were obtained for the adjustable parameters.
+Examples for three carbohydrates are exhibited in figure
 \ref{fig_violin_virial_carb}.
 
 \begin{figure}[h]
@@ -3476,57 +3471,59 @@ valores razoáveis para o ajuste. Exemplos para três carboidratos estão na fig
 		\end{tikzpicture}
 		}
 	\begin{axis}[
-			xmin = 1.0, xmax = 3.0, xlabel = {Carboidrato},
-			ymin = -2, ymax = 0, ylabel = {$b_\text{carboidrato}$},
+			xmin = 1.0, xmax = 3.0, xlabel = {Carbohydrate},
+			ymin = -2, ymax = 0, ylabel = {$b_\text{carbohydrate}$},
 			height=0.59\textwidth,
 			width=0.6\textwidth,
 			xtick style={draw=none},
 			xtick={1.5,2,2.5},
-			xticklabels={Sacarose,Glicose,Frutose},
+			xticklabels={Sucrose,Glucose,Fructose},
 		]
 		\draw (axis cs:2,-1) node {\usebox{\violinsucrose}};
 		\draw (axis cs:2,-1) node {\usebox{\violinglucose}};
 		\draw (axis cs:2,-1) node {\usebox{\violinfructose}};
 	\end{axis}
 	\end{tikzpicture}
-	\caption{Valores obtidos para o parâmetro $b$ para sacarose, %
-		glucose e frutose.}
+	\caption{Values obtained for $b$ for sucrose, glucose and fructose solutions}
 	\label{fig_violin_virial_carb}
 \end{figure}
 
-Entretanto, para os valores de $c_i$, a situação se torna diferente: diferentes
-estudos (apesar de coerentes entre si) apresentaram estimativas ordens de grandeza
-diferentes. Isso possivelmente está associado a temperatura ou diluição (já que
-diferentes experimentos\footnote{%
-	De fato, os valores de $c$ foram maiores para experimentos realizados
-	sob maiores diluições. \cite{abderafi1994,velezmoro2000}
-}
-apresentam diferentes temperaturas e diluições).
+However, one observes a different situation for the estimations of $c_{ij}$:
+different data sources, even if internally coherent, result in wildly different
+values when fitted. This is possibly associated with temperature or dilution
+differences\footnote{%
+	Indeed, the values estimated for $c_{ij}$ were greater for experiments
+	under greater dilutions. \cite{abderafi1994,velezmoro2000}
+} among the the different experimental conditions.
 
-\section{Capacidade preditiva dos modelos}
+\section{Predictive capabilities of the models}
 
-É interessante analisarmos a aplicação de parâmetros obtidos sobre um conjunto de
-dados a outro conjunto de dados em condições semelhantes; para isso, dentre as
-séries de dados avaliadas, separamos cada uma das dez maiores (em número de pontos)
-em duas séries, cada uma com metade dos dados da série inicial, de form aleatória;
-em seguida, ajustamos o modelo a uma dessas séries (dados de treino) e utilizamos
-os valores obtidos para os parâmetros para uma avaliação da outra (dados de teste).
+One may be interested in the use of estimations of the adjustable fitting
+parameters obtained over a data set to predict water activity values of
+solutions of the same substances in similar conditions. To assess this possibility,
+the ten largest data sets were split in two halves; to one (training subset) the
+three models requiring regression were fitted, and the models' adjustable parameters
+obtained were inserted in the model, that was then utilized to predict the values of
+water activity associated with each listed composition of the other half of the data
+(testing subset); with the predicted and real data, we obtained the scaled cost
+functions, which were, then, compared.
 
-Para todos os modelos avaliados, o uso dos parâmetros obtidos na série de treino
-foi um melhor ajuste à série de teste que o modelo de Raoult; em quase todos os
-casos a diferença das funções objetivo entre a aplicação do modelo aos dados de
-treino e teste foi uma ou mais ordens de grandeza inferior à diferença entre a
-aplicação do modelo em questão e a aplicação do modelo de Raoult, aos dados de
-teste.\footnote{A exceção reside em conjuntos de dados para os quais o modelo
-de Norrish acaba convergindo para o modelo de Raoult, como discutido
-anteriormente.}.
+For all models analysed, the models with the parameters obtained were a better
+fit then the ideal solution assumption (Raoult's law); in almost all situations
+the differences between the scaled cost functions of the application of the model
+with the adjustable parameters obtained from regression over the testing data and
+with adjustable parameters obtained from regression over the training data, over
+the testing data, were one or more orders of magnitude inferior to the difference
+between the scaled cost functions obtained when fitting the model to the testing
+data and when applying Raoult's law.\footnote{The exception lies in data sets to
+which Norrish's model converges to Raoult's, as previously explained.}
 
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
 		\begin{axis} [
-				xlabel={Diferença entre os desvios (ideal/treino)},
-				ylabel={Diferença entre os desvios (teste/treino)},
+				xlabel={Cost functions differences (ideal/training)},
+				ylabel={Cost function differences (testing/training)},
 				xticklabel style={
 					/pgf/number format/fixed,
 					/pgf/number format/precision=3,
@@ -3553,7 +3550,7 @@ anteriormente.}.
 				y={test_minus_train},
 				col sep=comma
 			] {./test_and_train_diff_norrish.csv};
-			\addlegendentry{Modelo de Norrish};
+			\addlegendentry{Norrish's model};
 			\addplot [
 				color=black,
 				fill=pblue,
@@ -3564,7 +3561,7 @@ anteriormente.}.
 				y={test_minus_train},
 				col sep=comma
 			] {./test_and_train_diff_virial.csv};
-			\addlegendentry{Modelo Virial};
+			\addlegendentry{Virial model};
 			\addplot [
 				color=black,
 				fill=pverydarkblue,
@@ -3575,7 +3572,7 @@ anteriormente.}.
 				y={test_minus_train},
 				col sep=comma
 			] {./test_and_train_diff_uniquac.csv};
-			\addlegendentry{Modelo UNIQUAC};
+			\addlegendentry{UNIQUAC model};
 			\fill[
 				color=lightgray,
 				opacity=0.5,
@@ -3585,35 +3582,35 @@ anteriormente.}.
 			\draw (axis cs:0,0) -- (axis cs:0.22,0.22);
 			\draw (axis cs:0.005,0.150)
 				node[anchor=west,align=left]
-					{Melhor ajuste com o\\
-					modelo de Raoult};
+					{Better fit\\with Raoult's law};
 			\draw (axis cs:0.215,0.100)
 				node[anchor=east,align=right]
-					{Melhor ajuste\\
-					com os parâmetros\\
-					obtidos no treino};
+					{Better fit with\\
+					parameters obtained\\
+					over training data set};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Diferenças entre dados de teste e de treino}
+	\caption{Differences between testing and training data sets}
 	\label{fig_test_train}
 \end{figure}
 
-Isso pode ser visto na figura \ref{fig_test_train}; temos que para todos conjuntos
-de dados avaliados nessa seção, fizemos um gráfico da diferença entre os desvios
-($\frac{1}{n}\sqrt{\sum_{i=1}^N\left(\phi_\text{exp}-\phi_\text{calc}\right)^2}$),
-obtidos para o ajuste do modelo e para a aplicação do modelo com parâmetros
-provenientes dos dados de treino aos dados de teste, em função da diferença entre
-os desvios obtidos aplicando a Lei de Raoult e aplicando o modelo com esses
-parâmetros aos dados de teste. Observe que nenhum ponto está na zona hachurada, na
-figura, na qual os modelos com parâmetros obtidos para dados de treino seriam
-inferiores ao modelo de Raoult, no ajuste de dados de teste.
+One may observe this in figure \ref{fig_test_train}; for all data sets analyzed
+in this section, we plotted the differences between the values of
+the scaled cost functions obtained from the model with adjustable parameters
+from fitting over the training data and from fitting data as a function of the
+differences between the scaled cost functions obtained from Raoult's law
+application and from the application of the model with adjustable parameters
+from the training data, over the testing data. It's easily seen that no points
+fall within the dark area, in which Raoult's law is a better estimator for water
+activity than the model generated from the parameters obtained from the training
+data.
 
-Isso indica que os parâmetros obtidos para os modelos através das regressões são
-boas estimativas para os parâmetros reais, como desejado, e não apenas informações
-sobre propriedades intrínsecas de cada série de dados sobre as quais se faz a
-regressão, já que nesse caso seria observada uma grande discrepância nos desvios
-ao aplicarmos o modelo com os parâmetros obtidos nos dados de treino aos dados de
-teste.
+This is indicative that the parameters obtained for the models through the
+regressions are good estimations for the real parameters, as desired, instead of
+simply information about intrinsical properties of each data series, since, were
+this true, a large discrepancy would be observed between the scaled cost functions
+obtained from the application of the model with adjustable parameters from the
+training data and from the application of the model fitted to the test data.
 
 
 \part{Conclusões}

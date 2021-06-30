@@ -271,7 +271,7 @@
 \DeclareMathOperator*{\minimize}{minimize}
 
 \titulo{Final Report for Undergraduate Research Project\\
-	Thermodynamical Modelling of Solutions of Interest for the %
+	Thermodynamical Modelling of Solutions Related to the %
 	Food Industry}
 \autor{Pedro Henrique Callil Soares}
 \local{São Paulo}
@@ -3613,33 +3613,29 @@ obtained from the application of the model with adjustable parameters from the
 training data and from the application of the model fitted to the test data.
 
 
-\part{Conclusões}
+\part{Conclusions}
 
-Apesar de o modelo UNIQUAC apresentar maior poder correlativo, comparado com os
-outros modelos apresentados, não é sempre possível fazer uma regressão entre os
-dados experimentais de composição e atividade, já que o modelo exige uma grande
-quantidade de parâmetros, mesmo adotando uma série de simplificações; de fato,
-para obtermos os valores dos coeficientes $q_i$ e $u_{ii}$ precisamos de uma grande
-quantidade de pontos $a_w=a_w(x_1,x_2,\ldots,x_n)$, que muitas vezes não está
-disponível. Além disso, existem maiores dificuldades para a convergência do método
-dos mínimos quadrados nesse modelo, comparando aos outros analisados.
+Despite having the greatest correlative power of the models analysed, the UNIQUAC
+model is not always useful, as even with a series of simplifications, it requires
+a large amount of adjustable parameters, and, for a successful regression, one may
+lack the quantity required of experimental data. Besides, there are difficulties in
+the convergence of the algorithms for the least-squares nonlinear fitting when
+analysing some data sets.
 
-Dessa forma, modelos mais simples como o de Norrish e o modelo virial estudado, que,
-para misturas que não sejam excessivamente complexas, apresentam poucos parâmetros
-a serem ajustados, encontram grande utilidade prática; além disso, o equacionamento
-mais simples desses modelos facilita a regressão através de métodos numéricos. Outra
-observação a ser feita reside na aplicabilidade desses modelos: enquanto o modelo
-de Norrish é relativamente mais restrito, o modelo virial (assim como UNIQUAC)
-consegue se adaptar a uma grande gama de valores possíveis de coeficiente osmótico
-$\phi$.
+Therefore, for relatively simple mixtures, models as Norrish's and the virial model
+find great practical usefulness; moreover, the mathematical modelling employed is
+less complex, which facilitates numerical analysis. However, one must pay attention
+to pitfalls arising from applicability problems: while the virial model is more
+flexible, Norrish's model fails to be useful when the solution being examined
+exhibits osmotic coefficient greater than one.
 
-Por fim, é importante ressaltar que, apesar de esses modelos (Norrish, Virial e
-UNIQUAC) serem superiores ao caso ideal (Lei de Raoult) e às correções (Zdanovskii
-e Caurie) propostas, a Lei de Raoult (e, quando aplicáveis, os outros dois modelos)
-apresenta grande concordância com os dados experimentais de $a_w$ em uma fração
-considerável das séries de dados analisadas: assim, para misturas não muito
-complexas, em altas diluições, em situações nas quais a precisão no valor
-de $a_w$ não é crítica, é válido, portanto, adotá-la.
+Finally, one must keep in mind that, despite the superiority of the models (and,
+usually, due to the above discussed reasons, of the virial model), the ideal
+solution hypothesis (Raoult's law) and its corrections (Caurie's and Zdanovskii's)
+predict the water activity reasonably well; when the accuracy of $a_w$ values is
+not critical, in mixtures in which the effects of complex solute-solute interactions
+are negligible and in which the dilutions are relatively high, their adoption is
+valid.
 
 \phantompart
 

@@ -127,9 +127,9 @@ void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 		R_squared = get_R_squared ( w, data );
 		R_squared_aw = get_R_squared_aw ( w, data );
 
-		fprintf ( stdout, "initial cost: |f(x)|         = %f\n",
+		fprintf ( stdout, "initial cost:         |f(x)| = %f\n",
 				sqrt (chisq0) / n );
-		fprintf ( stdout, "final cost:   |f(x)|         = %f\n",
+		fprintf ( stdout, "final cost:           |f(x)| = %f\n",
 				sqrt (chisq) / n );
 		fprintf ( stdout, "adj. coeff. of determination = %f\n",
 				1 - ( 1 - R_squared ) * ( n - 1 ) / ( n - p - 1 ) );

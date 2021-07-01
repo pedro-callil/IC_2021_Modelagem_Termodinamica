@@ -1,6 +1,8 @@
 Repositório do Projeto de Iniciação Científica "Modelagem Termodinâmica de Soluções de Interesse para a Indústria de Alimentos"
 ===============================================================================================================================
 
+*An english translation of this file is available [here](https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica/blob/main/README_en.md).*
+
 Nesse repositório estão o código-fonte dos programas utilizados para
 conversão e ajuste dos valores de atividade da água de acordo com a
 lista de modelos adotados, e uma coleção de dados da literatura
@@ -69,23 +71,23 @@ figurar a situação obtida ao se analisar água pura ou qualquer outra situaç�
 na qual o valor do coeficiente osmótico da solução (a razão entre os logaritmos
 naturais da atividade da água e de sua concentração) não esteja bem definido.
 
-Além disso, o programa assume que os arquivos sejam planilhas em formato .csv,
+Além disso, o programa assume que os arquivos sejam planilhas em formato `.csv`,
 nas quais a primeira linha apresenta os nomes dos componentes, a primeira coluna
 os valores da propriedade associada à atividade da água, e as próximas colunas
 os valores da propriedade associada à composição de cada componente:
 
 ```
-aw,componente,substancia
-0.99,0.006,0.004
-0.97,0.015,0.022
-0.88,0.123,0.045
+aw,primeiro_soluto,segundo_soluto,...
+0.99,0.006,0.004,...
+0.97,0.015,0.022,...
+0.88,0.123,0.045,...
 ...
 ```
 
 Para ajustar os dados de coeficiente osmótico, usando o programa `FitWaterActivity`
 é necessário que os dados estejam expressos como relações entre atividade da água
 e fração molar, como acima. Caso contrário, é preciso convertê-los usando o programa
-`ConvertWaterActivity`. Os dois programas estarão no subdiretório `bin` do diretório
+`ConvertWaterActivity`. Os dois programas estarão no subdiretório `bin/` do diretório
 no qual o código foi compilado. Para informações sobre como utilizar o programa,
 deve ser invocada a opção `-h`:
 
@@ -95,7 +97,7 @@ $ ./bin/FitWaterActivity -h
 ```
 
 Para a obtenção dos dados exibidos no relatório, existe um *script* em `bash` que faz
-uso da utilidade GNU datamash para obter essas informações. Basta executar:
+uso da utilidade GNU Datamash para obter essas informações. Basta executar:
 
 ```
 $ ./src/gen_data_and_print_table
@@ -118,10 +120,12 @@ necessário TeX Live 2021, gnuplot, e, novamente, Make:
 ```
 $ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
 $ cd IC_2021_Modelagem_Termodinamica/doc
-$ make bib
+$ make bibpt # compilar apenas a versao em portugues
+$ make biben # compilar apenas a versao em ingles
+$ make bib # compilar as duas versoes
 ```
 
-O relatório final estará disponível no subdiretório `doc/report`.
+O(s) relatório(s) final(is) estará(ão) disponível(is) no subdiretório `doc/report`.
 
 Autor
 -----

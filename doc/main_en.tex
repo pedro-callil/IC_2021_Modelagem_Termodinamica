@@ -3494,7 +3494,38 @@ values when fitted. This is possibly associated with temperature or dilution
 differences\footnote{%
 	Indeed, the values estimated for $c_{ij}$ were greater for experiments
 	under greater dilutions. \cite{abderafi1994,velezmoro2000}
-} among the the different experimental conditions.
+} among the different experimental conditions. However, the impact of the
+solute-solute interaction parameter is small, compared to the values of the
+$b_i$, in the scaled cost function: a simplified virial model, assuming $c_{ij} = 0$
+for all pairs of solutes $i$ and $j$ yields good water activity estimations, compared
+to the other models; as one may observe in table \ref{tab_vir_simpl}, the smallest
+values of the cost function are obtained through both virial models.
+
+\begin{tabularx}{\textwidth}{ X  r }
+	\caption{ Performance of the virial model simplification}
+	\label{tab_vir_simpl}\\
+	\toprule
+	Model & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{médio}}$\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Model & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{médio}}$\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{2}{r}{\footnotesize(Continue in the following page)}
+	\endfoot
+	\endlastfoot
+	Raoult's & 0.11653 \\
+	Norrish's & 0.07817 \\
+	UNIQUAC & 0.05141 \\
+	Virial (simplified) & 0.03631 \\
+	Virial (complete) & 0.03219 \\\hline
+\end{tabularx}
 
 \section{Predictive capabilities of the models}
 

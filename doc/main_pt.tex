@@ -3540,7 +3540,39 @@ diferentes experimentos\footnote{%
 	De fato, os valores de $c$ foram maiores para experimentos realizados
 	sob maiores diluições. \cite{abderafi1994,velezmoro2000}
 }
-apresentam diferentes temperaturas e diluições).
+apresentam diferentes temperaturas e diluições). De toda forma o valor dos
+parâmetros de iteração soluto-soluto acaba tendo pouco impacto nos desvios, e
+o uso do modelo, simplificado de forma a assumir nulos seus valores, é uma boa
+aproximação, comparável com os outros modelos avaliados. Isso pode ser visto
+na tabela \ref{tab_vir_simpl}: os dois modelos viriais são os que apresentam,
+em média, menores valores para os desvios.
+
+\begin{tabularx}{\textwidth}{ X  r }
+	\caption{\textit{Performance} do modelo virial simplificado}
+	\label{tab_vir_simpl}\\
+	\toprule
+	Modelo & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{médio}}$\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Modelo & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2_\text{médio}}$\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.11653 \\
+	Norrish & 0.07817 \\
+	UNIQUAC & 0.05141 \\
+	Virial (simplificado) & 0.03631 \\
+	Virial (completo) & 0.03219 \\\hline
+\end{tabularx}
+
 
 \section{Capacidade preditiva dos modelos}
 

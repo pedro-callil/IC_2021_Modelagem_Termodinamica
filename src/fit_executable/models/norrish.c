@@ -55,7 +55,7 @@ void callback_norrish ( const size_t iter, void *params,
 	fprintf ( stderr, "\t|f(x)| = %.4f\n", gsl_blas_dnrm2 (f) / f->size );
 	size = x->size;
 	for ( i = 0; i < size; i++ ) {
-		fprintf ( stderr, "\tK_%d = %.4f\n", i,
+		fprintf ( stderr, "\tK_%d = %.4f\n", (int) i,
 				gsl_vector_get ( x, i ) );
 	}
 	fprintf ( stderr, "\n" );
@@ -78,7 +78,7 @@ void print_norrish ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 	if ( user_data->is_all == FALSE ) {
 		fprintf ( stdout, "Results Obtained:\n" );
 		for ( i = 0; i < p; i++ ) {
-			fprintf ( stdout, "\tK_%d = %.5e\t+/-\t%.5e\t", i,
+			fprintf ( stdout, "\tK_%d = %.5e\t+/-\t%.5e\t", (int) i,
 				gsl_vector_get ( w->x, i), correction *
 				sqrt ( gsl_matrix_get ( covar, i, i ) ) );
 			fprintf ( stdout, "(%s)\n",

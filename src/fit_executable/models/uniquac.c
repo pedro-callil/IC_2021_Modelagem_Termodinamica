@@ -237,7 +237,7 @@ void callback_uniquac ( const size_t iter, void *params,
 	fprintf ( stderr, "\t|f(x)| = %.4f\n", gsl_blas_dnrm2 (f) / f->size );
 	size = x->size;
 	for ( i = 0; i < size; i++ ) {
-		fprintf ( stderr, "\tK_%d = %.7e\n", i,
+		fprintf ( stderr, "\tK_%d = %.7e\n", (int) i,
 				fabs ( gsl_vector_get ( x, i ) ) );
 	}
 	fprintf ( stderr, "\n" );

@@ -115,7 +115,7 @@ Relatório
 
 Caso exista interesse no relatório final do projeto, o arquivo `.tex` que constitui
 seu código-fonte está disponível no diretório `doc`. Para compilar o relatório, é
-necessário TeX Live 2021, gnuplot, e, novamente, Make:
+necessário TeX Live (versão posterior a 2020), gnuplot, e, novamente, Make:
 
 ```
 $ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica

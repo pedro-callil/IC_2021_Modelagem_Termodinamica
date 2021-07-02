@@ -103,8 +103,8 @@ Report
 ------
 
 If one is interested in the LaTeX source for the report, it's available in the
-subdirectory `doc/`. To compile it, are required TeX Live 2021, gnuplot and, again,
-Make.
+subdirectory `doc/`. To compile it, are required TeX Live (version 2020 or 2021), gnuplot
+and, again, Make.
 
 ```
 $ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica

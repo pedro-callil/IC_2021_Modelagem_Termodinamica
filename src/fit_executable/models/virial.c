@@ -78,7 +78,7 @@ void callback_virial ( const size_t iter, void *params,
 	fprintf ( stderr, "\t|f(x)| = %.4f\n", gsl_blas_dnrm2 (f) / f->size );
 	size = x->size;
 	for ( i = 0; i < size; i++ ) {
-		fprintf ( stderr, "\tK_%ld = %.4f\n", i,
+		fprintf ( stderr, "\tK_%d = %.4f\n", i,
 				gsl_vector_get ( x, i ) );
 	}
 	fprintf ( stderr, "\n" );
@@ -104,7 +104,7 @@ void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 		counter = 0;
 
 		for ( i = 0; i < p; i++ ) {
-			fprintf ( stdout, "\tb_%ld = %.5e\t+/-\t%.5e\t", counter,
+			fprintf ( stdout, "\tb_%d = %.5e\t+/-\t%.5e\t", counter,
 				gsl_vector_get ( w->x, counter),
 				correction * sqrt ( gsl_matrix_get
 					( covar, counter, counter ) ) );
@@ -112,7 +112,7 @@ void print_virial ( gsl_matrix *covar, gsl_multifit_nlinear_workspace *w,
 			/* add solute name */
 			counter++;
 			for ( j = 0; j < i; j++ ) {
-				fprintf ( stdout, "\tc_%ld = %.5e\t+/-\t%.5e\t",
+				fprintf ( stdout, "\tc_%d = %.5e\t+/-\t%.5e\t",
 					counter, gsl_vector_get ( w->x, counter),
 					correction * sqrt ( gsl_matrix_get
 						( covar, counter, counter ) ) );

@@ -1,7 +1,11 @@
 CC		= gcc
 CFLAGS		= -Wall -std=c18 -pedantic -Werror -Ofast
 LDFLAGS		= -ggdb3
-LDLIBS		= -lm -lmvec -lgsl -lcblas
+LDLIBS		= -lm -lgsl
+arch		:= $(shell uname -m)
+ifeq ($(arch),x86_64)
+	LDLIBS	= -lm -lmvec -lgsl -lcblas
+endif
 
 MAIN_SRC_DIR	= src/fit_executable
 CONVERT_SRC_DIR	= src/convert_executable

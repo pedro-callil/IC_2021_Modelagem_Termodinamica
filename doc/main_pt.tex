@@ -431,7 +431,7 @@ a razão entre a fugacidade de uma substância nas condições de um sistema
 e sua fugacidade em uma situação de referência (equação \ref{eq:def_atv}),
 age como sua ``concentração efetiva'', do ponto de vista termodinâmico.
 Portanto, a medição e análise da atividade da água em soluções nos permite
-prever de forma mais exata os fenômenos que dependem do teor de água em
+prever de modo mais exato os fenômenos que dependem do teor de água em
 um sistema. No caso da indústria de alimentos, o principal desses fenômenos
 é a degradação dos alimentos por ação microbiana.
 
@@ -525,7 +525,7 @@ obtemos:
 \end{equation}
 
 Para soluções ideais, obter $a_w$ é simples: para todo componente $i$ da
-mistura, a sua atividade é dada, simplesmente por sua fração molar, e portanto
+mistura, a sua atividade é dada, simplesmente por sua fração molar, e, portanto,
 $a_w = x_w$. Entretanto, essa hipótese nem sempre se verifica; assim sendo,
 para soluções ideais adotamos o coeficiente de atividade $\gamma_w$:
 
@@ -543,7 +543,7 @@ pura é de 1 (é, afinal, a solução de referência), temos que:
 	\lim_{x_w \to 1}\gamma_w = 1
 \end{equation}
 
-E, para muitas soluções de interesse, não somente temos altos desvios da
+Entretanto, para muitas soluções de interesse, não somente temos altos desvios da
 idealidade, como também temos soluções extremamente diluídas. Então adotamos
 uma nova grandeza, o coeficiente osmótico $\phi$, dado por:
 
@@ -659,7 +659,7 @@ realizada de modo mais indireto; podemos medir para uma determinada solução ao
 invés de seu valor de atividade da água (através da medição de sua pressão de
 vapor e comparação com a pressão de vapor de água pura nas mesmas condições), o
 seu valor de elevação do ponto de ebulição, de depressão de ponto de início de
-congelamento, ou a composição de uma outra solução em equilíbrio osmótico.
+congelamento, ou a composição de outra solução em equilíbrio osmótico.
 
 Por exemplo, alguns conjuntos de dados obtidos para soluções $n$-árias de
 carboidratos \cite{abderafi1994} apresentam dados de elevação do ponto de
@@ -742,8 +742,8 @@ solvente puro a $T_B$/$T_F$.
 
 Foram analisados diversos modelos, desde mais simples como a Lei de Raoult ou
 equação de Caurie a mais complexos como o método iterativo originário da equação
-de Zdanovskii, para posterior comparação com uma equação do tipo virial (equação
-como \ref{eq:ad_pessoa}, a adaptada de \cite{pessoa2008}, na qual $b_i$ e
+de Zdanovskii, para posterior comparação com uma equação do tipo virial (como
+\ref{eq:ad_pessoa}, a adaptada de \cite{pessoa2008}, na qual $b_i$ e
 $c_{ij}$ são parâmetros ajustáveis e $\theta_i$ é uma medida de concentração,
 com $i,j$ componentes da mistura).
 
@@ -815,8 +815,8 @@ multicomponente, os seguintes:
 		componentes, digamos, 1 e 2, adotamos duas soluções binárias,
 		cada uma com um componente, em equilíbrio osmótico com uma
 		terceira, ternária. Sendo $m_{01}$ e $m_{02}$ as
-		molalidades do componente 1 na solução na qual é o único
-		soluto e do componente 2 na solução no qual é o único soluto, e
+		molalidades do componente 1, na solução na qual é o único
+		soluto, e do componente 2, na solução na qual é o único soluto, e
 		sendo $m_1$ e $m_2$ as molalidades de 1 e 2 na solução ternária,
 		temos que $m_1m_{01}^{-1} + m_2m_{0_2}^{-1} = 1$, sendo esta a
 		relação de Zdanovskii. Disso se obtém um procedimento iterativo,
@@ -880,7 +880,7 @@ de sistemas binários à predição de dados de sistemas $n$-ários, aplicabilid
 essa que, caso verificada, traria grande vantagem ao modelo em questão, tendo em
 vista a quantidade de dados disponível para um sistema binário qualquer
 ser muito superior à quantidade de dados disponível para um sistema $n$-ário
-qualquer. Além disso, também deve-se levar em conta que os experimentos de
+qualquer. Além disso, também deve-se considerar que os experimentos de
 laboratório necessários ao levantamento de dados representativos para sistemas
 $n$-ários são muito mais custosos.
 
@@ -1247,7 +1247,7 @@ tabelas que seguem.
 				\cite{velezmoro2000}, medidas diretas de $a_w$ nas
 				temperaturas 25, 30 e 35\textcelsius\ para soluções
 				de água e glicose, água e frutose, água e maltose,
-				água e sacarose e uma solução de glicose, frutose
+				água e sacarose, e uma solução de glicose, frutose
 				e sacarose em base aquosa, com baixas concentrações
 				($x_w > 0.9$).
 		\end{itemize}
@@ -1322,7 +1322,7 @@ tabelas que seguem.
 
 Foi utilizado o método dos mínimos quadrados para o ajuste não-linear dos
 modelos aos dados obtidos. Para isso, foi escrito programa em linguagem
-\texttt{C}, de modo a fazer uso das rotinas fornecidas pela biblioteca
+\texttt{C}, de modo a utilizar as rotinas fornecidas pela biblioteca
 \textit{GNU Scientific Library} \cite{galassi_book} para otimização não-linear.
 A escolha dessa biblioteca em específico se deu devido ao fácil acesso aos
 passos intermediários dos processos iterativos utilizados para obter os
@@ -1343,7 +1343,7 @@ $a_w$ em valores de $\phi$ puramente interna.
 Foi utilizado o algoritmo de Levenberg-Marquardt com aceleração geodésica para a
 solução do problema de mínimos quadrados para um conjunto de $n$ dados e $N$
 parâmetros dado pela expressão \ref{eq:min_quad_lev}.
-A escolha desse algoritmo se dá pois converge de forma rápida para sistemas com
+Esse algoritmo foi escolhido pois converge de forma rápida para sistemas com
 uma quantidade de parâmetros razoável, como é o caso aqui (número de parâmetros
 $N$, para minimizar a função objetivo, menor que uma dezena).
 Perceba que para a apresentação dos dados e avaliação do ajuste, foi calculada a
@@ -1959,7 +1959,7 @@ Foi observado um desvio médio nos valores de $\phi$ menor para os dados de $a_w
 em soluções de aminoácidos, relativo ao desvio médio obtido para soluções de
 carboidratos; de fato, é esperado que soluções com baixas diluições apresentem
 maiores desvios da idealidade (e de quaisquer hipóteses que tenham sido adotadas
-na dedução dos modelos) e portanto é natural que obtenhamos resultados menos
+na dedução dos modelos) e, portanto, é natural que obtenhamos resultados menos
 precisos, nesse caso.\footnote{%
 	Excetuando-se, claro, a questão dos erros de medição, que aumentam
 	conforme aumenta a diluição, como discutido anteriormente.
@@ -1979,14 +1979,14 @@ a cada conjunto de dados para sistemas binários.
 	\toprule
 	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
 			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2_\text{médio}}$} \\
+			\phi_{\text{calc}})^2}_\text{médio}$} \\
 		& Soluções de aminoácidos & Soluções de carboidratos \\
 	\midrule
 	\endfirsthead
 	\toprule
 	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
 			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-			\phi_{\text{calc}})^2_\text{médio}}$} \\
+			\phi_{\text{calc}})^2}_\text{médio}$} \\
 		& Aminoácidos & Carboidratos \\\hline
 	\midrule
 	\endhead
@@ -2978,7 +2978,7 @@ tal tendência não é estatisticamente significante.
 \section{Soluções binárias e sistemas multicomponente}
 
 Foram comparados os ajustes sobre soluções binárias e $n$-árias de carboidratos.
-Quando possível (soluções ternárias) se fez uso da Relação de Zdanovskii.
+Quando possível (soluções ternárias) se recorreu à Relação de Zdanovskii.
 
 Estão disponíveis 823 dados para soluções binárias apenas, 235 dados para soluções
 binárias e ternárias, apenas e 213 dados para soluções quaternárias. A cada
@@ -3001,7 +3001,7 @@ ser analisados separadamente.
 	\toprule
 	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
 		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$}\\
+		\phi_{\text{calc}})^2}_\text{médio}$}\\
 		& Sistemas Binários & Sistemas Ternários &%
 			Sistemas Quaternários \\
 	\midrule
@@ -3009,7 +3009,7 @@ ser analisados separadamente.
 	\toprule
 	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
 		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$}\\
+		\phi_{\text{calc}})^2}_\text{médio}$}\\
 		& Sistemas Binários & Sistemas Ternários &%
 			Sistemas Quaternários \\\hline
 	\midrule
@@ -3050,13 +3050,13 @@ exemplo) mostra que existem situações nas quais o modelo se porta de forma raz
 	\toprule
 	Modelo & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\
+		\phi_{\text{calc}})^2}_\text{médio}$\\
 	\midrule
 	\endfirsthead
 	\toprule
 	Modelo & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\\hline
+		\phi_{\text{calc}})^2}_\text{médio}$\\\hline
 	\midrule
 	\endhead
 	\midrule
@@ -3084,13 +3084,13 @@ ligeiramente menores que os desvios para a Lei de Raoult.
 	\toprule
 	Modelo & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\
+		\phi_{\text{calc}})^2}_\text{médio}$\\
 	\midrule
 	\endfirsthead
 	\toprule
 	Modelo & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\\hline
+		\phi_{\text{calc}})^2}_\text{médio}$\\\hline
 	\midrule
 	\endhead
 	\midrule
@@ -3553,13 +3553,13 @@ em média, menores valores para os desvios.
 	\toprule
 	Modelo & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\
+		\phi_{\text{calc}})^2}_\text{médio}$\\
 	\midrule
 	\endfirsthead
 	\toprule
 	Modelo & %
 		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
-		\phi_{\text{calc}})^2_\text{médio}}$\\\hline
+		\phi_{\text{calc}})^2}_\text{médio}$\\\hline
 	\midrule
 	\endhead
 	\midrule
@@ -3669,7 +3669,7 @@ anteriormente.}.
 	\label{fig_test_train}
 \end{figure}
 
-Isso pode ser visto na figura \ref{fig_test_train}; temos que para todos conjuntos
+Isso pode ser visto na figura \ref{fig_test_train}; temos que para todos os conjuntos
 de dados avaliados nessa seção, fizemos um gráfico da diferença entre os desvios
 ($\frac{1}{n}\sqrt{\sum_{i=1}^N\left(\phi_\text{exp}-\phi_\text{calc}\right)^2}$),
 obtidos para o ajuste do modelo e para a aplicação do modelo com parâmetros

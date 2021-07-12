@@ -43,7 +43,7 @@ void print_raoult ( System *data, info *user_data, double *errors ) {
 		user_data->cost += pow ( errors[i], 2 );
 	}
 
-	user_data->cost = sqrt (user_data->cost);
+	user_data->cost = sqrt ( user_data->cost / n );
 
 	R_squared = get_R_squared_check ( errors, data );
 	R_squared_aw = get_R_squared_aw_check ( errors, data );
@@ -54,7 +54,7 @@ void print_raoult ( System *data, info *user_data, double *errors ) {
 		fprintf ( stdout, "coeff. of determination (aw) = %f\n",
 				R_squared_aw );
 		fprintf ( stdout, "final cost:           |f(x)| = %f\n",
-				user_data->cost / n );
+				user_data->cost );
 	}
 
 }

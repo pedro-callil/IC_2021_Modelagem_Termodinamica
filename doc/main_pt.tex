@@ -106,13 +106,13 @@
 				\multicolumn{2}{c|}{Modelos}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
 			\multirow{5}*{\makecell[l]{Água,\\#1}} &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#3$ &
+				$\sqrt{\frac{\sum\text{desvios}^2}{n}}=#3$ &
 				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#4$%
 					\\\hhline{~-~}
 			& UNIQUAC & $b_\text{#1}=#9$\\\hhline{~~-}
-			& $\frac{\sqrt{\sum\text{desvios}^2}}{n}=#5$ & Norrish\\
+			& $\sqrt{\frac{\sum\text{desvios}^2}{n}}=#5$ & Norrish\\
 			& $q_\text{água}=\ArgXI$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#6$\\
+				$\sqrt{\frac{\sum\text{desvios}^2}{n}}=#6$\\
 			& $q_\text{#1}=\ArgXIII$ & $K_\text{#1}=\ArgX$%
 				\\\hhline{-~~}
 			$\bar{a_w}=#7$ & $u_\text{água}=\ArgXII$ & \\
@@ -174,17 +174,17 @@
 				\multicolumn{2}{c|}{Modelos}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
 			\multirow{7}*{\makecell[l]{Água,\\#1 e\\#2}} &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#9$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#7$%
+				$\sqrt{\frac{\sum\text{desvios}^2}{n}}=#9$ &
+				$\sqrt{\frac{\sum\text{desvios}^2}{n}}=#7$%
 					\\\hhline{~-~}
 			& UNIQUAC & $b_\text{#1}=\ArgX$\\
-			& $\frac{\sqrt{\sum\text{desvios}^2}}{n}=#8$ &
+			& $\sqrt{\frac{\sum\text{desvios}^2}{n}}=#8$ &
 				$b_\text{#2}=\ArgXI$\\
 			& $q_\text{água}=\ArgXV$ &
 				$c_\text{#1/#2}=\ArgXII$\\\hhline{~~-}
 			& $q_\text{#1}=\ArgXVII$ & Norrish \\
 			& $q_\text{#2}=\ArgXIX$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#6$ \\
+				$\sqrt{\frac{\sum\text{desvios}^2}{n}}=#6$ \\
 			& $u_\text{água}=\ArgXVI$ & $K_\text{#1}=\ArgXIII$%
 				\\\hhline{-~~}
 			$\bar{a_w}=#4$ & $u_\text{#1}=\ArgXVIII$ &
@@ -233,11 +233,11 @@
 				\multicolumn{2}{c|}{Modelos}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
 			\multirow{10}*{\makecell[l]{Água,\\#1,\\#2 e\\\ArgXXVII}} &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#9$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#7$%
+				$\sqrt{\frac{\sum\text{desvios}^2}{n}}=#9$ &
+				$\sqrt{\frac{\sum\text{desvios}^2}{n}}=#7$%
 					\\\hhline{~-~}
 			& UNIQUAC & $b_\text{#1}=\ArgX$\\
-			& $\frac{\sqrt{\sum\text{desvios}^2}}{n}=#8$ &
+			& $\sqrt{\frac{\sum\text{desvios}^2}{n}}=#8$ &
 				$b_\text{#2}=\ArgXI$\\
 			& $q_\text{água}=\ArgXIX$ & $b_\text{\ArgXXVII} = \ArgXIII$ \\
 			& $q_\text{#1}=\ArgXXI$ &
@@ -248,7 +248,7 @@
 				& $c_\text{\ArgXXVII/#2}=\ArgXV$\\\hhline{~~-}
 			& $u_\text{água}=\ArgXX$ & Norrish \\
 			& $u_\text{#1}=\ArgXXII$ &
-				$\frac{\sqrt{\sum\text{desvios}^2}}{n}=#6$ \\
+				$\sqrt{\frac{\sum\text{desvios}^2}{n}}=#6$ \\
 			& $u_\text{#2}=\ArgXXIV$ & $K_\text{#1}=\ArgXVI$%
 				\\\hhline{-~~}
 			$\bar{a_w}=#4$ & $u_\text{\ArgXXVII}=\ArgXXVI$ &
@@ -1346,10 +1346,10 @@ Esse algoritmo foi escolhido pois converge de forma rápida para sistemas com
 uma quantidade de parâmetros razoável, como é o caso aqui (número de parâmetros
 $N$, para minimizar a função objetivo, menor que uma dezena).
 Perceba que para a apresentação dos dados e avaliação do ajuste, foi calculada a
-raiz dessa função (de modo a deixar o valor apto, dimensionalmente, à comparações),
-sendo o resultado dividido pelo número de dados do ajuste (para possibilitar a
-comparação entre diferentes séries de dados); como
-$n>0 \implies \frac{\partial}{\partial f}\frac{\sqrt{f}}{n} >0$, temos que os
+raiz (de modo a tornar o valor dimensionalmente correto) da razão entre o valor da
+função e o número de dados do ajuste (para possibilitar a comparação entre
+diferentes séries de dados); como
+$n>0 \implies \frac{\partial}{\partial f}\sqrt{\frac{f}{n}} >0$, temos que os
 parâmetros de ajuste dependem monotonicamente da função objetivo, sendo, portanto,
 válidos.
 
@@ -1457,7 +1457,7 @@ dos valores de $\phi$. Na figura \ref{fig_mannitol_sucrose}
 mais próximo para dados de $a_w$ que para $\phi$. Os dados desses ajustes (não
 somente para modelos que necessitam de regressão, como na figura) estão na tabela
 \ref{tab_mannitol_sucrose}, na qual é possível perceber a vantagem de se tomar
-$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-\phi_{\text{calc}})^2}$
+$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-\phi_{\text{calc}})^2}$
 como medida de exatidão dos modelos.
 
 \begin{figure}[h]
@@ -1609,14 +1609,14 @@ como medida de exatidão dos modelos.
 	\caption{Indicadores para um conjunto de dados}
 	\label{tab_mannitol_sucrose}\\
 	\toprule
-	Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+	Modelo & $\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}$ &
 		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
 		\textnumero\ parâmetros\\
 	\midrule
 	\endfirsthead
 	\toprule
-	Modelo & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+	Modelo & $\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}$ &
 		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
 		\textnumero\ parâmetros\\\hline
@@ -1626,12 +1626,12 @@ como medida de exatidão dos modelos.
 	\multicolumn{5}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.049057 & -25.947383 & 0.440301 & 0 \\
-	Caurie & 0.049952 & -26.940271 & 0.402607 & 0 \\
-	Zdanovskii & 0.049115 & -26.012114 & 0.423267 & 0 \\
-	Norrish & 0.024635 & -5.987272 & 0.814903 & 2\\
-	Virial & 0.006496 & 0.514218 & 0.975995 & 3\\
-	UNIQUAC & 0.006476 & 0.517119 & 0.977335 & 6\\\hline
+	Raoult & 0.422001 & -25.947383 & 0.440301 & 0 \\
+	Caurie & 0.429705 & -26.940271 & 0.402607 & 0 \\
+	Zdanovskii & 0.422505 & -26.012114 & 0.423267 & 0 \\
+	Norrish & 0.211922 & -5.987272 & 0.814903 & 2\\
+	Virial & 0.055878 & 0.514218 & 0.975995 & 3\\
+	UNIQUAC & 0.055712 & 0.517119 & 0.977335 & 6\\\hline
 \end{tabularx}
 
 \section{Número de iterações e tempo de computação}
@@ -1805,7 +1805,7 @@ modelo virial, mesmo para um conjunto de dados relativos a uma mistura ternária
 	\centering
 	\begin{tikzpicture}
 		\begin{semilogyaxis} [
-			ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2}$},
 			xlabel={Iteração},
 			xmax=27.5, xmin=-0.5,
@@ -1840,17 +1840,17 @@ modelo virial, mesmo para um conjunto de dados relativos a uma mistura ternária
 			table [x={iter},y={cost},col sep=comma]
 				{iter_uniquac.csv};
 			\addlegendentry{UNIQUAC};
-			\draw (axis cs: 6,0.0065) -- (axis cs: 10,0.65) -- %
-				(axis cs: 18,0.65);
-			\fill[pblue] (axis cs: 6,0.0065) circle (0.6mm);
-			\draw (axis cs: 8,0.0246) -- (axis cs: 10,0.65);
-			\fill[pverybrightblue] (axis cs: 8,0.0246) circle (0.6mm);
-			\draw (axis cs: 12,0.03) -- (axis cs: 10,0.65);
+			\draw (axis cs: 6,0.0559) -- (axis cs: 10,5.59) -- %
+				(axis cs: 18,5.59);
+			\fill[pblue] (axis cs: 6,0.0559) circle (0.6mm);
+			\draw (axis cs: 8,0.212) -- (axis cs: 10,5.59);
+			\fill[pverybrightblue] (axis cs: 8,0.212) circle (0.6mm);
+			\draw (axis cs: 12,0.2) -- (axis cs: 10,5.59);
 			\draw[-{Latex[length=2mm]}]
-				(axis cs: 12,0.03) -- (axis cs: 27,0.03);
-			\draw (axis cs: 12,0.03) node [anchor=south west]%
+				(axis cs: 12,0.2) -- (axis cs: 27,0.2);
+			\draw (axis cs: 12,0.2) node [anchor=south west]%
 				{\tiny{179 iterações para convergência}};
-			\draw (axis cs: 14,0.65) node [anchor=south]%
+			\draw (axis cs: 14,5.59) node [anchor=south]%
 				{\tiny{Última iteração}};
 		\end{semilogyaxis}
 	\end{tikzpicture}
@@ -1965,11 +1965,12 @@ precisos, nesse caso.\footnote{%
 }
 
 Os modelos se comportaram de forma distinta para cada grupo; enquanto para dados
-obtidos a partir de soluções de aminoácidos o modelo virial se destacou, para
-soluções de carboidratos o modelo UNIQUAC obteve os melhores desvios. Isso pode
-ser observado na tabela \ref{tab_model_amino_carb}, que exibe a média dos desvios
-(ponderada pela quantidade de dados em cada experimento) ao ajustarmos cada modelo
-a cada conjunto de dados para sistemas binários.
+obtidos a partir de soluções de aminoácidos o modelo virial se destacou, obtendo
+desvios similares ao modelo UNIQUAC, para soluções de carboidratos o modelo UNIQUAC
+obteve, de longe, os menores desvios. Isso pode ser observado na tabela
+\ref{tab_model_amino_carb}, que exibe a média dos desvios (ponderada pela quantidade
+de dados em cada experimento) ao ajustarmos cada modelo a cada conjunto de dados
+para sistemas binários.
 
 
 \begin{tabularx}{\textwidth}{ X r r }
@@ -1977,14 +1978,14 @@ a cada conjunto de dados para sistemas binários.
 	\label{tab_model_amino_carb}\\
 	\toprule
 	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
-			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2}_\text{médio}$} \\
 		& Soluções de aminoácidos & Soluções de carboidratos \\
 	\midrule
 	\endfirsthead
 	\toprule
 	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
-			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2}_\text{médio}$} \\
 		& Aminoácidos & Carboidratos \\\hline
 	\midrule
@@ -1993,10 +1994,10 @@ a cada conjunto de dados para sistemas binários.
 	\multicolumn{3}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.04202 & 0.16505 \\
-	Norrish & 0.02688 & 0.15668 \\
-	Virial & 0.01347 & 0.08805 \\
-	UNIQUAC & 0.01556 & 0.06193 \\\hline
+	Raoult & 0.153428 & 0.479665 \\
+	Norrish & 0.093486 & 0.448270 \\
+	Virial & 0.049592 & 0.247174 \\
+	UNIQUAC & 0.045613 & 0.197069 \\\hline
 \end{tabularx}
 
 Além disso, podemos observar que o modelo de Norrish apresenta resultados
@@ -2565,7 +2566,7 @@ Isso pode ser visto no gráfico exibido na figura \ref{fig_dilution_all}.
 	\centering
 	\begin{tikzpicture}
 		\begin{semilogyaxis} [
-			ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2}$},
 			xlabel={$x_w$},
 			legend pos=south west,
@@ -2864,14 +2865,14 @@ tal tendência não é estatisticamente significante.
 	\begin{subfigure}{0.5\textwidth}{%
 		\begin{tikzpicture}[scale=0.75]
 			\begin{axis} [
-				ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(%
+				ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(%
 					\phi_{\text{exp}}-%
 				\phi_{\text{calc}})^2}$},
 				xlabel={Pressão (kPa)},
 				xlabel near ticks,
 				ylabel near ticks,
 				scaled x ticks=false,
-				ymin=0.1,ymax=0.8,
+				ymin=0.3,ymax=1.5,
 			]
 				\addplot [
 					mark=*,
@@ -2889,8 +2890,8 @@ tal tendência não é estatisticamente significante.
 					samples=3,
 					domain=20:100,
 					ultra thick,
-				] plot {-0.00023889*x+0.288077};
-				\addlegendentry{$R^2=0.0064$};
+				] plot {-0.000585*x+0.7056};
+				\addlegendentry{$R^2=0.0065$};
 				\addplot [
 					mark=*,
 					color=black,
@@ -2907,7 +2908,7 @@ tal tendência não é estatisticamente significante.
 					samples=3,
 					domain=20:100,
 					ultra thick,
-				] plot {-0.000519161*x+0.43544};
+				] plot {-0.001272*x+1.0666};
 				\addlegendentry{$R^2=0.0204$};
 			\end{axis}
 		\end{tikzpicture}}
@@ -2918,14 +2919,14 @@ tal tendência não é estatisticamente significante.
 	\begin{subfigure}{0.5\textwidth}{%
 		\begin{tikzpicture}[scale=0.75]
 			\begin{axis} [
-				ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(%
+				ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(%
 					\phi_{\text{exp}}-%
 				\phi_{\text{calc}})^2}$},
 				xlabel={Pressão (kPa)},
 				xlabel near ticks,
 				ylabel near ticks,
 				scaled x ticks=false,
-				ymin=0.1,ymax=0.8,
+				ymin=0.5,ymax=1.8,
 			]
 				\addplot [
 					mark=*,
@@ -2943,7 +2944,7 @@ tal tendência não é estatisticamente significante.
 					samples=3,
 					domain=20:100,
 					ultra thick,
-				] plot {-0.0014502*x+0.413874};
+				] plot {-0.00355*x+1.0137};
 				\addlegendentry{$R^2=0.3086$};
 				\addplot [
 					mark=*,
@@ -2961,7 +2962,7 @@ tal tendência não é estatisticamente significante.
 					samples=3,
 					domain=20:100,
 					ultra thick,
-				] plot {-0.002172*x+0.6495};
+				] plot {-0.005321*x+1.5911};
 				\addlegendentry{$R^2=0.4052$};
 			\end{axis}
 		\end{tikzpicture}}
@@ -2999,7 +3000,7 @@ ser analisados separadamente.
 	\label{tab_comp_mono}\\
 	\toprule
 	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
-		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		{$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{médio}$}\\
 		& Sistemas Binários & Sistemas Ternários &%
 			Sistemas Quaternários \\
@@ -3007,7 +3008,7 @@ ser analisados separadamente.
 	\endfirsthead
 	\toprule
 	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
-		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		{$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{médio}$}\\
 		& Sistemas Binários & Sistemas Ternários &%
 			Sistemas Quaternários \\\hline
@@ -3017,10 +3018,10 @@ ser analisados separadamente.
 	\multicolumn{4}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.16505 & 0.11053 & 0.11332 \\
-	Norrish & 0.15669 & 0.04901 & 0.09413 \\
-	Virial & 0.08805 & 0.01316 & 0.04453 \\
-	UNIQUAC & 0.06193 & 0.01324 & 0.08449 \\\hline
+	Raoult & 0.479665 & 0.591365 & 0.820056 \\
+	Norrish & 0.448270 & 0.274971 & 0.654951 \\
+	Virial & 0.247174 & 0.076962 & 0.310939 \\
+	UNIQUAC & 0.197069 & 0.073781 & 0.550024 \\\hline
 \end{tabularx}
 
 \subsection{Relação de Zdanovskii}
@@ -3048,13 +3049,13 @@ exemplo) mostra que existem situações nas quais o modelo se porta de forma raz
 	\label{tab_zdan_multi}\\
 	\toprule
 	Modelo & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{médio}$\\
 	\midrule
 	\endfirsthead
 	\toprule
 	Modelo & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{médio}$\\\hline
 	\midrule
 	\endhead
@@ -3062,11 +3063,11 @@ exemplo) mostra que existem situações nas quais o modelo se porta de forma raz
 	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.09994 \\
-	Zdanovskii & 0.14775 \\
-	Norrish & 0.04597 \\
-	Virial & 0.01373 \\
-	UNIQUAC & 0.04596 \\\hline
+	Raoult & 0.635824 \\
+	Zdanovskii & 0.911042 \\
+	Norrish & 0.295073 \\
+	Virial & 0.087813 \\
+	UNIQUAC & 0.076432 \\\hline
 \end{tabularx}
 
 \subsection{Modelo de Caurie}
@@ -3082,13 +3083,13 @@ ligeiramente menores que os desvios para a Lei de Raoult.
 	\label{tab_caurie_multi}\\
 	\toprule
 	Modelo & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{médio}$\\
 	\midrule
 	\endfirsthead
 	\toprule
 	Modelo & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{médio}$\\\hline
 	\midrule
 	\endhead
@@ -3096,11 +3097,11 @@ ligeiramente menores que os desvios para a Lei de Raoult.
 	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.10132 \\
-	Caurie & 0.09701 \\
-	Norrish & 0.09346 \\
-	Virial & 0.03880 \\
-	UNIQUAC & 0.07771 \\\hline
+	Raoult & 0.668330 \\
+	Caurie & 0.654477 \\
+	Norrish & 0.600739 \\
+	Virial & 0.258034 \\
+	UNIQUAC & 0.488533 \\\hline
 \end{tabularx}
 
 \section{Observações sobre os resultados}
@@ -3565,11 +3566,11 @@ em média, menores valores para os desvios.
 	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.11653 \\
-	Norrish & 0.07817 \\
-	UNIQUAC & 0.05141 \\
-	Virial (simplificado) & 0.03631 \\
-	Virial (completo) & 0.03219 \\\hline
+	Raoult & 0.765376 \\
+	Norrish & 0.516392 \\
+	UNIQUAC & 0.344529 \\
+	Virial (simplificado) & 0.243334 \\
+	Virial (completo) & 0.215693 \\\hline
 \end{tabularx}
 
 
@@ -3611,7 +3612,7 @@ anteriormente.}.
 				scaled y ticks=false,
 				legend pos=north east,
 				xmin=0,ymin=0,
-				xmax=0.22,ymax=0.22,
+				xmax=1.1,ymax=1.1,
 			]
 			\addplot [
 				color=black,
@@ -3650,14 +3651,14 @@ anteriormente.}.
 				color=lightgray,
 				opacity=0.5,
 			]
-				(axis cs:0,0) -- (axis cs:0.22,0.22)
-				-- (axis cs:0,0.22) -- (axis cs:0,0);
-			\draw (axis cs:0,0) -- (axis cs:0.22,0.22);
-			\draw (axis cs:0.005,0.150)
+				(axis cs:0,0) -- (axis cs:1.1,1.1)
+				-- (axis cs:0,1.1) -- (axis cs:0,0);
+			\draw (axis cs:0,0) -- (axis cs:1.1,1.1);
+			\draw (axis cs:0.025,0.750)
 				node[anchor=west,align=left]
 					{Melhor ajuste com o\\
 					modelo de Raoult};
-			\draw (axis cs:0.215,0.100)
+			\draw (axis cs:1.075,0.500)
 				node[anchor=east,align=right]
 					{Melhor ajuste\\
 					com os parâmetros\\
@@ -3670,13 +3671,13 @@ anteriormente.}.
 
 Isso pode ser visto na figura \ref{fig_test_train}; temos que para todos os conjuntos
 de dados avaliados nessa seção, fizemos um gráfico da diferença entre os desvios
-($\frac{1}{n}\sqrt{\sum_{i=1}^N\left(\phi_\text{exp}-\phi_\text{calc}\right)^2}$),
+($\sqrt{\frac{1}{n}\sum_{i=1}^N\left(\phi_\text{exp}-\phi_\text{calc}\right)^2}$),
 obtidos para o ajuste do modelo e para a aplicação do modelo com parâmetros
 provenientes dos dados de treino aos dados de teste, em função da diferença entre
 os desvios obtidos aplicando a Lei de Raoult e aplicando o modelo com esses
-parâmetros aos dados de teste. Observe que nenhum ponto está na zona hachurada, na
-figura, na qual os modelos com parâmetros obtidos para dados de treino seriam
-inferiores ao modelo de Raoult, no ajuste de dados de teste.
+parâmetros aos dados de teste. Observe que quase nenhum ponto está na zona
+hachurada, na figura, na qual os modelos com parâmetros obtidos para dados de
+treino seriam inferiores ao modelo de Raoult, no ajuste de dados de teste.
 
 Isso indica que os parâmetros obtidos para os modelos através das regressões são
 boas estimativas para os parâmetros reais, como desejado, e não apenas informações

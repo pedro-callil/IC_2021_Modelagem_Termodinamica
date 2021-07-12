@@ -6,6 +6,7 @@
 for model in virial norrish uniquac;
 do
 	echo "$model" model
+	(
 	echo test_minus_train,raoult_minus_train
 	for file in $(
 		for file in data/converted/*.csv; do
@@ -35,5 +36,6 @@ do
 			| tr '\n' ',' | sed -e 's/,$//g'
 		echo
 	done | awk -F ',' '{print sqrt(($2-$1)^2)","sqrt(($2-$3)^2)}'
+	) > doc/test_and_train_diff_"$model".csv
 done
 

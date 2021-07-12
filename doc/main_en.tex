@@ -106,13 +106,13 @@
 				\multicolumn{2}{c|}{Models}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
 			\multirow{5}*{\makecell[l]{Water,\\#1}} &
-				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#3$ &
-				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#4$%
+				$\sqrt{\frac{\sum\text{deviations}^2}{n}}=#3$ &
+				$\sqrt{\frac{\sum\text{deviations}^2}{n}}=#4$%
 					\\\hhline{~-~}
 			& UNIQUAC & $b_\text{#1}=#9$\\\hhline{~~-}
-			& $\frac{\sqrt{\sum\text{deviations}^2}}{n}=#5$ & Norrish\\
+			& $\sqrt{\frac{\sum\text{deviations}^2}{n}}=#5$ & Norrish\\
 			& $q_\text{water}=\ArgXI$ &
-				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#6$\\
+				$\sqrt{\frac{\sum\text{deviations}^2}{n}}=#6$\\
 			& $q_\text{#1}=\ArgXIII$ & $K_\text{#1}=\ArgX$%
 				\\\hhline{-~~}
 			$\bar{a_w}=#7$ & $u_\text{water}=\ArgXII$ & \\
@@ -174,17 +174,17 @@
 				\multicolumn{2}{c|}{Models}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
 			\multirow{7}*{\makecell[l]{Water,\\#1 and\\#2}} &
-				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#9$ &
-				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#7$%
+				$\sqrt{\frac{\sum\text{deviations}^2}{n}}=#9$ &
+				$\sqrt{\frac{\sum\text{deviations}^2}{n}}=#7$%
 					\\\hhline{~-~}
 			& UNIQUAC & $b_\text{#1}=\ArgX$\\
-			& $\frac{\sqrt{\sum\text{deviations}^2}}{n}=#8$ &
+			& $\sqrt{\frac{\sum\text{deviations}^2}{n}}=#8$ &
 				$b_\text{#2}=\ArgXI$\\
 			& $q_\text{water}=\ArgXV$ &
 				$c_\text{#1/#2}=\ArgXII$\\\hhline{~~-}
 			& $q_\text{#1}=\ArgXVII$ & Norrish \\
 			& $q_\text{#2}=\ArgXIX$ &
-				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#6$ \\
+				$\sqrt{\frac{\sum\text{deviations}^2}{n}}=#6$ \\
 			& $u_\text{water}=\ArgXVI$ & $K_\text{#1}=\ArgXIII$%
 				\\\hhline{-~~}
 			$\bar{a_w}=#4$ & $u_\text{#1}=\ArgXVIII$ &
@@ -233,11 +233,11 @@
 				\multicolumn{2}{c|}{Models}\\\hhline{~--}
 			& Raoult & Virial\\\hhline{-~~}
 			\multirow{10}*{\makecell[l]{Water,\\#1,\\#2 and\\\ArgXXVII}} &
-				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#9$ &
-				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#7$%
+				$\sqrt{\frac{\sum\text{deviations}^2}{n}}=#9$ &
+				$\sqrt{\frac{\sum\text{deviations}^2}{n}}=#7$%
 					\\\hhline{~-~}
 			& UNIQUAC & $b_\text{#1}=\ArgX$\\
-			& $\frac{\sqrt{\sum\text{deviations}^2}}{n}=#8$ &
+			& $\sqrt{\frac{\sum\text{deviations}^2}{n}}=#8$ &
 				$b_\text{#2}=\ArgXI$\\
 			& $q_\text{water}=\ArgXIX$ &
 				$b_\text{\ArgXXVII} = \ArgXIII$ \\
@@ -249,7 +249,7 @@
 				& $c_\text{\ArgXXVII/#2}=\ArgXV$\\\hhline{~~-}
 			& $u_\text{water}=\ArgXX$ & Norrish \\
 			& $u_\text{#1}=\ArgXXII$ &
-				$\frac{\sqrt{\sum\text{deviations}^2}}{n}=#6$ \\
+				$\sqrt{\frac{\sum\text{deviations}^2}{n}}=#6$ \\
 			& $u_\text{#2}=\ArgXXIV$ & $K_\text{#1}=\ArgXVI$%
 				\\\hhline{-~~}
 			$\bar{a_w}=#4$ & $u_\text{\ArgXXVII}=\ArgXXVI$ &
@@ -1321,10 +1321,10 @@ fitting a model of $N$ parameters to set of $n>N$ experimental data points.
 The algorithm was chosen due to its fast convergence to a solution, for reasonably
 small values of $N$, as they are in the examples analysed.
 One must observe that, for the exhibition of the fitting parameters and comparison
-of the deviations, the value actually being shown is the ratio between the square
-root of the function (so the value is dimensionally correct) and the number of data
-points (so the comparisons between different data series are fair); as $n>0 %
-\implies \frac{\partial}{\partial f}\frac{\sqrt{f}}{n} >0$, this scaling is not a
+of the deviations, the value actually being shown is the square root (so the value
+is dimensionally correct) of the ratio between cost function and number of
+data points (so the comparisons between different data series are fair); as $n>0 %
+\implies \frac{\partial}{\partial f}\sqrt{\frac{f}{n}} >0$, this scaling is not a
 problem, since the fitting evaluation parameters are monotonically dependent on
 the cost function.
 
@@ -1433,7 +1433,7 @@ experimental activity data than the osmotic coefficient models derived from them
 lie to the experimental osmotic coefficient data. The fit evaluation parameters are
 exhibited (not only for models that require least-squares fitting) at the table
 \ref{tab_mannitol_sucrose}, in which one can observe the advantage in the use of
-the scaled cost function ($\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+the scaled cost function ($\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 \phi_{\text{calc}})^2}$) as a fit evaluation parameter.
 
 \begin{figure}[h]
@@ -1585,14 +1585,14 @@ the scaled cost function ($\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
 	\caption{Indicators for a data set}
 	\label{tab_mannitol_sucrose}\\
 	\toprule
-	Model & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+	Model & $\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}$ &
 		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
 		\textnumero\ parameters\\
 	\midrule
 	\endfirsthead
 	\toprule
-	Model & $\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+	Model & $\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}$ &
 		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
 		\textnumero\ parameters\\\hline
@@ -1602,12 +1602,12 @@ the scaled cost function ($\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
 	\multicolumn{5}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.049057 & -25.947383 & 0.440301 & 0 \\
-	Caurie & 0.049952 & -26.940271 & 0.402607 & 0 \\
-	Zdanovskii & 0.049115 & -26.012114 & 0.423267 & 0 \\
-	Norrish & 0.024635 & -5.987272 & 0.814903 & 2\\
-	Virial & 0.006496 & 0.514218 & 0.975995 & 3\\
-	UNIQUAC & 0.006476 & 0.517119 & 0.977335 & 6\\\hline
+	Raoult & 0.422001 & -25.947383 & 0.440301 & 0 \\
+	Caurie & 0.429705 & -26.940271 & 0.402607 & 0 \\
+	Zdanovskii & 0.422505 & -26.012114 & 0.423267 & 0 \\
+	Norrish & 0.211922 & -5.987272 & 0.814903 & 2\\
+	Virial & 0.055878 & 0.514218 & 0.975995 & 3\\
+	UNIQUAC & 0.055712 & 0.517119 & 0.977335 & 6\\\hline
 \end{tabularx}
 
 \section{Required number of iterations and computer time}
@@ -1771,7 +1771,7 @@ majority of data sets (a few hundredths of seconds).
 
 One may visualize the behavior of the (scaled) cost function as the iterative
 process runs, for the three models that require it, in figure \ref{fig_obj_iter},
-a plot of the scaled cost function at each step of the process to obtain the fit
+a plot of a scaled cost function at each step of the process to obtain the fit
 shown in figure \ref{fig_mannitol_sucrose}. One may observe, again, the smaller
 computer time required and smaller cost function associated with the virial
 model, even for data originating from a ternary system.
@@ -1780,7 +1780,7 @@ model, even for data originating from a ternary system.
 	\centering
 	\begin{tikzpicture}
 		\begin{semilogyaxis} [
-			ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2}$},
 			xlabel={Iteração},
 			xmax=27.5, xmin=-0.5,
@@ -1815,18 +1815,18 @@ model, even for data originating from a ternary system.
 			table [x={iter},y={cost},col sep=comma]
 				{iter_uniquac.csv};
 			\addlegendentry{UNIQUAC};
-			\draw (axis cs: 6,0.0065) -- (axis cs: 10,0.65) -- %
-				(axis cs: 18,0.65);
-			\fill[pblue] (axis cs: 6,0.0065) circle (0.6mm);
-			\draw (axis cs: 8,0.0246) -- (axis cs: 10,0.65);
-			\fill[pverybrightblue] (axis cs: 8,0.0246) circle (0.6mm);
-			\draw (axis cs: 12,0.03) -- (axis cs: 10,0.65);
+			\draw (axis cs: 6,0.0559) -- (axis cs: 10,5.59) -- %
+				(axis cs: 18,5.59);
+			\fill[pblue] (axis cs: 6,0.0559) circle (0.6mm);
+			\draw (axis cs: 8,0.212) -- (axis cs: 10,5.59);
+			\fill[pverybrightblue] (axis cs: 8,0.212) circle (0.6mm);
+			\draw (axis cs: 12,0.2) -- (axis cs: 10,5.59);
 			\draw[-{Latex[length=2mm]}]
-				(axis cs: 12,0.03) -- (axis cs: 27,0.03);
-			\draw (axis cs: 12,0.03) node [anchor=south west]%
+				(axis cs: 12,0.2) -- (axis cs: 27,0.2);
+			\draw (axis cs: 12,0.2) node [anchor=south west]%
 				{\tiny{179 iterations for convergence}};
-			\draw (axis cs: 14,0.65) node [anchor=south]%
-				{\tiny{Las iteration}};
+			\draw (axis cs: 14,5.59) node [anchor=south]%
+				{\tiny{Last iteration}};
 		\end{semilogyaxis}
 	\end{tikzpicture}
 	\caption{Scaled cost function for each step of the iterative process}
@@ -1933,26 +1933,25 @@ models are less precise.\footnote{%
 	that, as commented before, grow with the dilution.
 }
 
-The models behaved differently in each group of substances; while the virial model
-exhibited the smallest values (in average) of the scaled cost function for
-aminoacid solutions, the UNIQUAC model was the best for carbohydrate systems. This
-may be observed in the table \ref{tab_model_amino_carb}, that presents the average
-of the scaled cost functions (weighted with the size of each data set) of the
-fitting of each model to each bynary data series.
+The models behaved differently in each group of substances; while the virial and UNIQUAC models yielded similar values for aminoacid solutions, the UNIQUAC model was the
+best, by far, for carbohydrate systems. This may be observed in the table
+\ref{tab_model_amino_carb}, that presents the average of the scaled cost functions
+(weighted with the size of each data set) of the fitting of each model to each
+bynary data series.
 
 \begin{tabularx}{\textwidth}{ X r r }
 	\caption{Model performance for different substances}
 	\label{tab_model_amino_carb}\\
 	\toprule
 	\multirow{2}*{Model} & \multicolumn{2}{c}{%
-			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2}_\text{average}$} \\
 		& Aminoacid solutions & Carbohydrate solutions \\
 	\midrule
 	\endfirsthead
 	\toprule
 	\multirow{2}*{Model} & \multicolumn{2}{c}{%
-			$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2}_\text{average}$} \\
 		& Aminoacid solutions & Carbohydrate solutions \\\hline
 	\midrule
@@ -1961,10 +1960,10 @@ fitting of each model to each bynary data series.
 	\multicolumn{3}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.04202 & 0.16505 \\
-	Norrish & 0.02688 & 0.15668 \\
-	Virial & 0.01347 & 0.08805 \\
-	UNIQUAC & 0.01556 & 0.06193 \\\hline
+	Raoult & 0.153428 & 0.479665 \\
+	Norrish & 0.093486 & 0.448270 \\
+	Virial & 0.049592 & 0.247174 \\
+	UNIQUAC & 0.045613 & 0.197069 \\\hline
 \end{tabularx}
 
 Furthermore, one may also observe that the performance of Norrish's model,
@@ -2530,7 +2529,7 @@ figure \ref{fig_dilution_all}.
 	\centering
 	\begin{tikzpicture}
 		\begin{semilogyaxis} [
-			ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+			ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 			\phi_{\text{calc}})^2}$},
 			xlabel={$x_w$},
 			legend pos=south west,
@@ -2822,14 +2821,14 @@ increases, but the trend is not statistically significant.
 	\begin{subfigure}{0.5\textwidth}{%
 		\begin{tikzpicture}[scale=0.75]
 			\begin{axis} [
-				ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(%
+				ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(%
 					\phi_{\text{exp}}-%
 				\phi_{\text{calc}})^2}$},
 				xlabel={Pressure (kPa)},
 				xlabel near ticks,
 				ylabel near ticks,
 				scaled x ticks=false,
-				ymin=0.1,ymax=0.8,
+				ymin=0.3,ymax=1.5,
 			]
 				\addplot [
 					mark=*,
@@ -2847,8 +2846,8 @@ increases, but the trend is not statistically significant.
 					samples=3,
 					domain=20:100,
 					ultra thick,
-				] plot {-0.00023889*x+0.288077};
-				\addlegendentry{$R^2=0.0064$};
+				] plot {-0.000585*x+0.7056};
+				\addlegendentry{$R^2=0.0065$};
 				\addplot [
 					mark=*,
 					color=black,
@@ -2865,7 +2864,7 @@ increases, but the trend is not statistically significant.
 					samples=3,
 					domain=20:100,
 					ultra thick,
-				] plot {-0.000519161*x+0.43544};
+				] plot {-0.001272*x+1.0666};
 				\addlegendentry{$R^2=0.0204$};
 			\end{axis}
 		\end{tikzpicture}}
@@ -2876,14 +2875,14 @@ increases, but the trend is not statistically significant.
 	\begin{subfigure}{0.5\textwidth}{%
 		\begin{tikzpicture}[scale=0.75]
 			\begin{axis} [
-				ylabel={$\frac{1}{n}\sqrt{\sum_{i=1}^N(%
+				ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(%
 					\phi_{\text{exp}}-%
 				\phi_{\text{calc}})^2}$},
 				xlabel={Pressure (kPa)},
 				xlabel near ticks,
 				ylabel near ticks,
 				scaled x ticks=false,
-				ymin=0.1,ymax=0.8,
+				ymin=0.5,ymax=1.8,
 			]
 				\addplot [
 					mark=*,
@@ -2901,7 +2900,7 @@ increases, but the trend is not statistically significant.
 					samples=3,
 					domain=20:100,
 					ultra thick,
-				] plot {-0.0014502*x+0.413874};
+				] plot {-0.00355*x+1.0137};
 				\addlegendentry{$R^2=0.3086$};
 				\addplot [
 					mark=*,
@@ -2919,7 +2918,7 @@ increases, but the trend is not statistically significant.
 					samples=3,
 					domain=20:100,
 					ultra thick,
-				] plot {-0.002172*x+0.6495};
+				] plot {-0.005321*x+1.5911};
 				\addlegendentry{$R^2=0.4052$};
 			\end{axis}
 		\end{tikzpicture}}
@@ -2956,7 +2955,7 @@ of two auxiliary data series not always available -- Zdanovskii).
 	\label{tab_comp_mono}\\
 	\toprule
 	\multirow{2}*{Model} & \multicolumn{3}{c}%
-		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		{$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{average}$}\\
 		& Binary systems & Ternary systems &%
 			Quaternary systems \\
@@ -2964,7 +2963,7 @@ of two auxiliary data series not always available -- Zdanovskii).
 	\endfirsthead
 	\toprule
 	\multirow{2}*{Model} & \multicolumn{3}{c}%
-		{$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		{$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{average}$}\\
 		& Binary systems & Ternary systems &%
 			Quaternary systems \\\hline
@@ -2974,10 +2973,10 @@ of two auxiliary data series not always available -- Zdanovskii).
 	\multicolumn{4}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.16505 & 0.11053 & 0.11332 \\
-	Norrish & 0.15669 & 0.04901 & 0.09413 \\
-	Virial & 0.08805 & 0.01316 & 0.04453 \\
-	UNIQUAC & 0.06193 & 0.01324 & 0.08449 \\\hline
+	Raoult & 0.479665 & 0.591365 & 0.820056 \\
+	Norrish & 0.448270 & 0.274971 & 0.654951 \\
+	Virial & 0.247174 & 0.076962 & 0.310939 \\
+	UNIQUAC & 0.197069 & 0.073781 & 0.550024 \\\hline
 \end{tabularx}
 
 \subsection{Zdanovskii's relation}
@@ -3004,13 +3003,13 @@ that it may behave reasonably in certain conditions.
 	\label{tab_zdan_multi}\\
 	\toprule
 	Model & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{average}$\\
 	\midrule
 	\endfirsthead
 	\toprule
 	Model & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{average}$\\\hline
 	\midrule
 	\endhead
@@ -3018,11 +3017,11 @@ that it may behave reasonably in certain conditions.
 	\multicolumn{2}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.09994 \\
-	Zdanovskii & 0.14775 \\
-	Norrish & 0.04597 \\
-	Virial & 0.01373 \\
-	UNIQUAC & 0.04596 \\\hline
+	Raoult & 0.635824 \\
+	Zdanovskii & 0.911042 \\
+	Norrish & 0.295073 \\
+	Virial & 0.087813 \\
+	UNIQUAC & 0.076432 \\\hline
 \end{tabularx}
 
 \subsection{Caurie's model}
@@ -3037,13 +3036,13 @@ model). The data are in table \ref{tab_caurie_multi}.
 	\label{tab_caurie_multi}\\
 	\toprule
 	Model & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{average}$\\
 	\midrule
 	\endfirsthead
 	\toprule
 	Model & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{average}$\\\hline
 	\midrule
 	\endhead
@@ -3051,11 +3050,11 @@ model). The data are in table \ref{tab_caurie_multi}.
 	\multicolumn{2}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
-	Raoult & 0.10132 \\
-	Caurie & 0.09701 \\
-	Norrish & 0.09346 \\
-	Virial & 0.03880 \\
-	UNIQUAC & 0.07771 \\\hline
+	Raoult & 0.668330 \\
+	Caurie & 0.654477 \\
+	Norrish & 0.600739 \\
+	Virial & 0.258034 \\
+	UNIQUAC & 0.488533 \\\hline
 \end{tabularx}
 
 \section{Observations about the results obtained}
@@ -3505,13 +3504,13 @@ values of the cost function are obtained through both virial models.
 	\label{tab_vir_simpl}\\
 	\toprule
 	Model & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{average}$\\
 	\midrule
 	\endfirsthead
 	\toprule
 	Model & %
-		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
 		\phi_{\text{calc}})^2}_\text{average}$\\\hline
 	\midrule
 	\endhead
@@ -3519,11 +3518,11 @@ values of the cost function are obtained through both virial models.
 	\multicolumn{2}{r}{\footnotesize(Continue in the following page)}
 	\endfoot
 	\endlastfoot
-	Raoult's & 0.11653 \\
-	Norrish's & 0.07817 \\
-	UNIQUAC & 0.05141 \\
-	Virial (simplified) & 0.03631 \\
-	Virial (complete) & 0.03219 \\\hline
+	Raoult's & 0.765376 \\
+	Norrish's & 0.516392 \\
+	UNIQUAC & 0.344529 \\
+	Virial (simplified) & 0.243334 \\
+	Virial (complete) & 0.215693 \\\hline
 \end{tabularx}
 
 \section{Predictive capabilities of the models}
@@ -3568,7 +3567,7 @@ which Norrish's model converges to Raoult's, as previously explained.}
 				scaled y ticks=false,
 				legend pos=north east,
 				xmin=0,ymin=0,
-				xmax=0.22,ymax=0.22,
+				xmax=1.1,ymax=1.1,
 			]
 			\addplot [
 				color=black,
@@ -3607,13 +3606,13 @@ which Norrish's model converges to Raoult's, as previously explained.}
 				color=lightgray,
 				opacity=0.5,
 			]
-				(axis cs:0,0) -- (axis cs:0.22,0.22)
-				-- (axis cs:0,0.22) -- (axis cs:0,0);
-			\draw (axis cs:0,0) -- (axis cs:0.22,0.22);
-			\draw (axis cs:0.005,0.150)
+				(axis cs:0,0) -- (axis cs:1.1,1.1)
+				-- (axis cs:0,1.1) -- (axis cs:0,0);
+			\draw (axis cs:0,0) -- (axis cs:1.1,1.1);
+			\draw (axis cs:0.025,0.750)
 				node[anchor=west,align=left]
 					{Better fit\\with Raoult's law};
-			\draw (axis cs:0.215,0.100)
+			\draw (axis cs:1.075,0.500)
 				node[anchor=east,align=right]
 					{Better fit with\\
 					parameters obtained\\
@@ -3630,7 +3629,7 @@ the scaled cost functions obtained from the model with adjustable parameters
 from fitting over the training data and from fitting data as a function of the
 differences between the scaled cost functions obtained from Raoult's law
 application and from the application of the model with adjustable parameters
-from the training data, over the testing data. It's easily seen that no points
+from the training data, over the testing data. It's easily seen that almost no points
 fall within the dark area, in which Raoult's law is a better estimator for water
 activity than the model generated from the parameters obtained from the training
 data.

@@ -45,7 +45,7 @@ case "$lang" in
 		;;
 	"pt")
 		export alanine="alanina"
-		export aminobutyric="\ác. $\\alpha\$-aminobutírico"
+		export aminobutyric="ác. $\\alpha\$-aminobutírico"
 		export arginine="arginina"
 		export glutamic="ácido glutâmico"
 		export glycine="glicina"

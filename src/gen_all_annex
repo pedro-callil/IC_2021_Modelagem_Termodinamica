@@ -1,0 +1,564 @@
+#! /usr/bin/env bash
+
+lang="$1"
+paper="$2"
+
+case "$lang" in
+	"en")
+		case "$paper" in
+			"bonner")
+				./src/gen_latex_table \
+					data/converted/bonner_82_arginine.csv \
+					arginine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/bonner_82_lysine.csv \
+					lysine
+				;;
+			"ellerton")
+				./src/gen_latex_table \
+					data/converted/ellerton_64_alpha_amino_n_butyric_acid.csv \
+					"\$\\alpha\$-aminobutyric ac."
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/ellerton_64_glycine.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/ellerton_64_glycylglycine.csv \
+					glycylglycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/ellerton_64_lactamide.csv \
+					lactamide
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/ellerton_64_valine.csv \
+					valine
+				;;
+			"himanshu")
+				./src/gen_latex_table \
+					data/converted/himanshu_05_dl_alanine.csv \
+					alanine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/himanshu_05_dl_methionine.csv \
+					methionine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/himanshu_05_dl_valine.csv \
+					valine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/himanshu_05_glycine.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/himanshu_05_hydroxy_l_proline.csv \
+					hidroxyproline
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/himanshu_05_l_isoleucine.csv \
+					isoleucine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/himanshu_05_l_proline.csv \
+					proline
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/himanshu_05_l_serine.csv \
+					serine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/himanshu_05_l_threonine.csv \
+					threonine
+
+				;;
+			"kuramochi")
+				./src/gen_latex_table \
+					data/converted/kuramochi_97_glycine.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/kuramochi_97_l_alanine.csv \
+					alanine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/kuramochi_97_l_serine.csv \
+					serine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/kuramochi_97_l_valine.csv \
+					valine
+				;;
+			"ninni")
+				./src/gen_latex_table \
+					data/converted/ninni_01_dl_alanine.csv \
+					alanine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/ninni_01_glycine.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/ninni_01_l_arginine.csv \
+					arginine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/ninni_01_l_proline.csv \
+					proline
+				;;
+			"pinho")
+				./src/gen_latex_table \
+					data/converted/pinho_08_alanine.csv \
+					alanine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/pinho_08_glycine.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/pinho_08_serine.csv \
+					serine
+				;;
+			"romero")
+				echo \\paragraph{288.15}
+
+				echo; echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_glycine_288_15_K.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_dl_alpha_aminobutyric_acid_288_15_K.csv \
+					"\$\\alpha\$-aminobutyric ac."
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_dl_alanine_288_15_K.csv \
+					alanine
+
+				echo
+
+				echo \\FloatBarrier
+
+				echo
+
+				echo \\paragraph{293.15}
+
+				echo; echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_glycine_293_15_K.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_dl_alpha_aminobutyric_acid_293_15_K.csv \
+					"\$\\alpha\$-aminobutyric ac."
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_dl_alanine_293_15_K.csv \
+					alanine
+
+				echo
+
+				echo \\FloatBarrier
+
+				echo
+
+				echo \\paragraph{298.15}
+
+				echo; echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_glycine_298_15_K.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_dl_alpha_aminobutyric_acid_298_15_K.csv \
+					"\$\\alpha\$-aminobutyric ac."
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_dl_alanine_298_15_K.csv \
+					alanine
+
+				echo
+
+				echo \\FloatBarrier
+
+				echo
+
+				echo \\paragraph{303.15}
+
+				echo; echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_glycine_303_15_K.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_dl_alpha_aminobutyric_acid_303_15_K.csv \
+					"\$\\alpha\$-aminobutyric ac."
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/romero_06_dl_alanine_303_15_K.csv \
+					alanine
+
+				echo
+
+				echo \\FloatBarrier
+
+				echo
+
+				;;
+
+			"tsurko")
+
+				echo \\paragraph{298.15K}
+
+				echo; echo
+
+				./src/gen_latex_table \
+					data/converted/tsurko_07_glutamic_acid_298_15.csv \
+					glutamic acid
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/tsurko_07_glycine_298_15.csv \
+					glycine
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/tsurko_07_histidine_298_15.csv \
+					histidine
+
+				echo
+
+				echo \\FloatBarrier
+
+				echo
+
+				echo \\paragraph{310.15K}
+
+
+				echo; echo
+
+				./src/gen_latex_table \
+					data/converted/tsurko_07_glutamic_acid_310_15.csv \
+					glutamic acid
+
+				echo
+
+				./src/gen_latex_table \
+					data/converted/tsurko_07_glycine_310_15.csv \
+					glycine
+				echo
+				./src/gen_latex_table \
+					data/converted/tsurko_07_histidine_310_15.csv \
+					histidine
+				echo
+				echo \\FloatBarrier
+				echo
+				;;
+			"bhandari")
+				echo
+				./src/gen_latex_table \
+					data/converted/bhandari_03_glucose.csv \
+					glucose
+				echo
+				;;
+			"chen")
+				./src/gen_latex_table \
+					data/converted/chen_87_fructose.csv \
+					fructose
+				echo
+				./src/gen_latex_table \
+					data/converted/chen_87_lactose.csv \
+					lactose
+				echo
+				./src/gen_latex_table \
+					data/converted/chen_87_sucrose.csv \
+					sucrose
+				echo
+				;;
+			"cooke")
+				./src/gen_latex_table \
+					data/converted/cooke_02_erythritol.csv \
+					erythritol
+				echo
+				./src/gen_latex_table \
+					data/converted/cooke_02_fructose.csv \
+					fructose
+				echo
+				./src/gen_latex_table \
+					data/converted/cooke_02_raffinose.csv \
+					raffinose
+				echo
+				./src/gen_latex_table \
+					data/converted/cooke_02_sorbitol.csv \
+					sorbitol
+				echo
+				./src/gen_latex_table \
+					data/converted/cooke_02_sucrose.csv \
+					sucrose
+				echo
+				./src/gen_latex_table \
+					data/converted/cooke_02_xylitol.csv \
+					xylitol
+				echo
+				;;
+			"ebrahimi")
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_arabinose.csv \
+					arabinose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_fructose.csv \
+					fructose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_galactose.csv \
+					galactose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_glucose.csv \
+					glucose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_lactose_monohydrate.csv \
+					lactose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_maltitol.csv \
+					maltitol
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_maltose_monohydrate.csv \
+					maltose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_mannose.csv \
+					mannose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_raffinose_pentahydrate.csv \
+					raffinose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_ribose.csv \
+					ribose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_sorbitol.csv \
+					sorbitol
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_sucrose.csv \
+					sucrose
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_xylitol.csv \
+					xylitol
+				echo
+				./src/gen_latex_table \
+					data/converted/ebrahimi_16_xylose.csv \
+					xylose
+				echo
+				;;
+			"kiyosawa")
+				echo
+				./src/gen_latex_table \
+					data/converted/kiyosawa_92_1_2_3_4_butanetetrol.csv \
+					butanetetrol
+				echo
+				./src/gen_latex_table \
+					data/converted/kiyosawa_92_1_2_3_propanetriol.csv \
+					propanetriol
+				echo
+				./src/gen_latex_table \
+					data/converted/kiyosawa_92_1_2_ethanediol.csv \
+					ethanediol
+				echo
+				./src/gen_latex_table \
+					data/converted/kiyosawa_92_d_mannitol.csv \
+					mannitol
+				echo
+				./src/gen_latex_table \
+					data/converted/kiyosawa_92_xylitol.csv \
+					xylitol
+				;;
+			"maximo")
+				echo \\paragraph{Fructose}
+				echo \\label{sec_fructose}
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_20_0_kPa.csv \
+					fructose/20.0kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_26_7_kPa.csv \
+					fructose/26.7kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_33_3_kPa.csv \
+					fructose/33.3kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_40_0_kPa.csv \
+					fructose/40.0kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_46_7_kPa.csv \
+					fructose/46.7kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_53_3_kPa.csv \
+					fructose/53.3kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_60_0_kPa.csv \
+					fructose/60.0kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_66_7_kPa.csv \
+					fructose/66.7kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_73_3_kPa.csv \
+					fructose/73.3kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_80_0_kPa.csv \
+					fructose/80.0kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_86_7_kPa.csv \
+					fructose/86.7kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose_93_6_kPa.csv \
+					fructose/93.6kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_fructose.csv \
+					"fructose/P\$_\\text{atm}\$"
+				echo \\FloatBarrier
+				echo
+				echo \\paragraph{Glucose}
+				echo \\label{sec_glucose}
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_20_0_kPa.csv \
+					glucose/20.0kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_26_7_kPa.csv \
+					glucose/26.7kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_33_3_kPa.csv \
+					glucose/33.3kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_40_0_kPa.csv \
+					glucose/40.0kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_46_7_kPa.csv \
+					glucose/46.7kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_53_3_kPa.csv \
+					glucose/53.3kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_60_0_kPa.csv \
+					glucose/60.0kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_66_7_kPa.csv \
+					glucose/66.7kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_73_3_kPa.csv \
+					glucose/73.3kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_80_0_kPa.csv \
+					glucose/80.0kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_86_7_kPa.csv \
+					glucose/86.7kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose_93_6_kPa.csv \
+					glucose/93.6kPa
+				echo
+				./src/gen_latex_table \
+					data/converted/maximo_10_d_glucose.csv \
+					"glucose/P\$_\\text{atm}\$"
+				echo \\FloatBarrier
+				;;
+		esac
+esac

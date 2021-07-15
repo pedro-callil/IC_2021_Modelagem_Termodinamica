@@ -69,6 +69,8 @@ LSOUT		= main_pt.pdf
 LSOUTEN		= main_en.pdf
 RFILE		= report/relatorioIniciacaoCientificaAtividadeDaAgua.pdf
 RFILEEN		= report/undergraduateResearchProjectReportWaterActivity.pdf
+RFILEME		= report/relatorioEstagioModuloDois.pdf
+RFILECA		= report/cartaApresentacaoSeparada.pdf
 
 .PHONY: all pt en bib bibpt biben clean
 
@@ -105,6 +107,18 @@ biben: $(LSRCEN) $(LSRCDEPS) $(BSRCDEPS)
 			$(LC) $(LCFLAGS) $(LSRCEN); \
 				if [ ! -d "./report" ]; then mkdir report; fi; \
 				cp $(LSOUTEN) $(RFILEEN)
+
+internship: $(LSRC) $(LSRCDEPS) $(BSRCDEPS)
+	sed -i 's/%\\input{carta/\\input{carta/g' $(LSRC)
+	$(LC) $(LCFLAGS) $(LSRC); \
+		$(BC) $(BSRC); \
+			$(LC) $(LCFLAGS) $(LSRC); \
+			$(LC) $(LCFLAGS) $(LSRC); \
+			$(LC) $(LCFLAGS) $(LSRC); \
+				if [ ! -d "./report" ]; then mkdir report; fi; \
+				cp $(LSOUT) $(RFILEME)
+	sed -i 's/\\input{carta/%\\input{carta/g' $(LSRC)
+	pdfseparate -f 5 -l 5 $(RFILEME) $(RFILECA)
 
 clean:
 	rm -f main_pt-* \

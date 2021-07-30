@@ -109,7 +109,8 @@ biben: $(LSRCEN) $(LSRCDEPS) $(BSRCDEPS)
 				cp $(LSOUTEN) $(RFILEEN)
 
 internship: $(LSRC) $(LSRCDEPS) $(BSRCDEPS)
-	sed -i 's/%\\input{carta/\\input{carta/g' $(LSRC)
+	sed -i 's/%\\input{/\\input{/g' $(LSRC)
+	sed -i 's/}%IC_GOES_HERE/ - Iniciação Científica}/g' $(LSRC)
 	sed -i 's/Relatório Final de Iniciação Científica\/Tecnológica/Relatório Quadrimestral do Segundo Módulo de Estágio/g' $(LSRC)
 	$(LC) $(LCFLAGS) $(LSRC); \
 		$(BC) $(BSRC); \
@@ -118,7 +119,8 @@ internship: $(LSRC) $(LSRCDEPS) $(BSRCDEPS)
 			$(LC) $(LCFLAGS) $(LSRC); \
 				if [ ! -d "./report" ]; then mkdir report; fi; \
 				cp $(LSOUT) $(RFILEME)
-	sed -i 's/\\input{carta/%\\input{carta/g' $(LSRC)
+	sed -i 's/\\input{/%\\input{/g' $(LSRC)
+	sed -i 's/ - Iniciação Científica}/}%IC_GOES_HERE/g' $(LSRC)
 	sed -i 's/Relatório Quadrimestral do Segundo Módulo de Estágio/Relatório Final de Iniciação Científica\/Tecnológica/g' $(LSRC)
 	pdfseparate -f 5 -l 5 $(RFILEME) $(RFILECA)
 

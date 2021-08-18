@@ -1,0 +1,111 @@
+\part{Computational tools}
+
+\chapter{Choice of computational tools}
+
+The least-squares method was utilized for the nonlinear fitting of the models
+to the experimental data sets. This was achieved with a program in the \texttt{C}
+programming language, utilizing the functions and routines of the GNU Scientific
+Library (GSL), a library for numerical computations under the GNU General Public
+License \cite{galassi_book}. The choice of this library for nonlinear optimizations
+was due to the ease of access of the intermediate steps in the iterative calculations
+of the desired parameters.
+
+\chapter{Property conversion}
+
+Unfortunately, not all data sets utilized were available as series of $a_w$ values
+as a function of composition; as seen in the tables \ref{tab_dados_pontos} and
+\ref{tab_dados_multi_pontos}, one must, initially, convert all data to the same
+basis, before supplying the data to the program responsible for fitting. The basis
+of choice was simply water activity as a function of molar fraction, with all
+conversion of the activity data to osmotic coefficient data being internal to the
+fitting program.
+
+\chapter{Algorithms and cost functions}
+
+The Levenberg-Marquardt algorithm with geodesic acceleration was used to solve
+the least-squares problem as shown in the equation \ref{eq:min_quad_lev},
+fitting a model of $N$ parameters to set of $n>N$ experimental data points.
+The algorithm was chosen due to its fast convergence to a solution, for reasonably
+small values of $N$, as they are in the examples analysed.
+One must observe that, for the exhibition of the fitting parameters and comparison
+of the deviations, the value actually being shown is the square root (so the value
+is dimensionally correct) of the ratio between cost function and number of
+data points (so the comparisons between different data series are fair); as $n>0 %
+\implies \frac{\partial}{\partial f}\sqrt{\frac{f}{n}} >0$, this scaling is not a
+problem, since the fitting evaluation parameters are monotonically dependent on
+the cost function.
+
+\begin{equation}
+	\label{eq:min_quad_lev}
+	\minimize_{(A_j^*)_{j \in \{1,2,\ldots,N\}} \in \mathbb{R}^N}%
+	\left(\sum_{k \in \{1,2,\ldots,K\}}\left[\phi^k - \Phi((A^*_j)_{j%
+	\in \{1, 2, \ldots, N\}}, (x^k_i)_\text{$i$ componente},%
+	T^k, P^k)\right]^2\right)
+\end{equation}
+
+Clearly, the function $\Phi$ depends on the model to be fitted, ranging from simple
+expressions as the one derived from Norrish's equation, to relatively complex
+ones, as the one derived from the UNIQUAC model. Besides, the initial values for
+the iterative process were obtained through values registered in the literature for
+similar substances.
+
+For a few data sets, the property supplied was the composition of a binary mixture
+in osmotic equilibrium with the solution of interest. In this situation, a high
+degree polynomial was fitted through a reference data series, obtaining values of
+water activity for analysis.
+
+The reference substances were sodium chloride (to which the reference data were
+obtained from Scatchard\footnote{\cite{scatchard1938}}) and sucrose (to which
+the reference data were obtained from Stokes \& Robinson\footnote{\cite{%
+stokes1961}}).
+
+Apart from the cost function above, one may also be interested in other fitting
+evaluation parameters, such as the determination coefficient $R^2$, adjusted
+to account for the amount of parameters $N$ and the amount of data points $n$,
+obtaining the adjusted coefficient of determination $\bar{R^2}$.
+
+\begin{equation}
+	\bar{R^2} = 1 - \cfrac{\left( 1 - R^2 \right) \left( n - 1 \right)}
+		{n - N - 1}
+\end{equation}
+
+One of the main problems in the optimization of the models, beyond the previously
+listed ones, lies on the big values of $\sigma_\phi$, compared to the values of
+$\sigma_{x_w}$ and $\sigma_{a_w}$. Even if one assumes the activity measurements as
+greatest source of uncertainty (\textit{e.g} $\sigma_{a_w} \gg \sigma_{x_w}$), the
+uncertainty in the osmotic coefficient calculations goes to infinity as $x_w$
+approaches 1.
+
+\chapter{Code and data}
+
+All the code developed and all the data utilized are available at the project
+\href{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}{repository}
+\footnote{Available at
+	\url{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}.}
+in which are available more details about the implementation of each model and
+compilation, installation and execution of each binary.
+
+If one is interested in verifying the source code and the executables, one needs
+only to clone the repository and compile the program. To do this, are required
+git, GCC, the GSL and the numerical libraries BLAS/CBLAS.
+
+\begin{verbatim}
+$ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
+$ cd IC_2021_Modelagem_Termodinamica
+$ make # Desnecessário caso o interesse seja pelos dados
+\end{verbatim}
+
+If the interest is restricted to the data utilized, they can also be obtained,
+simply cloning the repository:
+
+\begin{verbatim}
+$ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
+$ cd IC_2021_Modelagem_Termodinamica/data
+\end{verbatim}
+
+\section{License}
+
+As the use of the GNU Scientific Library requires, the source code is available
+under the GNU General Public License, 3\textsuperscript{rd} version, as the
+library itself is.
+

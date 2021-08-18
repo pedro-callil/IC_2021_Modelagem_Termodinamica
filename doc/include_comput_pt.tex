@@ -1,0 +1,114 @@
+\part{Ferramentas computacionais}
+
+\chapter{Escolha das ferramentas}
+
+Foi utilizado o método dos mínimos quadrados para o ajuste não-linear dos
+modelos aos dados obtidos. Para isso, foi escrito programa em linguagem
+\texttt{C}, de modo a utilizar as rotinas fornecidas pela biblioteca
+\textit{GNU Scientific Library} \cite{galassi_book} para otimização não-linear.
+A escolha dessa biblioteca em específico se deu devido ao fácil acesso aos
+passos intermediários dos processos iterativos utilizados para obter os
+parâmetros desejados.
+
+\chapter{Conversão de propriedades}
+
+Infelizmente, nem todos os dados utilizados estão disponíveis nas mesmas
+propriedades; como visto nas tabelas \ref{tab_dados_pontos} e
+\ref{tab_dados_multi_pontos}, é necessário inicialmente converter todos os dados
+para a mesma base. Mesmo que o programa necessite dos dados de coeficiente
+osmótico para a regressão, todos os dados são alimentados ao programa na forma
+de dados de atividade da água e frações molares, sendo a conversão dos valores de
+$a_w$ em valores de $\phi$ puramente interna.
+
+\chapter{Algoritmos e funções-objetivo}
+
+Foi utilizado o algoritmo de Levenberg-Marquardt com aceleração geodésica para a
+solução do problema de mínimos quadrados para um conjunto de $n$ dados e $N$
+parâmetros dado pela expressão \ref{eq:min_quad_lev}.
+Esse algoritmo foi escolhido pois converge de forma rápida para sistemas com
+uma quantidade de parâmetros razoável, como é o caso aqui (número de parâmetros
+$N$, para minimizar a função objetivo, menor que uma dezena).
+Perceba que para a apresentação dos dados e avaliação do ajuste, foi calculada a
+raiz (de modo a tornar o valor dimensionalmente correto) da razão entre o valor da
+função e o número de dados do ajuste (para possibilitar a comparação entre
+diferentes séries de dados); como
+$n>0 \implies \frac{\partial}{\partial f}\sqrt{\frac{f}{n}} >0$, temos que os
+parâmetros de ajuste dependem monotonicamente da função objetivo, sendo, portanto,
+válidos.
+
+\begin{equation}
+	\label{eq:min_quad_lev}
+	\minimize_{(A_j^*)_{j \in \{1,2,\ldots,N\}} \in \mathbb{R}^N}%
+	\left(\sum_{k \in \{1,2,\ldots,K\}}\left[\phi^k - \Phi((A^*_j)_{j%
+	\in \{1, 2, \ldots, N\}}, (x^k_i)_\text{$i$ componente},%
+	T^k, P^k)\right]^2\right)
+\end{equation}
+
+Claramente, a forma da função $\Phi$ depende do modelo a ser utilizado, variando
+entre expressões simples como a obtida a partir da equação de Norrish, a
+expressões significantemente mais complexas, como a obtida a partir de modelos
+como UNIQUAC. Além disso, os valores iniciais para o processo iterativo serão
+obtidos a partir de consulta à literatura para obtenção de dados já obtidos para
+substâncias semelhantes.
+
+Para alguns conjuntos de dados, foram informados dados de composição de duas
+soluções, com a mesmo valor de $a_w$. Nesse caso, foi ajustado um polinômio
+de grau alto a uma série de dados de referência, e foram, dessa forma, obtidos
+valores de atividade para comparação.
+
+As substâncias de referência foram NaCl (cuja curva de ajuste foi obtida a
+partir de dados de Scatchard\footnote{\cite{scatchard1938}}) e sacarose (cuja
+curva de ajuste foi obtida a partir de dados de Stokes \& Robinson\footnote{%
+\cite{stokes1961}}).
+
+Além da função objetivo explicitada acima, também é interessante avaliar o
+comportamento e utilidade do coeficiente de determinação $R^2$, ajustado para
+considerarmos a quantidade de parâmetros $N$ e a quantidade de dados $n$, como
+parâmetro de ajuste.
+
+\begin{equation}
+	\bar{R^2} = 1 - \cfrac{\left( 1 - R^2 \right) \left( n - 1 \right)}
+		{n - N - 1}
+\end{equation}
+
+O principal problema para a otimização dos modelos é, além dos problemas
+intrínsecos aos modelos, como já discutido, a enorme imprecisão em
+$\sigma_\phi$ obtida ao se calcular o coeficiente osmótico, frente ao erro
+$\sigma_{a_w}$ e $\sigma_{x_w}$ das medições. Mesmo se assumindo que a maior
+fonte de erro seja a medição das atividades (\textit{e.g.} $\sigma_{a_w} \gg
+\sigma_{x_w}$), temos que a incerteza nos cálculos de coeficiente osmótico
+tende ao infinito quando o valor de $x_w$ tende a 1.
+
+\chapter{Código e Dados}
+
+Todo o código desenvolvido e os dados utilizados estão disponíveis no
+\href{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}{repositório}
+\footnote{Disponível em
+	\url{https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica}.}
+do projeto, no qual estão disponíveis mais detalhes sobre a implementação de
+cada modelo e compilação/execução do programa.
+
+Caso haja interesse em verificar o código-fonte e os executáveis basta clonar o
+repositório e compilar o programa. São necessários, para isso, git, GCC, GSL e as
+bibliotecas numéricas BLAS e CBLAS.
+
+\begin{verbatim}
+$ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
+$ cd IC_2021_Modelagem_Termodinamica
+$ make # Desnecessário caso o interesse seja pelos dados
+\end{verbatim}
+
+Caso não haja interesse em obter os executáveis, os dados podem ser obtidos
+clonando o repositório, simplesmente:
+
+\begin{verbatim}
+$ git clone https://github.com/pedro-callil/IC_2021_Modelagem_Termodinamica
+$ cd IC_2021_Modelagem_Termodinamica/data
+\end{verbatim}
+
+\section{Licença}
+
+Como exigido pelo uso da biblioteca científica da GNU (disponível sob a Licença
+Pública Geral, 3\textordfeminine\ versão), o código-fonte também está disponível
+sob os termos dessa licença.
+

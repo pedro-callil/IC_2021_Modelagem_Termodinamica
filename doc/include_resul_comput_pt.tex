@@ -1,0 +1,449 @@
+\chapter{Análise Computacional}
+
+\section{Discriminação entre modelos: $a_w$ \textit{vs.} $\phi$ e %
+parâmetros de ajuste}
+
+Como esperado, os ajustes em $\phi$ nos fornecem muito mais informação que os
+obtidos em dados de $a_w$: enquanto os valores para $\bar{R}^2$ podem estar
+muito próximos a 1 ao analisarmos dados de atividade, dados de coeficiente
+osmótico nos retornam valores de coeficiente (ajustado) de determinação com
+capacidade muito maior de discriminação entre os modelos.
+
+Podemos ver, também, que o coeficiente de determinação não é um bom parâmetro para
+avaliar os modelos: um coeficiente baixo de determinação (ou mesmo negativo) com
+relação aos dados de coeficiente osmótico não implica que o modelo não se aplica
+bem aos dados de $a_w$, de interesse; da mesma forma, um valor de $\bar{R}^2$ muito
+próximo a 1 não é indício, necessariamente de que um modelo seja excepcional para
+predição de valores de atividade: dado que $\lim_{x_w \to 1}\gamma_w = 1$, temos
+que para grandes diluições, mesmo modelos relativamente triviais (como a Lei de
+Raoult) se comportam de forma excelente.
+
+Assim sendo, para avaliarmos o ajuste, o melhor parâmetro é a média dos desvios
+dos valores de $\phi$. Na figura \ref{fig_mannitol_sucrose}
+\footnote{\cite{stokes1961}} temos uma visão clara do fenômeno: o ajuste é muito
+mais próximo para dados de $a_w$ que para $\phi$. Os dados desses ajustes (não
+somente para modelos que necessitam de regressão, como na figura) estão na tabela
+\ref{tab_mannitol_sucrose}, na qual é possível perceber a vantagem de se tomar
+$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-\phi_{\text{calc}})^2}$
+como medida de exatidão dos modelos.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+	\centering
+	\begin{tikzpicture}[scale = 0.75]
+		\begin{axis} [
+				xlabel={$x_\text{sacarose}$},
+				ylabel={$x_\text{manitol}$},
+				zlabel={$\phi$},
+				restrict z to domain=0.4:0.8,
+				view={-70}{40},
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				xtick={0.020,0.040,0.060,0.080},
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=north west,
+			]
+			\addplot3+ [
+				color=pbrightred,
+				only marks,
+				mark = *,
+				mark options={fill=pbrightred},
+				thick,
+			] table [
+				x={sucrose},y={mannitol},z={phi_exp},col sep=comma
+			] {./stokes_61_sucrose_mannitol_uni.csv};
+			\addlegendentry{$\phi_\text{experimental}$};
+			\addplot3+ [
+				mesh,
+				no marks,
+				color=pverybrightblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 50,50 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_nor.csv' u 5:6:1;
+			};
+			\addlegendentry{$\phi_\text{Norrish}$};
+			\addplot3+ [
+				mesh,
+				no marks,
+				color=pblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 25,25 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_vir.csv' u 5:6:1;
+			};
+			\addlegendentry{$\phi_\text{virial}$};
+			\addplot3+ [
+				mesh,
+				no marks,
+				color=pverydarkblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 24,24 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_uni.csv' u 5:6:1;
+			};
+			\addlegendentry{$\phi_\text{UNIQUAC}$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Coeficientes Osmóticos}
+	\label{fig_mannitol_sucrose_osm}
+\end{subfigure}%
+\hfill%
+\begin{subfigure}{.5\textwidth}
+	\centering
+	\begin{tikzpicture}[scale = 0.75]
+		\begin{axis} [
+				xlabel={$x_\text{sacarose}$},
+				ylabel={$x_\text{manitol}$},
+				zlabel={$a_w$},
+				%view={-60}{20},
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				xtick={0.020,0.040,0.060,0.080},
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=north east,
+			]
+			\addplot3+ [
+				color=pbrightred,
+				only marks,
+				mark = *,
+				mark options={fill=pbrightred},
+				thick,
+			] table [
+				x={sucrose},y={mannitol},z={aw_calc},col sep=comma
+			] {./stokes_61_sucrose_mannitol_uni.csv};
+			\addlegendentry{$a_{w,\text{experimental}}$};
+			\addplot3 [
+				mesh,
+				no marks,
+				color=pverybrightblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 15,15 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_nor.csv' u 5:6:3;
+			};
+			\addlegendentry{$a_{w,\text{Norrish}}$};
+			\addplot3 [
+				mesh,
+				no marks,
+				color=pblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 25,25 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_vir.csv' u 5:6:3;
+			};
+			\addlegendentry{$a_{w,\text{Virial}}$};
+			\addplot3 [
+				mesh,
+				no marks,
+				color=pverydarkblue,
+			] gnuplot [raw gnuplot] {
+				set dgrid 24,24 spline;
+				set datafile separator ',';
+				splot 'stokes_61_sucrose_mannitol_uni.csv' u 5:6:3;
+			};
+			\addlegendentry{$a_{w,\text{UNIQUAC}}$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Atividades da água}
+	\label{fig_mannitol_sucrose_atv}
+\end{subfigure}
+\caption{Valores de $\phi$ e $a_w$ (experimentais e calculados com os modelos) para %
+	uma solução de manitol e sacarose}
+\label{fig_mannitol_sucrose}
+\end{figure}
+
+\begin{tabularx}{\textwidth}{ X  r  r  r  r }
+	\caption{Indicadores para um conjunto de dados}
+	\label{tab_mannitol_sucrose}\\
+	\toprule
+	Modelo & $\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}$ &
+		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
+		\textnumero\ parâmetros\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Modelo & $\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}$ &
+		$\bar{R}^2_{\phi}$ & $\bar{R}^2_{a_w}$ &
+		\textnumero\ parâmetros\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{5}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.422001 & -25.947383 & 0.440301 & 0 \\
+	Caurie & 0.429705 & -26.940271 & 0.402607 & 0 \\
+	Zdanovskii & 0.422505 & -26.012114 & 0.423267 & 0 \\
+	Norrish & 0.211922 & -5.987272 & 0.814903 & 2\\
+	Virial & 0.055878 & 0.514218 & 0.975995 & 3\\
+	UNIQUAC & 0.055712 & 0.517119 & 0.977335 & 6\\\hline
+\end{tabularx}
+
+\section{Número de iterações e tempo de computação}
+
+Na figura \ref{fig_violin_iter} estão exibidos os números de iterações necessárias
+para a convergência do método de Levenberg-Marquardt com aceleração geodésica,
+para os conjuntos de dados avaliados.
+Perceba que o modelo virial (que, de fato, é mais simples, ao menos quando se
+consideram conjuntos de dados de soluções binárias) apresenta um número de
+iterações ordens de grandeza menor que o necessário para a convergência dos
+outros modelos, em média. Outro ponto a ser considerado é o número de iterações
+para o modelo UNIQUAC, que é, por sua vez, ordens de grandeza maior que o número
+de iterações necessárias para a convergência do modelo de Norrish. Além disso, é
+importante ressaltar que alguns conjuntos de dados levaram a tempos de máquina
+excepcionalmente longos.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\newsavebox{\violinnorrish}
+		\savebox{\violinnorrish}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.6\textwidth,
+				ymin=0,ymax=15,
+				xmin=-1,xmax=3,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinbrightblue,thick]
+				(axis cs:0,0) -- (axis cs:0,10);
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./norrish_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./norrish_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,3.98797)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinvirial}
+		\savebox{\violinvirial}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.6\textwidth,
+				ymin=0,ymax=15,
+				xmin=-2,xmax=2,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,5);
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./virial_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./virial_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,2.06878)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinuniquac}
+		\savebox{\violinuniquac}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.6\textwidth,
+				ymin=0,ymax=15,
+				xmin=-3,xmax=1,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,15);
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./uniquac_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./uniquac_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,7.8168)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+	\begin{axis}[
+			xmin = 1.0, xmax = 3.0, xlabel = {Modelo},
+			ymin = 0, ymax = 15, ylabel = {\textnumero\ de iterações},
+			height=0.59\textwidth,
+			width=0.6\textwidth,
+			xtick style={draw=none},
+			xtick={1.5,2,2.5},
+			xticklabels={Norrish,Virial,UNIQUAC},
+			ytick={0,3,6,9,12,15},
+			yticklabels={1,8,64,512,4096,32768},
+		]
+		\draw (axis cs:2,7.5) node {\usebox{\violinnorrish}};
+		\draw (axis cs:2,7.5) node {\usebox{\violinvirial}};
+		\draw (axis cs:2,7.5) node {\usebox{\violinuniquac}};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Número de iterações para a convergência de cada modelo}
+	\label{fig_violin_iter}
+\end{figure}
+
+Podemos ver, como exemplo, o comportamento da função objetivo com as
+iterações, para os três modelos, na figura \ref{fig_obj_iter}, obtida
+ao fazermos o gráfico da função objetivo ao longo das iterações necessárias
+para a obtenção do ajuste exibido na figura \ref{fig_mannitol_sucrose}. Aqui
+percebemos, novamente, a maior exatidão e menor tempo de máquina exigido pelo
+modelo virial, mesmo para um conjunto de dados relativos a uma mistura ternária.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{semilogyaxis} [
+			ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2}$},
+			xlabel={Iteração},
+			xmax=27.5, xmin=-0.5,
+		]
+			\addplot [
+				mark=o,
+				smooth,
+				color=pverybrightblue,
+				very thick,
+				only marks,
+			]
+			table [x={iter},y={cost},col sep=comma]
+				{iter_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot [
+				mark=o,
+				smooth,
+				color=pblue,
+				very thick,
+				only marks,
+			]
+			table [x={iter},y={cost},col sep=comma]
+				{iter_virial.csv};
+			\addlegendentry{Virial};
+			\addplot [
+				mark=o,
+				smooth,
+				color=pverydarkblue,
+				very thick,
+				only marks,
+			]
+			table [x={iter},y={cost},col sep=comma]
+				{iter_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\draw (axis cs: 6,0.0559) -- (axis cs: 10,5.59) -- %
+				(axis cs: 18,5.59);
+			\fill[pblue] (axis cs: 6,0.0559) circle (0.6mm);
+			\draw (axis cs: 8,0.212) -- (axis cs: 10,5.59);
+			\fill[pverybrightblue] (axis cs: 8,0.212) circle (0.6mm);
+			\draw (axis cs: 12,0.2) -- (axis cs: 10,5.59);
+			\draw[-{Latex[length=2mm]}]
+				(axis cs: 12,0.2) -- (axis cs: 27,0.2);
+			\draw (axis cs: 12,0.2) node [anchor=south west]%
+				{\tiny{179 iterações para convergência}};
+			\draw (axis cs: 14,5.59) node [anchor=south]%
+				{\tiny{Última iteração}};
+		\end{semilogyaxis}
+	\end{tikzpicture}
+	\caption{Função objetivo em função da iteração}
+	\label{fig_obj_iter}
+\end{figure}
+
+\section{Observações sobre os modelos de Caurie e Zdanovskii}
+
+Para análise de dados de soluções binárias, a relação de Zdanovskii não
+apresenta utilidade; assim sendo, foi considerada apenas na análise de dados
+provenientes de soluções ternárias. Para obter as isotermas necessárias,
+simplesmente se ajustou um polinômio de grau menor que 4 sobre dados de $a_w$
+de soluções binárias de cada soluto.
+
+O modelo de Caurie exige um modelo secundário para o cálculo da atividade da
+água de solução binária com molalidade equivalente a de cada soluto. Foi
+utilizada a Lei de Raoult, nesse caso, sendo a equação \ref{eq_caurie},
+na prática, adotada na forma \ref{eq_caurie_raoult}
+
+\begin{equation}
+	\label{eq_caurie_raoult}
+	a_w = \prod_{i \neq w}x_{wi}-\left[\cfrac{n}%
+	{55.5^2}\sum_{\substack{i \neq j \\ i,j \neq w}}%
+	m_im_j + \cfrac{(n+1)}{55.5^3}\sum_{%
+	\substack{i\neq j,k \\ j \neq k \\  i,j,k \neq w}}%
+	m_im_jm_k\right]
+\end{equation}
+

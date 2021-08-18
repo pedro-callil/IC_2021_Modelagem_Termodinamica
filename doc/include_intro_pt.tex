@@ -1,0 +1,310 @@
+\part{Introdução}
+
+A atividade $a$ de uma substância, definida \cite{sandler2017} como
+a razão entre a fugacidade de uma substância nas condições de um sistema
+e sua fugacidade em uma situação de referência (equação \ref{eq:def_atv}),
+age como sua ``concentração efetiva'', do ponto de vista termodinâmico.
+Portanto, a medição e análise da atividade da água em soluções nos permite
+prever de modo mais exato os fenômenos que dependem do teor de água em
+um sistema. No caso da indústria de alimentos, o principal desses fenômenos
+é a degradação dos alimentos por ação microbiana.
+
+De fato, a grandeza que controla o crescimento microbiano em um alimento é a
+atividade da água. No gráfico da figura \ref{fig:germ}\footnote{\cite{canovas2007}}
+temos os valores de atividade da água necessários para a proliferação microbiana
+para alguns microorganismos.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[>=Stealth]
+		\draw[->] (5,-0.5) -- (5,11);
+		\draw (5,0.0) node[anchor=west] {$a_w$};
+		\draw (5,8.75) -- (6.3,8.75);
+		\draw (6.3,8.75) -- (13.5,8.75);
+		\draw (5,7.75) -- (6.3,7.25);
+		\draw (6.3,7.25) -- (13.5,7.25);
+		\draw (5,6.75) -- (6.3,5.8);
+		\draw (6.3,5.8) -- (13.5,5.8);
+		\draw (5,5) -- (6.3,4.2);
+		\draw (6.3,4.2) -- (13.5,4.2);
+		\draw (5,3.75) -- (6.3,3);
+		\draw (6.3,3) -- (13.5,3);
+		\draw (5,1.25) -- (6.3,1.85);
+		\draw (6.3,1.85) -- (13.5,1.85);
+		\draw (5,0.25) -- (6.3,0.35);
+		\draw (6.3,0.35) -- (13.5,0.35);
+		\fill[black] (5,0.25) circle (0.07);
+		\fill[black] (5,1.25) circle (0.07);
+		\fill[black] (5,3.75) circle (0.07);
+		\fill[black] (5,5) circle (0.07);
+		\fill[black] (5,6.75) circle (0.07);
+		\fill[black] (5,7.75) circle (0.07);
+		\fill[black] (5,8.75) circle (0.07);
+		\fill[black] (5,10) circle (0.07);
+		\draw (10,10.4) node[anchor=south, text width=9cm]
+		{\tiny{Microorganismos inibidos pelo menor valor de
+		$a_w$ nessa faixa}};
+		\draw (6.3,9.5) node[anchor=west, text width=7cm]
+		{\tiny{\textit{Pseudomonas}, \textit{Escherichia},
+		\textit{Proteus}, \textit{Shigella}, \textit{Klebsiella},
+		\textit{Bacillus}, \textit{Clostridium perfringens},
+		\textit{C. botulinum} E, G, algumas leveduras}};
+		\draw (6.3,8) node[anchor=west, text width=7cm]
+		{\tiny{\textit{Salmonella}, \textit{Vibrio parahaemolyticus},
+		\textit{Clostridium botulinum} A, B, \textit{Listeria
+		monocytogenes}, \textit{Bacillus cereus}}};
+		\draw (6.3,6.5) node[anchor=west, text width=7cm]
+		{\tiny{\textit{Staphylococcus aureus} (aeróbico), diversas
+		leveduras (como \textit{Candida, Torulopsis, Hansenula}),
+		\textit{Micrococcus}}};
+		\draw (6.3,5) node[anchor=west, text width=7cm]
+		{\tiny{Maior parte dos bolores (\textit{Penicillium}
+		micotoxigênicos), \textit{Staphylococcus aureus},
+		maior parte dos \textit{Saccharomyces}, \textit{Debaryomyces}}};
+		\draw (6.3,3.5) node[anchor=west, text width=7cm]
+		{\tiny{Maior parte das bactérias halófilas, \textit{Aspergillus}
+		micotoxigênicos}};
+		\draw (6.3,2.4) node[anchor=west, text width=7cm]
+		{\tiny{Bolores xerófilos (\textit{Aspergillus chevalieri, A.
+		candidus, Wallemia sebi}), \textit{Saccharomyces bisporus}}};
+		\draw (6.3,1.1) node[anchor=west, text width=7cm]
+		{\tiny{Leveduras osmófilas (\textit{Sacharomyces rouxii},
+		alguns bolores (\textit{Aspergillus echinulatus, Monascus
+		bisporus})}};
+		\draw (6.3,0.1) node[anchor=west, text width=7cm]
+		{\tiny{Não ocorre proliferação microbiana}};
+		\draw (5,0.25) node[anchor=east] {0.61};
+		\draw (5,1.25) node[anchor=east] {0.65};
+		\draw (5,3.75) node[anchor=east] {0.75};
+		\draw (5,5) node[anchor=east] {0.80};
+		\draw (5,6.75) node[anchor=east] {0.87};
+		\draw (5,7.75) node[anchor=east] {0.91};
+		\draw (5,8.75) node[anchor=east] {0.95};
+		\draw (5,10) node[anchor=east] {1.00};
+	\end{tikzpicture}
+	\caption{Valores de $a_w$ para o crescimento microbiano}
+	\label{fig:germ}
+\end{figure}
+
+Nas condições encontradas na indústria de alimentos, não é absurdo assumir a
+hipótese de gás ideal para a fase gás dos sistemas
+considerados \cite{canovas2007}, em muitas situações. Além disso, a condição de
+referência é tomada como água pura, líquida, à mesma temperatura $T$. Assim
+obtemos:
+
+\begin{equation}
+	\label{eq:def_atv}
+	a_w \equiv \left(\cfrac{f_w}{f^\text{ref}_w}\right)_T%
+		\approx \left(\cfrac{p^\text{vap}_w}{p^\text{vap,ref}_w}\right)_T
+\end{equation}
+
+Para soluções ideais, obter $a_w$ é simples: para todo componente $i$ da
+mistura, a sua atividade é dada, simplesmente por sua fração molar, e, portanto,
+$a_w = x_w$. Entretanto, essa hipótese nem sempre se verifica; assim sendo,
+para soluções ideais adotamos o coeficiente de atividade $\gamma_w$:
+
+\begin{equation}
+	a_w = \gamma_wx_w \implies \gamma_w = \cfrac{a_w}{x_w}
+\end{equation}
+
+Entretanto, ainda que o coeficiente de atividade seja um indicador para o
+desvio da idealidade em uma solução, apresenta um problema: é uma grandeza ruim
+para avaliarmos os desvios da idealidade em soluções diluídas, já que, sendo
+$a_w$ função contínua da fração molar de água, e dado que a atividade da água
+pura é de 1 (é, afinal, a solução de referência), temos que:
+
+\begin{equation}
+	\lim_{x_w \to 1}\gamma_w = 1
+\end{equation}
+
+Entretanto, para muitas soluções de interesse, não somente temos altos desvios da
+idealidade, como também temos soluções extremamente diluídas. Então adotamos
+uma nova grandeza, o coeficiente osmótico $\phi$, dado por:
+
+\begin{equation}
+	\phi = \cfrac{\ln(a_w)}{\ln(x_w)}
+\end{equation}
+
+Para comparar essas grandezas e visualizar um possível comportamento da
+atividade da água com a mudança na composição de uma mistura, podemos
+observar o gráfico na figura \ref{fig_atv_gamma_gluc} \cite{ebrahimi2016}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\newsavebox{\minigrafglic}
+		\savebox{\minigrafglic}{%
+		\scalebox{0.5}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+			xmin=0.97,xmax=1.0,
+			ymin=0.97,ymax=1.0,
+			x dir=reverse,
+			width=7cm,
+			height=7cm,
+			xlabel = {$x_w$},
+			ylabel = {$a_w$},
+			]
+			\addplot+[
+				color=pverydarkred,
+				mark=o,
+				only marks,
+			]
+			table[x={xw},y={aw}]{glucose_a_w_and_phi.dat};
+			\addlegendentry{$a_w$ experimental};
+			\addplot+[
+				color=black,
+				no marks,
+				domain=0.96:1.0,
+				samples=5,
+			]{x};
+			\addlegendentry{$a_w=x_w$};
+		\end{axis}
+	\end{tikzpicture}
+	}}
+	\begin{axis}[
+			xmin = 0.97, xmax = 1.0, xlabel = {$x_w$},
+			ymin = 0.96, ymax = 1.05, ylabel = {$\phi$},
+			x tick label style={
+				/pgf/number format/.cd,
+				fixed,
+				fixed zerofill,
+				precision=3,
+				/tikz/.cd
+			},
+			y tick label style={
+				/pgf/number format/.cd,
+				fixed,
+				fixed zerofill,
+				precision=3,
+				/tikz/.cd
+			},
+			legend pos = south west,
+			axis y line=left,
+			x axis line style={-},
+			xlabel near ticks,
+			ylabel near ticks,
+			x dir=reverse,
+			ytick={0.97,0.985,1.00,1.015,1.03,1.045},
+		]
+		\addplot+[
+			color=pdarkblue,
+			mark=square,
+			very thick,
+			only marks,
+		]
+		table[x={xw},y={phi}]{glucose_a_w_and_phi.dat};
+		\addlegendentry{$\phi$};
+		\draw (axis cs: 0.981,0.99)node{\usebox{\minigrafglic}};
+		\end{axis}
+		\begin{axis}[
+			xmin = 0.97, xmax = 1.0, xlabel = {$x_w$},
+			ymin = 0.9977, ymax = 1.0001, ylabel = {$\gamma_w$},
+			y tick label style={
+				/pgf/number format/.cd,
+				fixed,
+				fixed zerofill,
+				precision=4,
+				/tikz/.cd
+			},
+			axis y line=right,
+			axis x line=none,
+			legend pos = south east,
+			x dir=reverse,
+		]
+		\addplot+[
+			color=pverybrightred,
+			mark=o,
+			very thick,
+			only marks,
+		]
+		table[x={xw},y={gammaw}]{glucose_a_w_and_phi.dat};
+		\addlegendentry{$\gamma_w$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Atividade ($a_w$), coeficiente de atividade ($\gamma_w$) e%
+	coeficiente osmótico ($\phi$) da água em soluções de D-glicose. %
+	Perceba a diferença entre as escalas utilizadas para $\gamma_w$ e $\phi$.}
+	\label{fig_atv_gamma_gluc}
+\end{figure}
+
+Devemos, além disso, lembrar que a medida de atividade da água é, por vezes,
+realizada de modo mais indireto; podemos medir para uma determinada solução ao
+invés de seu valor de atividade da água (através da medição de sua pressão de
+vapor e comparação com a pressão de vapor de água pura nas mesmas condições), o
+seu valor de elevação do ponto de ebulição, de depressão de ponto de início de
+congelamento, ou a composição de outra solução em equilíbrio osmótico.
+
+Por exemplo, alguns conjuntos de dados obtidos para soluções $n$-árias de
+carboidratos \cite{abderafi1994} apresentam dados de elevação do ponto de
+ebulição. Essas medidas devem ser convertidas em dados de coeficiente osmótico,
+através das equações \ref{eq:eleb_to_osco} \cite{ge2009,ge2009err}, por
+exemplo, que estão exibidas na figura \ref{fig_ge_and_wang}.
+
+\begin{equation}
+	\label{eq:eleb_to_osco}
+	\begin{cases}
+		\ln(a_w) = -\cfrac{\Delta H^\text{vap}_{0,T_B}\left(\cfrac{1}{T_B}%
+			-\cfrac{1}{T_B+\Delta T_B}\right)-%
+			\Delta C_p^\text{vap}\Bigg[\ln\left(\cfrac{T_B+%
+			\Delta T_B}{T_B}\right) - \cfrac{\Delta T_B}{T_B+%
+			\Delta T_B}\Bigg]}{R}\\
+		\ln(a_w) = \cfrac{\Delta H^\text{fus}_{0,T_F}\left(\cfrac{1}{T_F}-%
+		\cfrac{1}{T_F-\Delta T_F}\right)+\Delta C_p^\text{fus}%
+		\Bigg[\ln\left(\cfrac{T_F-\Delta T_F}{T_F}\right) -%
+		\cfrac{\Delta T_F}{T_F-\Delta T_F}\Bigg]}{R}
+	\end{cases}
+\end{equation}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\begin{tikzpicture}[scale=0.75]
+			\begin{axis}[
+				ylabel={$a_w$},
+				xlabel={$T_B$[\textcelsius]},
+				ymax=1, xmax=115, xmin=100,
+			]
+				\addplot [
+					color=pred,
+					no marks,
+					very thick,
+				]
+					table [x={BPE},y={aw},col sep=comma]
+						{ge_and_wang_bpe.csv};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Ponto de Ebulição}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}
+		\begin{tikzpicture}[scale=0.75]
+			\begin{axis}[
+				ylabel={$a_w$},
+				xlabel={$T_F$[\textcelsius]},
+				ymax=1, xmin=-15, xmax=0,
+			]
+				\addplot [
+					color=pblue,
+					no marks,
+					very thick,
+				]
+					table [x={FPD},y={aw},col sep=comma]
+						{ge_and_wang_fpd.csv};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Ponto de Fusão}
+	\end{subfigure}
+	\caption{Relações entre $T_B$/$T_F$ (em \textcelsius) e $a_w$, %
+		$P=P_\text{atm}$}
+	\label{fig_ge_and_wang}
+\end{figure}
+
+Com $\Delta C_p$ sendo definido como a diferença entre os calores
+específicos, entre as fases: $\Delta C_p^\text{vap} = C_p^\text{vapor} -%
+C_p^\text{líquido}$ e $\Delta C_p^\text{fus} = C_p^\text{líquido} -%
+C_p^\text{sólido}$, $\Delta T_F$ sendo a depressão do ponto de congelamento,
+$\Delta T_B$ a elevação do ponto de ebulição e $\Delta H_{0,T_B}^\text{vap}$ e
+$\Delta H_{0,T_F}^\text{fus}$ sendo as entalpias de vaporização e ebulição do
+solvente puro a $T_B$/$T_F$.
+

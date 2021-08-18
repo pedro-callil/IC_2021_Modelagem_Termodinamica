@@ -1,0 +1,714 @@
+\chapter{Análise dos Modelos}
+
+\section{Soluções binárias e sistemas multicomponente}
+
+Foram comparados os ajustes sobre soluções binárias e $n$-árias de carboidratos.
+Quando possível (soluções ternárias) se recorreu à Relação de Zdanovskii.
+
+Estão disponíveis 823 dados para soluções binárias apenas, 235 dados para soluções
+binárias e ternárias, apenas e 213 dados para soluções quaternárias. A cada
+conjunto de dados foram ajustados cada um dos modelos, e os valores médios dos
+desvios dos coeficientes osmóticos estão disponíveis na tabela \ref{tab_comp_mono},
+ponderados pela quantidade de dados em cada série.
+
+Nessa tabela, estão inclusos apenas os modelos que são aplicáveis a todas as séries
+de dados; assim sendo, foi necessário excluir os modelos de Caurie (que apresentam
+resultados não físicos para soluções com baixas diluições\footnote{%
+	\cite{abderafi1994}
+}, e também o modelo de Zdanovskii, que exige duas séries auxiliares, nem sempre
+presentes, de dados sobre sistemas binários. Assim sendo, esses dois modelos devem
+ser analisados separadamente.
+
+\begin{tabularx}{\textwidth}{ X r r r }
+	\caption{Performance dos modelos para sistemas binários, ternários %
+		e quaternários}
+	\label{tab_comp_mono}\\
+	\toprule
+	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
+		{$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}_\text{médio}$}\\
+		& Sistemas Binários & Sistemas Ternários &%
+			Sistemas Quaternários \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\multirow{2}*{Modelo} & \multicolumn{3}{c}%
+		{$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}_\text{médio}$}\\
+		& Sistemas Binários & Sistemas Ternários &%
+			Sistemas Quaternários \\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{4}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.479665 & 0.591365 & 0.820056 \\
+	Norrish & 0.448270 & 0.274971 & 0.654951 \\
+	Virial & 0.247174 & 0.076962 & 0.310939 \\
+	UNIQUAC & 0.197069 & 0.073781 & 0.550024 \\\hline
+\end{tabularx}
+
+\subsection{Relação de Zdanovskii}
+
+O comportamento desse modelo foi ruim para os dados ternários analisados; uma
+comparação com os resultados obtidos com Raoult, Norrish, Virial e UNIQUAC está
+na tabela \ref{tab_zdan_multi}, que compara os desvios quadrados médios dos
+coeficientes osmóticos para os conjuntos de dados para os quais a Relação de
+Zdanovskii pode ser aplicada. Perceba que os desvios obtidos com a Relação de
+Zdanovskii são maiores que os obtidos assumindo solução ideal (Lei de Raoult),
+por exemplo. Isso não indica necessariamente que o modelo seja ruim; como,
+de todos os dados para soluções binárias disponíveis, apenas 4 conjuntos de
+dados estavam acompanhados por séries de dados para modelos binários para cada
+componente, comportamentos aberrantes do modelo para as condições de algum desses
+experimentos podem ser responsabilizados pelo aumento dos desvios.
+
+De fato, dos 178 pontos experimentais em questão, 103 (57.8\%) são provenientes de
+dados obtidos a baixíssimas diluições\footnote{\cite{abderafi1994}}, e de fato, o
+modelo de Zdanovskii é inferior justamente nesses dados; uma comparação com o ajuste
+obtido para diluições mais baixas (visto na tabela \ref{tab_mannitol_sucrose}, por
+exemplo) mostra que existem situações nas quais o modelo se porta de forma razoável.
+
+\begin{tabularx}{\textwidth}{ X  r }
+	\caption{Comparação com o modelo de Zdanovskii}
+	\label{tab_zdan_multi}\\
+	\toprule
+	Modelo & %
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}_\text{médio}$\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Modelo & %
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}_\text{médio}$\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.635824 \\
+	Zdanovskii & 0.911042 \\
+	Norrish & 0.295073 \\
+	Virial & 0.087813 \\
+	UNIQUAC & 0.076432 \\\hline
+\end{tabularx}
+
+\subsection{Modelo de Caurie}
+
+O modelo de Caurie retorna resultados não-físicos para alguns conjuntos de dados.
+Excluindo esses conjuntos e comparando os resultados, percebemos que o modelo
+apresenta resultados razoavelmente bons. Esses dados estão na tabela
+\ref{tab_caurie_multi}; observe que os desvios para o modelo de Caurie são
+ligeiramente menores que os desvios para a Lei de Raoult.
+
+\begin{tabularx}{\textwidth}{ X  r }
+	\caption{Comparação com o modelo de Caurie}
+	\label{tab_caurie_multi}\\
+	\toprule
+	Modelo & %
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}_\text{médio}$\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Modelo & %
+		$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}_\text{médio}$\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.668330 \\
+	Caurie & 0.654477 \\
+	Norrish & 0.600739 \\
+	Virial & 0.258034 \\
+	UNIQUAC & 0.488533 \\\hline
+\end{tabularx}
+
+\section{Observações sobre os resultados}
+
+Podemos observar que os modelos virial e UNIQUAC são, tanto para sistemas
+binários quanto para sistemas multicomponente, os melhores em termos de
+reduzir o valor da função objetivo, e que isso se dá não somente devido ao maior
+número de parâmetros, já que, para sistemas binários tanto o modelo de Norrish
+quanto o modelo virial apresentam apenas um parâmetro, apesar de apresentarem desvios
+claramente diferentes.
+
+Além disso, a versão (simplificada) do modelo UNIQUAC (que chega a contar com até 8
+parâmetros) não apresenta valores consistentemente menores da função objetivo que o
+modelo virial (que apresenta no máximo 6 parâmetros).
+
+Por fim, vale ressaltar que, para alguns conjuntos de dados\footnote{%
+	\cite{norrish1966}, dados para uma mistura de sacarose e dextrose.
+}, a quantidade de pontos foi insuficiente para ajuste via modelo UNIQUAC;
+entretanto, isso não é um grande problema, já que análises do modelo para
+dados da mesma fonte não apresentaram peculiaridades. Ao contrário das situações
+vistas com Caurie, isso foi decorrente da simples quantidade de dados.
+
+\section{Valores Ajustados \textendash\ Observações Gerais}
+
+\subsection{Modelo de Norrish}
+
+Como discutido anteriormente, o modelo de Norrish apresenta dificuldades para
+lidar com sistemas que apresentem $\phi > 1$. Nesse caso, o processo iterativo
+deixará os parâmetros $K_i$ tão próximos quanto o possível de 0, de modo a
+maximizar o valor de $\phi$.
+
+\subsection{Modelo UNIQUAC}
+
+O modelo UNIQUAC apresenta, mesmo para soluções binárias, um grande número
+de parâmetros. Isso pode levar a problemas com \textit{overfitting}. Além disso,
+existem problemas relativos a colinearidade, já que o conjunto de valores
+possíveis $(x_1,x_2,\ldots,x_p)$ para a composição de uma mistura com $p$
+componentes (incluindo a água) pertence a um subespaço de dimensão $p-1$
+de $\mathbb{R}^p$. Entretanto, ainda foram observados valores coerentes
+para alguns parâmetros, analisando diversos experimentos; por exemplo,
+$u_\text{água}$ se manteve consistentemente em torno de 1700J/mol, enquanto
+outras substâncias como a sacarose apresentaram grandes variações. Isso
+pode ser visto claramente na figura \ref{fig_violin_uniquac_u}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\newsavebox{\violinglycineu}
+		\savebox{\violinglycineu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.8\textwidth,
+				ymin=2,ymax=6,
+				xmin=-5,xmax=2,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolindarkred,thick]
+				(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolindarkred,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_glycine_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolindarkred,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_glycine_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.714)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinalanineu}
+		\savebox{\violinalanineu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.8\textwidth,
+				ymin=2,ymax=6,
+				xmin=-6,xmax=1,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			%\draw[pviolinbrightred,thin,opacity=0.3]
+				%(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolinbrightred,
+				fill opacity=0.6,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_alanine_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinbrightred,
+				fill opacity=0.6,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_alanine_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.683)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinfructoseu}
+		\savebox{\violinfructoseu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.8\textwidth,
+				ymin=2,ymax=6,
+				xmin=-3,xmax=4,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinbrightblue,thick]
+				(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_fructose_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_fructose_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.198)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinsucroseu}
+		\savebox{\violinsucroseu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.8\textwidth,
+				ymin=2,ymax=6,
+				xmin=-2,xmax=5,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_sucrose_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_sucrose_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.604)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinglucoseu}
+		\savebox{\violinglucoseu}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.8\textwidth,
+				ymin=2,ymax=6,
+				xmin=-1,xmax=6,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolindarkblue,thick]
+				(axis cs:0,2) -- (axis cs:0,6);
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./violin_glucose_uniquac.csv};
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./violin_glucose_uniquac.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,4.714)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+	\begin{axis}[
+			xmin = 0.0, xmax = 1.4, xlabel = {Substância},
+			ymin = 2, ymax = 6, ylabel = {$u_\text{substância}$},
+			height=0.59\textwidth,
+			width=0.8\textwidth,
+			xtick style={draw=none},
+			xtick={0.2,0.4,0.6,1.0,1.2},
+			xticklabels={Glicose,Sacarose,Frutose,Glicina,Alanina},
+			ytick={2,3,4,5,6},
+			yticklabels={$10^2$,$10^3$,$10^4$,$10^5$,$10^6$},
+		]
+		\draw (axis cs:0.7,4) node {\usebox{\violinfructoseu}};
+		\draw (axis cs:0.7,4) node {\usebox{\violinsucroseu}};
+		\draw (axis cs:0.7,4) node {\usebox{\violinglucoseu}};
+		\draw (axis cs:0.7,4) node {\usebox{\violinglycineu}};
+		\draw (axis cs:0.7,4) node {\usebox{\violinalanineu}};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Valores obtidos para o parâmetro $u$ para diversas substâncias}
+	\label{fig_violin_uniquac_u}
+\end{figure}
+
+
+\subsection{Modelo Virial}
+
+As estimativas para os valores de $b_i$ apresentaram boa coerência (especialmente
+entre conjuntos de dados provenientes das mesmas fontes), e foi possível obter
+valores razoáveis para o ajuste. Exemplos para três carboidratos estão na figura
+\ref{fig_violin_virial_carb}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\newsavebox{\violinsucrose}
+		\savebox{\violinsucrose}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.6\textwidth,
+				ymin=-2,ymax=0,
+				xmin=-4,xmax=12,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,-3);
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./sucrose_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolinbrightblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./sucrose_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,-1.065754)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinglucose}
+		\savebox{\violinglucose}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.6\textwidth,
+				ymin=-2,ymax=0,
+				xmin=-8,xmax=8,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,-3);
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./glucose_violin.csv};
+			\draw[pviolinblue,thick]
+				(axis cs:0,0) -- (axis cs:0,-3);
+			\addplot+[
+				color=black,
+				fill=pviolinblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./glucose_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,-1.16826)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+		\newsavebox{\violinfructose}
+		\savebox{\violinfructose}{%
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=0.6\textwidth,
+				width=0.6\textwidth,
+				ymin=-2,ymax=0,
+				xmin=-12,xmax=4,
+				axis line style={draw=none},
+				tick style={draw=none},
+				xticklabels={,,},
+				yticklabels={,,},
+			]
+			\draw[pviolindarkblue,thick]
+				(axis cs:0,0) -- (axis cs:0,-3);
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yplus},y={x},col sep=comma]
+				{./fructose_violin.csv};
+			\addplot+[
+				color=black,
+				fill=pviolindarkblue,
+				no marks,
+				thick,
+				smooth,
+			]
+			table[x={yminus},y={x},col sep=comma]
+				{./fructose_violin.csv};
+			\addplot+[
+				color=black,
+				very thick,
+				mark=o,
+			] coordinates {(0.0,-1.23545)};
+			\end{axis}
+		\end{tikzpicture}
+		}
+	\begin{axis}[
+			xmin = 1.0, xmax = 3.0, xlabel = {Carboidrato},
+			ymin = -2, ymax = 0, ylabel = {$b_\text{carboidrato}$},
+			height=0.59\textwidth,
+			width=0.6\textwidth,
+			xtick style={draw=none},
+			xtick={1.5,2,2.5},
+			xticklabels={Sacarose,Glicose,Frutose},
+		]
+		\draw (axis cs:2,-1) node {\usebox{\violinsucrose}};
+		\draw (axis cs:2,-1) node {\usebox{\violinglucose}};
+		\draw (axis cs:2,-1) node {\usebox{\violinfructose}};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Valores obtidos para o parâmetro $b$ para sacarose, %
+		glucose e frutose.}
+	\label{fig_violin_virial_carb}
+\end{figure}
+
+Entretanto, para os valores de $c_i$, a situação se torna diferente: diferentes
+estudos (apesar de coerentes entre si) apresentaram estimativas ordens de grandeza
+diferentes. Isso possivelmente está associado a temperatura ou diluição (já que
+diferentes experimentos\footnote{%
+	De fato, os valores de $c$ foram maiores para experimentos realizados
+	sob maiores diluições. \cite{abderafi1994,velezmoro2000}
+}
+apresentam diferentes temperaturas e diluições). De toda forma o valor dos
+parâmetros de iteração soluto-soluto acaba tendo pouco impacto nos desvios, e
+o uso do modelo, simplificado de forma a assumir nulos seus valores, é uma boa
+aproximação, comparável com os outros modelos avaliados. Isso pode ser visto
+na tabela \ref{tab_vir_simpl}: os dois modelos viriais são os que apresentam,
+em média, menores valores para os desvios.
+
+\begin{tabularx}{\textwidth}{ X  r }
+	\caption{\textit{Performance} do modelo virial simplificado}
+	\label{tab_vir_simpl}\\
+	\toprule
+	Modelo & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}_\text{médio}$\\
+	\midrule
+	\endfirsthead
+	\toprule
+	Modelo & %
+		$\frac{1}{n}\sqrt{\sum_{i=1}^N(\phi_{\text{exp}}-%
+		\phi_{\text{calc}})^2}_\text{médio}$\\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{2}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.765376 \\
+	Norrish & 0.516392 \\
+	UNIQUAC & 0.344529 \\
+	Virial (simplificado) & 0.243334 \\
+	Virial (completo) & 0.215693 \\\hline
+\end{tabularx}
+
+
+\section{Capacidade preditiva dos modelos}
+
+É interessante analisarmos a aplicação de parâmetros obtidos sobre um conjunto de
+dados a outro conjunto de dados em condições semelhantes; para isso, dentre as
+séries de dados avaliadas, separamos cada uma das dez maiores (em número de pontos)
+em duas séries, cada uma com metade dos dados da série inicial, de form aleatória;
+em seguida, ajustamos o modelo a uma dessas séries (dados de treino) e utilizamos
+os valores obtidos para os parâmetros para uma avaliação da outra (dados de teste).
+
+Para todos os modelos avaliados, o uso dos parâmetros obtidos na série de treino
+foi um melhor ajuste à série de teste que o modelo de Raoult; em quase todos os
+casos a diferença das funções objetivo entre a aplicação do modelo aos dados de
+treino e teste foi uma ou mais ordens de grandeza inferior à diferença entre a
+aplicação do modelo em questão e a aplicação do modelo de Raoult, aos dados de
+teste.\footnote{A exceção reside em conjuntos de dados para os quais o modelo
+de Norrish acaba convergindo para o modelo de Raoult, como discutido
+anteriormente.}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis} [
+				xlabel={Diferença entre os desvios (ideal/treino)},
+				ylabel={Diferença entre os desvios (teste/treino)},
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=north east,
+				xmin=0,ymin=0,
+				xmax=1.1,ymax=1.1,
+			]
+			\addplot [
+				color=black,
+				fill=pverybrightblue,
+				only marks,
+				mark size=3pt,
+			] table [
+				x={raoult_minus_train},
+				y={test_minus_train},
+				col sep=comma
+			] {./test_and_train_diff_norrish.csv};
+			\addlegendentry{Modelo de Norrish};
+			\addplot [
+				color=black,
+				fill=pblue,
+				only marks,
+				mark size=3pt,
+			] table [
+				x={raoult_minus_train},
+				y={test_minus_train},
+				col sep=comma
+			] {./test_and_train_diff_virial.csv};
+			\addlegendentry{Modelo Virial};
+			\addplot [
+				color=black,
+				fill=pverydarkblue,
+				only marks,
+				mark size=3pt,
+			] table [
+				x={raoult_minus_train},
+				y={test_minus_train},
+				col sep=comma
+			] {./test_and_train_diff_uniquac.csv};
+			\addlegendentry{Modelo UNIQUAC};
+			\fill[
+				color=lightgray,
+				opacity=0.5,
+			]
+				(axis cs:0,0) -- (axis cs:1.1,1.1)
+				-- (axis cs:0,1.1) -- (axis cs:0,0);
+			\draw (axis cs:0,0) -- (axis cs:1.1,1.1);
+			\draw (axis cs:0.025,0.750)
+				node[anchor=west,align=left]
+					{Melhor ajuste com o\\
+					modelo de Raoult};
+			\draw (axis cs:1.075,0.500)
+				node[anchor=east,align=right]
+					{Melhor ajuste\\
+					com os parâmetros\\
+					obtidos no treino};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Diferenças entre dados de teste e de treino}
+	\label{fig_test_train}
+\end{figure}
+
+Isso pode ser visto na figura \ref{fig_test_train}; temos que para todos os conjuntos
+de dados avaliados nessa seção, fizemos um gráfico da diferença entre os desvios
+($\sqrt{\frac{1}{n}\sum_{i=1}^N\left(\phi_\text{exp}-\phi_\text{calc}\right)^2}$),
+obtidos para o ajuste do modelo e para a aplicação do modelo com parâmetros
+provenientes dos dados de treino aos dados de teste, em função da diferença entre
+os desvios obtidos aplicando a Lei de Raoult e aplicando o modelo com esses
+parâmetros aos dados de teste. Observe que quase nenhum ponto está na zona
+hachurada, na figura, na qual os modelos com parâmetros obtidos para dados de
+treino seriam inferiores ao modelo de Raoult, no ajuste de dados de teste.
+
+Isso indica que os parâmetros obtidos para os modelos através das regressões são
+boas estimativas para os parâmetros reais, como desejado, e não apenas informações
+sobre propriedades intrínsecas de cada série de dados sobre as quais se faz a
+regressão, já que nesse caso seria observada uma grande discrepância nos desvios
+ao aplicarmos o modelo com os parâmetros obtidos nos dados de treino aos dados de
+teste.
+
+

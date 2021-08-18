@@ -1,0 +1,65 @@
+\part{Conclusões}
+
+Apesar de o modelo UNIQUAC apresentar maior poder correlativo, comparado com os
+outros modelos apresentados, não é sempre possível fazer uma regressão entre os
+dados experimentais de composição e atividade, já que o modelo exige uma grande
+quantidade de parâmetros, mesmo adotando uma série de simplificações; de fato,
+para obtermos os valores dos coeficientes $q_i$ e $u_{ii}$ precisamos de uma grande
+quantidade de pontos $a_w=a_w(x_1,x_2,\ldots,x_n)$, que muitas vezes não está
+disponível. Além disso, existem maiores dificuldades para a convergência do método
+dos mínimos quadrados nesse modelo, comparando aos outros analisados.
+
+Dessa forma, modelos mais simples como o de Norrish e o modelo virial estudado, que,
+para misturas que não sejam excessivamente complexas, apresentam poucos parâmetros
+a serem ajustados, encontram grande utilidade prática; além disso, o equacionamento
+mais simples desses modelos facilita a regressão através de métodos numéricos. Outra
+observação a ser feita reside na aplicabilidade desses modelos: enquanto o modelo
+de Norrish é relativamente mais restrito, o modelo virial (assim como UNIQUAC)
+consegue se adaptar a uma grande gama de valores possíveis de coeficiente osmótico
+$\phi$.
+
+Por fim, é importante ressaltar que, apesar de esses modelos (Norrish, Virial e
+UNIQUAC) serem superiores ao caso ideal (Lei de Raoult) e às correções (Zdanovskii
+e Caurie) propostas, a Lei de Raoult (e, quando aplicáveis, os outros dois modelos)
+apresenta grande concordância com os dados experimentais de $a_w$ em uma fração
+considerável das séries de dados analisadas: assim, para misturas não muito
+complexas, em altas diluições, em situações nas quais a precisão no valor
+de $a_w$ não é crítica, é válido, portanto, adotá-la. Além disso, em situações
+nas quais a Lei de Raoult e suas correções são insuficientes, mas não há
+importância crítica em obter a precisão oferecida pelo modelo virial, a utilização
+de uma simplificação desse modelo, sem parâmetros de interação soluto-soluto, é
+razoável.
+
+\phantompart
+
+\part{Cronograma}
+
+O cronograma original (tabela \ref{tab:cronograma}) proposto para o projeto
+está sendo obedecido: já foi feita a compilação e interpretação dos dados da
+literatura, e estão sendo escritos os códigos-fonte dos programas responsáveis
+por ajustar os modelos aos dados.
+
+\begin{table}[h]
+	\centering
+	\caption{Cronograma e etapas já cumpridas}%IC_GOES_HERE
+	\label{tab:cronograma}
+	\begin{tabular}{l C C C C}\hline
+		\multirow{2}*{Etapa} & \multicolumn{4}{c}{Trimestre}\\
+			& 1 & 2 & 3 & 4\\\hline
+		Revisão bibliográfica & \multicolumn{4}{|c|}%
+		{\cellcolor{pdone}Concluída}\\\hhline{~----}
+		Análise e interpretação da literatura &
+		\multicolumn{2}{|c|}{\cellcolor{pdone}Concluída} & & \\\hhline{~---~}
+		Programação das rotinas computacionais & &
+		\multicolumn{2}{|c|}{\cellcolor{pdone}Concluída} & \\\hhline{~~---}
+		Ajuste do modelo & & &
+			\multicolumn{2}{|c|}{\cellcolor{pdone}Concluída}\\
+		\hhline{~~---}
+		Redação de relatório & &
+			\multicolumn{1}{|c|}{\cellcolor{pdone}Concluída}
+		& & \multicolumn{1}{|c|}{\cellcolor{pdone}Concluída}\\\hline
+	\end{tabular}
+\end{table}
+
+%\input{schedule_for_internship.tex}
+

@@ -1,0 +1,1093 @@
+\chapter{Análise dos Dados Experimentais}
+
+\section{Carboidratos e aminoácidos}
+
+Foram obtidos mais dados para soluções de carboidratos (1208, distribuídos em
+91 conjuntos de dados) do que para soluções de aminoácidos (511, em 45 conjuntos).
+Além disso, os dados para soluções de carboidratos incluem uma variedade maior de
+substâncias (21, entre carboidratos e compostos semelhantes\footnote{%
+	São elas: arabinose, butanotetrol, dextrose, eritritol, etanodiol,
+	frutose, galactose, glicose, glicerol, lactose, maltitol, maltose,
+	manitol, manose, propanotriol, rafinose, ribose, sorbitol, sacarose,
+	xilitol e xilose.
+}
+) que os dados para aminoácidos (16 substâncias\footnote{%
+	São elas: alanina, ácido $\alpha$-aminobutírico, arginina, ácido
+	glutâmico, glicina, glicilglicina, histidina, hidroxiprolina,
+	isoleucina, lactamida, lisina, metionina, prolina, serina,
+	treonina e valina.
+}
+); por fim, dados para sistemas multicomponente incluem apenas carboidratos.
+
+Os dados para aminoácidos apresentam diluições maiores, em média, que os de
+soluções de carboidratos. Isso pode ser visto no histograma da figura
+\ref{fig_hist_dilui}.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\begin{tikzpicture} [scale=0.75]
+			\begin{axis} [
+				ybar,
+				ylabel={\textnumero\ de soluções},
+				xlabel={$a_w$},
+				ymin=0, xmax=1,
+				legend pos=north west,
+			]
+				\addplot+ [
+					hist={bins=20},
+					color=black,
+					fill=pdarkred,
+				] table [y index=0] {aminoacid_aw_avgs.csv};
+				\addlegendentry{Aminoácidos ($\bar{a_w}=0.9861$)};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Aminoácidos}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}
+		\begin{tikzpicture} [scale=0.75]
+			\begin{axis} [
+				ybar,
+				ylabel={\textnumero\ de soluções},
+				xlabel={$a_w$},
+				ymin=0, xmax=1,
+				legend pos=north west,
+			]
+				\addplot+ [
+					hist={bins=40},
+					color=black,
+					fill=pdarkblue,
+				] table [y index=0] {./carbohydrate_aw_avgs.csv};
+				\addlegendentry{Carboidratos ($\bar{a_w}=0.9352$)};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Carboidratos}
+	\end{subfigure}
+	\caption{Distribuição dos valores de $a_w$ real}
+	\label{fig_hist_dilui}
+\end{figure}
+
+Foram comparados os ajustes dos modelos sobre soluções binárias, de carboidratos
+e de aminoácidos. Assim sendo, a Relação de Zdanovskii não se aplica e a Equação
+de Caurie não difere do modelo de Raoult, como discutido anteriormente.
+
+Foi observado um desvio médio nos valores de $\phi$ menor para os dados de $a_w$
+em soluções de aminoácidos, relativo ao desvio médio obtido para soluções de
+carboidratos; de fato, é esperado que soluções com baixas diluições apresentem
+maiores desvios da idealidade (e de quaisquer hipóteses que tenham sido adotadas
+na dedução dos modelos) e, portanto, é natural que obtenhamos resultados menos
+precisos, nesse caso.\footnote{%
+	Excetuando-se, claro, a questão dos erros de medição, que aumentam
+	conforme aumenta a diluição, como discutido anteriormente.
+}
+
+Os modelos se comportaram de forma distinta para cada grupo; enquanto para dados
+obtidos a partir de soluções de aminoácidos o modelo virial se destacou, obtendo
+desvios similares ao modelo UNIQUAC, para soluções de carboidratos o modelo UNIQUAC
+obteve, de longe, os menores desvios. Isso pode ser observado na tabela
+\ref{tab_model_amino_carb}, que exibe a média dos desvios (ponderada pela quantidade
+de dados em cada experimento) ao ajustarmos cada modelo a cada conjunto de dados
+para sistemas binários.
+
+
+\begin{tabularx}{\textwidth}{ X r r }
+	\caption{Performance dos modelos para diferentes substâncias}
+	\label{tab_model_amino_carb}\\
+	\toprule
+	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
+			$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2}_\text{médio}$} \\
+		& Soluções de aminoácidos & Soluções de carboidratos \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\multirow{2}*{Modelo} & \multicolumn{2}{c}{%
+			$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2}_\text{médio}$} \\
+		& Aminoácidos & Carboidratos \\\hline
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{3}{r}{\footnotesize(Continua na página seguinte)}
+	\endfoot
+	\endlastfoot
+	Raoult & 0.153428 & 0.479665 \\
+	Norrish & 0.093486 & 0.448270 \\
+	Virial & 0.049592 & 0.247174 \\
+	UNIQUAC & 0.045613 & 0.197069 \\\hline
+\end{tabularx}
+
+Além disso, podemos observar que o modelo de Norrish apresenta resultados
+consideravelmente melhores para aminoácidos, em comparação com os desvios obtidos
+para soluções de carboidratos; isso se torna ainda mais claro ao compararmos
+as variações nos desvios entre carboidratos e aminoácidos para os modelos
+avaliados.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}%
+		\centering
+		\begin{tikzpicture}[scale=0.75]
+			\newsavebox{\minigrafarg}
+			\savebox{\minigrafarg}{%
+			\scalebox{0.5}{%
+			\begin{tikzpicture}
+				\begin{axis}[
+				xmin=0.0,xmax=0.015,
+				ymin=0.985,ymax=1.0,
+				width=7cm,
+				height=7cm,
+				xlabel = {$x$},
+				ylabel = {$a_w$},
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=south west,
+				]
+				\addplot+[
+					no marks,
+					color=black,
+					samples=2,
+					domain=-0.001:0.016,
+				] plot {1-x};
+				\addlegendentry{$a_w=x_w$};
+				\addplot+[
+					color=pbrightred,
+					mark=o,
+					only marks,
+					thick,
+				]
+				table[x={l_arginine},y={aw_exp},col sep=comma]
+					{ninni_arginine_norrish.csv};
+				\addplot+[
+					color=pverybrightblue,
+					no marks,
+					thick,
+				]
+				table[x={l_arginine},y={aw_calc},col sep=comma]
+					{ninni_arginine_norrish.csv};
+				\addplot+[
+					color=pblue,
+					no marks,
+					thick,
+				]
+				table[x={l_arginine},y={aw_calc},col sep=comma]
+					{ninni_arginine_virial.csv};
+				\addplot+[
+					color=pverydarkblue,
+					no marks,
+					thick,
+				]
+				table[x={l_arginine},y={aw_calc},col sep=comma]
+					{ninni_arginine_uniquac.csv};
+			\end{axis}
+		\end{tikzpicture}
+		}}
+		\begin{axis}[
+				xmin = 0.002, xmax = 0.015,
+				xlabel = {$x_\text{arginina}$},
+				ymin = 0.62, ymax = 0.85, ylabel = {$\phi$},
+				legend pos = north west,
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				xtick = {0.003,0.006,0.009,0.012},
+			]
+			\addplot+[
+				smooth,
+				color=pverybrightblue,
+				no marks,
+				thick,
+			]
+			table[x={l_arginine},y={phi_calc},col sep=comma]
+				{ninni_arginine_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot+[
+				smooth,
+				color=pblue,
+				no marks,
+				thick,
+			]
+			table[x={l_arginine},y={phi_calc},col sep=comma]
+				{ninni_arginine_virial.csv};
+			\addlegendentry{virial};
+			\addplot+[
+				smooth,
+				color=pverydarkblue,
+				no marks,
+				thick,
+			]
+			table[x={l_arginine},y={phi_calc},col sep=comma]
+				{ninni_arginine_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\addplot+[
+				color=pbrightred,
+				mark=o,
+				very thick,
+				only marks,
+			]
+			table[x={l_arginine},y={phi_exp},col sep=comma]
+				{ninni_arginine_uniquac.csv};
+			\addlegendentry{experimental};
+			\draw (axis cs:0.0055,0.68) node{\usebox{\minigrafarg}};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Arginina -- exemplo de aminoácido}
+		\label{fig_arginine_phi}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}%
+		\centering
+		\begin{tikzpicture}[scale=0.75]
+			\newsavebox{\minigrafxyl}
+			\savebox{\minigrafxyl}{%
+			\scalebox{0.5}{%
+			\begin{tikzpicture}
+				\begin{axis}[
+				xmin=0.0,xmax=0.061,
+				ymin=0.94,ymax=1.0,
+				width=7cm,
+				height=7cm,
+				xlabel = {$x$},
+				ylabel = {$a_w$},
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=south west,
+				]
+				\addplot+[
+					no marks,
+					color=black,
+					samples=2,
+					domain=-0.001:0.061,
+				] plot {1-x};
+				\addlegendentry{$a_w=x_w$};
+				\addplot+[
+					color=pbrightred,
+					mark=o,
+					only marks,
+					thick,
+				]
+				table[x={xylose},y={aw_exp},col sep=comma]
+					{./ebrahimi_xylose_norrish.csv};
+				\addplot+[
+					color=pverybrightblue,
+					no marks,
+					thick,
+				]
+				table[x={xylose},y={aw_calc},col sep=comma]
+					{./ebrahimi_xylose_norrish.csv};
+				\addplot+[
+					color=pblue,
+					no marks,
+					thick,
+				]
+				table[x={xylose},y={aw_calc},col sep=comma]
+					{./ebrahimi_xylose_virial.csv};
+				\addplot+[
+					color=pverydarkblue,
+					no marks,
+					thick,
+				]
+				table[x={xylose},y={aw_calc},col sep=comma]
+					{./ebrahimi_xylose_uniquac.csv};
+			\end{axis}
+		\end{tikzpicture}
+		}}
+		\begin{axis}[
+				xmin = 0.000, xmax = 0.061,
+				xlabel = {$x_\text{xilose}$},
+				ymin = 0.978, ymax = 1.02, ylabel = {$\phi$},
+				legend pos = south east,
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				xtick = {0.015,0.030,0.045,0.060},
+			]
+			\addplot+[
+				smooth,
+				color=pverybrightblue,
+				no marks,
+				thick,
+			]
+			table[x={xylose},y={phi_calc},col sep=comma]
+				{ebrahimi_xylose_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot+[
+				smooth,
+				color=pblue,
+				no marks,
+				thick,
+			]
+			table[x={xylose},y={phi_calc},col sep=comma]
+				{ebrahimi_xylose_virial.csv};
+			\addlegendentry{virial};
+			\addplot+[
+				smooth,
+				color=pverydarkblue,
+				no marks,
+				thick,
+			]
+			table[x={xylose},y={phi_calc},col sep=comma]
+				{ebrahimi_xylose_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\addplot+[
+				color=pbrightred,
+				mark=o,
+				very thick,
+				only marks,
+			]
+			table[x={xylose},y={phi_exp},col sep=comma]
+				{ebrahimi_xylose_uniquac.csv};
+			\addlegendentry{experimental};
+			\draw (axis cs:0.017,1.008) node{\usebox{\minigrafxyl}};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Xilose -- exemplo de carboidrato}
+		\label{fig_xylose_phi}
+	\end{subfigure}
+	\caption{Exemplos de conjuntos de dados e ajustes dos modelos}
+	\label{fig_tipi_datasets_xylose_arginine}
+\end{figure}
+
+Podemos ver um exemplo do comportamento dos dados (e do ajuste dos modelos) na
+figura \ref{fig_tipi_datasets_xylose_arginine}
+\footnote{\cite{ninni2001,ebrahimi2016}}: perceba que o maior desvio da idealidade
+para a solução de aminoácido torna a Lei de Raoult muito inferior aos outros
+modelos; além disso, $\phi$ é consistentemente menor que 1 nessas soluções, como
+requerido pelo modelo de Norrish, matematicamente, mas não para as soluções de
+carboidratos, exemplificando a diferença exibida na tabela. Outro ponto a ser
+comentado é a semelhança entre os modelos UNIQUAC e virial; enquanto no primeiro
+caso ambos se aproximam do caso em que $\phi$ e $x_w$ não estão correlacionados,
+no segundo caso temos duas funções semelhantes para diluições menores que
+$x_w=0.99$.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}%
+		\centering
+		\begin{tikzpicture}[scale=0.75]
+			\newsavebox{\minigrafglyc}
+			\savebox{\minigrafglyc}{%
+			\scalebox{0.5}{%
+			\begin{tikzpicture}
+				\begin{axis}[
+				xmin=0.0,xmax=0.030,
+				ymin=0.985,ymax=1.0,
+				width=7cm,
+				height=3.5cm,
+				xlabel = {$x$},
+				ylabel = {$a_w$},
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=south west,
+				]
+				\addplot+[
+					no marks,
+					color=black,
+					samples=2,
+					domain=-0.001:0.03,
+				] plot {1-x};
+				\addlegendentry{$a_w=x_w$};
+				\addplot+[
+					color=pbrightred,
+					mark=o,
+					only marks,
+					thick,
+				]
+				table[x={glycylglycine},y={aw_exp},col sep=comma]
+					{ellerton_glycylglycine_norrish.csv};
+				\addplot+[
+					color=pverybrightblue,
+					no marks,
+					thick,
+				]
+				table[x={glycylglycine},y={aw_calc},col sep=comma]
+					{ellerton_glycylglycine_norrish.csv};
+				\addplot+[
+					color=pblue,
+					no marks,
+					thick,
+				]
+				table[x={glycylglycine},y={aw_calc},col sep=comma]
+					{ellerton_glycylglycine_virial.csv};
+				\addplot+[
+					color=pverydarkblue,
+					no marks,
+					thick,
+				]
+				table[x={glycylglycine},y={aw_calc},col sep=comma]
+					{ellerton_glycylglycine_uniquac.csv};
+			\end{axis}
+		\end{tikzpicture}
+		}}
+		\begin{axis}[
+				xmin = 0.0, xmax = 0.03,
+				xlabel = {$x_\text{glicilglicina}$},
+				ymin = 0.42, ymax = 0.5, ylabel = {$\phi$},
+				legend pos = north east,
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				xtick = {0.006,0.012,0.018,0.024},
+			]
+			\addplot+[
+				smooth,
+				color=pverybrightblue,
+				no marks,
+				thick,
+			]
+			table[x={glycylglycine},y={phi_calc},col sep=comma]
+				{ellerton_glycylglycine_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot+[
+				smooth,
+				color=pblue,
+				no marks,
+				thick,
+			]
+			table[x={glycylglycine},y={phi_calc},col sep=comma]
+				{ellerton_glycylglycine_virial.csv};
+			\addlegendentry{virial};
+			\addplot+[
+				color=pverydarkblue,
+				no marks,
+				thick,
+			]
+			table[x={glycylglycine},y={phi_calc},col sep=comma]
+				{ellerton_glycylglycine_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\addplot+[
+				color=pbrightred,
+				mark=o,
+				very thick,
+				only marks,
+			]
+			table[x={glycylglycine},y={phi_exp},col sep=comma]
+				{ellerton_glycylglycine_uniquac.csv};
+			\addlegendentry{experimental};
+			\draw (axis cs:0.009,0.432) node{\usebox{\minigrafglyc}};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Glicilglicina -- exemplo de aminoácido}
+		\label{fig_glycylglycine_phi}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}%
+		\centering
+		\begin{tikzpicture}[scale=0.75]
+			\newsavebox{\minigrafsuc}
+			\savebox{\minigrafsuc}{%
+			\scalebox{0.5}{%
+			\begin{tikzpicture}
+				\begin{axis}[
+				xmin=0.0,xmax=0.1,
+				ymin=0.9,ymax=1.0,
+				width=7cm,
+				height=7cm,
+				xlabel = {$x$},
+				ylabel = {$a_w$},
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				legend pos=south west,
+				]
+				\addplot+[
+					no marks,
+					color=black,
+					samples=2,
+					domain=-0.001:0.1,
+				] plot {1-x};
+				\addlegendentry{$a_w=x_w$};
+				\addplot+[
+					color=pbrightred,
+					mark=o,
+					only marks,
+					thick,
+				]
+				table[x={sucrose},y={aw_exp},col sep=comma]
+					{./stokes_sucrose_uniquac_orig.csv};
+				\addplot+[
+					color=pverybrightblue,
+					no marks,
+					thick,
+				]
+				table[x={sucrose},y={aw_calc},col sep=comma]
+					{./stokes_sucrose_norrish.csv};
+				\addplot+[
+					color=pblue,
+					no marks,
+					thick,
+				]
+				table[x={sucrose},y={aw_calc},col sep=comma]
+					{./stokes_sucrose_virial.csv};
+				\addplot+[
+					color=pverydarkblue,
+					no marks,
+					thick,
+				]
+				table[x={sucrose},y={aw_calc},col sep=comma]
+					{./stokes_sucrose_uniquac.csv};
+			\end{axis}
+		\end{tikzpicture}
+		}}
+		\begin{axis}[
+				xmin = 0.000, xmax = 0.1,
+				xlabel = {$x_\text{sacarose}$},
+				ymin = 0.45, ymax = 1.0, ylabel = {$\phi$},
+				legend pos = south east,
+				xlabel near ticks,
+				ylabel near ticks,
+				xticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled x ticks=false,
+				yticklabel style={
+					/pgf/number format/fixed,
+					/pgf/number format/precision=3,
+					/pgf/number format/fixed zerofill
+				},
+				scaled y ticks=false,
+				xtick = {0.016,0.032,0.048,0.064,0.080},
+			]
+			\addplot+[
+				smooth,
+				color=pverybrightblue,
+				no marks,
+				thick,
+			]
+			table[x={sucrose},y={phi_calc},col sep=comma]
+				{stokes_sucrose_norrish.csv};
+			\addlegendentry{Norrish};
+			\addplot+[
+				smooth,
+				color=pblue,
+				no marks,
+				thick,
+			]
+			table[x={sucrose},y={phi_calc},col sep=comma]
+				{stokes_sucrose_virial.csv};
+			\addlegendentry{virial};
+			\addplot+[
+				smooth,
+				color=pverydarkblue,
+				no marks,
+				thick,
+			]
+			table[x={sucrose},y={phi_calc},col sep=comma]
+				{stokes_sucrose_uniquac.csv};
+			\addlegendentry{UNIQUAC};
+			\addplot+[
+				color=pbrightred,
+				mark=o,
+				very thick,
+				only marks,
+			]
+			table[x={sucrose},y={phi_exp},col sep=comma]
+				{stokes_sucrose_uniquac_orig.csv};
+			\addlegendentry{experimental};
+			\draw (axis cs:0.07,0.870) node{\usebox{\minigrafsuc}};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Sacarose -- exemplo de carboidrato}
+		\label{fig_sucrose_phi}
+	\end{subfigure}
+	\caption{Exemplos de conjuntos de dados e ajustes dos modelos}
+	\label{fig_tipi_datasets_sucrose_glycylglycine}
+\end{figure}
+
+Podemos observar na figura \ref{fig_tipi_datasets_sucrose_glycylglycine}
+\footnote{\cite{ellerton1964,stokes1961}}
+outro motivo para as grandes diferenças observadas entre o modelo de Norrish no
+ajuste de aminoácidos e carboidratos; de forma geral, temos que conforme a diluição
+diminui, o coeficiente osmótico tende a aumentar, para uma solução de carboidratos,
+a partir de determinado valor de $x_w$, o que não é tão comum em soluções de
+aminoácidos; assim, sendo, o modelo de Norrish, que não apresenta meio de lidar com
+valores negativos de $\frac{\partial \phi}{\partial x_w}$.
+
+\section{Influência da diluição}
+
+Observando os dados como um todo, podemos observar que a diluição parece não
+afetar de forma significativa o valor dos desvios, para os modelos avaliados.
+Isso pode ser visto no gráfico exibido na figura \ref{fig_dilution_all}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{semilogyaxis} [
+			ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(\phi_{\text{exp}}-%
+			\phi_{\text{calc}})^2}$},
+			xlabel={$x_w$},
+			legend pos=south west,
+			xmin=0.85,
+			xmax=1.0,
+		]
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={xw},y={raoult},col sep=comma]
+				{dilution_mono.csv};
+			\addlegendentry{Raoult};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverybrightblue,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={xw},y={norrish},col sep=comma]
+				{dilution_mono.csv};
+			\addlegendentry{Norrish};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pblue,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={xw},y={virial},col sep=comma]
+				{dilution_mono.csv};
+			\addlegendentry{Virial};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverydarkblue,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={xw},y={uniquac},col sep=comma]
+				{dilution_mono.csv};
+			\addlegendentry{UNIQUAC};
+		\end{semilogyaxis}
+	\end{tikzpicture}
+	\caption{Função objetivo em função da diluição (sistemas binários)}
+	\label{fig_dilution_all}
+\end{figure}
+
+
+\section{Influência do Método de Obtenção}
+
+Como visto na seção \ref{sec_selec_data}, os dados foram obtidos através de
+diversos métodos, como medidas de pressão de vapor, depressão do ponto de fusão,
+elevação do ponto de ebulição, entre outros. Dentre conjuntos de dados obtidos
+a partir de substâncias similares, podemos comparar os desvios obtidos entre os
+dados e os modelos para diferentes procedimentos experimentais.
+
+\subsection{Aminoácidos}
+
+\label{sec_metod_amin}
+
+Foram comparados dados obtidos a partir de medições de coeficiente osmótico,
+medidas diretas de atividade da água, depressão do ponto de fusão e dados de
+pressão de vapor, de acordo com as fontes delineadas na seção \ref{sec_selec_data}.
+A única diferença estatisticamente significante observada foi entre os desvios
+obtidos através do modelo UNIQUAC para dados obtidos a partir de coeficiente
+osmótico e para dados obtidos através de depressão de ponto de fusão.
+
+Entretanto, como os experimentos que compõem esse último grupo geraram poucos
+dados experimentais, e como tem todos a mesma fonte, a explicação mais provável
+é a simples ocorrência de \textit{overfitting} ao utilizar nesses dados o modelo
+UNIQUAC, tornando os desvios excepcionalmente pequenos.
+
+\subsection{Carboidratos}
+
+Foram analisados os desvios dos ajustes para dados obtidos a partir de medições
+diretas de $a_w$, medições de coeficientes osmóticos, depressões de ponto de fusão,
+elevações de ponto de ebulição e umidade relativa. Para manter a coerência com a
+seção \ref{sec_metod_amin}, foram avaliados apenas ajustes sobre dados
+provenientes de sistemas binários.
+
+Existe diferença estatisticamente significante entre os desvios obtidos a partir
+de dados de elevação do ponto de ebulição, de coeficientes osmóticos, e do resto.
+De forma similar a anterior, entretanto, a explicação mais provável para essa
+diferença são as diferenças entre os estudos: entre os dados de elevação de ponto
+de ebulição, por exemplo, se incluem os obtidos, por Abderafi \& Bounahmidi
+\cite{abderafi1994}, que, por terem sido obtidos em condições muito diferentes
+das condições nos quais foram obtidos os outros dados, apresentam algumas
+peculiaridades\footnote{%
+	\textit{E.g.} a diferença na temperatura dos experimentos.
+}.
+
+
+\section{Influência da Temperatura}
+
+Para avaliar a influência da temperatura, avaliamos separadamente dados
+provenientes de estudos feitos a diferentes temperaturas, tanto para carboidratos
+\cite{velezmoro2000} quanto para aminoácidos \cite{romero2006,tsurko2007}.
+
+Com isso, pode ser observado que a influência da temperatura sobre a função
+objetivo não é universal. Ocorrendo apenas em situações específicas, a
+depender de outros fatores como natureza química dos solutos ou diluição.
+
+\subsection{Aminoácidos}
+
+Foram analisados dois estudos: um comparando três aminoácidos (ácido glutâmico,
+glicina e histidina) às temperaturas de 298.15K e 310.15K \cite{tsurko2007}, e
+outro comparando três aminoácidos (alanina, ácido $\alpha$-aminobutírico e glicina)
+às temperaturas de 288.15K, 293.15K, 298.15K e 303.15K \cite{romero2006}.
+
+Analisando os dados obtidos em cada um, não foi encontrada diferença significativa
+entre os desvios a uma temperatura e a outra, para modelo algum, tanto para os
+dados do primeiro conjunto de dados, quanto para os dados do segundo.
+
+Isso se explica já que não temos, como no caso a seguir, valores de $\phi$ maiores
+que 1; assim sendo, para os valores de temperatura em questão é possível obter
+um ajuste, para os modelos avaliados; além disso, o comportamento não se modifica
+de forma qualitativa (como no caso anterior, que passa a exibir pontos de mínimo
+perceptíveis para maiores temperaturas).
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis} [
+			ylabel={$\phi$},
+			xlabel={$x_\text{glicina}$},
+			xtick={0.002,0.006,0.010,0.014,0.018,0.022},
+			xlabel near ticks,
+			ylabel near ticks,
+			xticklabel style={
+				/pgf/number format/fixed,
+				/pgf/number format/precision=3,
+				/pgf/number format/fixed zerofill
+			},
+			scaled x ticks=false,
+		]
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverybrightred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={glycine},y={phi_exp},col sep=comma]
+				{./romero_glycine_288_15_K.csv};
+			\addlegendentry{288.15K};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={glycine},y={phi_exp},col sep=comma]
+				{./romero_glycine_293_15_K.csv};
+			\addlegendentry{293.15K};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverydarkred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={glycine},y={phi_exp},col sep=comma]
+				{./romero_glycine_298_15_K.csv};
+			\addlegendentry{288.15K};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=black,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={glycine},y={phi_exp},col sep=comma]
+				{./romero_glycine_303_15_K.csv};
+			\addlegendentry{303.15K};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Valores experimentais obtidos para $\phi$ em uma solução de glicina}
+	\label{fig_temp_amins}
+\end{figure}
+
+\subsection{Carboidratos}
+
+Avaliando dados de $a_w$ em função de $(x_\text{frutose},x_\text{glicose},%
+x_\text{sacaraose},x_\text{maltose})$ \cite{velezmoro2000}, não foi possível
+afirmar que as pequenas diferenças observadas entre os desvios para
+$T=25,30,35$ \textcelsius\ são estatisticamente significantes, para
+os modelos virial e UNIQUAC.
+
+Entretanto, o modelo de Norrish e a lei de Raoult apresentam desvios
+estatisticamente significantes diferentes entre medidas obtidas a
+25\textcelsius\ ou 30\textcelsius\ e medidas obtidas a 35\textcelsius.
+
+Além disso, os desvios para Norrish e Raoult foram muito similares; sendo
+assim, podemos concluir que para esse conjunto de dados, temos, de forma
+geral, $\phi>1$; além disso, o crescimento de $T$ deve levar a um aumento
+no valor de $\phi$, o que torna os modelos de Norrish e Raoult ainda menos
+adequados. Isso pode ser visto na figura \ref{fig_temp_carbs}\footnote{%
+\cite{velezmoro2000}}.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis} [
+			ylabel={$\phi$},
+			xlabel={$x_\text{maltose}$},
+			xtick={0.004,0.008,0.012,0.016,0.020},
+			xlabel near ticks,
+			ylabel near ticks,
+			xticklabel style={
+				/pgf/number format/fixed,
+				/pgf/number format/precision=3,
+				/pgf/number format/fixed zerofill
+			},
+			scaled x ticks=false,
+			xmin=0.0000,
+		]
+			\draw[black,thick] (axis cs:0.0000,1) -- (axis cs:0.022,1);
+			\draw (axis cs: 0.016,0.9)
+				node[anchor=north] {\tiny{Lei de Raoult}};
+			\draw (axis cs: 0.0135,0.9) -- (axis cs:0.0185,0.9);
+			\draw (axis cs: 0.0125,1.0) -- (axis cs: 0.0135,0.9);
+			\draw (axis cs: 0.0128,1.0) -- (axis cs: 0.0138,0.9);
+			\draw (axis cs: 0.0131,1.0) -- (axis cs: 0.0141,0.9);
+			\fill [
+				color=lightgray,
+				opacity=0.5,
+			]
+				(axis cs: 0.0000,1.0) rectangle (axis cs: 0.022,2.8);
+			\draw (rel axis cs: 0.5,0.75)
+				node[anchor=south]
+				{\tiny{Região inacessível}};
+			\draw (rel axis cs: 0.5,0.75)
+				node[anchor=north]
+				{\tiny{ao modelo de Norrish}};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverybrightred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={maltose},y={phi_exp},col sep=comma]
+				{./velezmoro_maltose_25.csv};
+			\addlegendentry{25\textcelsius};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={maltose},y={phi_exp},col sep=comma]
+				{./velezmoro_maltose_30.csv};
+			\addlegendentry{30\textcelsius};
+			\addplot [
+				mark=*,
+				color=black,
+				fill=pverydarkred,
+				only marks,
+				mark size=3pt,
+			]
+			table [x={maltose},y={phi_exp},col sep=comma]
+				{./velezmoro_maltose_35.csv};
+			\addlegendentry{35\textcelsius};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Valores experimentais obtidos para $\phi$ em uma solução de maltose}
+	\label{fig_temp_carbs}
+\end{figure}
+
+\section{Influência da Pressão}
+
+Os modelos de Norrish e virial foram ajustados aos dados de $a_w$
+\footnote{\cite{maximo2010}} em função da composição à diferentes pressões,
+para soluções de frutose e glicose. Como a quantidade de dados para cada
+valor de $P$ era pequena (5 pontos), um ajuste do modelo UNIQUAC não resultaria
+em dados interessantes.
+
+Foi observado que o modelo de Norrish manteve a tendência de simplesmente se
+aproximar da Lei de Raoult, como visto para soluções de carboidratos. Assim sendo,
+estão comparados apenas os desvios para a Lei de Raoult e para o modelo virial,
+nos gráficos exibidos na figura \ref{fig_pressure}.
+
+Podemos observar que apesar de existir (para dados obtidos a partir de soluções
+de frutose) uma leve tendência à diminuição dos desvios com o aumento da pressão,
+tal tendência não é estatisticamente significante.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}{%
+		\begin{tikzpicture}[scale=0.75]
+			\begin{axis} [
+				ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(%
+					\phi_{\text{exp}}-%
+				\phi_{\text{calc}})^2}$},
+				xlabel={Pressão (kPa)},
+				xlabel near ticks,
+				ylabel near ticks,
+				scaled x ticks=false,
+				ymin=0.3,ymax=1.5,
+			]
+				\addplot [
+					mark=*,
+					color=black,
+					fill=pblue,
+					only marks,
+					mark size=3pt,
+				]
+				table [x={pressure},y={virial},col sep=comma]
+					{./pressure_glucose.csv};
+				\addlegendentry{Modelo Virial};
+				\addplot [
+					no marks,
+					color=pblue,
+					samples=3,
+					domain=20:100,
+					ultra thick,
+				] plot {-0.000585*x+0.7056};
+				\addlegendentry{$R^2=0.0065$};
+				\addplot [
+					mark=*,
+					color=black,
+					fill=pred,
+					only marks,
+					mark size=3pt,
+				]
+				table [x={pressure},y={raoult},col sep=comma]
+					{./pressure_glucose.csv};
+				\addlegendentry{Lei de Raoult};
+				\addplot [
+					no marks,
+					color=pred,
+					samples=3,
+					domain=20:100,
+					ultra thick,
+				] plot {-0.001272*x+1.0666};
+				\addlegendentry{$R^2=0.0204$};
+			\end{axis}
+		\end{tikzpicture}}
+		\caption{Glicose}
+		\label{fig_pressure_glic}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{0.5\textwidth}{%
+		\begin{tikzpicture}[scale=0.75]
+			\begin{axis} [
+				ylabel={$\sqrt{\frac{1}{n}\sum_{i=1}^N(%
+					\phi_{\text{exp}}-%
+				\phi_{\text{calc}})^2}$},
+				xlabel={Pressão (kPa)},
+				xlabel near ticks,
+				ylabel near ticks,
+				scaled x ticks=false,
+				ymin=0.5,ymax=1.8,
+			]
+				\addplot [
+					mark=*,
+					color=black,
+					fill=pblue,
+					only marks,
+					mark size=3pt,
+				]
+				table [x={pressure},y={virial},col sep=comma]
+					{./pressure_fructose.csv};
+				\addlegendentry{Modelo Virial};
+				\addplot [
+					no marks,
+					color=pblue,
+					samples=3,
+					domain=20:100,
+					ultra thick,
+				] plot {-0.00355*x+1.0137};
+				\addlegendentry{$R^2=0.3086$};
+				\addplot [
+					mark=*,
+					color=black,
+					fill=pred,
+					only marks,
+					mark size=3pt,
+				]
+				table [x={pressure},y={raoult},col sep=comma]
+					{./pressure_fructose.csv};
+				\addlegendentry{Lei de Raoult};
+				\addplot [
+					no marks,
+					color=pred,
+					samples=3,
+					domain=20:100,
+					ultra thick,
+				] plot {-0.005321*x+1.5911};
+				\addlegendentry{$R^2=0.4052$};
+			\end{axis}
+		\end{tikzpicture}}
+		\caption{Frutose}
+		\label{fig_pressure_fruc}
+	\end{subfigure}
+	\caption{Desvios obtidos para $\phi$ sob diferentes pressões}
+	\label{fig_pressure}
+\end{figure}
+
